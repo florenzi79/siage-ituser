@@ -89,7 +89,7 @@
 		// NASCONDI gli ITEM per la raccolta dati atto unico
 		fieldsets.get(idFildsetFirmatario).setHidden(true);
 		fieldsets.get(idFildsetDichiarazioni).setHidden(true);
-		
+
 		//TODO XXXXXXXXXXXXXx
 
 
