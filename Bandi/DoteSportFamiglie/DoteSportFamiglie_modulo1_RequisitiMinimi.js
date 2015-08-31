@@ -10,12 +10,24 @@ if (instance.getOwner() == user.getGruppoCorrente().getGroup().getId()) {
 	if (mappaValoriSgProf != null) {
 		if( mappaValoriSgProf.get('ASIS015') != null ) values.put( 'Richiedente_Cognome', mappaValoriSgProf.get('ASIS015').toString() );
 		if( mappaValoriSgProf.get('ASIS016') != null ) values.put( 'Richiedente_Nome', mappaValoriSgProf.get('ASIS016').toString() );
-		if( mappaValoriSgProf.get('ASIS018') != null) values.put( 'Richiedente_DataNascita', mappaValoriSgProf.get('ASIS018').toString() );
-		if( mappaValoriSgProf.get('ASIS009') != null ) values.put( 'Richiedente_ComuneNascita', mappaValoriSgProf.get('ASIS009').toString() );
-		if( mappaValoriSgProf.get('ASIS010') != null ) values.put( 'Richiedente_ProvinciaNascita', mappaValoriSgProf.get('ASIS010').toString() );
-		if( mappaValoriSgProf.get('ASIS011') != null ) values.put( 'Richiedente_IndirizzoResidenza', mappaValoriSgProf.get('ASIS011').toString() );
-		if( mappaValoriSgProf.get('ASIS012') != null ) values.put( 'Richiedente_ComuneResidenza', mappaValoriSgProf.get('ASIS012').toString() );
-		if( mappaValoriSgProf.get('ASIS013') != null ) values.put( 'Richiedente_ProvinciaResidenza', mappaValoriSgProf.get('ASIS013').toString() );
+		if( mappaValoriSgProf.get('ASIS018') != null ) values.put( 'Richiedente_DataNascita', mappaValoriSgProf.get('ASIS018').toString() );
+		if( (mappaValoriSgProf.get('ASIS009') != null) && (values.get('Richiedente_ComuneNascita') == null)) {
+			values.put( 'Richiedente_ComuneNascita', mappaValoriSgProf.get('ASIS009').toString() );
+			values.put( 'Richiedente_ComuneNascitaDn', getAnaDenominazione('comune_istat', values.get('Richiedente_ComuneNascita')) );
+		}
+		if( (mappaValoriSgProf.get('ASIS010') != null) && (values.get('Richiedente_ProvinciaNascita') == null)) {
+			values.put( 'Richiedente_ProvinciaNascita', mappaValoriSgProf.get('ASIS010').toString() );
+			values.put( 'Richiedente_ProvinciaNascitaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_ProvinciaNascita')) );
+		}
+		if( (mappaValoriSgProf.get('ASIS011') != null) && (values.get('Richiedente_IndirizzoResidenza') == null)) values.put( 'Richiedente_IndirizzoResidenza', mappaValoriSgProf.get('ASIS011').toString() );
+		if( (mappaValoriSgProf.get('ASIS012') != null) && (values.get('Richiedente_ComuneResidenza') == null)) {
+			values.put( 'Richiedente_ComuneResidenza', mappaValoriSgProf.get('ASIS012').toString() );
+			values.put( 'Richiedente_ComuneResidenzaDn', getAnaDenominazione('comune_istat', values.get('Richiedente_ComuneResidenza')) );
+		}
+		if( (mappaValoriSgProf.get('ASIS013') != null) && (values.get('Richiedente_ProvinciaResidenza') == null)) {
+			values.put( 'Richiedente_ProvinciaResidenza', mappaValoriSgProf.get('ASIS013').toString() );
+			values.put( 'Richiedente_ProvinciaResidenzaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_ProvinciaResidenza')) );
+		}
 	}
 }
 //titolo pratica
@@ -23,158 +35,12 @@ if (instance.getOwner() == user.getGruppoCorrente().getGroup().getId()) {
 	values.put('title',values.get('SoggettoRichiedente_Denominazione') );
 	items.get('title').setHidden(true);
 }
-var cfLinea1 = ['80109730582','00493410583','00528960588','96197870585','05275570587',
-                '80083470015','96321650580','97175110580','08272960587','05843520585',
-                '05267450582','05228470588','05299330588','05257340587','05263360587',
-                '96072950585','05288960585','05291670585','05248370586','05277720586',
-                '06369180150','05284670584','05267070588','05268880589','05267300589',
-                '80014530325','05281810589','97015510585','97015820588','05271310582',
-                '06369340150','97016560159','97006060582','97015720580','05027640159',
-                '80181390586','05244400585','05301810585','96033100585','97015850585',
-                '80063130159','96135770582','95003780103','05267420585','97545260586',
-                '97626090589','97626110585','97736010014','97626100586','97626120584',
-                '97388210581','97497320156','03253030120','04300791003'];
-var cfRichiedente = values.get('SoggettoRichiedente_CodiceFiscale');
-var k = 0;
-var cfPresente = false;
-while (k<cfLinea1.length) {
-	if (cfRichiedente == cfLinea1[k]) {
-		cfPresente = true;
-	}
-	k++;
-}
-if (isEmpty('SoggettiAmmissibili_CategoriaAppartenenza')) {
-  if (cfPresente) {
-    values.put('SoggettiAmmissibili_CategoriaAppartenenza','uno');
-  }
-}
-var richiedente_NatGiu = values.get('Richiedente_NaturaGiuridica');
-if ((richiedente_NatGiu != null) && (richiedente_NatGiu != '')) {
-	var codicePubblico = richiedente_NatGiu.substring(0,3);
-	var pubblico = ((codicePubblico == '2.4'));
-	items.get('Dichiarazioni_AttivitaCommerciale').setRequired(!pubblico);
-	items.get('Dichiarazioni_RegimeImpresa').setRequired(!pubblico);
-	items.get('Dichiarazioni_EnteNonCommerciale').setRequired(!pubblico);
-	items.get('Dichiarazioni_Iva').setRequired(!pubblico);
-}
-//deroga ritenuta
-if (values.get('Dichiarazioni_EnteNonCommerciale')!=null) {
-	var i = 0;
-	var deroga = false;
-	while (values.get('Dichiarazioni_EnteNonCommerciale['+i+']') != null) {
-		if (values.get('Dichiarazioni_EnteNonCommerciale['+i+']') == 'deroga') {
-			deroga = true;
-		}
-		i++;
-	}
-	items.get('Dichiarazioni_SpecificareLegge').setHidden(!deroga);
-	items.get('Dichiarazioni_SpecificareLegge').setRequired(deroga);
-}
-//percentuale detrazione
-var ivaParziale = (values.get('Dichiarazioni_Iva')=='parzialmente');
-items.get('Dichiarazioni_Detrazione').setHidden(!ivaParziale);
-items.get('Dichiarazioni_Detrazione').setRequired(ivaParziale);
-//SoggettiAmmissibili_CategoriaAppartenenza
-{
-	var categoriaUno = (values.get('SoggettiAmmissibili_CategoriaAppartenenza') == 'uno');
-	var categoriaDue = (values.get('SoggettiAmmissibili_CategoriaAppartenenza') == 'due');
-	var categoriaTre = (values.get('SoggettiAmmissibili_CategoriaAppartenenza') == 'tre');
-	var categoriaQuattro = (values.get('SoggettiAmmissibili_CategoriaAppartenenza') == 'quattro');
-	items.get('SoggettiAmmissibili_Polisportiva').setHidden(categoriaUno || isEmpty('SoggettiAmmissibili_CategoriaAppartenenza'));
-	items.get('SoggettiAmmissibili_Polisportiva').setRequired(!categoriaUno && !isEmpty('SoggettiAmmissibili_CategoriaAppartenenza'));
-	fieldsets.get('e46f9164a3254c1ba7558d3efea8b33e').setHidden(!categoriaDue);
-	items.get('Federazione_AppartenenzaNome').setRequired(categoriaDue);
-	items.get('Federazione_CodiceAffiliazione').setRequired(categoriaDue);
-	items.get('Federazione_RegistroConi').setRequired(categoriaDue);
-	fieldsets.get('3f06c854b4e74908a1702331e6859b6e').setHidden(!categoriaTre);
-	items.get('DisciplineEnti_AppartenenzaNome').setRequired(categoriaTre);
-	items.get('DisciplineEnti_CodiceAffiliazione').setRequired(categoriaTre);
-	items.get('DisciplineEnti_RegistroConi').setRequired(categoriaTre);
-	fieldsets.get('b4c92b5cc530475ebdb5e5778496d341').setHidden(!categoriaQuattro);
-	items.get('FederazioneCip_AppartenenzaNome').setRequired(categoriaQuattro);
-	items.get('FederazioneCip_CodiceAffiliazione').setRequired(categoriaQuattro);
-	items.get('FederazioneCip_RegistroParallelo').setRequired(categoriaQuattro);
-	items.get('Dichiarazioni_Polisportiva').setHidden(categoriaUno || isEmpty('SoggettiAmmissibili_CategoriaAppartenenza'));
-	items.get('Dichiarazioni_Polisportiva').setRequired(!categoriaUno && !isEmpty('SoggettiAmmissibili_CategoriaAppartenenza'));
-}
-//Dichiarazioni_NoContributiBandi
-var domandaAltriBandi = (values.get('Dichiarazioni_NoContributiBandi') == 'true');
-items.get('Dichiarazioni_ContributiBandiSpecificare').setHidden(!domandaAltriBandi);
-items.get('Dichiarazioni_ContributiBandiSpecificare').setRequired(domandaAltriBandi);
-items.get('Dichiarazioni_NoContributiSpese').setHidden(!domandaAltriBandi);
-items.get('Dichiarazioni_NoContributiSpese').setRequired(domandaAltriBandi);
-//Dichiarazioni_NoContributiSpese
-var speseAltriBandi = (values.get('Dichiarazioni_NoContributiSpese') == 'true');
-items.get('Dichiarazioni_ContributiSpeseSpecificare').setHidden(!speseAltriBandi);
-items.get('Dichiarazioni_ContributiSpeseSpecificare').setRequired(speseAltriBandi);
+//Richiedente_ComuneNascita
+setSelectOptionsCached('Richiedente_ProvinciaNascita','provincia_istat');
+setSelectDependedOptionsAndShowCached('Richiedente_ComuneNascita', 'comune_istat', path+'Richiedente_ProvinciaNascita');
 
 //onChange
 //SoggettiAmmissibili_CategoriaAppartenenza
-values.remove('SoggettiAmmissibili_Polisportiva');
-values.remove('Federazione_AppartenenzaNome');
-values.remove('Federazione_CodiceAffiliazione');
-values.remove('Federazione_RegistroConi');
-values.remove('DisciplineEnti_AppartenenzaNome');
-values.remove('DisciplineEnti_CodiceAffiliazione');
-values.remove('DisciplineEnti_RegistroConi');
-values.remove('FederazioneCip_AppartenenzaNome');
-values.remove('FederazioneCip_CodiceAffiliazione');
-values.remove('FederazioneCip_RegistroParallelo');
-values.remove('FederazioneCip_RegistroConi');
-values.remove('Dichiarazioni_Polisportiva');
-var categoriaUno = (values.get('SoggettiAmmissibili_CategoriaAppartenenza') == 'uno');
-var categoriaDue = (values.get('SoggettiAmmissibili_CategoriaAppartenenza') == 'due');
-var categoriaTre = (values.get('SoggettiAmmissibili_CategoriaAppartenenza') == 'tre');
-var categoriaQuattro = (values.get('SoggettiAmmissibili_CategoriaAppartenenza') == 'quattro');
-items.get('SoggettiAmmissibili_Polisportiva').setHidden(categoriaUno);
-items.get('SoggettiAmmissibili_Polisportiva').setRequired(!categoriaUno);
-fieldsets.get('e46f9164a3254c1ba7558d3efea8b33e').setHidden(!categoriaDue);
-items.get('Federazione_AppartenenzaNome').setRequired(categoriaDue);
-items.get('Federazione_CodiceAffiliazione').setRequired(categoriaDue);
-items.get('Federazione_RegistroConi').setRequired(categoriaDue);
-fieldsets.get('3f06c854b4e74908a1702331e6859b6e').setHidden(!categoriaTre);
-items.get('DisciplineEnti_AppartenenzaNome').setRequired(categoriaTre);
-items.get('DisciplineEnti_CodiceAffiliazione').setRequired(categoriaTre);
-items.get('DisciplineEnti_RegistroConi').setRequired(categoriaTre);
-fieldsets.get('b4c92b5cc530475ebdb5e5778496d341').setHidden(!categoriaQuattro);
-items.get('FederazioneCip_AppartenenzaNome').setRequired(categoriaQuattro);
-items.get('FederazioneCip_CodiceAffiliazione').setRequired(categoriaQuattro);
-items.get('FederazioneCip_RegistroParallelo').setRequired(categoriaQuattro);
-items.get('Dichiarazioni_Polisportiva').setHidden(categoriaUno);
-items.get('Dichiarazioni_Polisportiva').setRequired(!categoriaUno);
-//Dichiarazioni_NoContributiBandi
-values.remove('Dichiarazioni_ContributiBandiSpecificare');
-values.remove('Dichiarazioni_NoContributiSpese');
-var domandaAltriBandi = (values.get('Dichiarazioni_NoContributiBandi') == 'true');
-items.get('Dichiarazioni_ContributiBandiSpecificare').setHidden(!domandaAltriBandi);
-items.get('Dichiarazioni_ContributiBandiSpecificare').setRequired(domandaAltriBandi);
-items.get('Dichiarazioni_NoContributiSpese').setHidden(!domandaAltriBandi);
-items.get('Dichiarazioni_NoContributiSpese').setRequired(domandaAltriBandi);
-//Dichiarazioni_NoContributiSpese
-values.remove('Dichiarazioni_ContributiSpeseSpecificare');
-var speseAltriBandi = (values.get('Dichiarazioni_NoContributiSpese') == 'true');
-items.get('Dichiarazioni_ContributiSpeseSpecificare').setHidden(!speseAltriBandi);
-items.get('Dichiarazioni_ContributiSpeseSpecificare').setRequired(speseAltriBandi);
-//Dichiarazioni_EnteNonCommerciale
-var i = 0;
-var isDeroga = false;
-while ((values.get('Dichiarazioni_EnteNonCommerciale['+i+']') != null) && (values.get('Dichiarazioni_EnteNonCommerciale['+i+']') != '')) {
-	if ( values.get('Dichiarazioni_EnteNonCommerciale['+i+']') == 'deroga') {
-		isDeroga = true;
-	}
-	i++;
-}
-if (!isDeroga) {
-	values.remove('Dichiarazioni_SpecificareLegge');
-}
-items.get('Dichiarazioni_SpecificareLegge').setHidden(!isDeroga);
-items.get('Dichiarazioni_SpecificareLegge').setRequired(isDeroga);
-//Dichiarazioni_Iva
-values.remove('Dichiarazioni_Detrazione');
-var ivaParziale = (values.get('Dichiarazioni_Iva')=='parzialmente');
-items.get('Dichiarazioni_Detrazione').setHidden(!ivaParziale);
-items.get('Dichiarazioni_Detrazione').setRequired(ivaParziale);
-
 //Validazione
 //pratica duplicata
 var codiceFiscaleRichiedente = values.get('SoggettoRichiedente_CodiceFiscale');
@@ -193,33 +59,49 @@ var pratiche = dizionarioService.getList(null, sql);
 if(pratiche.size() > 0) {
 	errors.put('SoggettoRichiedente_AvvisiPresentazione', 'PraticaDuplicata_val');
 }
-//codici fiscali linea 1
-if (values.get('SoggettiAmmissibili_CategoriaAppartenenza') == 'uno') {
-	var cfLinea1 = ['80109730582','00493410583','00528960588','96197870585','05275570587',
-	                '80083470015','96321650580','97175110580','08272960587','05843520585',
-	                '05267450582','05228470588','05299330588','05257340587','05263360587',
-	                '96072950585','05288960585','05291670585','05248370586','05277720586',
-	                '06369180150','05284670584','05267070588','05268880589','05267300589',
-	                '80014530325','05281810589','97015510585','97015820588','05271310582',
-	                '06369340150','97016560159','97006060582','97015720580','05027640159',
-	                '80181390586','05244400585','05301810585','96033100585','97015850585',
-	                '80063130159','96135770582','95003780103','05267420585','97545260586',
-	                '97626090589','97626110585','97736010014','97626100586','97626120584',
-	                '97388210581','97497320156','03253030120','04300791003'];
-	var cfRichiedente = values.get('SoggettoRichiedente_CodiceFiscale');
-	var k = 0;
-	var cfPresente = false;
-	while (k<cfLinea1.length) {
-  	if (cfRichiedente == cfLinea1[k]) {
-  		cfPresente = true;
-  	}
-  	k++;
-	}
-	if (!cfPresente) {
-  	errors.put('SoggettiAmmissibili_CategoriaAppartenenza','Linea1NonAmmessa_val');
+//verifica residenza in comune della manifestazione d'interesse
+//1. ricercare la lista dei richiedenti e aggiungerla all'elenco dei comuni
+//2. per ogni richiedente, valutare se ha presentato in forma singola o associata, in questo secondo caso, ricercare la lista degli associati
+var comuneResidenzaRichiedente = values.get('Richiedente_ComuneResidenza');
+var isComuneManifestazione = false;
+var sqlRichiedenti = "SELECT"+
+										 "  CODICEISTAT.DAT_VL AS CODICEISTAT"+
+										 "FROM ("+
+										 "  SELECT SM_ID"+
+										 "  FROM AG_SM_INSTANCES inst"+
+										 "  WHERE inst.SM_TMPL_DN = 'Manifestazione interesse comuni Dote sport'"+
+										 "  AND inst.CURRENT_STATE IN ('b6eb1d6973c8432281d3de1f66272093','a849d6d6b98040f092fbb7b814f1da06')"+
+										 ") I"+
+										 "LEFT OUTER JOIN ("+
+										 "  SELECT FK_ID,DAT_VL"+
+										 "  FROM AG_SM_DATA_ENTRIES data_entries"+
+										 "  WHERE DAT_PTH = 'Richiedente_Istat'"+
+										 ") CODICEISTAT ON I.SM_ID= CODICEISTAT.FK_ID";
+var elencoComuniResults = dizionarioService.getList(null, sqlRichiedenti);
+var sqlAderenti = "SELECT"+
+									"  CODICEISTAT.DAT_VL AS CODICEISTAT"+
+									"FROM ("+
+									"  SELECT SM_ID"+
+									"  FROM AG_SM_INSTANCES inst"+
+									"  WHERE inst.SM_TMPL_DN = 'Manifestazione interesse comuni Dote sport'"+
+									"  AND inst.CURRENT_STATE IN ('b6eb1d6973c8432281d3de1f66272093','a849d6d6b98040f092fbb7b814f1da06')"+
+									") I"+
+									"LEFT OUTER JOIN ("+
+									"  SELECT FK_ID,DAT_VL"+
+									"  FROM AG_SM_DATA_ENTRIES data_entries"+
+									"  WHERE DAT_PTH like 'ComuniAderenti[%].CodiceIstat'"+
+									") CODICEISTAT ON I.SM_ID= CODICEISTAT.FK_ID";
+elencoComuniResults.addAll(dizionarioService.getList(null, sqlAderenti));
+for (var i=0; i<elencoComuniResults.size(); i++) {
+	var codiceIstat = professionisti.get(i)[0];
+	if (codiceIstat == comuneResidenzaRichiedente) {
+		isComuneManifestazione = true;
+		break;
 	}
 }
-//dichiarazioni
+if (!isComuneManifestazione) {
+	errors.put('Richiedente_ComuneResidenza','Richiedente_ComuneResidenza_val');
+}
 {
     var dichiarazioni_value=  values.get('Dichiarazioni_Dpr');
     if(dichiarazioni_value=='false') {
