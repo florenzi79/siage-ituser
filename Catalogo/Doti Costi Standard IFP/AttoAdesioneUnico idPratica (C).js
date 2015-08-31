@@ -3,6 +3,9 @@
 // PARAMETRI da valorizzare correttamente usando il CATALOGO
 		var idStatiAttoUnicoPresentato = "'859506c362764ba1a70277d1345e7cee','8c8999ca9712409f81b1f5c39ef2f052'";
 		var nomeTemplate ="Doti IeFP DDF I anni"; // usato nella query per il check dell'atto unico
+
+		var nomeTemplate ="TEST CATALOGO Dote IFP "; // temporaneo... per prova ********
+
 		var idFildsetDettagliAttoUnicoPresentato = 'e242e43908354a728b9c7286441a0245'; // viene nascosto o mostrato a secondo che è stato o non è stato presentato l'atto di adesione unico
 		var idFildsetFirmatario = '9286c54bf9b442bb831963add45108e1';
 		var idFildsetDichiarazioni = 'f14ac1d78de84e8c92e1b0bbd5235110';
@@ -70,9 +73,6 @@
 	logger.info("XXXXX DOTE IFP: Numero Atti unici presentati per il CF "+CF_Operatore+": "+numAttiUniciPresentati);
 	if(numAttiUniciPresentati >0){
 		isAttoUnicoPresentato = true;
-		// MOSTRA AVVISO di atto unico ok e DATIPROCOCOLLAZIONE ATTO UNICO PRESENTATO
-		fieldsets.get(idFildsetDettagliAttoUnicoPresentato).setHidden(false);
-		items.get('Avviso_AttoUnicoOk').setHidden(false);
 		var dataAtto = values.get('AttoDiAdesioneUnico_dataProtocollo');
 		var numeroAtto = values.get('AttoDiAdesioneUnico_numeroProtocollo');
 		if ((dataAtto!== null) && (numeroAtto!== null) &&(dataAtto!== '') && (numeroAtto!== '')) {
@@ -84,21 +84,10 @@
 		    items.get('AttoDiAdesioneUnico_dataProtocollo_1').setHidden(true);
 		    items.get('AttoDiAdesioneUnico_numeroProtocollo_1').setHidden(true);
 		}
-		items.get('AttoDiAdesioneUnico_dataProtocollo_1').setHidden(false);
-		items.get('AttoDiAdesioneUnico_numeroProtocollo_1').setHidden(false);
-		// NASCONDI gli ITEM per la raccolta dati atto unico
-		fieldsets.get(idFildsetFirmatario).setHidden(true);
-		fieldsets.get(idFildsetDichiarazioni).setHidden(true);
-
-		//TODO XXXXXXXXXXXXXx
-
-
-
 	} else {
 		isAttoUnicoPresentato = false;
 		// NASCONDI I DATI RELATIVI ALLA PROTOCOLLAZIONE dell'ATTO UNICO che non è stato ancora PRESENTATO
 		fieldsets.get(idFildsetDettagliAttoUnicoPresentato).setHidden(true);
-		items.get('Avviso_AttoUnicoOk').setHidden(true);
 		items.get('AttoDiAdesioneUnico_dataProtocollo_1').setHidden(true);
 		items.get('AttoDiAdesioneUnico_numeroProtocollo_1').setHidden(true);
 
@@ -106,13 +95,43 @@
 		values.put('AttoUnico_RappresentanteLegaleNome',values.get('Richiedente_RappresentanteLegaleNome'));
 		values.put('AttoUnico_RappresentanteLegaleCognome',values.get('Richiedente_RappresentanteLegaleCognome'));
 		values.put('AttoUnico_RappresentanteLegaleCodiceFiscale',values.get('Richiedente_RappresentanteLegaleCodiceFiscale'));
-
-		// MOSTRA gli ITEM per la raccolta dati atto unico
-		fieldsets.get(idFildsetFirmatario).setHidden(false);
-		fieldsets.get(idFildsetDichiarazioni).setHidden(false);
-		//TODO XXXXXXXXXXXXXx
-
 	}
+
+	// NASCONDI o MOSTRA fieldsets e ITEMS per la raccolta dati atto unico
+	fieldsets.get(idFildsetFirmatario).setHidden(isAttoUnicoPresentato);
+	fieldsets.get(idFildsetDichiarazioni).setHidden(isAttoUnicoPresentato);
+
+	// MOSTRA/NASCONDI AVVISO di atto unico ok e DATIPROCOCOLLAZIONE ATTO UNICO PRESENTATO
+	fieldsets.get(idFildsetDettagliAttoUnicoPresentato).setHidden(!isAttoUnicoPresentato);
+	items.get('Avviso_AttoUnicoOk').setHidden(!isAttoUnicoPresentato);
+
+	//Rende  non obbligatori / obbligatori ITEMS per la raccolta dati atto unico
+	items.get('AttoUnico_FirmatarioRappresentanteLegale').setRequired(!isAttoUnicoPresentato);
+	items.get('AttoUnico_RappresentanteLegaleNascitaProvincia').setRequired(!isAttoUnicoPresentato);
+	items.get('AttoUnico_RappresentanteLegaleNascitaComune').setRequired(!isAttoUnicoPresentato);
+	items.get('AttoUnico_RappresentanteLegaleNascitaData').setRequired(!isAttoUnicoPresentato);
+	items.get('AttoUnico_FirmatarioCodiceFiscale').setRequired(!isAttoUnicoPresentato);
+	items.get('AttoUnico_FirmatarioNome').setRequired(!isAttoUnicoPresentato);
+	items.get('AttoUnico_FirmatarioCognome').setRequired(!isAttoUnicoPresentato);
+	items.get('AttoUnico_FirmatarioNascitaProvincia').setRequired(!isAttoUnicoPresentato);
+	items.get('AttoUnico_FirmatarioNascitaComune').setRequired(!isAttoUnicoPresentato);
+	items.get('AttoUnico_FirmatarioNascitaData').setRequired(!isAttoUnicoPresentato);
+	items.get('SelezionaTutteDichiarazioni').setRequired(!isAttoUnicoPresentato);
+    var idItemDichiarazioni;
+	idItemDichiarazioni = items.get('Dichiaraz_0001'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0002'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0003'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0004'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0005'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0007'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0008'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0009'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0009_1'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0010'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0010_1'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0011'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0012'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0013'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 
 
     // Verifica Accreditamento Operatore
