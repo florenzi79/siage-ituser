@@ -1,0 +1,24 @@
+// onLoad
+// Avviso_NonModificabile
+var isFirmatarioRappresentante = (values.get('Firmatario_CoincideLegaleRappresentante') == 'true');
+items.get('Adesione_File_AttoDelega').setHidden(isFirmatarioRappresentante);
+items.get('Adesione_File_AttoDelega').setRequired(!isFirmatarioRappresentante);
+
+//Validazione
+//pratica duplicata
+var codiceFiscaleRichiedente = values.get('SoggettoRichiedente_CodiceFiscale');
+var sql =
+"  select SM_ID PRATICA_BLOCCANTE"+
+"  from AG_SM_INSTANCES PRATICA, AG_SM_DATA_ENTRIES DETTAGLIO"+
+"  where"+
+"  DETTAGLIO.DAT_PTH like 'SoggettoRichiedente_CodiceFiscale' and"+
+"  DETTAGLIO.DAT_VL = '" + codiceFiscaleRichiedente +"' and"+
+"  DETTAGLIO.FK_ID = PRATICA.SM_ID and"+
+"  PRATICA.SM_TMPL_DN = 'Contributi ASD Eccellenze Linea 3' and"+
+"  PRATICA.CURRENT_STATE in ('63549fd5d8c64e519a29e8788755fc0a', '5a8a62f27a704dc2a3afa45a164ff7c1')"
+  //							  					Attesa protocollazione			  			Presentata
+;
+var pratiche = dizionarioService.getList(null, sql);
+if(pratiche.size() > 0) {
+	errors.put('Avviso_NonModificabile', 'PraticaDuplicata_val');
+}
