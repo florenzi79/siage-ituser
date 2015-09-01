@@ -4,25 +4,23 @@
 		var idStatiAttoUnicoPresentato = "'859506c362764ba1a70277d1345e7cee','8c8999ca9712409f81b1f5c39ef2f052'";
 		var nomeTemplate ="Doti IeFP DDF I anni"; // usato nella query per il check dell'atto unico
 //		var nomeTemplate ="TEST CATALOGO Dote IFP "; // temporaneo... per prova ********
-
-		var idFildsetDettagliAttoUnicoPresentato = 'e242e43908354a728b9c7286441a0245'; // viene nascosto o mostrato a secondo che è stato o non è stato presentato l'atto di adesione unico
-		var idFildsetFirmatario = '9286c54bf9b442bb831963add45108e1';
-		var idFildsetDichiarazioni = 'f14ac1d78de84e8c92e1b0bbd5235110';
+		var idFildsetDettagliAttoUnicoPresentato = 'ce4c9924a7fb44aaae84ef5cf814098d'; // viene nascosto o mostrato a secondo che è stato o non è stato presentato l'atto di adesione unico
+		var idFildsetFirmatario = 'e681dd72e6e647d68429e9e6dab34be3';
+		var idFildsetDichiarazioni = '2089fc04d0294984b2f85cdbe3eda960';
 		var descrizioneBando ="wait chiusura  punto aperto PA_020 - inserire la descrizione del bando";
-		var descrizioneSedeLegale = "wait chiusura  punto aperto PA_019 - inserire la descrizione della Sede Operatore";
 
 
 	//**** VALORIZZAZIONE CAMPI dei DATI GENERICI
 		values.put('NumeroPratica', values.get('idPratica'));
 		values.put('Bando_Descrizione', descrizioneBando); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
-		values.put('Richiedente_SedeLegaleDescrizione', descrizioneSedeLegale); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
-
+/*
 		if (!isEmpty('Richiedente_Denominazione') && !isEmpty('title')) {
 				values.put('TitoloPratica',values.get('title') + ' ' + values.get('Richiedente_Denominazione'));
 		}
 		if ((!isEmpty('Partecipante_Cognome')) && (!isEmpty('Partecipante_Nome'))) {
 				values.put('title',values.get('Partecipante_Cognome')+' '+values.get('Partecipante_Nome'));
 		}
+*/
 	//    items.get('title').setHidden(true);
 
 
@@ -63,6 +61,14 @@
 		if( mappaValoriSgProf.get('AA142') != null && isEmpty('Richiedente_RappresentanteLegaleCodiceFiscale') )
 			values.put( 'Richiedente_RappresentanteLegaleCodiceFiscale', mappaValoriSgProf.get('AA142').toString() );
 	} // **** FINE LETTURA da SGPROF
+
+	// Campi derivati
+	var descrizioneSedeLegaleOperatore = values.get('Richiedente_SedeLegaleComuneDn')+" ("+
+														  values.get('Richiedente_SedeLegaleProvinciaDn')+") "+
+															values.get('Richiedente_SedeLegaleIndirizzo');
+	values.put('Richiedente_SedeLegaleDescrizione', descrizioneSedeLegaleOperatore);
+	logger.info("\n\n\n\n\n XXXXXXXX descrizioneSedeLegaleOperatore: " + descrizioneSedeLegaleOperatore + "\n\n\n\n\n");
+
     // Verifica Se atto unico è stato presentato
 
 	var isAttoUnicoPresentato =false;
@@ -72,6 +78,7 @@
 	logger.info("XXXXX DOTE IFP: Numero Atti unici presentati per il CF "+CF_Operatore+": "+numAttiUniciPresentati);
 	if(numAttiUniciPresentati >0){
 		isAttoUnicoPresentato = true;
+		values.put('Richiedente_AttoUnicoPresentato','true');
 		var dataAtto = values.get('AttoDiAdesioneUnico_dataProtocollo');
 		var numeroAtto = values.get('AttoDiAdesioneUnico_numeroProtocollo');
 		if ((dataAtto!== null) && (numeroAtto!== null) &&(dataAtto!== '') && (numeroAtto!== '')) {
@@ -85,6 +92,7 @@
 		}
 	} else {
 		isAttoUnicoPresentato = false;
+		values.put('Richiedente_AttoUnicoPresentato','false');
 		// NASCONDI I DATI RELATIVI ALLA PROTOCOLLAZIONE dell'ATTO UNICO che non è stato ancora PRESENTATO
 		fieldsets.get(idFildsetDettagliAttoUnicoPresentato).setHidden(true);
 		items.get('AttoDiAdesioneUnico_dataProtocollo_1').setHidden(true);
@@ -94,7 +102,11 @@
 		values.put('AttoUnico_RappresentanteLegaleNome',values.get('Richiedente_RappresentanteLegaleNome'));
 		values.put('AttoUnico_RappresentanteLegaleCognome',values.get('Richiedente_RappresentanteLegaleCognome'));
 		values.put('AttoUnico_RappresentanteLegaleCodiceFiscale',values.get('Richiedente_RappresentanteLegaleCodiceFiscale'));
+		if (!isEmpty('Richiedente_Denominazione')) {
+				values.put('title', "Atto di adesione unico - "+ values.get('Richiedente_Denominazione'));
+		}
 	}
+	values.put('TitoloPratica',values.get('title'));
 
 	// NASCONDI o MOSTRA fieldsets e ITEMS per la raccolta dati atto unico
 	fieldsets.get(idFildsetFirmatario).setHidden(isAttoUnicoPresentato);
