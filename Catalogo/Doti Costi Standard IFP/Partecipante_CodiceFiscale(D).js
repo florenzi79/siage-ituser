@@ -39,6 +39,7 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 						logger.info("XXXXXX dataNascitaString: " + dataNascitaString);
 						logger.info("XXXXXX dataNascitaMS: " + dataNascitaMS);
 						values.put('Partecipante_NascitaData',dataNascitaMS);
+
 						// ToDo calcolare l'età ad oggi valorizzando  valorizzando Partecipante_Eta
              // copiato dall'OnChange di Data di Nascita
 						{
@@ -87,21 +88,77 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 						}
 
 
-
-
-						var istatComune = m_Ana.get("istatcomunenascita");
-						values.put('Partecipante_NascitaProvincia',istatComune.substr(0, 3));
-						values.put('Partecipante_NascitaComune',istatComune);
+            //valorizza da gefo Comune e Provincia di NASCITA
+						var istatComuneN = m_Ana.get("istatcomunenascita");
+						values.put('Partecipante_NascitaProvincia',istatComuneN.substr(0, 3));
+						values.put('Partecipante_NascitaComune',istatComuneN);
 						setSelectDependedOptionsAndShowCached('Partecipante_NascitaComune', 'comune_istat', path+'Partecipante_NascitaProvincia');
 						// imposto la label provincia per i PDF
-						var codeProvincia = values.get(path+'Partecipante_NascitaProvincia');
-						var labelProvincia = getOptionLabel('Partecipante_NascitaProvincia', codeProvincia);
-						values.put('Partecipante_NascitaProvinciaDn', labelProvincia);
+						var codeProvinciaN = values.get(path+'Partecipante_NascitaProvincia');
+						var labelProvinciaN = getOptionLabel('Partecipante_NascitaProvincia', codeProvinciaN);
+						values.put('Partecipante_NascitaProvinciaDn', labelProvinciaN);
 						// imposto la label comune  per i PDF
-						var codeComune = values.get(path+'Partecipante_NascitaComune');
-						var labelComune = getOptionLabel('Partecipante_NascitaComune', codeComune);
-						values.put('Partecipante_NascitaComuneDn', labelComune);
+						var codeComuneN = values.get(path+'Partecipante_NascitaComune');
+						var labelComuneN = getOptionLabel('Partecipante_NascitaComune', codeComuneN);
+						values.put('Partecipante_NascitaComuneDn', labelComuneN);
 
+            //valorizza da gefo Comune e Provincia di RESIDENZA
+            var istatComuneR = m_Ana.get("istatcomuneresidenza");
+						values.put('Partecipante_ResidenzaProvincia',istatComuneR.substr(0, 3));
+						values.put('Partecipante_ResidenzaComune',istatComuneR);
+						setSelectDependedOptionsAndShowCached('Partecipante_ResidenzaComune', 'comune_istat', path+'Partecipante_ResidenzaProvincia');
+						// imposto la label provincia per i PDF
+						var codeProvinciaN = values.get(path+'Partecipante_ResidenzaProvincia');
+						var labelProvinciaN = getOptionLabel('Partecipante_ResidenzaProvincia', codeProvinciaN);
+						values.put('Partecipante_ResidenzaProvinciaDn', labelProvinciaN);
+						// imposto la label comune  per i PDF
+						var codeComuneR = values.get(path+'Partecipante_ResidenzaComune');
+						var labelComuneR = getOptionLabel('Partecipante_ResidenzaComune', codeComuneR);
+						values.put('Partecipante_ResidenzaComuneDn', labelComuneR);
+
+            //valorizza da gefo Comune e Provincia di DOMICILIO
+            var istatComuneD = m_Ana.get("comunedomicilio");
+						values.put('Partecipante_DomicilioProvincia',istatComuneD.substr(0, 3));
+						values.put('Partecipante_DomicilioComune',istatComuneD);
+						setSelectDependedOptionsAndShowCached('Partecipante_DomicilioComune', 'comune_istat', path+'Partecipante_DomicilioProvincia');
+						// imposto la label provincia per i PDF
+						var codeProvinciaN = values.get(path+'Partecipante_DomicilioProvincia');
+						var labelProvinciaN = getOptionLabel('Partecipante_DomicilioProvincia', codeProvinciaN);
+						values.put('Partecipante_DomicilioProvinciaDn', labelProvinciaN);
+						// imposto la label comune  per i PDF
+						var codeComuneR = values.get(path+'Partecipante_DomicilioComune');
+						var labelComuneR = getOptionLabel('Partecipante_DomicilioComune', codeComuneR);
+						values.put('Partecipante_DomicilioComuneDn', labelComuneR);
+
+            // valorizza da gefo Altri dati RESIDENZA
+						values.put('Partecipante_ResidenzaCap',m_Ana.get("capresidenza"));
+            values.put('Partecipante_ResidenzaIndirizzo',m_Ana.get("indirizzoresidenza"));
+            values.put('Partecipante_DomicilioCap',m_Ana.get("capdomicilio"));
+            values.put('Partecipante_DomicilioIndirizzo',m_Ana.get("indirizzodomicilio"));
+
+            if (
+              (values.get('Partecipante_ResidenzaComune')==values.get('Partecipante_DomicilioComune')) &&
+              (values.get('Partecipante_ResidenzaIndirizzo')==values.get('Partecipante_DomicilioIndirizzo')) &&
+              (values.get('Partecipante_ResidenzaCap')==values.get('Partecipante_DomicilioCap'))
+            ) {
+                values.put('Partecipante_DomicilioComeResidenza','true');
+            } else {
+                values.put('Partecipante_DomicilioComeResidenza','false');
+            }
+
+            (values.get('Partecipante_ResidenzaComune')==values.get('Partecipante_DomicilioComune')) &&
+            (values.get('Partecipante_ResidenzaIndirizzo')==values.get('Partecipante_DomicilioIndirizzo')) &&
+            (values.get('Partecipante_ResidenzaCap')==values.get('Partecipante_DomicilioCap'))
+
+            logger.info('XXXXX Partecipante_ResidenzaComune:>>>'+values.get('Partecipante_ResidenzaComune')+'<<<');
+            logger.info('XXXXX Partecipante_DomicilioComune:>>>'+values.get('Partecipante_DomicilioComune')+'<<<');
+            logger.info('XXXXX Partecipante_ResidenzaIndirizzo:>>>'+values.get('Partecipante_ResidenzaIndirizzo')+'<<<');
+            logger.info('XXXXX Partecipante_DomicilioIndirizzo:>>>'+values.get('Partecipante_DomicilioIndirizzo')+'<<<');
+            logger.info('XXXXX Partecipante_ResidenzaCap:>>>'+values.get('Partecipante_ResidenzaCap')+'<<<');
+            logger.info('XXXXX Partecipante_DomicilioCap:>>>'+values.get('Partecipante_DomicilioCap')+'<<<');
+
+
+            logger.info('XXXXX Partecipante_DomicilioComeResidenza: '+values.get('Partecipante_DomicilioComeResidenza'));
 
 					/*
 			    for (i = 0; i < dati_estraiStatoIscrizioni.result.get('iscrizioni').length; i++) {
