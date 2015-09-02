@@ -1,3 +1,4 @@
+logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1");
 {
 	if (iamInRoot()) {
 // PARAMETRI da valorizzare correttamente usando il CATALOGO
@@ -224,4 +225,4 @@
 	}  // fine if iamInRoot()
 }
 
-logger.info("XXXXXMMMMM DOTE IFP: FINE Script ONLOAD su IdPratica");
+logger.info("XXXXXMMMMM DOTE IFP: FINE Script ONLOAD su IdPratica - Modulo 1");
