@@ -53,6 +53,12 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 			values.put( 'Richiedente_SedeLegaleComune', mappaValoriSgProf.get('AA061').toString());
 			values.put( 'Richiedente_SedeLegaleComuneDn', getAnaDenominazione('comune_istat', values.get('Richiedente_SedeLegaleComune')) );
 		}
+
+		if((mappaValoriSgProf.get('AA063')!= null)&&(isEmpty('Richiedente_SedeLegaleCap'))) {
+			values.put( 'Richiedente_SedeLegaleCap', mappaValoriSgProf.get('AA063').toString());
+		}
+
+
 		if((mappaValoriSgProf.get('AA060') != null)&&(isEmpty('Richiedente_SedeLegaleIndirizzo')))
 			values.put( 'Richiedente_SedeLegaleIndirizzo', mappaValoriSgProf.get('AA060').toString() );
 		if( mappaValoriSgProf.get('AA030') != null && isEmpty('Richiedente_RappresentanteLegaleNome'))
@@ -80,24 +86,24 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 	if(numAttiUniciPresentati >0){
 		isAttoUnicoPresentato = true;
 		values.put('Richiedente_AttoUnicoPresentato','true');
-		var dataAtto = values.get('AttoDiAdesioneUnico_dataProtocollo');
-		var numeroAtto = values.get('AttoDiAdesioneUnico_numeroProtocollo');
+		var dataAtto = values.get('AttoUnico_ProtocolloData');
+		var numeroAtto = values.get('AttoUnico_ProtocolloNumero');
 		if ((dataAtto!== null) && (numeroAtto!== null) &&(dataAtto!== '') && (numeroAtto!== '')) {
-		    values.put('AttoDiAdesioneUnico_dataProtocollo_1',dataAtto);
-		    values.put('AttoDiAdesioneUnico_numeroProtocollo_1',numeroAtto);
-				items.get('AttoDiAdesioneUnico_dataProtocollo_1').setHidden(false);
-				items.get('AttoDiAdesioneUnico_numeroProtocollo_1').setHidden(false);
+		    values.put('AttoUnico_ProtocolloData_1',dataAtto);
+		    values.put('AttoUnico_ProtocolloNumero_1',numeroAtto);
+				items.get('AttoUnico_ProtocolloData_1').setHidden(false);
+				items.get('AttoUnico_ProtocolloNumero_1').setHidden(false);
 		} else {
-		    items.get('AttoDiAdesioneUnico_dataProtocollo_1').setHidden(true);
-		    items.get('AttoDiAdesioneUnico_numeroProtocollo_1').setHidden(true);
+		    items.get('AttoUnico_ProtocolloData_1').setHidden(true);
+		    items.get('AttoUnico_ProtocolloNumero_1').setHidden(true);
 		}
 	} else {
 		isAttoUnicoPresentato = false;
 		values.put('Richiedente_AttoUnicoPresentato','false');
 		// NASCONDI I DATI RELATIVI ALLA PROTOCOLLAZIONE dell'ATTO UNICO che non è stato ancora PRESENTATO
 		fieldsets.get(idFildsetDettagliAttoUnicoPresentato).setHidden(true);
-		items.get('AttoDiAdesioneUnico_dataProtocollo_1').setHidden(true);
-		items.get('AttoDiAdesioneUnico_numeroProtocollo_1').setHidden(true);
+		items.get('AttoUnico_ProtocolloData_1').setHidden(true);
+		items.get('AttoUnico_ProtocolloNumero_1').setHidden(true);
 
 		// VALORIZZO i campi che servono per l'ATTO unico, compresa la prodizione dei PDF
 		values.put('AttoUnico_RappresentanteLegaleNome',values.get('Richiedente_RappresentanteLegaleNome'));
