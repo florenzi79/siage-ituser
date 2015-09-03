@@ -5,7 +5,7 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 		var idStatiAttoUnicoPresentato = "'859506c362764ba1a70277d1345e7cee','8c8999ca9712409f81b1f5c39ef2f052'";
 		var nomeTemplate ="Doti IeFP DDF I anni"; // usato nella query per il check dell'atto unico
 //		var nomeTemplate ="TEST CATALOGO Dote IFP "; // temporaneo... per prova ********
-		var idFildsetDettagliAttoUnicoPresentato = 'ce4c9924a7fb44aaae84ef5cf814098d'; // viene nascosto o mostrato a secondo che è stato o non è stato presentato l'atto di adesione unico
+		var idFildsetDettagliAttoUnicoPresentato = 'b19c24e93a98431bbb1c5720807fcf2f'; // viene nascosto o mostrato a secondo che è stato o non è stato presentato l'atto di adesione unico
 		var idFildsetFirmatario = 'e681dd72e6e647d68429e9e6dab34be3';
 		var idFildsetDichiarazioni = '2089fc04d0294984b2f85cdbe3eda960';
 		var descrizioneBando ="wait chiusura  punto aperto PA_020 - inserire la descrizione del bando";
@@ -125,7 +125,7 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 
 	//Rende  non obbligatori / obbligatori ITEMS per la raccolta dati atto unico
 	items.get('AttoUnico_FirmatarioRappresentanteLegale').setRequired(!isAttoUnicoPresentato);
-	items.get('AttoUnico_RappresentanteLegaleNascitaProvincia').setRequired(!isAttoUnicoPresentato);
+	/*items.get('AttoUnico_RappresentanteLegaleNascitaProvincia').setRequired(!isAttoUnicoPresentato);
 	items.get('AttoUnico_RappresentanteLegaleNascitaComune').setRequired(!isAttoUnicoPresentato);
 	items.get('AttoUnico_RappresentanteLegaleNascitaData').setRequired(!isAttoUnicoPresentato);
 	items.get('AttoUnico_FirmatarioCodiceFiscale').setRequired(!isAttoUnicoPresentato);
@@ -134,7 +134,64 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 	items.get('AttoUnico_FirmatarioNascitaProvincia').setRequired(!isAttoUnicoPresentato);
 	items.get('AttoUnico_FirmatarioNascitaComune').setRequired(!isAttoUnicoPresentato);
 	items.get('AttoUnico_FirmatarioNascitaData').setRequired(!isAttoUnicoPresentato);
-	items.get('SelezionaTutteDichiarazioni').setRequired(!isAttoUnicoPresentato);
+	items.get('SelezionaTutteDichiarazioni').setRequired(!isAttoUnicoPresentato);*/
+	if ((values.get('AttoUnico_FirmatarioRappresentanteLegale') == 'true') && !isAttoUnicoPresentato) {
+		items.get('AttoUnico_RappresentanteLegaleNascitaProvincia').setHidden(false);
+		items.get('AttoUnico_RappresentanteLegaleNascitaProvincia').setRequired(true);
+		
+		items.get('AttoUnico_RappresentanteLegaleNascitaComune').setHidden(false);
+		items.get('AttoUnico_RappresentanteLegaleNascitaComune').setRequired(true);
+		
+		items.get('AttoUnico_RappresentanteLegaleNascitaData').setHidden(false);
+		items.get('AttoUnico_RappresentanteLegaleNascitaData').setRequired(true);
+		
+		items.get('AttoUnico_FirmatarioCodiceFiscale').setHidden(true);
+		items.get('AttoUnico_FirmatarioCodiceFiscale').setRequired(false);
+		
+		items.get('AttoUnico_FirmatarioCognome').setHidden(true);
+		items.get('AttoUnico_FirmatarioCognome').setRequired(false);
+		
+		items.get('AttoUnico_FirmatarioNome').setHidden(true);
+		items.get('AttoUnico_FirmatarioNome').setRequired(false);
+		
+		items.get('AttoUnico_FirmatarioNascitaProvincia').setHidden(true);
+		items.get('AttoUnico_FirmatarioNascitaProvincia').setRequired(false);
+		
+		items.get('AttoUnico_FirmatarioNascitaComune').setHidden(true);
+		items.get('AttoUnico_FirmatarioNascitaComune').setRequired(false);
+		
+		items.get('AttoUnico_FirmatarioNascitaData').setHidden(true);
+		items.get('AttoUnico_FirmatarioNascitaData').setRequired(false);
+	}
+	else if ((values.get('AttoUnico_FirmatarioRappresentanteLegale') == 'false') && !isAttoUnicoPresentato) {
+		items.get('AttoUnico_RappresentanteLegaleNascitaProvincia').setHidden(true);
+		items.get('AttoUnico_RappresentanteLegaleNascitaProvincia').setRequired(false);
+		
+		items.get('AttoUnico_RappresentanteLegaleNascitaComune').setHidden(true);
+		items.get('AttoUnico_RappresentanteLegaleNascitaComune').setRequired(false);
+		
+		items.get('AttoUnico_RappresentanteLegaleNascitaData').setHidden(true);
+		items.get('AttoUnico_RappresentanteLegaleNascitaData').setRequired(false);
+		
+		items.get('AttoUnico_FirmatarioCodiceFiscale').setHidden(false);
+		items.get('AttoUnico_FirmatarioCodiceFiscale').setRequired(true);
+		
+		items.get('AttoUnico_FirmatarioCognome').setHidden(false);
+		items.get('AttoUnico_FirmatarioCognome').setRequired(true);
+		
+		items.get('AttoUnico_FirmatarioNome').setHidden(false);
+		items.get('AttoUnico_FirmatarioNome').setRequired(true);
+		
+		items.get('AttoUnico_FirmatarioNascitaProvincia').setHidden(false);
+		items.get('AttoUnico_FirmatarioNascitaProvincia').setRequired(true);
+		
+		items.get('AttoUnico_FirmatarioNascitaComune').setHidden(false);
+		items.get('AttoUnico_FirmatarioNascitaComune').setRequired(true);
+		
+		items.get('AttoUnico_FirmatarioNascitaData').setHidden(false);
+		items.get('AttoUnico_FirmatarioNascitaData').setRequired(true);	
+	}
+
     var idItemDichiarazioni;
 	idItemDichiarazioni = items.get('Dichiaraz_0001'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 	idItemDichiarazioni = items.get('Dichiaraz_0002'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
