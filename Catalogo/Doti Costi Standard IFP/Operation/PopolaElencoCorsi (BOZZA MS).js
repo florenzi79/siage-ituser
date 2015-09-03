@@ -12,6 +12,7 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
           var m_Ana = dati_estraiStatoIscrizioni.result.get('datiAnagrafici');
           logger.info("\n XXXXX Test-Integrazione-GEFO: cognome: "+ m_Ana.get("cognome")+"\n");
           logger.info("\n XXXXX Test-Integrazione-GEFO: nome   : "+ m_Ana.get("nome")+"\n");
+          
       /*
           {datiAnagrafici={
             capdomicilio=23861,
