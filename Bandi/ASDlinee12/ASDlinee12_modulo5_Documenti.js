@@ -6,6 +6,8 @@ items.get('Adesione_File_DeMinimisFirmato').setRequired(isAttivitaEconomica);
 var isFirmatarioRappresentante = (values.get('Firmatario_CoincideLegaleRappresentante') == 'true');
 items.get('Adesione_File_AttoDelega').setHidden(isFirmatarioRappresentante);
 items.get('Adesione_File_AttoDelega').setRequired(!isFirmatarioRappresentante);
+//Adesione_File_DeMinimisIstruzioni
+values.put('Adesione_File_DeMinimisIstruzioni', getContextPath()+'/file/5acbd3dab5224c1fb8cbc4d1ac5f8fd0');
 //Adesione_File_DeMinimisModello
 values.put('Adesione_File_DeMinimisModello', getContextPath()+'/file/4457c05e76f744fa8a68c7eb7004446b');
 //Adesione_File_DeMinimisControllateModello
