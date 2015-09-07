@@ -1,3 +1,33 @@
+function calcolaEtaRichiedente(dobTime) {
+    if (parseInt(dobTime) === 0)
+        return '';
+
+	var age;
+
+	var today = new Date();
+	var todaysDay = today.getDate();
+	var todaysMonth = today.getMonth()+1;
+	var todaysYear = today.getFullYear();
+    // todaysDay=28; todaysMonth=2; todaysYear=2000; // simulate today is another day
+
+	var dob = new Date();
+	dob.setTime(parseInt(dobTime));
+	var myDay = dob.getDate();
+	var myMonth = dob.getMonth()+1;
+	var myYear = dob.getFullYear();
+
+	age = todaysYear - myYear;
+	if (todaysMonth < myMonth) age--;
+
+	if (todaysMonth == myMonth) {
+		if (todaysDay < myDay) age--;
+	}
+
+	if (isNaN(age))
+    	return '';
+	return age;
+}
+
 if (!isEmpty('Partecipante_CodiceFiscale')) {
     var codiceFiscale= values.get('Partecipante_CodiceFiscale');
     codiceFiscale = codiceFiscale.toUpperCase();
@@ -51,40 +81,11 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 										    } else {
 										        dataNascita = parseFloat(dataNascita);
 										    }
-										logger.info('XXXXXXXX DOTI 3 Script variazione dataNascita: '+dataNascita);
-										    var oggi = new Date();
-										    logger.info('XXXXXXXX DOTI 4 oggi:==>'+oggi+'<===');
-										    var gg = oggi.getDate();
-										    if (gg < 10) { gg = '0' + gg; }
-										    var mm = (oggi.getMonth() + 1);
-										    if (mm < 10) { mm = '0' + mm; }
-										    var aa = oggi.getFullYear();
-										    if (aa < 10) { aa = '0' + aa; }
-										    logger.info('XXXXXXXX DOTI 4 gg:==>'+gg+'<===');
-										    logger.info('XXXXXXXX DOTI 4 mm:==>'+mm+'<===');
-										    logger.info('XXXXXXXX DOTI 4 aa:==>'+aa+'<===');
 
-										    var dataConfronto = getTimemillis(gg+'/'+mm+'/'+aa,'dd/MM/yyyy');
+											var etaRichiedente = calcolaEtaRichiedente(dataNascita);
+											values.put('Partecipante_Eta',etaRichiedente+'');
 
-										    logger.info('XXXXXXXX DOTI 4 Script variazione dataConfronto: '+dataConfronto);
-										    if ( (dataConfronto == null) || (dataConfronto == '') ) {
-										        dataConfronto = '';
-										    } else {
-										        dataConfronto = parseFloat(dataConfronto);
-										    }
-										    logger.info('XXXXXXXX DOTI 5 Script variazione dataConfronto: '+dataConfronto);
-										    if ( (dataConfronto != '') && (dataNascita != '') ) {
-										        var etaInGiorni = parseFloat(calcolaGiorni(dataNascita, dataConfronto));
-										        logger.info('XXXXXXXX DOTI 6 Script variazione etaInGiorni: '+etaInGiorni);
-										        if (etaInGiorni>0) {
-										            var remaining = etaInGiorni;
-										            var anni = Math.floor(remaining / 365.25);
-										            values.put('Partecipante_Eta', ''+anni);
-										            logger.info('XXXXXXXX DOTI 7 Script variazione etaInGiorni: '+etaInGiorni);
-										            logger.info('XXXXXXXX DOTI 8 Script variazione remaining: '+remaining);
-										            logger.info('XXXXXXXX DOTI 9 Script variazione anni: '+anni);
-										        }
-										    }
+										logger.info('XXXXXXXX DOTI 3 Script variazione dataNascita: '+dataNascita+' - anni: '+etaRichiedente);
 						}
 
 
