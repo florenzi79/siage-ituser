@@ -18,6 +18,9 @@ if (true) {
             for (i = 0; i < a_Iscr.length; i++) {
                 var elem = a_Iscr[i];
                 print("\nXXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni.iscrizioni: "+ elem+"\n");
+//                print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" idcorso="+ elem.get("idcorso")+" \n");
+//                print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" iddote="+ elem.get("iddote")+" \n");
+
             }
 
             /*
@@ -36,6 +39,11 @@ if (true) {
                   nome=SONIA},
                   66678={idcorso=66678, iddote=35417757, idiscrizione=502926, numeroofferta=048, statoiscrizione=I}, 91010={idcorso=91010, iddote=41180104, idiscrizione=588364, numeroofferta=048, statoiscrizione=I}, 110036={idcorso=110036, iddote=50420706, idiscrizione=748344, numeroofferta=048, statoiscrizione=I}, 105061={idcorso=105061, iddote=51346779, idiscrizione=793791, numeroofferta=120, statoiscrizione=I},
                   iscrizioni=[Ljava.util.LinkedHashMap;@1051506f}
+                  17:28:06,347 INFO  [stdout] (http-/0.0.0.0:8080-3) XXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni.iscrizioni: {idcorso=66678, iddote=35417757, idiscrizione=502926, numeroofferta=048, statoiscrizione=I}
+                  17:28:06,348 INFO  [stdout] (http-/0.0.0.0:8080-3) XXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni.iscrizioni: {idcorso=91010, iddote=41180104, idiscrizione=588364, numeroofferta=048, statoiscrizione=I}
+                  17:28:06,349 INFO  [stdout] (http-/0.0.0.0:8080-3) XXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni.iscrizioni: {idcorso=110036, iddote=50420706, idiscrizione=748344, numeroofferta=048, statoiscrizione=I}
+                  17:28:06,349 INFO  [stdout] (http-/0.0.0.0:8080-3) XXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni.iscrizioni: {idcorso=105061, iddote=51346779, idiscrizione=793791, numeroofferta=120, statoiscrizione=I}
+
             */
 
           }
