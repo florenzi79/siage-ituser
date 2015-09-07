@@ -1,1 +1,2 @@
 https://siage.formazione.integrazione.lispa.it/siage-bo/designer/template/basicXsl?templateName=NomeTemplate&moduleId=idModulo
+https://10.68.69.81:8080/siage-bo/designer/template/basicXsl?templateName=NomeTemplate&moduleId=idModulo
