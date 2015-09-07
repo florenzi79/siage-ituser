@@ -70,24 +70,20 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 						logger.info("XXXXXX dataNascitaMS: " + dataNascitaMS);
 						values.put('Partecipante_NascitaData',dataNascitaMS);
 
-						// ToDo calcolare l'età ad oggi valorizzando  valorizzando Partecipante_Eta
-             // copiato dall'OnChange di Data di Nascita
-						{
-										logger.info('XXXXXXXX DOTI 1 Entrata Script variazione Data Nascita ');
-										    var dataNascita = values.get('Partecipante_NascitaData');
-										logger.info('XXXXXXXX DOTI 2 Script variazione dataNascita: '+dataNascita);
-										    if ( (dataNascita == null) || (dataNascita == '') ) {
-										        dataNascita = '';
-										    } else {
-										        dataNascita = parseFloat(dataNascita);
-										    }
+						// calcolo età ad oggi
+						logger.info('XXXXXXXX DOTI 1 Entrata Script variazione Data Nascita ');
+						    var dataNascita = values.get('Partecipante_NascitaData');
+						logger.info('XXXXXXXX DOTI 2 Script variazione dataNascita: '+dataNascita);
+						    if ( (dataNascita == null) || (dataNascita == '') ) {
+						        dataNascita = '';
+						    } else {
+						        dataNascita = parseFloat(dataNascita);
+						    }
 
-											var etaRichiedente = calcolaEtaRichiedente(dataNascita);
-											values.put('Partecipante_Eta',etaRichiedente+'');
+							var etaRichiedente = calcolaEtaRichiedente(dataNascita);
+							values.put('Partecipante_Eta',etaRichiedente+'');
 
-										logger.info('XXXXXXXX DOTI 3 Script variazione dataNascita: '+dataNascita+' - anni: '+etaRichiedente);
-						}
-
+						logger.info('XXXXXXXX DOTI 3 Script variazione dataNascita: '+dataNascita+' - anni: '+etaRichiedente);
 
             //valorizza da gefo Comune e Provincia di NASCITA
 						var istatComuneN = m_Ana.get("istatcomunenascita");

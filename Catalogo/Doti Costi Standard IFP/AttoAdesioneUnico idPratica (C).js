@@ -138,61 +138,61 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 	if ((values.get('AttoUnico_FirmatarioRappresentanteLegale') == 'true') && !isAttoUnicoPresentato) {
 		items.get('AttoUnico_RappresentanteLegaleNascitaProvincia').setHidden(false);
 		items.get('AttoUnico_RappresentanteLegaleNascitaProvincia').setRequired(true);
-		
+
 		items.get('AttoUnico_RappresentanteLegaleNascitaComune').setHidden(false);
 		items.get('AttoUnico_RappresentanteLegaleNascitaComune').setRequired(true);
-		
+
 		items.get('AttoUnico_RappresentanteLegaleNascitaData').setHidden(false);
 		items.get('AttoUnico_RappresentanteLegaleNascitaData').setRequired(true);
-		
+
 		items.get('AttoUnico_FirmatarioCodiceFiscale').setHidden(true);
 		items.get('AttoUnico_FirmatarioCodiceFiscale').setRequired(false);
-		
+
 		items.get('AttoUnico_FirmatarioCognome').setHidden(true);
 		items.get('AttoUnico_FirmatarioCognome').setRequired(false);
-		
+
 		items.get('AttoUnico_FirmatarioNome').setHidden(true);
 		items.get('AttoUnico_FirmatarioNome').setRequired(false);
-		
+
 		items.get('AttoUnico_FirmatarioNascitaProvincia').setHidden(true);
 		items.get('AttoUnico_FirmatarioNascitaProvincia').setRequired(false);
-		
+
 		items.get('AttoUnico_FirmatarioNascitaComune').setHidden(true);
 		items.get('AttoUnico_FirmatarioNascitaComune').setRequired(false);
-		
+
 		items.get('AttoUnico_FirmatarioNascitaData').setHidden(true);
 		items.get('AttoUnico_FirmatarioNascitaData').setRequired(false);
 	}
 	else if ((values.get('AttoUnico_FirmatarioRappresentanteLegale') == 'false') && !isAttoUnicoPresentato) {
 		items.get('AttoUnico_RappresentanteLegaleNascitaProvincia').setHidden(true);
 		items.get('AttoUnico_RappresentanteLegaleNascitaProvincia').setRequired(false);
-		
+
 		items.get('AttoUnico_RappresentanteLegaleNascitaComune').setHidden(true);
 		items.get('AttoUnico_RappresentanteLegaleNascitaComune').setRequired(false);
-		
+
 		items.get('AttoUnico_RappresentanteLegaleNascitaData').setHidden(true);
 		items.get('AttoUnico_RappresentanteLegaleNascitaData').setRequired(false);
-		
+
 		items.get('AttoUnico_FirmatarioCodiceFiscale').setHidden(false);
 		items.get('AttoUnico_FirmatarioCodiceFiscale').setRequired(true);
-		
+
 		items.get('AttoUnico_FirmatarioCognome').setHidden(false);
 		items.get('AttoUnico_FirmatarioCognome').setRequired(true);
-		
+
 		items.get('AttoUnico_FirmatarioNome').setHidden(false);
 		items.get('AttoUnico_FirmatarioNome').setRequired(true);
-		
+
 		items.get('AttoUnico_FirmatarioNascitaProvincia').setHidden(false);
 		items.get('AttoUnico_FirmatarioNascitaProvincia').setRequired(true);
-		
+
 		items.get('AttoUnico_FirmatarioNascitaComune').setHidden(false);
 		items.get('AttoUnico_FirmatarioNascitaComune').setRequired(true);
-		
+
 		items.get('AttoUnico_FirmatarioNascitaData').setHidden(false);
-		items.get('AttoUnico_FirmatarioNascitaData').setRequired(true);	
+		items.get('AttoUnico_FirmatarioNascitaData').setRequired(true);
 	}
 
-    var idItemDichiarazioni;
+  var idItemDichiarazioni;
 	idItemDichiarazioni = items.get('Dichiaraz_0001'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 	idItemDichiarazioni = items.get('Dichiaraz_0002'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 	idItemDichiarazioni = items.get('Dichiaraz_0003'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
@@ -209,31 +209,80 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 	idItemDichiarazioni = items.get('Dichiaraz_0013'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 
 
-    // Verifica Accreditamento Operatore
+  // Verifica Accreditamento Operatore
 
-		var CF_Oper = values.get('Richiedente_CodiceFiscale');
-		var m_accreditamentoOperatore = verificaAccreditamentoOperatore(CF_Oper);
-		logger.info("XXXXX DOTE IFP: verificaAccreditamentoOperatore per il CF "+CF_Oper+": m_accreditamentoOperatore.success:"+m_accreditamentoOperatore.success);
-		if (m_accreditamentoOperatore.success) {
-			logger.info("XXXXX DOTE IFP: verificaAccreditamentoOperatore per il CF "+CF_Oper+": m_accreditamentoOperatore.result:"+m_accreditamentoOperatore.result);
-			items.get('Avviso_AccreditamentoOperatoreNonVerificabile').setHidden(true);
-			values.put('InterrogazioneAlboAccreditati','ok');
-			if(m_accreditamentoOperatore.result) {
-					logger.info('XXXXXXXX  Ente Accreditato');
-					values.put('Richiedente_OperatoreAccreditato','true');
-					items.get('Avviso_NoRequisitiAttoUnico').setHidden(true);
-			} else {
-					logger.info('XXXXXXXX  Ente NON Accreditato - Visualizzo avviso 01');
-					values.put('Richiedente_OperatoreAccreditato','false');
-					items.get('Avviso_NoRequisitiAttoUnico').setHidden(false);
-			}
-		} else {  // se non è stato possibile verificare l'accreditamento dell'operatore
-			logger.info("\n\n\n\n\n XXXXXXXX Errore su verificaAccreditamentoOperatore: " + m_accreditamentoOperatore.message + "\n\n\n\n\n");
-			values.put('InterrogazioneAlboAccreditati','m_accreditamentoOperatore.message');
-			items.get('Avviso_NoRequisitiAttoUnico').setHidden(true);
-			items.get('Avviso_AccreditamentoOperatoreNonVerificabile').setHidden(false);
+	var CF_Oper = values.get('Richiedente_CodiceFiscale');
+	var m_accreditamentoOperatore = verificaAccreditamentoOperatore(CF_Oper);
+	logger.info("XXXXX DOTE IFP: verificaAccreditamentoOperatore per il CF "+CF_Oper+": m_accreditamentoOperatore.success:"+m_accreditamentoOperatore.success);
+	if (m_accreditamentoOperatore.success) {
+		logger.info("XXXXX DOTE IFP: verificaAccreditamentoOperatore per il CF "+CF_Oper+": m_accreditamentoOperatore.result:"+m_accreditamentoOperatore.result);
+		items.get('Avviso_AccreditamentoOperatoreNonVerificabile').setHidden(true);
+		values.put('InterrogazioneAlboAccreditati','ok');
+		if(m_accreditamentoOperatore.result) {
+				logger.info('XXXXXXXX  Ente Accreditato');
+				values.put('Richiedente_OperatoreAccreditato','true');
+				items.get('Avviso_NoRequisitiAttoUnico').setHidden(true);
+		} else {
+				logger.info('XXXXXXXX  Ente NON Accreditato - Visualizzo avviso 01');
+				values.put('Richiedente_OperatoreAccreditato','false');
+				items.get('Avviso_NoRequisitiAttoUnico').setHidden(false);
 		}
-		logger.info("XXXXX DOTE IFP: FINE verificaAccreditamentoOperatore");
+	} else {  // se non è stato possibile verificare l'accreditamento dell'operatore
+		logger.info("\n\n\n\n\n XXXXXXXX Errore su verificaAccreditamentoOperatore: " + m_accreditamentoOperatore.message + "\n\n\n\n\n");
+		values.put('InterrogazioneAlboAccreditati','m_accreditamentoOperatore.message');
+		items.get('Avviso_NoRequisitiAttoUnico').setHidden(true);
+		items.get('Avviso_AccreditamentoOperatoreNonVerificabile').setHidden(false);
+	}
+	logger.info("XXXXX DOTE IFP: FINE verificaAccreditamentoOperatore");
+
+	// ricavo idSede
+	result_SedePratica = recuperaSedePratica();
+  /*
+ recuperaSedePratica: {
+ cap=25048,
+ cf=02481950984,
+   denominazionesede=C.F.P. EDOLO,
+ email=l.gazzoli@cfpzanardelli.it,
+ fax=0364/73165,
+   idoperatore=171919,
+   idsede=179778,
+ indirizzo=VIA MARCONI, 73,
+ istatcomune=017068,
+ reanum=453948,
+ telefono=0364/71256,
+ tipologia=Sede operativa,
+ www=www.cfpzanardelli.it}
+
+	*/
+	if (result_SedePratica.success) {
+		var m_InfoSedePratica=result_SedePratica.result;
+	    logger.info("XXXXX Test-Integrazione-GEFO: m_InfoSedePratica: "+ m_InfoSedePratica);
+
+			logger.info("XXXXX Test-Integrazione-GEFO: denominazionesede: "+ m_InfoSedePratica.get("denominazionesede"));
+			logger.info("XXXXX Test-Integrazione-GEFO: idsede: "+ m_InfoSedePratica.get("idsede"));
+			logger.info("XXXXX Test-Integrazione-GEFO: idoperatore: "+ m_InfoSedePratica.get("idoperatore"));
+			logger.info("XXXXX Test-Integrazione-GEFO: denominazionesede: "+ m_InfoSedePratica.get("denominazionesede"));
+			logger.info("XXXXX Test-Integrazione-GEFO: cap: "+ m_InfoSedePratica.get("cap"));
+			logger.info("XXXXX Test-Integrazione-GEFO: cf: "+ m_InfoSedePratica.get("cf"));
+			logger.info("XXXXX Test-Integrazione-GEFO: email: "+ m_InfoSedePratica.get("email"));
+			logger.info("XXXXX Test-Integrazione-GEFO: fax: "+ m_InfoSedePratica.get("fax"));
+			logger.info("XXXXX Test-Integrazione-GEFO: indirizzo: "+ m_InfoSedePratica.get("indirizzo"));
+			logger.info("XXXXX Test-Integrazione-GEFO: istatcomune: "+ m_InfoSedePratica.get("istatcomune"));
+			logger.info("XXXXX Test-Integrazione-GEFO: reanum: "+ m_InfoSedePratica.get("reanum"));
+			logger.info("XXXXX Test-Integrazione-GEFO: telefono: "+ m_InfoSedePratica.get("telefono"));
+			logger.info("XXXXX Test-Integrazione-GEFO: tipologia: "+ m_InfoSedePratica.get("tipologia"));
+			logger.info("XXXXX Test-Integrazione-GEFO: www: "+ m_InfoSedePratica.get("www"));
+
+			values.put('Richiedente_IdOperatore',m_InfoSedePratica.get("idoperatore"));
+			values.put('Richiedente_IdSede',m_InfoSedePratica.get("idsede"));
+			values.put('Richiedente_SedeOperativa',m_InfoSedePratica.get("denominazionesede"));
+
+
+
+	} else {
+	    logger.info("\n\n\n\n\nErrore su recuperaSedePratica: " + result_SedePratica.message + "\n\n\n\n\n");
+	}
+
 // TODO MARCO SCOTTI -  verificare da qui in avanti......
 /*
   // Mostro avviso solo se ente La dotazione finanziaria per la linea di intervento relativa A o B  è terminata
