@@ -29,7 +29,7 @@ if (return_test.success) {
 } else {
     logger.info("\n\n\n\n\nErrore su verificaAccreditamentoOperatore: " + return_test.message + "\n\n\n\n\n");
 }
-/*
+
 return_test = verificaAccreditamentoSede('179778');
 if (return_test.success) {
     logger.info("XXXXX Test-Integrazione-GEFO: verificaAccreditamentoSede: "+ return_test.result);
@@ -94,7 +94,7 @@ if (return_test.success) {
 } else {
     logger.info("\n\n\n\n\nErrore su estraiOffertaFormativa: " + return_test.message + "\n\n\n\n\n");
 }
-*/
+
 //logger.info("XXXXX Test-Integrazione-GEFO: mappaestraiStatoIscrizioni2:"+mappaestraiStatoIscrizioni2);
 
 logger.info("\n\n\n\n\n\n\n\nXXXXX Test-Integrazione-GEFO: FINE Script\n\n\n\n\n\n\n\n");

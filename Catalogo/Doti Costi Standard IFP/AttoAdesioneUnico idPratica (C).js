@@ -14,22 +14,10 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 	//**** VALORIZZAZIONE CAMPI dei DATI GENERICI
 		values.put('NumeroPratica', values.get('idPratica'));
 		values.put('Bando_Descrizione', descrizioneBando); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
-/*
-		if (!isEmpty('Richiedente_Denominazione') && !isEmpty('title')) {
-				values.put('TitoloPratica',values.get('title') + ' ' + values.get('Richiedente_Denominazione'));
-		}
-		if ((!isEmpty('Partecipante_Cognome')) && (!isEmpty('Partecipante_Nome'))) {
-				values.put('title',values.get('Partecipante_Cognome')+' '+values.get('Partecipante_Nome'));
-		}
-*/
-	//    items.get('title').setHidden(true);
-
 
 	//**** SCRIPT di INIZIALIZZAZIONE
 		values.put('statoPratica', "Bozza");
 		values.put('fasePratica', "Adesione"); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
-
-    //values.put('DataPubblicazioneAvviso', "18/05/2015");
 
 	//**** LETTURA user
 	if (user.getProfiloQualificaCorrente().getCodiceNaturaGiuridicaSgProf() !== null) {
@@ -58,7 +46,6 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 			values.put( 'Richiedente_SedeLegaleCap', mappaValoriSgProf.get('AA063').toString());
 		}
 
-
 		if((mappaValoriSgProf.get('AA060') != null)&&(isEmpty('Richiedente_SedeLegaleIndirizzo')))
 			values.put( 'Richiedente_SedeLegaleIndirizzo', mappaValoriSgProf.get('AA060').toString() );
 		if( mappaValoriSgProf.get('AA030') != null && isEmpty('Richiedente_RappresentanteLegaleNome'))
@@ -74,10 +61,8 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 														  values.get('Richiedente_SedeLegaleProvinciaDn')+") "+
 															values.get('Richiedente_SedeLegaleIndirizzo');
 	values.put('Richiedente_SedeLegaleDescrizione', descrizioneSedeLegaleOperatore);
-	logger.info("\n\n\n\n\n XXXXXXXX descrizioneSedeLegaleOperatore: " + descrizioneSedeLegaleOperatore + "\n\n\n\n\n");
 
     // Verifica Se atto unico è stato presentato
-
 	var isAttoUnicoPresentato =false;
 	var CF_Operatore = values.get('Richiedente_CodiceFiscale');
 	var sql_AttoUnicoPresentato = " select count(*)  from ag_sm_data_entries data_entries where dat_pth = 'Richiedente_CodiceFiscale'  and fk_id in (select sm_id  FROM ag_sm_instances inst  WHERE  inst.sm_tmpl_dn = '"+nomeTemplate+"' and  inst.current_state in ("+idStatiAttoUnicoPresentato+") and DAT_VL ='"+CF_Operatore+"')";
@@ -210,7 +195,6 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 
 
   // Verifica Accreditamento Operatore
-
 	var CF_Oper = values.get('Richiedente_CodiceFiscale');
 	var m_accreditamentoOperatore = verificaAccreditamentoOperatore(CF_Oper);
 	logger.info("XXXXX DOTE IFP: verificaAccreditamentoOperatore per il CF "+CF_Oper+": m_accreditamentoOperatore.success:"+m_accreditamentoOperatore.success);
@@ -261,7 +245,6 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 			logger.info("XXXXX Test-Integrazione-GEFO: denominazionesede: "+ m_InfoSedePratica.get("denominazionesede"));
 			logger.info("XXXXX Test-Integrazione-GEFO: idsede: "+ m_InfoSedePratica.get("idsede"));
 			logger.info("XXXXX Test-Integrazione-GEFO: idoperatore: "+ m_InfoSedePratica.get("idoperatore"));
-			logger.info("XXXXX Test-Integrazione-GEFO: denominazionesede: "+ m_InfoSedePratica.get("denominazionesede"));
 			logger.info("XXXXX Test-Integrazione-GEFO: cap: "+ m_InfoSedePratica.get("cap"));
 			logger.info("XXXXX Test-Integrazione-GEFO: cf: "+ m_InfoSedePratica.get("cf"));
 			logger.info("XXXXX Test-Integrazione-GEFO: email: "+ m_InfoSedePratica.get("email"));
@@ -276,7 +259,10 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 			values.put('Richiedente_IdOperatore',m_InfoSedePratica.get("idoperatore"));
 			values.put('Richiedente_IdSede',m_InfoSedePratica.get("idsede"));
 			values.put('Richiedente_SedeOperativa',m_InfoSedePratica.get("denominazionesede"));
+			values.put('Richiedente_SedeOperativa_Comune',m_InfoSedePratica.get("istatcomune"));
 
+			// TODO Valorizzare Richiedente_SedeOperativa_ComuneDn
+			 values.put('Richiedente_SedeOperativa_ComuneDn', 'TODO valorizzare Comune Sede Operativa');
 
 
 	} else {
