@@ -1,38 +1,94 @@
 print("\n************************************\n XXXXX INIZIO SCRIPT OPERATION PopolaElencoCorsi_DOTE\n************************************\n")
 //PopolaElencoCorsi_DOTE
 //if (!isEmpty('Partecipante_CodiceFiscale')) {
+//TODO Svuotare il sottomodulo ServiziFormazione_ElencoCorsi
 if (true) {
     var codiceFiscale= values.get('Partecipante_CodiceFiscale');
     codiceFiscale = codiceFiscale.toUpperCase();
     values.put('Partecipante_CodiceFiscale',codiceFiscale);
-
-  if (true) {  //		if (isValidCf(codiceFiscale)) {
+//		if (isValidCf(codiceFiscale)) {
+  if (true) {
     var idOperatore = values.get('Richiedente_IdOperatore');
     var idSede = values.get('Richiedente_IdSede');
-// TODO  Usare Parametro valorizzato all'inizio del bando
-    var offerteFormative = ['048','120'];
+
+// recupera offerte formative del bando definite nel primo modulo
+    var offerteFormative = [];
+    var i=0;
+    while (values.get('Bando_OfferteFormative['+i+']')!==null) {
+      offerteFormative[i]=values.get('Bando_OfferteFormative['+i+']');
+      i++;
+    }
+    // per forzare le offerte formative per test, togliere il commento all'istruzione seguente:
+    // offerteFormative = [048];
+    //
+
+    print("XXXXX DOTI - Offerte Formative: "+offerteFormative+"\n");
     try {
+      print("XXXXX DOTI - esecuzione di estraiDettagliCorsi(IdOperatore = "+idOperatore+" codiceFiscale="+codiceFiscale+" offerteFormative:"+offerteFormative+" idSede:"+idSede+")\n");
       var dati_estraiDettagliCorsi = estraiDettagliCorsi(idOperatore, codiceFiscale, offerteFormative, idSede);
       if (dati_estraiDettagliCorsi.success) {
-          print("XXXXX Test-Integrazione-GEFO: dati_estraiDettagliCorsi result: "+ dati_estraiDettagliCorsi.result+"\n");
+          print("XXXXX DOTI: dati_estraiDettagliCorsi result: "+ dati_estraiDettagliCorsi.result+"\n");
+          print("XXXXX DOTI: dati_estraiDettagliCorsi result 66678: "+ dati_estraiDettagliCorsi.result.get('66678')+"\n");
+          print("XXXXX DOTI: dati_estraiDettagliCorsi result 66678 datafine: "+ dati_estraiDettagliCorsi.result.get('66678').get('datafine')+"\n");
+
+
           if (dati_estraiDettagliCorsi.result!== null) {
             var a_IscrDC = dati_estraiDettagliCorsi.result.get('iscrizioni');
             if (a_IscrDC!==null) {
-
+              var j=0;
+              var offerta;
               for (i = 0; i < a_IscrDC.length; i++) {
                   var elem = a_IscrDC[i];
-                  print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" estraiStatoIscrizioni.iscrizioni: "+ elem+"\n");
-                  print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" iddote="+ elem.get("iddote")+" \n");
-                  print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" idcorsoMAPPA="+ elem.get("idcorso")+" \n");
-                  print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" idcorsoMAPPA="+ elem.get("idcorso")+" \n");
+                  offerta = dati_estraiDettagliCorsi.result.get(elem.get('idcorso'));
+                  //print("\nXXXXX DOTI i="+i+" estraiStatoIscrizioni.iscrizioni: "+ elem+"\n");
+                  print("XXXXX DOTI i="+i+" elem.get('idcorso')="+ elem.get('idcorso')+" \n");
+                  print("XXXXX DOTI: dati_estraiDettagliCorsi result datafine i-esima: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('datafine')+"\n");
+                  print("XXXXX DOTI: dati_estraiDettagliCorsi result titolo i-esimo: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('titolo')+"\n");
+                  print("XXXXX DOTI: offerta get titolo i-esimo: "+ offerta.get('titolo')+"\n");
 
+                  if(true) {  // TODO Aggiungere le condizioni corrette che devono essere soddisfatte per popolare l'elenco corsi
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].NomeServizio',offerta.get('titolo'));
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].NomeServizioDn',offerta.get('titolo'));
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].IdCorso',offerta.get('idcorso'));
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].DenominazioneOperatore',values.get('Richiedente_Denominazione'));
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].DenominazioneSedeOperatore',values.get('Richiedente_SedeOperativa'));
+
+                    //TODO Da verificare se è la provincia dell'operatore o della sede del corso
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].Provincia',"Da verificare se è la provincia dell'operatore o della sede del corso");
+
+                    //TODO Da verificare se è il comune dell'operatore o della sede del corso
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].Comune',"Da verificare se è il comune dell'operatore o della sede del corso");
+
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].IdAnnualita',offerta.get('annocorso'));
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].Area',offerta.get('area'));
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].QualificaDiploma',offerta.get('descrizionequalifica'));
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].Indirizzo',offerta.get('idindirizzo'));
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].Ore',''+parseFloat(offerta.get('durata')));
+
+                    //TODO Valorizzare ImportoAmmissibile Da tabella "tabella qualifica valori Dote" in base al valore di c43
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',''+parsefloat('1234567890'));
+                    if (offerta.get('datainizio')!== null) {
+                      var dataAvvioMS = getTimemillis(offerta.get('datainizio'),'dd/MM/yyyy');
+                      values.put('ServiziFormazione_ElencoCorsi['+j+'].DataAvvio',''+dataAvvioMS);
+                    }
+                    if (offerta.get('datafine')!== null) {
+                      var dataConclusioneMS = getTimemillis(offerta.get('datafine'),'dd/MM/yyyy');
+                      values.put('ServiziFormazione_ElencoCorsi['+j+'].DataConclusione',''+dataConclusioneMS);
+                    }
+                    values.put('ServiziFormazione_ElencoCorsi['+j+'].StatoCorso',offerta.get('stato'));
+                    j++;
+
+                  }
+
+                  //print("\nXXXXX DOTI i="+i+" iddote="+ elem.get("iddote")+" \n");
 
               }
 
+            } else {
+              print("XXXXX DOTI dati_estraiDettagliCorsi.result.get('iscrizioni')=null\n");
             }
             var a_idcorsoDC = dati_estraiDettagliCorsi.result.get('idcorso');
             if (a_idcorsoDC!==null) {
-
               for (i = 0; i < a_idcorsoDC.length; i++) {
                   var elem3 = a_idcorsoDC[i];
                   print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" estraiStatoIscrizioni.iscrizioni: "+ elem3+"\n");
@@ -40,10 +96,14 @@ if (true) {
                   print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" iddote="+ elem3.get("annocorso ")+" \n");
                   print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" area="+ elem3.get("area")+" \n");
 
+
               }
 
             }
 
+          }
+          else {
+          print("dati_estraiDettagliCorsi.result = null\n");
           }
       }
       else  {
@@ -60,7 +120,43 @@ if (true) {
 
 
 
-  }
+/*
+      // TODO: Specificare correttamente l'offerta formativa come sarà indicato dai BU per ogni Bando
+      var dati_estraiStatoIscrizioni = estraiStatoIscrizioni(codiceFiscale,null);
+      if (dati_estraiStatoIscrizioni.success) {
+        print("XXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni result: "+ dati_estraiStatoIscrizioni.result+"\n");
+
+
+
+        print("\n\n\n\n\n XXXXXX (1) estraiStatoIscrizioni message: " + dati_estraiStatoIscrizioni.message + "\n\n\n\n\n");
+        if (dati_estraiStatoIscrizioni.result!== null) {
+          var a_Iscr = dati_estraiStatoIscrizioni.result.get('iscrizioni');
+          if (a_Iscr!==null) {
+
+            for (i = 0; i < a_Iscr.length; i++) {
+                var elem = a_Iscr[i];
+                print("\nXXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni.iscrizioni: "+ elem+"\n");
+                print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" idcorso="+ elem.get("idcorso")+" \n");
+                print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" iddote="+ elem.get("iddote")+" \n");
+
+            }
+
+
+
+          }
+
+          }
+      }
+      else {
+        {
+          // l'integrazione con gefo ha problemi
+          // TODO: Valorizzare una variabile per permettere un avviso nel modulo successivo e relativo blocco
+          print("\n XXXXX estraiStatoIscrizioni non andato a buon fine -  \n")
+
+        }
+      }
+*/
+    }
 }
 print("\n************************************\n XXXXX FINE SCRIPT OPERATION PopolaElencoCorsi_DOTE\n************************************\n")
 

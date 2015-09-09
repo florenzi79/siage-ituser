@@ -1,0 +1,42 @@
+{datiAnagrafici=
+  {capdomicilio=23861, capresidenza=23861, codicefiscale=VLSSNO98S60E507L, cognome=VALSECCHI, datanascita=20/11/1998, genere=F, indirizzodomicilio=SEGANTINI, 95, indirizzoresidenza=SEGANTINI, 95, comunedomicilio=097021, istatcomunenascita=097042, istatcomuneresidenza=097021, nome=SONIA},
+66678={
+  alternanza=0,
+  annocorso=1,
+  area=11,
+  autofinanziato=N,
+  datafine=05/06/2013,
+  datainizio=null,
+  descrizionepercorsoabilitante=Nessuna,
+  descrizionepercorsoregolamentato=,
+  durata=990,
+  idcorso=66678,
+  idoperatore=5498,
+  idpadre=66678,
+  idpercorsoabilitante=1,
+  idpercorsoregolamentato=null,
+  idsede=125962,
+  idstato=C,
+  ndotimax=18,
+  numoffertaformativa=048,
+  percorsoabilitante=NO,
+  percorsoregolamentato=SI,
+  stato=Concluso,
+  tipologia=DDIF Triennali (2011-2013),
+  titolo=OPERATORE DEL BENESSERE - TRATTAMENTI ESTETICI,
+  totaleannualita=3,
+  descrizionearea=COMPETENZA STORICO,SOCIO-ECONOMICA,
+  descrizioneindirizzo=null,
+  descrizionequalifica=null,
+  idarea=137,
+  idindirizzo=null,
+  idqualifica=null,
+  competenze=[Ljava.util.LinkedHashMap;@5fc4147f}, 
+
+91010={alternanza=232, annocorso=2, area=11, autofinanziato=N, datafine=03/06/2014, datainizio=null, descrizionepercorsoabilitante=Nessuna, descrizionepercorsoregolamentato=, durata=990, idcorso=91010, idoperatore=5498, idpadre=66678, idpercorsoabilitante=1, idpercorsoregolamentato=null, idsede=180785, idstato=C, ndotimax=24, numoffertaformativa=048, percorsoabilitante=NO, percorsoregolamentato=SI, stato=Concluso, tipologia=DDIF Triennali (2011-2013), titolo=OPERATORE DEL BENESSERE - TRATTAMENTI ESTETICI, totaleannualita=3, descrizionearea=COMPETENZA STORICO,SOCIO-ECONOMICA, descrizioneindirizzo=null, descrizionequalifica=null, idarea=137, idindirizzo=null, idqualifica=null, competenze=[Ljava.util.LinkedHashMap;@421dcef7},
+
+110036={alternanza=362, annocorso=3, area=11, autofinanziato=N, datafine=05/06/2015, datainizio=15/09/2014, descrizionepercorsoabilitante=Nessuna, descrizionepercorsoregolamentato=, durata=990, idcorso=110036, idoperatore=5498, idpadre=66678, idpercorsoabilitante=1, idpercorsoregolamentato=null, idsede=221739, idstato=A, ndotimax=22, numoffertaformativa=048, percorsoabilitante=NO, percorsoregolamentato=SI, stato=Avviato, tipologia=DDIF Triennali (2011-2013), titolo=OPERATORE DEL BENESSERE - TRATTAMENTI ESTETICI, totaleannualita=3, descrizionearea=COMPETENZA STORICO,SOCIO-ECONOMICA, descrizioneindirizzo=null, descrizionequalifica=null, idarea=137, idindirizzo=null, idqualifica=null, competenze=[Ljava.util.LinkedHashMap;@32fedc0a},
+
+105061={idcorso=105061, iddote=51346779, idiscrizione=793791, numeroofferta=120, statoiscrizione=I},
+
+iscrizioni=[Ljava.util.LinkedHashMap;@7a202ead}

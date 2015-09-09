@@ -28,18 +28,65 @@ function calcolaEtaRichiedente(dobTime) {
 	return age;
 }
 
+function svuotaCampiDestinatario() {
+  values.put('Partecipante_Cognome','');
+  values.put('Partecipante_Nome','');
+  values.put('title','nuova pratica');
+  values.put('Partecipante_Genere','');
+  values.put('Partecipante_NascitaData','');
+  values.put('Partecipante_Eta','');
+  values.put('Partecipante_NascitaProvincia','');
+  values.put('Partecipante_NascitaComune','');
+  values.put('Partecipante_NascitaProvinciaDn','');
+  values.put('Partecipante_NascitaComuneDn','');
+  values.put('Partecipante_ResidenzaProvincia','');
+  values.put('Partecipante_ResidenzaComune','');
+  values.put('Partecipante_ResidenzaProvinciaDn','');
+  values.put('Partecipante_ResidenzaComuneDn','');
+  values.put('Partecipante_DomicilioProvincia','');
+  values.put('Partecipante_DomicilioComune','');
+  values.put('Partecipante_DomicilioProvinciaDn','');
+  values.put('Partecipante_DomicilioComuneDn','');
+  values.put('Partecipante_ResidenzaCap','');
+  values.put('Partecipante_ResidenzaIndirizzo','');
+  values.put('Partecipante_DomicilioCap','');
+  values.put('Partecipante_DomicilioIndirizzo','');
+  values.put('Partecipante_DomicilioComeResidenza','');
+}
+function nascondiCampiDestinatario(flag) {
+  items.get('Partecipante_Cognome').setHidden(flag);
+  items.get('Partecipante_Nome').setHidden(flag);
+  items.get('Partecipante_Genere').setHidden(flag);
+  items.get('Partecipante_NascitaData').setHidden(flag);
+  items.get('Partecipante_Eta').setHidden(flag);
+  items.get('Partecipante_NascitaProvincia').setHidden(flag);
+  items.get('Partecipante_NascitaComune').setHidden(flag);
+  //items.get('dichiarazione_frequenza').setHidden(flag);
+}
+
+
+
 if (!isEmpty('Partecipante_CodiceFiscale')) {
     var codiceFiscale= values.get('Partecipante_CodiceFiscale');
     codiceFiscale = codiceFiscale.toUpperCase();
     values.put('Partecipante_CodiceFiscale',codiceFiscale);
 		if (isValidCf(codiceFiscale)) {
-
+      items.get('avviso_CfErrato').setHidden(true);
 			// chiamata a GeFo per compilare i restanti campi
-			var dati_estraiStatoIscrizioni = estraiStatoIscrizioni(codiceFiscale,null);
+      var offerteFormative = [];
+      var i=0;
+      while (values.get('Bando_OfferteFormative['+i+']')!==null) {
+        offerteFormative[i]=values.get('Bando_OfferteFormative['+i+']');
+        i++;
+      }
+      logger.info("XXXXX Offerte Formative: "+offerteFormative);
+			var dati_estraiStatoIscrizioni = estraiStatoIscrizioni(codiceFiscale,offerteFormative);
+
 			if (dati_estraiStatoIscrizioni.success) {
-				logger.info("XXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni result: "+ dati_estraiStatoIscrizioni.result);
-				logger.info("\n\n\n\n\n XXXXXX (1) estraiStatoIscrizioni message: " + dati_estraiStatoIscrizioni.message + "\n\n\n\n\n");
+        items.get('avviso_problemaTecnico').setHidden(true);
+				logger.info("XXXXX DOTI IFP Esecuzione di estraiStatoIscrizioni. result:"+ dati_estraiStatoIscrizioni.result);
 				if (dati_estraiStatoIscrizioni.result!== null) {
+          nascondiCampiDestinatario(false);
 					var m_Ana = dati_estraiStatoIscrizioni.result.get('datiAnagrafici');
 					logger.info("\n XXXXX Test-Integrazione-GEFO: cognome: "+ m_Ana.get("cognome")+"\n");
 					logger.info("\n XXXXX Test-Integrazione-GEFO: nome   : "+ m_Ana.get("nome")+"\n");
@@ -157,15 +204,38 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 
             logger.info('XXXXX Partecipante_DomicilioComeResidenza: '+values.get('Partecipante_DomicilioComeResidenza'));
 
-					/*
-			    for (i = 0; i < dati_estraiStatoIscrizioni.result.get('iscrizioni').length; i++) {
-			        var elem = dati_estraiStatoIscrizioni.result.get('iscrizioni')[i];
-			        logger.info("XXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni.iscrizioni: "+ elem);
-			    }
-					*/
+  					/*
+  			    for (i = 0; i < dati_estraiStatoIscrizioni.result.get('iscrizioni').length; i++) {
+  			        var elem = dati_estraiStatoIscrizioni.result.get('iscrizioni')[i];
+  			        logger.info("XXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni.iscrizioni: "+ elem);
+  			    }
+  					*/
+            items.get('avviso_iscrizioneCorso').setHidden(true);
+            // TODO: Richiamare Gefo per controllare che il destinatario non abbia già partecipato ad una dote tra quelle nel sheets "Verifica Bandi"
+            // visualizzando eventualmente l'avviso  avviso_DoteGiaErogataIncompatibile e bloccando con un controllo.
+
 				}
+        else {
+          // result = null ==> Non ci sono destinatari iscritti con quel CF
+          logger.info("XXXXXX  DOTE: Il destinatario non risulta iscritto a nessun corso. Pertanto non è possibile procedere con la richiesta della dote");
+          items.get('avviso_iscrizioneCorso').setHidden(false);
+          svuotaCampiDestinatario();
+          nascondiCampiDestinatario(true);
+        }
 			} else {
-			    logger.info("\n\n\n\n\n XXXXXX  Errore su estraiStatoIscrizioni message: " + dati_estraiStatoIscrizioni.message + "\n\n\n\n\n");
+        // c'è un errore nell'integrazione con GeFo
+			  logger.info("\n\n\n\n\n XXXXXX  Errore su estraiStatoIscrizioni message: " + dati_estraiStatoIscrizioni.message + "\n\n\n\n\n");
+        // visualizzare avviso: Si è verificato un momentaneo problema di connessione. Si prega di riprovare più tardi
+        items.get('avviso_problemaTecnico').setHidden(false);
+        //svuotaCampiDestinatario();
+        //nascondiCampiDestinatario(true);
 			}
-		}
+		} else {
+      // CF Non Valido
+      logger.info("XXXXXX  DOTE: CF Non Valido");
+      items.get('avviso_CfErrato').setHidden(false);
+      items.get('avviso_iscrizioneCorso').setHidden(true);
+      svuotaCampiDestinatario();
+      nascondiCampiDestinatario(true);
+    }
 }

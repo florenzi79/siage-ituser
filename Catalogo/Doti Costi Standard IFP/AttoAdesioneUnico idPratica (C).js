@@ -2,19 +2,25 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 {
 	if (iamInRoot()) {
 // PARAMETRI da valorizzare correttamente usando il CATALOGO
-		var idStatiAttoUnicoPresentato = "'859506c362764ba1a70277d1345e7cee','8c8999ca9712409f81b1f5c39ef2f052'";
 		var nomeTemplate ="Doti IeFP DDF I anni"; // usato nella query per il check dell'atto unico
-//		var nomeTemplate ="TEST CATALOGO Dote IFP "; // temporaneo... per prova ********
+		//		var nomeTemplate ="TEST CATALOGO Dote IFP "; // temporaneo... per prova ********
+		var offerteFormative = ['048','120'];
+		// TODO: Inserire le offerte formative corrette
+		var idStatiAttoUnicoPresentato = "'859506c362764ba1a70277d1345e7cee','8c8999ca9712409f81b1f5c39ef2f052'";
 		var idFildsetDettagliAttoUnicoPresentato = 'b19c24e93a98431bbb1c5720807fcf2f'; // viene nascosto o mostrato a secondo che è stato o non è stato presentato l'atto di adesione unico
 		var idFildsetFirmatario = 'e681dd72e6e647d68429e9e6dab34be3';
 		var idFildsetDichiarazioni = '2089fc04d0294984b2f85cdbe3eda960';
 		var descrizioneBando ="wait chiusura  punto aperto PA_020 - inserire la descrizione del bando";
 
-
 	//**** VALORIZZAZIONE CAMPI dei DATI GENERICI
 		values.put('NumeroPratica', values.get('idPratica'));
 		values.put('Bando_Descrizione', descrizioneBando); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
 
+		var i=0;
+		while (offerteFormative[i]) {
+			values.put('Bando_OfferteFormative['+i+']',offerteFormative[i]);
+			i++;
+		}
 	//**** SCRIPT di INIZIALIZZAZIONE
 		values.put('statoPratica', "Bozza");
 		values.put('fasePratica', "Adesione"); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
