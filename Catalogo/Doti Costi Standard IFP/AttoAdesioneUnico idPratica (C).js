@@ -3,6 +3,7 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 	if (iamInRoot()) {
 // PARAMETRI da valorizzare correttamente usando il CATALOGO
 		var nomeTemplate ="Doti IeFP DDF I anni"; // usato nella query per il check dell'atto unico
+		var annualita ="1";
 		//		var nomeTemplate ="TEST CATALOGO Dote IFP "; // temporaneo... per prova ********
 		var offerteFormative = ['048','120'];
 		// TODO: Inserire le offerte formative corrette
@@ -15,6 +16,8 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 	//**** VALORIZZAZIONE CAMPI dei DATI GENERICI
 		values.put('NumeroPratica', values.get('idPratica'));
 		values.put('Bando_Descrizione', descrizioneBando); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
+		values.put('Bando_Annualita', annualita); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
+
 
 		var i=0;
 		while (offerteFormative[i]) {
