@@ -269,10 +269,11 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 			values.put('Richiedente_IdSede',m_InfoSedePratica.get("idsede"));
 			values.put('Richiedente_SedeOperativa',m_InfoSedePratica.get("denominazionesede"));
 			values.put('Richiedente_SedeOperativa_Comune',m_InfoSedePratica.get("istatcomune"));
+			values.put('Richiedente_SedeOperativa_ComuneDn', getAnaDenominazione('comune_istat', values.get('Richiedente_SedeOperativa_Comune'));
 
-			// TODO Valorizzare Richiedente_SedeOperativa_ComuneDn
-			 values.put('Richiedente_SedeOperativa_ComuneDn', 'TODO valorizzare Comune Sede Operativa');
-
+			var istatComuneP = m_InfoSedePratica.get("istatcomune");
+			values.put('Richiedente_SedeOperativa_Provincia',istatComuneP.substr(0, 3));
+			values.put('Richiedente_SedeOperativa_ProvinciaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_SedeOperativa_Provincia'));
 
 	} else {
 	    logger.info("\n\n\n\n\nErrore su recuperaSedePratica: " + result_SedePratica.message + "\n\n\n\n\n");
