@@ -1,19 +1,19 @@
-Attivit‡ Doti IFP
+Attivit√† Doti IFP
 
-- (Marco) 			idqualifica dentro il vettore competenze (servizi)
-- ( ????? ) 		cambiare messaggio atto unico
-- (TODO) 			tutor da query
-- (wait LISPA) 	controllo tutor anni esperienza 
-- (gi‡ fatto ?? ) 	gestione messaggio servizi di formazione
-- ( Ok )				 titolo servizi di formazione tutto maiuscolo
-- (CONTROLLI) controllo obbligatorieta' selezione corso
-
-- ( Ë solo da riportare in PO ? ) domanda di selezione corso tutta maiuscola
-- ( Ë solo da riportare in PO ? ) aggiunta di un fieldset e un item per ricordare all'utente di selezionare il corso
-- ( Ë solo da riportare in PO e gitHub ) aggiustare il totale ore dei servizi (non devono essere somme)
+- (TODO Marco) 	idqualifica dentro il vettore competenze (servizi)
+- (TODO ) 			Facility di autocomulazione tutormettendo solo CF, facendo query su pratiche gi√† protocollate
+- (TODO oltre a altri CONTROLLI) controllo obbligatorieta' selezione corso
 - (TODO) 			aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
 - (TODO) 		cambiare il nome dei file
 - (TODO) 		Fix Dati Firmatario (tranne nome e cognome) non presenti quando coincidono con rappresentante legale
 
+- (wait LISPA) 	controllo tutor anni esperienza (gi√† aperto PA_021)
+- (TODO )  Fare screenshots per Lispa e richiedere il testo del messaggio che deve comparire quando l'atto unico √® stato presentato.
 
 
+
+- ( Ok solo da riportare in PO ? ) 	gestione messaggio servizi di formazione
+- ( Ok )				 titolo servizi di formazione tutto maiuscolo
+- ( Ok solo da riportare in PO ? ) domanda di selezione corso tutta maiuscola
+- ( Ok solo da riportare in PO ? ) aggiunta di un fieldset e un item per ricordare all'utente di selezionare il corso
+- ( Ok solo da riportare in PO e gitHub ) aggiustare il totale ore dei servizi (non devono essere somme)
