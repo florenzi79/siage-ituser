@@ -1,0 +1,15 @@
+Attività Doti IFP
+
+- ( ????? ) cambiare messaggio atto unico
+- (TODO) tutor da query
+- (wait LISPA) controllo tutor anni esperienza 
+- (già fatto ?? ) gestione messaggio servizi di formazione
+- ( Ok ) titolo servizi di formazione tutto maiuscolo
+- (CONTROLLI) controllo obbligatorieta' selezione corso
+- (Marco) idqualifica dentro il vettore competenze (servizi)
+- ( è solo da riportare in PO ? ) domanda di selezione corso tutta maiuscola
+- ( è solo da riportare in PO ? ) aggiunta di un fieldset e un item per ricordare all'utente di selezionare il corso
+- ( è solo da riportare in PO e gitHub ) aggiustare il totale ore dei servizi (non devono essere somme)
+- (TODO) aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
+- (TODO) cambiare il nome dei file
+

@@ -9,6 +9,7 @@ if (true) {
   if (true) {  //		if (isValidCf(codiceFiscale)) {
     var idOperatore = values.get('Richiedente_IdOperatore');
     var idSede = values.get('Richiedente_IdSede');
+    idSede = '88888';
 // TODO  Usare Parametro valorizzato all'inizio del bando
     var offerteFormative = ['048','120'];
     try {

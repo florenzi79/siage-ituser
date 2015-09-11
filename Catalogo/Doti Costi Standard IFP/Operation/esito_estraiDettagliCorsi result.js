@@ -31,7 +31,7 @@
   idarea=137,
   idindirizzo=null,
   idqualifica=null,
-  competenze=[Ljava.util.LinkedHashMap;@5fc4147f}, 
+  competenze=[Ljava.util.LinkedHashMap;@5fc4147f},
 
 91010={alternanza=232, annocorso=2, area=11, autofinanziato=N, datafine=03/06/2014, datainizio=null, descrizionepercorsoabilitante=Nessuna, descrizionepercorsoregolamentato=, durata=990, idcorso=91010, idoperatore=5498, idpadre=66678, idpercorsoabilitante=1, idpercorsoregolamentato=null, idsede=180785, idstato=C, ndotimax=24, numoffertaformativa=048, percorsoabilitante=NO, percorsoregolamentato=SI, stato=Concluso, tipologia=DDIF Triennali (2011-2013), titolo=OPERATORE DEL BENESSERE - TRATTAMENTI ESTETICI, totaleannualita=3, descrizionearea=COMPETENZA STORICO,SOCIO-ECONOMICA, descrizioneindirizzo=null, descrizionequalifica=null, idarea=137, idindirizzo=null, idqualifica=null, competenze=[Ljava.util.LinkedHashMap;@421dcef7},
 
