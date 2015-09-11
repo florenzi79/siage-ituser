@@ -93,7 +93,7 @@
                 </fo:table-cell>
                 <fo:table-cell font-size="10pt" font-weight="bold" padding="1mm">
                   <fo:block>
-                    <fo:inline><xsl:value-of select="/_/Beneficiario_StatoCittandinanza" /></fo:inline>
+                    <fo:inline><xsl:value-of select="/_/Beneficiario_StatoCittandinanzaDn" /></fo:inline>
                     <fo:inline padding-left="1mm">(</fo:inline>
                     <fo:inline>
                       <xsl:choose>
@@ -109,7 +109,7 @@
                 <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
                   <fo:block>ENTE SEGNALANTE</fo:block>
                 </fo:table-cell>
-                <fo:table-cell font-size="10pt" padding="1mm">
+                <fo:table-cell font-size="10pt" font-weight="bold" padding="1mm">
                   <fo:block>
                     <xsl:value-of select="/_/EnteSegnalante" />
                   </fo:block>
@@ -122,68 +122,56 @@
             <fo:table-column column-width="5mm" />
             <fo:table-column column-width="165mm" />
             <fo:table-body>
-              <xsl:choose>
-                <xsl:when test="(/_/*[(starts-with(name(),'Beneficiario_MotivoSegnalazione_')) and (contains(text(),'abbandono'))])">
-                  <fo:table-row>
-                    <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
-                      <fo:block>-</fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell text-align="justify" font-size="10pt" padding="1mm">
-                      <fo:block>Abbandono scolastico (fallimenti scolastici/formativi)</fo:block>
-                    </fo:table-cell>
-                  </fo:table-row>
-                </xsl:when>
-                <xsl:when test="(/_/*[(starts-with(name(),'Beneficiario_MotivoSegnalazione_')) and (contains(text(),'disagio'))])">
-                  <fo:table-row>
-                    <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
-                      <fo:block>-</fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell text-align="justify" font-size="10pt" padding="1mm">
-                      <fo:block>Disagio psicologico e relazionale, blocchi del processo evolutivo (relazioni familiari difficili, eventi di vita stressanti, devianza e coinvolgimento in gruppi a rischio, agiti autolesivi, ideazione suicidaria; attacchi di panico e disturbi somatici)</fo:block>
-                    </fo:table-cell>
-                  </fo:table-row>
-                </xsl:when>
-                <xsl:when test="(/_/*[(starts-with(name(),'Beneficiario_MotivoSegnalazione_')) and (contains(text(),'sostanze_abuso'))])">
-                  <fo:table-row>
-                    <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
-                      <fo:block>-</fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell text-align="justify" font-size="10pt" padding="1mm">
-                      <fo:block>Uso e abuso di sostanze (consumo non occasionale di alcol e droghe) - isolamento sociale (scarsa capacità di adattamento, presenza di problemi psicologici, problemi comportamentali)</fo:block>
-                    </fo:table-cell>
-                  </fo:table-row>
-                </xsl:when>
-                <xsl:when test="(/_/*[(starts-with(name(),'Beneficiario_MotivoSegnalazione_')) and (contains(text(),'isolamento_sociale'))])">
-                  <fo:table-row>
-                    <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
-                      <fo:block>-</fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell text-align="justify" font-size="10pt" padding="1mm">
-                      <fo:block>Isolamento sociale (scarsa capacità di adattamento, presenza di problemi psicologici, problemi comportamentali)</fo:block>
-                    </fo:table-cell>
-                  </fo:table-row>
-                </xsl:when>
-                <xsl:when test="(/_/*[(starts-with(name(),'Beneficiario_MotivoSegnalazione_')) and (contains(text(),'problemi_penali'))])">
-                  <fo:table-row>
-                    <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
-                      <fo:block>-</fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell text-align="justify" font-size="10pt" padding="1mm">
-                      <fo:block>Problemi con la giustizia (comportamenti antisociali, delinquenziali, distruttivi, problemi di tipo penale o amministrativo per reati come risse o detenzione illegale di stupefacenti)</fo:block>
-                    </fo:table-cell>
-                  </fo:table-row>
-                </xsl:when>
-                <xsl:otherwise>
-                  <fo:table-row>
-                    <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
-                      <fo:block>-</fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell font-size="10pt" padding="1mm">
-                      <fo:block>Non specificato</fo:block>
-                    </fo:table-cell>
-                  </fo:table-row>
-                </xsl:otherwise>
-              </xsl:choose>
+              <xsl:if test="(/_/*[(starts-with(name(),'Beneficiario_MotivoSegnalazione_')) and (contains(text(),'abbandono'))])">
+                <fo:table-row>
+                  <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
+                    <fo:block>-</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell text-align="justify" font-size="10pt" padding="1mm">
+                    <fo:block>Abbandono scolastico (fallimenti scolastici/formativi)</fo:block>
+                  </fo:table-cell>
+                </fo:table-row>
+              </xsl:if>
+              <xsl:if test="(/_/*[(starts-with(name(),'Beneficiario_MotivoSegnalazione_')) and (contains(text(),'disagio'))])">
+                <fo:table-row>
+                  <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
+                    <fo:block>-</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell text-align="justify" font-size="10pt" padding="1mm">
+                    <fo:block>Disagio psicologico e relazionale, blocchi del processo evolutivo (relazioni familiari difficili, eventi di vita stressanti, devianza e coinvolgimento in gruppi a rischio, agiti autolesivi, ideazione suicidaria; attacchi di panico e disturbi somatici)</fo:block>
+                  </fo:table-cell>
+                </fo:table-row>
+              </xsl:if>
+              <xsl:if test="(/_/*[(starts-with(name(),'Beneficiario_MotivoSegnalazione_')) and (contains(text(),'sostanze_abuso'))])">
+                <fo:table-row>
+                  <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
+                    <fo:block>-</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell text-align="justify" font-size="10pt" padding="1mm">
+                    <fo:block>Uso e abuso di sostanze (consumo non occasionale di alcol e droghe) - isolamento sociale (scarsa capacità di adattamento, presenza di problemi psicologici, problemi comportamentali)</fo:block>
+                  </fo:table-cell>
+                </fo:table-row>
+              </xsl:if>
+              <xsl:if test="(/_/*[(starts-with(name(),'Beneficiario_MotivoSegnalazione_')) and (contains(text(),'isolamento_sociale'))])">
+                <fo:table-row>
+                  <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
+                    <fo:block>-</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell text-align="justify" font-size="10pt" padding="1mm">
+                    <fo:block>Isolamento sociale (scarsa capacità di adattamento, presenza di problemi psicologici, problemi comportamentali)</fo:block>
+                  </fo:table-cell>
+                </fo:table-row>
+              </xsl:if>
+              <xsl:if test="(/_/*[(starts-with(name(),'Beneficiario_MotivoSegnalazione_')) and (contains(text(),'problemi_penali'))])">
+                <fo:table-row>
+                  <fo:table-cell font-size="10pt" padding-before="1mm" padding-after="1mm">
+                    <fo:block>-</fo:block>
+                  </fo:table-cell>
+                  <fo:table-cell text-align="justify" font-size="10pt" padding="1mm">
+                    <fo:block>Problemi con la giustizia (comportamenti antisociali, delinquenziali, distruttivi, problemi di tipo penale o amministrativo per reati come risse o detenzione illegale di stupefacenti)</fo:block>
+                  </fo:table-cell>
+                </fo:table-row>
+              </xsl:if>
             </fo:table-body>
           </fo:table>
           <fo:block font-size="10pt" font-weight="bold" space-after="3mm">TIPOLOGIA DI AREA DI INTERVENTO</fo:block>
@@ -221,16 +209,16 @@
           </fo:table>
           <fo:block font-size="10pt" space-after="5mm">
             <fo:inline>DURATA DEL PROGETTO (mesi)</fo:inline>
-            <fo:inline padding-left="1mm" font-weight="bold"><xsl:value-of select="/_/Progetto_Durata" /></fo:inline>
+            <fo:inline padding-left="1mm" font-weight="bold"><xsl:value-of select="format-number(translate(/_/Progetto_Durata, ',.', '.'), '0')" /></fo:inline>
           </fo:block>
           <fo:block font-size="10pt" space-after="2mm">VOUCHER RICONOSCIUTI</fo:block>
           <fo:block font-size="10pt" space-after="2mm">
             <fo:inline>- Valutazione</fo:inline>
-            <fo:inline padding-left="1mm" font-weight="bold">90 €</fo:inline>
+            <fo:inline padding-left="1mm" font-weight="bold">90,00 €</fo:inline>
           </fo:block>
           <fo:block font-size="10pt" space-after="2mm">
             <fo:inline>- Osservazione e stesura PEI</fo:inline>
-            <fo:inline padding-left="1mm" font-weight="bold">270 €</fo:inline>
+            <fo:inline padding-left="1mm" font-weight="bold">270,00 €</fo:inline>
           </fo:block>
           <fo:block font-size="10pt" space-after="10mm">
             <fo:inline>

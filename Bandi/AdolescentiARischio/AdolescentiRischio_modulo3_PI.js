@@ -99,6 +99,51 @@ if (values.get(path+'ServizioErogato') == 'Sviluppo di competenze individuali') 
 }
 
 //Validazione
+if(!isValidCf(values.get('Richiedente_FirmatarioCodiceFiscale'))) {
+  errors.put('Richiedente_FirmatarioCodiceFiscale','Richiedente_FirmatarioCodiceFiscale_val');
+}
+if (!isEmpty('Progetto_Durata')) {
+  var durata = parseFloat(values.get('Progetto_Durata'));
+  if (durata < 0) {
+    errors.put('Progetto_Durata','Progetto_Durata_val');
+  }
+}
+  //sottomodulo
 if (values.get('PI[2].ServizioErogato') == 'Selezionare') {
   errors.put('PI[2].ServizioErogato','selezione_servizio_val');
+}
+var indexPI = 0;
+var dataOdiernaDate = new Date();
+var adessoOre = parseFloat(dataOdiernaDate.getHours());
+var adessoMinuti = parseFloat(dataOdiernaDate.getMinutes());
+var adessoSecondi = parseFloat(dataOdiernaDate.getSeconds());
+var adessoMillis = parseFloat(dataOdiernaDate.getMilliseconds());
+adessoOre = adessoOre * 60 * 60 * 1000;
+adessoMinuti = adessoMinuti * 60 * 1000;
+adessoSecondi = adessoSecondi * 1000;
+var adesso = parseFloat(dataOdiernaDate.getTime());
+var oggi = adesso - adessoOre - adessoMinuti - adessoSecondi - adessoMillis;
+var dataMassimaDate = new Date(2016,10,1,0,0,0,0);
+var dataMassima = parseFloat(dataMassimaDate.getTime());
+while (values.get('PI['+indexPI+'].ServizioErogato') != null) {
+  if ((!isEmpty('PI['+indexPI+'].DataAvvioServizio')) && (!isEmpty('PI['+indexPI+'].DataFineServizio'))) {
+    var dataAvvio = parseFloat(values.get('PI['+indexPI+'].DataAvvioServizio'));
+    var dataFine = parseFloat(values.get('PI['+indexPI+'].DataFineServizio'));
+    if (dataFine < dataAvvio) {
+      errors.put('PI['+indexPI+'].DataAvvioServizio','DataAvvioServizio_val');
+    }
+    if (dataFine > dataMassima) {
+      errors.put('PI['+indexPI+'].DataFineServizio','DataMassimaServizio_val');
+    }
+    if ((dataAvvio < oggi) && (indexPI != 0)) {
+      errors.put('PI['+indexPI+'].DataAvvioServizio','DataServizioOggi_val');
+    }
+  }
+  if (!isEmpty('PI['+indexPI+'].NumeroAccessi')) {
+    var numAccessi = parseFloat(values.get('PI['+indexPI+'].NumeroAccess'));
+    if (numAccessi < 0) {
+      errors.put('PI['+indexPI+'].NumeroAccessi','NumeroAccessi_val');
+    }
+  }
+  indexPI++;
 }

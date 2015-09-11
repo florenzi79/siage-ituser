@@ -1,23 +1,13 @@
 // onLoad
 // Richiedente_FirmatarioRappresentanteLegale
-var isNotFirmatarioRappresentante = (values.get('Richiedente_FirmatarioRappresentanteLegale') == 'false');
-items.get('Richiedente_FirmatarioCodiceFiscale').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioCognome').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNome').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaProvincia').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaComune').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaData').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioGenere').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioCodiceFiscale').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioCognome').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNome').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaProvincia').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaComune').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaData').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioGenere').setRequired(isNotFirmatarioRappresentante);
-//Richiedente_RappresentanteLegaleNascitaProvincia
-setSelectOptionsCached('Richiedente_RappresentanteLegaleNascitaProvincia','provincia_istat');
-setSelectDependedOptionsAndShowCached('Richiedente_RappresentanteLegaleNascitaComune', 'comune_istat', path+'Richiedente_RappresentanteLegaleNascitaProvincia');
+var isEmptyFirmatarioRappresentante = isEmpty(Richiedente_FirmatarioRappresentanteLegale);
+items.get('Richiedente_FirmatarioCodiceFiscale').setHidden(isEmptyFirmatarioRappresentante);
+items.get('Richiedente_FirmatarioCognome').setHidden(isEmptyFirmatarioRappresentante);
+items.get('Richiedente_FirmatarioNome').setHidden(isEmptyFirmatarioRappresentante);
+items.get('Richiedente_FirmatarioNascitaProvincia').setHidden(isEmptyFirmatarioRappresentante);
+items.get('Richiedente_FirmatarioNascitaComune').setHidden(isEmptyFirmatarioRappresentante);
+items.get('Richiedente_FirmatarioNascitaData').setHidden(isEmptyFirmatarioRappresentante);
+items.get('Richiedente_FirmatarioGenere').setHidden(isEmptyFirmatarioRappresentante);
 //Richiedente_FirmatarioNascitaProvincia
 setSelectOptionsCached('Richiedente_FirmatarioNascitaProvincia','provincia_istat');
 setSelectDependedOptionsAndShowCached('Richiedente_FirmatarioNascitaComune', 'comune_istat', path+'Richiedente_FirmatarioNascitaProvincia');
@@ -33,33 +23,30 @@ values.remove('Richiedente_FirmatarioNascitaComune');
 values.remove('Richiedente_FirmatarioNascitaComuneDn');
 values.remove('Richiedente_FirmatarioNascitaData');
 values.remove('Richiedente_FirmatarioGenere');
-var isNotFirmatarioRappresentante = (values.get('Richiedente_FirmatarioRappresentanteLegale') == 'false');
-items.get('Richiedente_FirmatarioCodiceFiscale').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioCognome').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNome').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaProvincia').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaProvincia').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaData').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioGenere').setHidden(!isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioCodiceFiscale').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioCognome').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNome').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaProvincia').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaComune').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioNascitaData').setRequired(isNotFirmatarioRappresentante);
-items.get('Richiedente_FirmatarioGenere').setRequired(isNotFirmatarioRappresentante);
-//Richiedente_RappresentanteLegaleNascitaProvincia
-values.put('Richiedente_RappresentanteLegaleNascitaProvinciaDn', getOptionLabel('Richiedente_RappresentanteLegaleNascitaProvincia', values.get(path+'Richiedente_RappresentanteLegaleNascitaProvincia')));
-values.put(path+'Richiedente_RappresentanteLegaleNascitaComune', '');
-values.remove('Richiedente_RappresentanteLegaleNascitaComuneDn');
-setSelectDependedOptionsAndShowCached('Richiedente_RappresentanteLegaleNascitaComune', 'comune_istat', path+'Richiedente_RappresentanteLegaleNascitaProvincia');
+if (values.get('Richiedente_FirmatarioRappresentanteLegale') == 'true') {
+  values.put('Richiedente_FirmatarioCodiceFiscale',values.get('Richiedente_RappresentanteLegaleCodiceFiscale'));
+  values.put('Richiedente_FirmatarioCognome',values.get('Richiedente_RappresentanteLegaleCognome'));
+  values.put('Richiedente_FirmatarioNome',values.get('Richiedente_RappresentanteLegaleNome'));
+}
+items.get('Richiedente_FirmatarioCodiceFiscale').setHidden(false);
+items.get('Richiedente_FirmatarioCognome').setHidden(false);
+items.get('Richiedente_FirmatarioNome').setHidden(false);
+items.get('Richiedente_FirmatarioNascitaProvincia').setHidden(false);
+items.get('Richiedente_FirmatarioNascitaComune').setHidden(false);
+items.get('Richiedente_FirmatarioNascitaData').setHidden(false);
+items.get('Richiedente_FirmatarioGenere').setHidden(false);
+var isFirmatarioRappresentante = (values.get('Richiedente_FirmatarioRappresentanteLegale') == 'true');
+items.get('Richiedente_FirmatarioCodiceFiscale').setReadonly(isFirmatarioRappresentante);
+items.get('Richiedente_FirmatarioCognome').setReadonly(isFirmatarioRappresentante);
+items.get('Richiedente_FirmatarioNome').setReadonly(isFirmatarioRappresentante);
+items.get('Richiedente_FirmatarioCodiceFiscale').setRequired(!isFirmatarioRappresentante);
+items.get('Richiedente_FirmatarioCognome').setRequired(!isFirmatarioRappresentante);
+items.get('Richiedente_FirmatarioNome').setRequired(!isFirmatarioRappresentante);
 //Richiedente_FirmatarioNascitaProvincia
 values.put('Richiedente_FirmatarioNascitaProvinciaDn', getOptionLabel('Richiedente_FirmatarioNascitaProvincia', values.get(path+'Richiedente_FirmatarioNascitaProvincia')));
 values.put(path+'Richiedente_FirmatarioNascitaComune', '');
 values.remove('Richiedente_FirmatarioNascitaComuneDn');
 setSelectDependedOptionsAndShowCached('Richiedente_FirmatarioNascitaComune', 'comune_istat', path+'Richiedente_FirmatarioNascitaProvincia');
-//Richiedente_RappresentanteLegaleNascitaComune
-values.put('Richiedente_RappresentanteLegaleNascitaComuneDn', getOptionLabel('Richiedente_RappresentanteLegaleNascitaComune', values.get(path+'Richiedente_RappresentanteLegaleNascitaComune')));
 //Richiedente_FirmatarioNascitaComune
 values.put('Richiedente_FirmatarioNascitaComuneDn', getOptionLabel('Richiedente_FirmatarioNascitaComune', values.get(path+'Richiedente_FirmatarioNascitaComune')));
 

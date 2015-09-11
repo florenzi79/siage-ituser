@@ -8,79 +8,57 @@ if (instance.getOwner() == user.getGruppoCorrente().getGroup().getId()) {
   var nomeProfilo = user.getProfiloQualificaCorrente().getProfilo().getName();
   var descrizioneProfilo = user.getProfiloQualificaCorrente().getProfilo().getDescription();
   values.put('Richiedente_ASL',''+descrizioneProfilo);
-  var sqlDisponibilita = "SELECT SUM(contributo_concesso) AS contributo_concesso "+
-  "FROM ( "+
-  "  SELECT SM_ID AS id_pratica, "+
-  "  CASE "+
-  "    WHEN inst.CURRENT_STATE IN ('92be108f05424435b95add2fd35728f1', 'fdbc5d4259524fc785ef7b2d439ed700', 'da19d78504164967bac98fa0bfb042eb', '608db556dd354830b66eb0095a9a6621', 'a1cf2e34d51c46feaebded83bc8595d7') "+
-  "    THEN 0 "+
-  "    WHEN inst.CURRENT_STATE IN ('8e96cc52ae7a4141867441eb055d7996', '1d676b4674fe4bb8b1b8b7b0ce75fded') "+
-  "    THEN ( "+
-  "      SELECT nvl(cast (V.DAT_VL AS number), 0) "+
-  "      FROM ( "+
-  "        SELECT FK_ID,DAT_VL "+
-  "        FROM AG_SM_DATA_ENTRIES "+
-  "        INNER JOIN ( "+
-  "          SELECT SM_ID "+
-  "          FROM AG_SM_INSTANCES "+
-  "          WHERE SM_TMPL_DN = 'Adolescenti in difficolta''' "+
-  "          AND CURRENT_STATE IN ('8e96cc52ae7a4141867441eb055d7996', '1d676b4674fe4bb8b1b8b7b0ce75fded') "+
-  "        ) SM ON SM.SM_ID = FK_ID "+
-  "        WHERE DAT_PTH = 'SintesiCosti_ContributoRichiesto' "+
-  "      ) V "+
-  "      LEFT OUTER JOIN ( "+
-  "        SELECT FK_ID,DAT_VL "+
-  "        FROM AG_SM_DATA_ENTRIES "+
-  "        WHERE DAT_PTH = 'Richiedente_ASL' "+
-  "        AND DAT_VL = '"+descrizioneProfilo+"' "+
-  "      ) ASL ON V.FK_ID = ASL.FK_ID "+
-  "    ) "+
-  "    ELSE 0 "+
-  "  END AS contributo_concesso "+
-  "  FROM AG_SM_INSTANCES inst "+
-  "  INNER JOIN ( "+
-  "    SELECT FK_ID AS cdPratica "+
-  "    FROM AG_SM_DATA_ENTRIES "+
-  "    WHERE DAT_VL = '"+descrizioneProfilo+"' "+
-  "  )  ON cdPratica = inst.SM_ID "+
-  "  WHERE SM_TMPL_DN = 'Adolescenti in difficolta''' "+
-  ")";
-  var esitoQuery = dizionarioService.getSingle(null, sqlDisponibilita);
-  var contrConcessi = 0;
-  if (esitoQuery != null) {
-    contrConcessi = parseFloat(esitoQuery);
-  }
+  var sqlImportiRichiesti = "SELECT NVL(SUM(CAST(DAT_VL AS NUMBER)), 0) importo_richiesto "+
+                            "FROM ag_sm_data_entries en "+
+                            "WHERE DAT_PTH = 'SintesiCosti_ContributoRichiesto' "+
+                            "AND FK_ID IN ( "+
+                            "  SELECT inst.SM_ID "+
+                            "  FROM ag_sm_instances inst "+
+                            "  WHERE inst.SM_TMPL_DN = 'Adolescenti in difficolta''' "+
+                            "  AND inst.CURRENT_STATE IN ( "+
+                            "    '8e96cc52ae7a4141867441eb055d7996', "+
+                            "    '1d676b4674fe4bb8b1b8b7b0ce75fded' "+
+                            "  ) "+
+                            "  AND EXISTS ( "+
+                            "    SELECT null "+
+                            "    FROM ag_sm_data_entries e "+
+                            "    WHERE e.FK_ID = inst.SM_ID "+
+                            "    AND DAT_PTH = 'Richiedente_ASL' "+
+                            "    AND DAT_VL = '"+descrizioneProfilo+"' "+
+                            "  ) "+
+                            ") ";
+  var importiRichiesti = parseFloat(dizionarioService.getSingle(null, sqlImportiRichiesti));
   var dispResidua = 0;
   if (nomeProfilo == 'ASL-BG') {
-    dispResidua = 361162 - contrConcessi;
+    dispResidua = 361162 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-BS') {
-    dispResidua = 370650 - contrConcessi;
+    dispResidua = 370650 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-CO') {
-    dispResidua = 182765 - contrConcessi;
+    dispResidua = 182765 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-CR') {
-    dispResidua = 107742 - contrConcessi;
+    dispResidua = 107742 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-LC') {
-    dispResidua = 107153 - contrConcessi;
+    dispResidua = 107153 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-LO') {
-    dispResidua = 71919 - contrConcessi;
+    dispResidua = 71919 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-MN') {
-    dispResidua = 120205 - contrConcessi;
+    dispResidua = 120205 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-MI') {
-    dispResidua = 426104 - contrConcessi;
+    dispResidua = 426104 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-MI-1') {
-    dispResidua = 288208 - contrConcessi;
+    dispResidua = 288208 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-MI-2') {
-    dispResidua = 193427 - contrConcessi;
+    dispResidua = 193427 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-MB') {
-    dispResidua = 259961 - contrConcessi;
+    dispResidua = 259961 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-PV') {
-    dispResidua = 152418 - contrConcessi;
+    dispResidua = 152418 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-SO') {
-    dispResidua = 58647 - contrConcessi;
+    dispResidua = 58647 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-VA') {
-    dispResidua = 268364 - contrConcessi;
+    dispResidua = 268364 - importiRichiesti;
   } else if (nomeProfilo == 'ASL-VS') {
-    dispResidua = 31275 - contrConcessi;
+    dispResidua = 31275 - importiRichiesti;
   }
   values.put('Budget_ASL', ''+dispResidua);
 }
@@ -146,6 +124,88 @@ items.get('Beneficiario_CivicoDomicilio').setRequired(!isDomicilioResidenza);
 items.get('Beneficiario_TelefonoDomicilio').setRequired(!isDomicilioResidenza);
 
 //Validazione
+//disponibilita Budget_ASL
+var nomeProfilo = user.getProfiloQualificaCorrente().getProfilo().getName();
+var descrizioneProfilo = values.get('Richiedente_ASL');
+var sqlImportiRichiesti = "SELECT NVL(SUM(CAST(DAT_VL AS NUMBER)), 0) importo_richiesto "+
+                          "FROM ag_sm_data_entries en "+
+                          "WHERE DAT_PTH = 'SintesiCosti_ContributoRichiesto' "+
+                          "AND FK_ID IN ( "+
+                          "  SELECT inst.SM_ID "+
+                          "  FROM ag_sm_instances inst "+
+                          "  WHERE inst.SM_TMPL_DN = 'Adolescenti in difficolta''' "+
+                          "  AND inst.CURRENT_STATE IN ( "+
+                          "    '8e96cc52ae7a4141867441eb055d7996', "+
+                          "    '1d676b4674fe4bb8b1b8b7b0ce75fded' "+
+                          "  ) "+
+                          "  AND EXISTS ( "+
+                          "    SELECT null "+
+                          "    FROM ag_sm_data_entries e "+
+                          "    WHERE e.FK_ID = inst.SM_ID "+
+                          "    AND DAT_PTH = 'Richiedente_ASL' "+
+                          "    AND DAT_VL = '"+descrizioneProfilo+"' "+
+                          "  ) "+
+                          ") ";
+var importiRichiesti = parseFloat(dizionarioService.getSingle(null, sqlImportiRichiesti));
+var dispResidua = 0;
+if (nomeProfilo == 'ASL-BG') {
+  dispResidua = 361162 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-BS') {
+  dispResidua = 370650 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-CO') {
+  dispResidua = 182765 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-CR') {
+  dispResidua = 107742 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-LC') {
+  dispResidua = 107153 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-LO') {
+  dispResidua = 71919 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-MN') {
+  dispResidua = 120205 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-MI') {
+  dispResidua = 426104 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-MI-1') {
+  dispResidua = 288208 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-MI-2') {
+  dispResidua = 193427 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-MB') {
+  dispResidua = 259961 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-PV') {
+  dispResidua = 152418 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-SO') {
+  dispResidua = 58647 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-VA') {
+  dispResidua = 268364 - importiRichiesti;
+} else if (nomeProfilo == 'ASL-VS') {
+  dispResidua = 31275 - importiRichiesti;
+}
+var contributoRichiesto = 0;
+if (!isEmpty('SintesiCosti_ContributoRichiesto')) {
+  contributoRichiesto = parseFloat(values.get('SintesiCosti_ContributoRichiesto'));
+}
+var dispASL = dispResidua - contributoRichiesto;
+if ((dispResidua <= 0) || (dispASL < 0)) {
+  errors.put('Budget_ASL','disponibilita_val');
+}
+  //Il budget disponibile per l'ASL è esaurito: non è possibile procedere con la domanda
+//pratica duplicata
+var codiceFiscaleBeneficiario = values.get('Beneficiario_CodiceFiscale');
+var sql =
+"  SELECT SM_ID PRATICA_BLOCCANTE "+
+"  FROM AG_SM_INSTANCES PRATICA, AG_SM_DATA_ENTRIES DETTAGLIO "+
+"  WHERE DETTAGLIO.DAT_PTH = 'Beneficiario_CodiceFiscale' "+
+"  AND DETTAGLIO.DAT_VL = '" + codiceFiscaleBeneficiario +"' "+
+"  AND DETTAGLIO.FK_ID = PRATICA.SM_ID "+
+"  AND PRATICA.SM_TMPL_DN = 'Adolescenti in difficolta''' "+
+"  AND PRATICA.CURRENT_STATE in ('8e96cc52ae7a4141867441eb055d7996', '1d676b4674fe4bb8b1b8b7b0ce75fded') "
+//							  						    Attesa protocollazione			  			Presentata
+;
+var pratiche = dizionarioService.getList(null, sql);
+if(pratiche.size() > 0) {
+	errors.put('Beneficiario_CodiceFiscale', 'PraticaDuplicata_val');
+}
+//È già stata presentata una pratica per il beneficiario indicato, non è possibile presentarne una seconda
+
 if (!isEmpty('Beneficiario_CodiceFiscale')) {
   if (!isValidCf(values.get('Beneficiario_CodiceFiscale'))) {
     errors.put('Beneficiario_CodiceFiscale','Beneficiario_CodiceFiscale_val');

@@ -1,0 +1,21 @@
+ASD linea 1 e 2
+  passaggi di stato
+  dati monitoraggio
+  verifica profili/gruppi
+  report
+ASD linea 3
+  passaggi di stato
+  dati monitoraggio
+  verifica profili/gruppi
+  report
+Adolescenti a rischio
+  passaggi di stato
+  caricamento e verifica dati domanda
+  dati monitoraggio
+  verifica profili/gruppi
+  report
+INAIL legge 107
+  dati domanda
+  dati monitoraggio
+  verifica profili/gruppi
+Dote sport

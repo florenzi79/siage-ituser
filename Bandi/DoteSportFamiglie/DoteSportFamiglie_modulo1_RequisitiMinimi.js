@@ -10,7 +10,15 @@ if (instance.getOwner() == user.getGruppoCorrente().getGroup().getId()) {
 	if (mappaValoriSgProf != null) {
 		if( mappaValoriSgProf.get('ASIS015') != null ) values.put( 'Richiedente_Cognome', mappaValoriSgProf.get('ASIS015').toString() );
 		if( mappaValoriSgProf.get('ASIS016') != null ) values.put( 'Richiedente_Nome', mappaValoriSgProf.get('ASIS016').toString() );
-		if( mappaValoriSgProf.get('ASIS018') != null ) values.put( 'Richiedente_DataNascita', mappaValoriSgProf.get('ASIS018').toString() );
+		if( mappaValoriSgProf.get('ASIS018') != null ) {
+			var timestampDataNascita = mappaValoriSgProf.get('ASIS018').toString();
+			var giornoNascita = parseInt(timestampDataNascita.substring(0,2));
+			var meseNascita = parseInt(timestampDataNascita.substring(3,5)) -1;
+			var annoNascita = parseInt(timestampDataNascita.substring(6,10));
+			var dataNascita = new Date(annoNascita, meseNascita, giornoNascita, 0, 0, 0, 0);
+			var dataNascitaMillis = parseFloat(dataNascita.getTime());
+			values.put( 'Richiedente_DataNascita', ''+dataNascitaMillis );
+		}
 		if( (mappaValoriSgProf.get('ASIS009') != null) && (values.get('Richiedente_ComuneNascita') == null)) {
 			values.put( 'Richiedente_ComuneNascita', mappaValoriSgProf.get('ASIS009').toString() );
 			values.put( 'Richiedente_ComuneNascitaDn', getAnaDenominazione('comune_istat', values.get('Richiedente_ComuneNascita')) );
@@ -139,22 +147,102 @@ values.put('AltroGenitore_ComuneResidenzaDn', getOptionLabel('AltroGenitore_Comu
 //SoggettiAmmissibili_CategoriaAppartenenza
 //Validazione
 //pratica duplicata
-var codiceFiscaleRichiedente = values.get('SoggettoRichiedente_CodiceFiscale');
-var sql =
-"  select SM_ID PRATICA_BLOCCANTE"+
-"  from AG_SM_INSTANCES PRATICA, AG_SM_DATA_ENTRIES DETTAGLIO"+
-"  where"+
-"  DETTAGLIO.DAT_PTH like 'SoggettoRichiedente_CodiceFiscale' and"+
-"  DETTAGLIO.DAT_VL = '" + codiceFiscaleRichiedente +"' and"+
-"  DETTAGLIO.FK_ID = PRATICA.SM_ID and"+
-"  PRATICA.SM_TMPL_DN = 'Contibuti ASD Linea 1 e Linea 2' and"+
-"  PRATICA.CURRENT_STATE in ('63549fd5d8c64e519a29e8788755fc0a', '5a8a62f27a704dc2a3afa45a164ff7c1')"
-//							  						Attesa protocollazione			  			Presentata
-;
-var pratiche = dizionarioService.getList(null, sql);
-if(pratiche.size() > 0) {
-	errors.put('SoggettoRichiedente_AvvisiPresentazione', 'PraticaDuplicata_val');
+var codiceFiscaleRichiedente = values.get('Richiedente_CodiceFiscale');
+var sqlGenitorePrimoPrimo = "SELECT SM_ID PRATICA_BLOCCANTE "+
+             	              "FROM AG_SM_INSTANCES PRATICA, AG_SM_DATA_ENTRIES DETTAGLIO "+
+             	              "WHERE DETTAGLIO.DAT_PTH = 'Richiedente_CodiceFiscale' "+
+             	              "AND DETTAGLIO.DAT_VL = '" + codiceFiscaleRichiedente +"' "+
+             	              "AND DETTAGLIO.FK_ID = PRATICA.SM_ID "+
+             	              "AND PRATICA.SM_TMPL_DN = 'Dote sport famiglie' "+
+             	              "AND PRATICA.CURRENT_STATE in ('e63f4d0b55f346ca9716a95b48b28196', 'df5f52099a6a4f8894083a9ed5724b51')";
+             	              //							  						Attesa protocollazione			  			Presentata
+var sqlGenitorePrimoSecondo = "SELECT SM_ID PRATICA_BLOCCANTE "+
+             	                "FROM AG_SM_INSTANCES PRATICA, AG_SM_DATA_ENTRIES DETTAGLIO "+
+             	                "WHERE DETTAGLIO.DAT_PTH = 'AltroGenitore_CodiceFiscale' "+
+             	                "AND DETTAGLIO.DAT_VL = '" + codiceFiscaleRichiedente +"' "+
+             	                "AND DETTAGLIO.FK_ID = PRATICA.SM_ID "+
+															"AND PRATICA.SM_TMPL_DN = 'Dote sport famiglie' "+
+															"AND PRATICA.CURRENT_STATE in ('e63f4d0b55f346ca9716a95b48b28196', 'df5f52099a6a4f8894083a9ed5724b51')";
+             	                //							  						Attesa protocollazione			  			Presentata
+var duplicatiGenitorePrimoPrimo = dizionarioService.getList(null, sqlGenitorePrimoPrimo);
+var duplicatiGenitorePrimoSecondo = dizionarioService.getList(null, sqlGenitorePrimoSecondo);
+if ((duplicatiGenitorePrimoPrimo.size() > 0) || (duplicatiGenitorePrimoSecondo.size() > 0)) {
+	errors.put('Richiedente_CodiceFiscale', 'PraticaDuplicataRichiedente_val');
 }
+//Il codice fiscale del soggetto richiedente è già stato utilizzato per presentare una domanda, pertanto non è possibile proseguire
+if (!isEmpty('AltroGenitore_CodiceFiscale')) {
+	var codiceFiscaleAltroGenitore = values.get('AltroGenitore_CodiceFiscale');
+	var sqlGenitoreSecondoPrimo = "SELECT SM_ID PRATICA_BLOCCANTE "+
+                                "FROM AG_SM_INSTANCES PRATICA, AG_SM_DATA_ENTRIES DETTAGLIO "+
+                                "WHERE DETTAGLIO.DAT_PTH = 'Richiedente_CodiceFiscale' "+
+                                "AND DETTAGLIO.DAT_VL = '" + codiceFiscaleAltroGenitore +"' "+
+                                "AND DETTAGLIO.FK_ID = PRATICA.SM_ID "+
+	                              "AND PRATICA.SM_TMPL_DN = 'Dote sport famiglie' "+
+	                              "AND PRATICA.CURRENT_STATE in ('e63f4d0b55f346ca9716a95b48b28196', 'df5f52099a6a4f8894083a9ed5724b51')";
+                                //							  						Attesa protocollazione			  			Presentata
+	var sqlGenitoreSecondoSecondo = "SELECT SM_ID PRATICA_BLOCCANTE "+
+  	                              "FROM AG_SM_INSTANCES PRATICA, AG_SM_DATA_ENTRIES DETTAGLIO "+
+  	                              "WHERE DETTAGLIO.DAT_PTH = 'AltroGenitore_CodiceFiscale' "+
+  	                              "AND DETTAGLIO.DAT_VL = '" + codiceFiscaleAltroGenitore +"' "+
+  	                              "AND DETTAGLIO.FK_ID = PRATICA.SM_ID "+
+		                              "AND PRATICA.SM_TMPL_DN = 'Dote sport famiglie' "+
+		                              "AND PRATICA.CURRENT_STATE in ('e63f4d0b55f346ca9716a95b48b28196', 'df5f52099a6a4f8894083a9ed5724b51')";
+  	                              //							  						Attesa protocollazione			  			Presentata
+	var duplicatiGenitoreSecondoPrimo = dizionarioService.getList(null, sqlGenitoreSecondoPrimo);
+	var duplicatiGenitoreSecondoSecondo = dizionarioService.getList(null, sqlGenitoreSecondoSecondo);
+	if ((duplicatiGenitoreSecondoPrimo.size() > 0) || (duplicatiGenitoreSecondoSecondo.size() > 0)) {
+		errors.put('AltroGenitore_CodiceFiscale', 'PraticaDuplicataAltroGenitore_val');
+	}
+}
+//Il codice fiscale dell'altro genitore è già stato utilizzato per presentare una domanda, pertanto non è possibile proseguire
+var codiceFiscalePrimoFiglio = values.get('PrimoMinore_CodiceFiscale');
+var sqlFiglioPrimoPrimo = "SELECT SM_ID PRATICA_BLOCCANTE "+
+             	            "FROM AG_SM_INSTANCES PRATICA, AG_SM_DATA_ENTRIES DETTAGLIO "+
+             	            "WHERE DETTAGLIO.DAT_PTH = 'PrimoMinore_CodiceFiscale' "+
+             	            "AND DETTAGLIO.DAT_VL = '" + codiceFiscalePrimoFiglio +"' "+
+             	            "AND DETTAGLIO.FK_ID = PRATICA.SM_ID "+
+													"AND PRATICA.SM_TMPL_DN = 'Dote sport famiglie' "+
+													"AND PRATICA.CURRENT_STATE in ('e63f4d0b55f346ca9716a95b48b28196', 'df5f52099a6a4f8894083a9ed5724b51')";
+             	            //							  						Attesa protocollazione			  			Presentata
+var sqlFiglioPrimoSecondo = "SELECT SM_ID PRATICA_BLOCCANTE "+
+             	              "FROM AG_SM_INSTANCES PRATICA, AG_SM_DATA_ENTRIES DETTAGLIO "+
+             	              "WHERE DETTAGLIO.DAT_PTH = 'SecondoMinore_CodiceFiscale' "+
+             	              "AND DETTAGLIO.DAT_VL = '" + codiceFiscalePrimoFiglio +"' "+
+             	              "AND DETTAGLIO.FK_ID = PRATICA.SM_ID "+
+														"AND PRATICA.SM_TMPL_DN = 'Dote sport famiglie' "+
+														"AND PRATICA.CURRENT_STATE in ('e63f4d0b55f346ca9716a95b48b28196', 'df5f52099a6a4f8894083a9ed5724b51')";
+             	              //							  						Attesa protocollazione			  			Presentata
+var duplicatiFiglioPrimoPrimo = dizionarioService.getList(null, sqlFiglioPrimoPrimo);
+var duplicatiFiglioPrimoSecondo = dizionarioService.getList(null, sqlFiglioPrimoSecondo);
+if ((duplicatiFiglioPrimoPrimo.size() > 0) || (duplicatiFiglioPrimoSecondo.size() > 0)) {
+	errors.put('PrimoMinore_CodiceFiscale', 'PraticaDuplicataPrimoFiglio_val');
+}
+//Il codice fiscale del primo minore è già stato utilizzato per presentare una domanda, pertanto non è possibile proseguire
+if (!isEmpty('SecondoMinore_CodiceFiscale')) {
+	var codiceFiscaleSecondoFiglio = values.get('SecondoMinore_CodiceFiscale');
+	var sqlFiglioSecondoPrimo = "SELECT SM_ID PRATICA_BLOCCANTE "+
+             	                "FROM AG_SM_INSTANCES PRATICA, AG_SM_DATA_ENTRIES DETTAGLIO "+
+             	                "WHERE DETTAGLIO.DAT_PTH = 'PrimoMinore_CodiceFiscale' "+
+             	                "AND DETTAGLIO.DAT_VL = '" + codiceFiscaleSecondoFiglio +"' "+
+             	                "AND DETTAGLIO.FK_ID = PRATICA.SM_ID "+
+														  "AND PRATICA.SM_TMPL_DN = 'Dote sport famiglie' "+
+														  "AND PRATICA.CURRENT_STATE in ('e63f4d0b55f346ca9716a95b48b28196', 'df5f52099a6a4f8894083a9ed5724b51')";
+             	                //							  						Attesa protocollazione			  			Presentata
+	var sqlFiglioSecondoSecondo = "SELECT SM_ID PRATICA_BLOCCANTE "+
+             	                  "FROM AG_SM_INSTANCES PRATICA, AG_SM_DATA_ENTRIES DETTAGLIO "+
+             	                  "WHERE DETTAGLIO.DAT_PTH = 'SecondoMinore_CodiceFiscale' "+
+             	                  "AND DETTAGLIO.DAT_VL = '" + codiceFiscaleSecondoFiglio +"' "+
+             	                  "AND DETTAGLIO.FK_ID = PRATICA.SM_ID "+
+															  "AND PRATICA.SM_TMPL_DN = 'Dote sport famiglie' "+
+															  "AND PRATICA.CURRENT_STATE in ('e63f4d0b55f346ca9716a95b48b28196', 'df5f52099a6a4f8894083a9ed5724b51')";
+             	                  //							  						Attesa protocollazione			  			Presentata
+	var duplicatiFiglioSecondoPrimo = dizionarioService.getList(null, sqlFiglioSecondoPrimo);
+	var duplicatiFiglioSecondoSecondo = dizionarioService.getList(null, sqlFiglioSecondoSecondo);
+	if ((duplicatiFiglioSecondoPrimo.size() > 0) || (duplicatiFiglioSecondoSecondo.size() > 0)) {
+		errors.put('SecondoMinore_CodiceFiscale', 'PraticaDuplicataSecondoFiglio_val');
+	}
+}
+//Il codice fiscale del secondo minore è già stato utilizzato per presentare una domanda, pertanto non è possibile proseguire
 //verifica residenza in comune della manifestazione d'interesse
 //1. ricercare la lista dei richiedenti e aggiungerla all'elenco dei comuni
 //2. per ogni richiedente, valutare se ha presentato in forma singola o associata, in questo secondo caso, ricercare la lista degli associati

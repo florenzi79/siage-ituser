@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<_>
+  <Adesione_File_DeMinimisControllateModello>/siage-simulazione/file/3497478ae4254671902b25723be6505a</Adesione_File_DeMinimisControllateModello>
+  <Adesione_File_DeMinimisFirmato>93a95628147340cab99cbbcf328ee7f1</Adesione_File_DeMinimisFirmato>
+  <Adesione_File_DeMinimisIstruzioni>/siage-simulazione/file/8e6c310631a14a9da483c7354353c886</Adesione_File_DeMinimisIstruzioni>
+  <Adesione_File_DeMinimisModello>/siage-simulazione/file/b56948a5ae2b4a47b0c7e843d2eb6a16</Adesione_File_DeMinimisModello>
+  <Adesione_File_DomandaDiContributoModello>cc0871063bcb457396ff8129e7ffa596</Adesione_File_DomandaDiContributoModello>
+  <Dichiarazioni_AttivitaEconomica>true</Dichiarazioni_AttivitaEconomica>
+  <Dichiarazioni_CaricamentoDocumenti>true</Dichiarazioni_CaricamentoDocumenti>
+  <Dichiarazioni_CondannaDoping>true</Dichiarazioni_CondannaDoping>
+  <Dichiarazioni_CondannaIllecito>true</Dichiarazioni_CondannaIllecito>
+  <Dichiarazioni_CondizioniProvvedimento>true</Dichiarazioni_CondizioniProvvedimento>
+  <Dichiarazioni_Dpr>true</Dichiarazioni_Dpr>
+  <Dichiarazioni_EsenzioneBollo>true</Dichiarazioni_EsenzioneBollo>
+  <Dichiarazioni_PossessoRequisiti>true</Dichiarazioni_PossessoRequisiti>
+  <Dichiarazioni_PresaAttoCondizioni>true</Dichiarazioni_PresaAttoCondizioni>
+  <Dichiarazioni_PresaVisione>true</Dichiarazioni_PresaVisione>
+  <Dichiarazioni_SanzioneConi>true</Dichiarazioni_SanzioneConi>
+  <Dichiarazioni_VeridicitaDati>true</Dichiarazioni_VeridicitaDati>
+  <Firmatario_CodiceFiscale>ZNAPLA68A25F205O</Firmatario_CodiceFiscale>
+  <Firmatario_Cognome>Zani</Firmatario_Cognome>
+  <Firmatario_CoincideLegaleRappresentante>true</Firmatario_CoincideLegaleRappresentante>
+  <Firmatario_Fax>0303030</Firmatario_Fax>
+  <Firmatario_Mail>zani.paolo@mail.com</Firmatario_Mail>
+  <Firmatario_Nome>Paolo</Firmatario_Nome>
+  <Firmatario_Ruolo>Rappresentante legale</Firmatario_Ruolo>
+  <Firmatario_Telefono>02020202</Firmatario_Telefono>
+  <Pratica_dataCreazioneDomanda>08/09/2015</Pratica_dataCreazioneDomanda>
+  <ReferentePratica_CodiceFiscale>ZNAPLA68A25F205O</ReferentePratica_CodiceFiscale>
+  <ReferentePratica_Cognome>Zani</ReferentePratica_Cognome>
+  <ReferentePratica_CoincideLegaleRapprFirmatario>rappresentante</ReferentePratica_CoincideLegaleRapprFirmatario>
+  <ReferentePratica_Fax>0303030</ReferentePratica_Fax>
+  <ReferentePratica_Mail>zani.paolo@mail.com</ReferentePratica_Mail>
+  <ReferentePratica_Nome>Paolo</ReferentePratica_Nome>
+  <ReferentePratica_Ruolo>Rappresentante legale</ReferentePratica_Ruolo>
+  <ReferentePratica_Telefono>02020202</ReferentePratica_Telefono>
+  <Richiedente_Affiliazione>000087</Richiedente_Affiliazione>
+  <Richiedente_FsnDsaAppartenenza>Federazione Ginnastica d’Italia - Comitato Regionale Lombardia</Richiedente_FsnDsaAppartenenza>
+  <Richiedente_GestioneImpianti>true</Richiedente_GestioneImpianti>
+  <Richiedente_IscrizioneConiCip>24223</Richiedente_IscrizioneConiCip>
+  <Richiedente_NaturaGiuridica>1.2.10</Richiedente_NaturaGiuridica>
+  <Richiedente_Polisportiva>true</Richiedente_Polisportiva>
+  <Richiedente_RappresentanteLegaleCf>ZNAPLA68A25F205O</Richiedente_RappresentanteLegaleCf>
+  <Richiedente_RappresentanteLegaleCognome>Zani</Richiedente_RappresentanteLegaleCognome>
+  <Richiedente_RappresentanteLegaleFax>0303030</Richiedente_RappresentanteLegaleFax>
+  <Richiedente_RappresentanteLegaleMail>zani.paolo@mail.com</Richiedente_RappresentanteLegaleMail>
+  <Richiedente_RappresentanteLegaleNome>Paolo</Richiedente_RappresentanteLegaleNome>
+  <Richiedente_RappresentanteLegaleTelefono>02020202</Richiedente_RappresentanteLegaleTelefono>
+  <SedeLegale_Comune>015211</SedeLegale_Comune>
+  <SedeLegale_ComuneDn>Settimo Milanese</SedeLegale_ComuneDn>
+  <SedeLegale_Indirizzo>viale piave</SedeLegale_Indirizzo>
+  <SedeLegale_Provincia>015</SedeLegale_Provincia>
+  <SedeLegale_ProvinciaDn>Milano</SedeLegale_ProvinciaDn>
+  <SoggettoRichiedente_CodiceFiscale>91003670154</SoggettoRichiedente_CodiceFiscale>
+  <SoggettoRichiedente_Denominazione>A.S.D. GINNASTICA SAMPIETRINA</SoggettoRichiedente_Denominazione>
+  <SoggettoRichiedente_Fax>0202020</SoggettoRichiedente_Fax>
+  <SoggettoRichiedente_Pec>ginnastica.sanp@pec.mail</SoggettoRichiedente_Pec>
+  <SoggettoRichiedente_Piva>91003670154</SoggettoRichiedente_Piva>
+  <creationDate>08/09/2015</creationDate>
+  <fasePratica>Adesione</fasePratica>
+  <id>8a4aa0984fa7c06b014fad4e09d304b4</id>
+  <idPratica>786</idPratica>
+  <idSottoprocedimento>fc328848b3954040872b536df40b6fdf</idSottoprocedimento>
+  <idStrumentoAttuativo>RLN12015000424</idStrumentoAttuativo>
+  <lastUpdate>08/09/2015</lastUpdate>
+  <lastUpdateFormated>08/09/2015</lastUpdateFormated>
+  <loanId>8a4aa0984ed9d18b014edfe089ed08a5</loanId>
+  <statoPratica>In bozza</statoPratica>
+  <title>A.S.D. GINNASTICA SAMPIETRINA</title>
+</_>

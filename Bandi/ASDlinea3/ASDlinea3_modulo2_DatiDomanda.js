@@ -41,6 +41,10 @@ items.get('ReferentePratica_Ruolo').setRequired(isNotRappresentanteFirmatarioRef
 // SedeLegale_ProvinciaDn
 //La sede legale ricavata dal profilo non è in Lombardia, si intende dichiararne un'altra?
 //Non sono ammessi soggetti che abbiano sede legale fuori Lombardia
+var provinciaSedeNonPresente = isEmpty('SedeLegale_Provincia');
+items.get('SedeLegale_Indirizzo').setHidden(provinciaSedeNonPresente);
+items.get('SedeLegale_ProvinciaDn').setHidden(provinciaSedeNonPresente);
+items.get('SedeLegale_ComuneDn').setHidden(provinciaSedeNonPresente);
 var provinciaProfilo = values.get('SedeLegale_Provincia');
 var isProfiloLombardo = ((provinciaProfilo == '012') || (provinciaProfilo == '013') || (provinciaProfilo == '014') || (provinciaProfilo == '015') || (provinciaProfilo == '016') || (provinciaProfilo == '017') || (provinciaProfilo == '018') || (provinciaProfilo == '019') || (provinciaProfilo == '020') || (provinciaProfilo == '097') || (provinciaProfilo == '098') || (provinciaProfilo == '108'));
 items.get('SedeLegale_DomandaPerFuoriRegione').setHidden(isProfiloLombardo);

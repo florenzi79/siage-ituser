@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<_>
+  <Adesione_File_DeMinimisControllateModello>/siage-simulazione/file/99d3a6c6c1cf4623a7113531b06cd98a</Adesione_File_DeMinimisControllateModello>
+  <Adesione_File_DeMinimisIstruzioni>/siage-simulazione/file/5acbd3dab5224c1fb8cbc4d1ac5f8fd0</Adesione_File_DeMinimisIstruzioni>
+  <Adesione_File_DeMinimisModello>/siage-simulazione/file/4457c05e76f744fa8a68c7eb7004446b</Adesione_File_DeMinimisModello>
+  <Adesione_File_DistintaPagamentiCompilato>cd3ed696f79e46539b6e7ae48d09fc8d</Adesione_File_DistintaPagamentiCompilato>
+  <Adesione_File_DistintaPagamentiCompilato_idDocumento>49701380</Adesione_File_DistintaPagamentiCompilato_idDocumento>
+  <Adesione_File_DistintaPagamentiModello>/siage-simulazione/file/a2d380d213124fa980155cc1b88d6add</Adesione_File_DistintaPagamentiModello>
+  <Adesione_File_DomandaDiContributoFirmato>1193ea4f3d944c49997292f892112db3</Adesione_File_DomandaDiContributoFirmato>
+  <Adesione_File_DomandaDiContributoIdDocumento>49701379</Adesione_File_DomandaDiContributoIdDocumento>
+  <Adesione_File_DomandaDiContributoModello>18cf7c3b84014d25963d7cb86729842e</Adesione_File_DomandaDiContributoModello>
+  <Adesione_File_RendicontazioneSpeseCompilato>77fd5c308c774d5eb544709a064d9eb1</Adesione_File_RendicontazioneSpeseCompilato>
+  <Adesione_File_RendicontazioneSpeseCompilato_idDocumento>49701381</Adesione_File_RendicontazioneSpeseCompilato_idDocumento>
+  <Adesione_File_RendicontazioneSpeseModello>/siage-simulazione/file/f15bd46e40d440f0b6c5bade629997f1</Adesione_File_RendicontazioneSpeseModello>
+  <Adesione_File_RicevutaCompensoModello>/siage-simulazione/file/dc081eaac1504c28b3e1eb8639c3807b</Adesione_File_RicevutaCompensoModello>
+  <Avviso_pulsantePostPagamentoBollo>Il bollo è stato correttamente pagato. Premere il pulsante INVIA AL PROTOCOLLO per confermare i dati e inviare la domanda.</Avviso_pulsantePostPagamentoBollo>
+  <Collaboratori_PresenzaLineaDue>false</Collaboratori_PresenzaLineaDue>
+  <CoordinateBancarie_Agenzia>Milano</CoordinateBancarie_Agenzia>
+  <CoordinateBancarie_Credito>BCC</CoordinateBancarie_Credito>
+  <CoordinateBancarie_Iban>IT35P0300200130000003976499</CoordinateBancarie_Iban>
+  <CoordinateBancarie_Intestatario>Zani for president</CoordinateBancarie_Intestatario>
+  <Dichiarazioni_AttivitaCommerciale>false</Dichiarazioni_AttivitaCommerciale>
+  <Dichiarazioni_AttivitaEconomica>false</Dichiarazioni_AttivitaEconomica>
+  <Dichiarazioni_CondannaDoping>true</Dichiarazioni_CondannaDoping>
+  <Dichiarazioni_CondannaIllecito>true</Dichiarazioni_CondannaIllecito>
+  <Dichiarazioni_ContributiBandiSpecificare>nessuno</Dichiarazioni_ContributiBandiSpecificare>
+  <Dichiarazioni_Contributo>true</Dichiarazioni_Contributo>
+  <Dichiarazioni_Dpr>true</Dichiarazioni_Dpr>
+  <Dichiarazioni_EnteNonCommerciale_0>ritenuta</Dichiarazioni_EnteNonCommerciale_0>
+  <Dichiarazioni_EsenzioneBollo>true</Dichiarazioni_EsenzioneBollo>
+  <Dichiarazioni_Iva>interamente</Dichiarazioni_Iva>
+  <Dichiarazioni_NoContributiBandi>true</Dichiarazioni_NoContributiBandi>
+  <Dichiarazioni_NoContributiSpese>false</Dichiarazioni_NoContributiSpese>
+  <Dichiarazioni_Polisportiva>true</Dichiarazioni_Polisportiva>
+  <Dichiarazioni_PossessoRequisiti>true</Dichiarazioni_PossessoRequisiti>
+  <Dichiarazioni_PrendereAtto>true</Dichiarazioni_PrendereAtto>
+  <Dichiarazioni_PresaVisione>true</Dichiarazioni_PresaVisione>
+  <Dichiarazioni_ProvvedutoCaricamento>true</Dichiarazioni_ProvvedutoCaricamento>
+  <Dichiarazioni_RegimeImpresa>true</Dichiarazioni_RegimeImpresa>
+  <Dichiarazioni_SanzioneConi>true</Dichiarazioni_SanzioneConi>
+  <Dichiarazioni_SpeseAmmissibili>true</Dichiarazioni_SpeseAmmissibili>
+  <Dichiarazioni_Veridicita>true</Dichiarazioni_Veridicita>
+  <DocumentiSpesa_0.Allegato_Descrizione>affitto</DocumentiSpesa_0.Allegato_Descrizione>
+  <DocumentiSpesa_0.Allegato_File>3a3787a7e96741e3a533e3042bf6db65</DocumentiSpesa_0.Allegato_File>
+  <DocumentiSpesa_0.Allegato_IdDocumento>49701382</DocumentiSpesa_0.Allegato_IdDocumento>
+  <DocumentiSpesa_0.Allegato_tipo>Affitto strutture</DocumentiSpesa_0.Allegato_tipo>
+  <DocumentiSpesa_1.Allegato_Descrizione>affiliazione</DocumentiSpesa_1.Allegato_Descrizione>
+  <DocumentiSpesa_1.Allegato_File>f84e0f5de170439b8040d5130c984b77</DocumentiSpesa_1.Allegato_File>
+  <DocumentiSpesa_1.Allegato_IdDocumento>49701383</DocumentiSpesa_1.Allegato_IdDocumento>
+  <DocumentiSpesa_1.Allegato_tipo>Affiliazione e tesseramento</DocumentiSpesa_1.Allegato_tipo>
+  <DomandaDiAdesione_NumeroProtocollo>N1.2015.0000102</DomandaDiAdesione_NumeroProtocollo>
+  <DomandadiAdesione_DataProtocollo>08/09/2015 17:32:11</DomandadiAdesione_DataProtocollo>
+  <Federazione_AppartenenzaNome>FIB - Federazione Italiana Bocce</Federazione_AppartenenzaNome>
+  <Federazione_CodiceAffiliazione>AS454</Federazione_CodiceAffiliazione>
+  <Federazione_RegistroConi>0012</Federazione_RegistroConi>
+  <Firmatario_CodiceFiscale>ZNAPLA68A25F205O</Firmatario_CodiceFiscale>
+  <Firmatario_Cognome>Zani</Firmatario_Cognome>
+  <Firmatario_CoincideLegaleRappresentante>true</Firmatario_CoincideLegaleRappresentante>
+  <Firmatario_Fax>03030033</Firmatario_Fax>
+  <Firmatario_Mail>zani.paolo@mail.com</Firmatario_Mail>
+  <Firmatario_Nome>Paolo</Firmatario_Nome>
+  <Firmatario_Ruolo>Rappresentante legale</Firmatario_Ruolo>
+  <Firmatario_Telefono>030303030</Firmatario_Telefono>
+  <PagamentoBollo_email>patrizia.teodori@astir.com</PagamentoBollo_email>
+  <PagamentoBollo_ente>#AGORA#</PagamentoBollo_ente>
+  <PagamentoBollo_esito>
+  </PagamentoBollo_esito>
+  <PagamentoBollo_esito_label>Da pagare</PagamentoBollo_esito_label>
+  <PagamentoBollo_importo>16,00</PagamentoBollo_importo>
+  <PagamentoBollo_inserzionista>PATRIZIA TEODORI</PagamentoBollo_inserzionista>
+  <PagamentoBollo_oggetto>SiAge - Pagamento imposta di bollo</PagamentoBollo_oggetto>
+  <Punteggio_AssolutaFemminile>0,00</Punteggio_AssolutaFemminile>
+  <Punteggio_AssolutaMaschile>0,00</Punteggio_AssolutaMaschile>
+  <Punteggio_CollaboratoriLineaDue>0,00</Punteggio_CollaboratoriLineaDue>
+  <Punteggio_GiovanileFemminile>0,00</Punteggio_GiovanileFemminile>
+  <Punteggio_GiovanileMaschile>0,00</Punteggio_GiovanileMaschile>
+  <Punteggio_OrganizzazioneNessunaLineaUno>0,00</Punteggio_OrganizzazioneNessunaLineaUno>
+  <Punteggio_OrganizzazioneTitoliCioLineaUno>0,00</Punteggio_OrganizzazioneTitoliCioLineaUno>
+  <Punteggio_OrganizzazioneTitoliFederaliInternazionaliLineaUno>0,00</Punteggio_OrganizzazioneTitoliFederaliInternazionaliLineaUno>
+  <Punteggio_OrganizzazioneTitoliFederaliMondialiLineaUno>0,00</Punteggio_OrganizzazioneTitoliFederaliMondialiLineaUno>
+  <Punteggio_OrganizzazioneTitoliFederaliNazionaliLineaUno>0,00</Punteggio_OrganizzazioneTitoliFederaliNazionaliLineaUno>
+  <Punteggio_OrganizzazioneTitoliFederaliRegionaliLineaUno>0,00</Punteggio_OrganizzazioneTitoliFederaliRegionaliLineaUno>
+  <Punteggio_TesseratiTotaleLineaDue>3,00</Punteggio_TesseratiTotaleLineaDue>
+  <Punteggio_TesseratiUnderDiciottoLineaDue>0,00</Punteggio_TesseratiUnderDiciottoLineaDue>
+  <Punteggio_TitoliInternazionaleLineaDue>0,00</Punteggio_TitoliInternazionaleLineaDue>
+  <Punteggio_TitoliNazionaleLineaDue>0,00</Punteggio_TitoliNazionaleLineaDue>
+  <Punteggio_TitoliNessunoLineaDue>0,00</Punteggio_TitoliNessunoLineaDue>
+  <Punteggio_TitoliRegionaleLineaDue>0,00</Punteggio_TitoliRegionaleLineaDue>
+  <Punteggio_TotaleLineaDue>3,00</Punteggio_TotaleLineaDue>
+  <Punteggio_TotaleLineaUno>0,00</Punteggio_TotaleLineaUno>
+  <ReferentePratica_CodiceFiscale>ZNAPLA68A25F205O</ReferentePratica_CodiceFiscale>
+  <ReferentePratica_Cognome>Zani</ReferentePratica_Cognome>
+  <ReferentePratica_CoincideLegaleRapprFirmatario>rappresentante</ReferentePratica_CoincideLegaleRapprFirmatario>
+  <ReferentePratica_Fax>03030033</ReferentePratica_Fax>
+  <ReferentePratica_Mail>zani.paolo@mail.com</ReferentePratica_Mail>
+  <ReferentePratica_Nome>Paolo</ReferentePratica_Nome>
+  <ReferentePratica_Ruolo>Rappresentante legale</ReferentePratica_Ruolo>
+  <ReferentePratica_Telefono>030303030</ReferentePratica_Telefono>
+  <Richiedente_NaturaGiuridica>1.2.10</Richiedente_NaturaGiuridica>
+  <Richiedente_RappresentanteLegaleCf>ZNAPLA68A25F205O</Richiedente_RappresentanteLegaleCf>
+  <Richiedente_RappresentanteLegaleCognome>Zani</Richiedente_RappresentanteLegaleCognome>
+  <Richiedente_RappresentanteLegaleFax>03030033</Richiedente_RappresentanteLegaleFax>
+  <Richiedente_RappresentanteLegaleMail>zani.paolo@mail.com</Richiedente_RappresentanteLegaleMail>
+  <Richiedente_RappresentanteLegaleNome>Paolo</Richiedente_RappresentanteLegaleNome>
+  <Richiedente_RappresentanteLegaleTelefono>030303030</Richiedente_RappresentanteLegaleTelefono>
+  <SedeLegale_Comune>015211</SedeLegale_Comune>
+  <SedeLegale_ComuneDn>Settimo Milanese</SedeLegale_ComuneDn>
+  <SedeLegale_Indirizzo>viale piave</SedeLegale_Indirizzo>
+  <SedeLegale_Provincia>015</SedeLegale_Provincia>
+  <SedeLegale_ProvinciaDn>Milano</SedeLegale_ProvinciaDn>
+  <SoggettiAmmissibili_CategoriaAppartenenza>due</SoggettiAmmissibili_CategoriaAppartenenza>
+  <SoggettiAmmissibili_GestioneImpianti>false</SoggettiAmmissibili_GestioneImpianti>
+  <SoggettiAmmissibili_Polisportiva>true</SoggettiAmmissibili_Polisportiva>
+  <SoggettoRichiedente_CodiceFiscale>91003670154</SoggettoRichiedente_CodiceFiscale>
+  <SoggettoRichiedente_Denominazione>A.S.D. GINNASTICA SAMPIETRINA</SoggettoRichiedente_Denominazione>
+  <SoggettoRichiedente_Fax>030303</SoggettoRichiedente_Fax>
+  <SoggettoRichiedente_Piva>91003670154</SoggettoRichiedente_Piva>
+  <Spese_Abbigliamento>2.000,00</Spese_Abbigliamento>
+  <Spese_Affiliazione>2.000,00</Spese_Affiliazione>
+  <Spese_Affitto>500,00</Spese_Affitto>
+  <Spese_Compensi>0,00</Spese_Compensi>
+  <Spese_ContributoConcedibile>2.250,00</Spese_ContributoConcedibile>
+  <Spese_Defibrillatori>0,00</Spese_Defibrillatori>
+  <Spese_IscrizioneCampionati>0,00</Spese_IscrizioneCampionati>
+  <Spese_IscrizioneManifestazioni>0,00</Spese_IscrizioneManifestazioni>
+  <Spese_Noleggio>0,00</Spese_Noleggio>
+  <Spese_Polizze>0,00</Spese_Polizze>
+  <Spese_TotaleUscite>4.500,00</Spese_TotaleUscite>
+  <StatoPratica>In bozza</StatoPratica>
+  <Tesserati_TotaleLineaDue>1,00</Tesserati_TotaleLineaDue>
+  <Tesserati_UnderDiciottoLineaDue>0,00</Tesserati_UnderDiciottoLineaDue>
+  <Titoli_InternazionaleLineaDue>false</Titoli_InternazionaleLineaDue>
+  <Titoli_NazionaleLineaDue>false</Titoli_NazionaleLineaDue>
+  <Titoli_NessunoLineaDue>true</Titoli_NessunoLineaDue>
+  <Titoli_RegionaleLineaDue>false</Titoli_RegionaleLineaDue>
+  <creationDate>08/09/2015</creationDate>
+  <fasePratica>Adesione</fasePratica>
+  <id>8a4aa0984fa7c06b014fad86d44b050b</id>
+  <idPratica>787</idPratica>
+  <idSottoprocedimento>b355ea0e78b74f469c8cdbd3baf49fcf</idSottoprocedimento>
+  <idStrumentoAttuativo>RLN12015000463</idStrumentoAttuativo>
+  <lastUpdate>08/09/2015</lastUpdate>
+  <lastUpdateFormated>08/09/2015</lastUpdateFormated>
+  <loanId>8a4aa0984efdd183014efdf713f20000</loanId>
+  <title>A.S.D. GINNASTICA SAMPIETRINA</title>
+</_>
