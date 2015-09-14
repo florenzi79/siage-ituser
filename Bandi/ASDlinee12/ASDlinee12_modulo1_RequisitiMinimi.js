@@ -26,7 +26,7 @@ if (instance.getOwner() == user.getGruppoCorrente().getGroup().getId()) {
 		if( mappaValoriSgProf.get('AA029') != null ) values.put( 'Richiedente_RappresentanteLegaleCognome', mappaValoriSgProf.get('AA029').toString() );
 		if( mappaValoriSgProf.get('AA030') != null ) values.put( 'Richiedente_RappresentanteLegaleNome', mappaValoriSgProf.get('AA030').toString() );
 	}
-	
+
 }
 //titolo pratica
 {
@@ -117,6 +117,10 @@ items.get('Dichiarazioni_NoContributiSpese').setRequired(domandaAltriBandi);
 var speseAltriBandi = (values.get('Dichiarazioni_NoContributiSpese') == 'true');
 items.get('Dichiarazioni_ContributiSpeseSpecificare').setHidden(!speseAltriBandi);
 items.get('Dichiarazioni_ContributiSpeseSpecificare').setRequired(speseAltriBandi);
+//Dichiarazioni_Polisportiva
+var isPolisportiva = (values.get('SoggettiAmmissibili_Polisportiva') == 'true');
+items.get('Dichiarazioni_Polisportiva').setHidden(!isPolisportiva);
+items.get('Dichiarazioni_Polisportiva').setRequired(isPolisportiva);
 
 //onChange
 //SoggettiAmmissibili_CategoriaAppartenenza
@@ -184,6 +188,12 @@ values.remove('Dichiarazioni_Detrazione');
 var ivaParziale = (values.get('Dichiarazioni_Iva')=='parzialmente');
 items.get('Dichiarazioni_Detrazione').setHidden(!ivaParziale);
 items.get('Dichiarazioni_Detrazione').setRequired(ivaParziale);
+//SoggettiAmmissibili_Polisportiva
+values.remove('Dichiarazioni_Polisportiva');
+var isPolisportiva = (values.get('SoggettiAmmissibili_Polisportiva') == 'true');
+items.get('Dichiarazioni_Polisportiva').setHidden(!isPolisportiva);
+items.get('Dichiarazioni_Polisportiva').setRequired(isPolisportiva);
+
 
 //Validazione
 //pratica duplicata
