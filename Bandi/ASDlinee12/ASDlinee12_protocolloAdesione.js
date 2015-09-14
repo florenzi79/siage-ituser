@@ -35,4 +35,4 @@ if (dm.isRegistrered()) {
 	message(username,'edmaSyncProtocollaAdesione');
 }
 // creaPdfDatiAdesione
-generatePdf('PdfDatiDomanda', '3e23c8cc5be34e6ca4f65711b4bd0e75', 'DatiAdesione.pdf');
+generatePdf('PdfDatiDomanda', '5b042cf4fd284eb59be5d7ef41ef23c2', 'DatiAdesione.pdf');
