@@ -1,6 +1,6 @@
 //onLoad
 //Richiedente_NaturaGiuridica
-values.put('StatoPratica','In bozza');
+values.put('statoPratica','In bozza');
 values.put('fasePratica','Adesione');
 if (instance.getOwner() == user.getGruppoCorrente().getGroup().getId()) {
 	values.put('Richiedente_CodiceFiscale',user.getCodiceFiscale());
@@ -8,41 +8,71 @@ if (instance.getOwner() == user.getGruppoCorrente().getGroup().getId()) {
 	values.put( 'Richiedente_NaturaGiuridica', user.getProfiloQualificaCorrente().getCodiceNaturaGiuridicaSgProf());
 	var mappaValoriSgProf = ricercaProfiloSgProf(user);
 	if (mappaValoriSgProf != null) {
-		if( mappaValoriSgProf.get('ASIS015') != null ) values.put( 'Richiedente_Cognome', mappaValoriSgProf.get('ASIS015').toString() );
-		if( mappaValoriSgProf.get('ASIS016') != null ) values.put( 'Richiedente_Nome', mappaValoriSgProf.get('ASIS016').toString() );
-		if( mappaValoriSgProf.get('ASIS018') != null ) {
-			var timestampDataNascita = mappaValoriSgProf.get('ASIS018').toString();
-			var giornoNascita = parseInt(timestampDataNascita.substring(0,2));
-			var meseNascita = parseInt(timestampDataNascita.substring(3,5)) -1;
-			var annoNascita = parseInt(timestampDataNascita.substring(6,10));
-			var dataNascita = new Date(annoNascita, meseNascita, giornoNascita, 0, 0, 0, 0);
-			var dataNascitaMillis = parseFloat(dataNascita.getTime());
-			values.put( 'Richiedente_DataNascita', ''+dataNascitaMillis );
-		}
-		if( (mappaValoriSgProf.get('ASIS009') != null) && (values.get('Richiedente_ComuneNascita') == null)) {
-			values.put( 'Richiedente_ComuneNascita', mappaValoriSgProf.get('ASIS009').toString() );
-			values.put( 'Richiedente_ComuneNascitaDn', getAnaDenominazione('comune_istat', values.get('Richiedente_ComuneNascita')) );
-		}
-		if( (mappaValoriSgProf.get('ASIS010') != null) && (values.get('Richiedente_ProvinciaNascita') == null)) {
-			values.put( 'Richiedente_ProvinciaNascita', mappaValoriSgProf.get('ASIS010').toString() );
-			values.put( 'Richiedente_ProvinciaNascitaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_ProvinciaNascita')) );
-		}
-		if( (mappaValoriSgProf.get('ASIS011') != null) && (values.get('Richiedente_IndirizzoResidenza') == null)) values.put( 'Richiedente_IndirizzoResidenza', mappaValoriSgProf.get('ASIS011').toString() );
-		if( (mappaValoriSgProf.get('ASIS012') != null) && (values.get('Richiedente_ComuneResidenza') == null)) {
-			values.put( 'Richiedente_ComuneResidenza', mappaValoriSgProf.get('ASIS012').toString() );
-			values.put( 'Richiedente_ComuneResidenzaDn', getAnaDenominazione('comune_istat', values.get('Richiedente_ComuneResidenza')) );
-		}
-		if( (mappaValoriSgProf.get('ASIS013') != null) && (values.get('Richiedente_ProvinciaResidenza') == null)) {
-			values.put( 'Richiedente_ProvinciaResidenza', mappaValoriSgProf.get('ASIS013').toString() );
-			values.put( 'Richiedente_ProvinciaResidenzaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_ProvinciaResidenza')) );
+		if (values.get('Richiedente_NaturaGiuridica') == 'NGPFL') {
+			if( mappaValoriSgProf.get('ASCS013') != null ) values.put( 'Richiedente_Cognome', mappaValoriSgProf.get('ASCS013').toString() );
+			if( mappaValoriSgProf.get('ASCS000') != null ) values.put( 'Richiedente_Nome', mappaValoriSgProf.get('ASCS000').toString() );
+			if( mappaValoriSgProf.get('ASCS002') != null ) values.put( 'Richiedente_DataNascita', mappaValoriSgProf.get('ASCS002').toString() );
+			if( (mappaValoriSgProf.get('ASCS003') != null) && (values.get('Richiedente_ComuneNascita') == null)) {
+				values.put( 'Richiedente_ComuneNascita', mappaValoriSgProf.get('ASCS003').toString() );
+				values.put( 'Richiedente_ComuneNascitaDn', getAnaDenominazione('comune_istat', values.get('Richiedente_ComuneNascita')) );
+				var sqlProvinciaNascita = "SELECT ANA_PARENT_CD "+
+																	"FROM AG_ANAGRAFICHE "+
+																	"WHERE ANA_TIPO = 'comune_istat' "+
+																	"AND ANA_CD = '"+values.get('Richiedente_ComuneNascita')+"' ";
+				var provinciaNascita = dizionarioService.getList(null, sqlProvinciaNascita);
+				if(provinciaNascita.size() > 0) {
+					values.put('Richiedente_ProvinciaNascita',''+provinciaNascita.get(0));
+					values.put( 'Richiedente_ProvinciaNascitaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_ProvinciaNascita')) );
+				}
+			}
+			if( (mappaValoriSgProf.get('ASCS005') != null) && (values.get('Richiedente_ComuneResidenza') == null)) {
+				values.put( 'Richiedente_ComuneResidenza', mappaValoriSgProf.get('ASCS005').toString() );
+				values.put( 'Richiedente_ComuneResidenzaDn', getAnaDenominazione('comune_istat', values.get('Richiedente_ComuneResidenza')) );
+				var sqlProvinciaResidenza = "SELECT ANA_PARENT_CD "+
+																	  "FROM AG_ANAGRAFICHE "+
+																	  "WHERE ANA_TIPO = 'comune_istat' "+
+																	  "AND ANA_CD = '"+values.get('Richiedente_ComuneResidenza')+"' ";
+				var provinciaResidenza = dizionarioService.getList(null, sqlProvinciaResidenza);
+				if(sqlProvinciaResidenza.size() > 0) {
+					values.put('Richiedente_ProvinciaResidenza',''+provinciaResidenza.get(0));
+					values.put( 'Richiedente_ProvinciaResidenzaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_ProvinciaResidenza')) );
+				}
+			}
+		} else if (values.get('Richiedente_NaturaGiuridica') == 'NGPFNL') {
+			if( mappaValoriSgProf.get('ASIS015') != null ) values.put( 'Richiedente_Cognome', mappaValoriSgProf.get('ASIS015').toString() );
+			if( mappaValoriSgProf.get('ASIS016') != null ) values.put( 'Richiedente_Nome', mappaValoriSgProf.get('ASIS016').toString() );
+			if( mappaValoriSgProf.get('ASIS018') != null ) {
+				var timestampDataNascita = mappaValoriSgProf.get('ASIS018').toString();
+				var giornoNascita = parseInt(timestampDataNascita.substring(0,2),10);
+				var meseNascita = parseInt(timestampDataNascita.substring(3,5),10) -1;
+				var annoNascita = parseInt(timestampDataNascita.substring(6,10),10);
+				var dataNascita = new Date(annoNascita, meseNascita, giornoNascita, 0, 0, 0, 0);
+				var dataNascitaMillis = parseFloat(dataNascita.getTime());
+				values.put( 'Richiedente_DataNascita', ''+dataNascitaMillis );
+			}
+			if( (mappaValoriSgProf.get('ASIS009') != null) && (values.get('Richiedente_ComuneNascita') == null)) {
+				values.put( 'Richiedente_ComuneNascita', mappaValoriSgProf.get('ASIS009').toString() );
+				values.put( 'Richiedente_ComuneNascitaDn', getAnaDenominazione('comune_istat', values.get('Richiedente_ComuneNascita')) );
+			}
+			if( (mappaValoriSgProf.get('ASIS010') != null) && (values.get('Richiedente_ProvinciaNascita') == null)) {
+				values.put( 'Richiedente_ProvinciaNascita', mappaValoriSgProf.get('ASIS010').toString() );
+				values.put( 'Richiedente_ProvinciaNascitaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_ProvinciaNascita')) );
+			}
+			if( (mappaValoriSgProf.get('ASIS011') != null) && (values.get('Richiedente_IndirizzoResidenza') == null)) values.put( 'Richiedente_IndirizzoResidenza', mappaValoriSgProf.get('ASIS011').toString() );
+			if( (mappaValoriSgProf.get('ASIS012') != null) && (values.get('Richiedente_ComuneResidenza') == null)) {
+				values.put( 'Richiedente_ComuneResidenza', mappaValoriSgProf.get('ASIS012').toString() );
+				values.put( 'Richiedente_ComuneResidenzaDn', getAnaDenominazione('comune_istat', values.get('Richiedente_ComuneResidenza')) );
+			}
+			if( (mappaValoriSgProf.get('ASIS013') != null) && (values.get('Richiedente_ProvinciaResidenza') == null)) {
+				values.put( 'Richiedente_ProvinciaResidenza', mappaValoriSgProf.get('ASIS013').toString() );
+				values.put( 'Richiedente_ProvinciaResidenzaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_ProvinciaResidenza')) );
+			}
 		}
 	}
 }
-//titolo pratica
-{
-	values.put('title',values.get('SoggettoRichiedente_Denominazione') );
-	items.get('title').setHidden(true);
-}
+values.put('title',values.get('Richiedente_Nome') + ' ' + values.get('Richiedente_Cognome'));
+items.get('title').setHidden(true);
+
 //Richiedente_ProvinciaNascita
 setSelectOptionsCached('Richiedente_ProvinciaNascita','provincia_istat');
 setSelectDependedOptionsAndShowCached('Richiedente_ComuneNascita', 'comune_istat', path+'Richiedente_ProvinciaNascita');

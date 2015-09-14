@@ -17,7 +17,7 @@ function f() {
 f();
 
 function f() {
-    var res = values.get('SoggettiAmmissibili_GestioneImpianti');
+    var res = values.get('Richiedente_Polisportiva');
     if (res == 'true') {
     	res = 'Sì';
     } else if (res == 'false') {
