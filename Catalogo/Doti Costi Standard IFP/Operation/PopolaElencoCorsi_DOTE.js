@@ -19,7 +19,7 @@ if (true) {
   if (true) {
     var idOperatore = values.get('Richiedente_IdOperatore');
     var idSede = values.get('Richiedente_IdSede');
-    
+
 // recupera offerte formative del bando definite nel primo modulo
     var offerteFormative = [];
     var i=0;
@@ -30,6 +30,21 @@ if (true) {
     // per forzare le offerte formative per test, togliere il commento all'istruzione seguente:
     // offerteFormative = [048];
     //
+
+		// recupero tabella qualifiche da anagrafica
+		var qualificheSql = "SELECT ANA_DS FROM AG_ANAGRAFICHE "+
+				"WHERE ANA_TIPO = 'Qualifiche_Doti_Costi_Standard_IFP' ";
+		var qualificheResult = dizionarioService.getList(null, qualificheSql);
+    logger.info("XXXXX qualificheResult: "+ qualificheResult);
+
+    if (qualificheResult.size() > 0) {
+      var i=0;
+      for (i = 0; i < qualificheResult.size(); i++) {
+        var qualificheResultStr = ''+qualificheResult.get(i);
+        var datiQualifiche = qualificheResultStr.split("|");
+        logger.info("XXXXX : "+ datiQualifiche);
+      }
+    }
 
     print("XXXXX DOTI - Offerte Formative: "+offerteFormative+"\n");
     try {

@@ -1,14 +1,17 @@
 Attività Doti IFP
 
-- (TODO Fabiola) 	idqualifica dentro il vettore competenze (servizi)
+OK- (TODO Fabiola) 	idqualifica dentro il vettore competenze (servizi)
+- (TODO Fabiola) Fare in modo che il sottomodulo riepilogo corsi contenga tutti i campi che sono presenti nell'elenco corsi valorizzati.
 - (TODO Marco) Calcolo Importo parametrico da tabella dei requisiti
 - (TODO Marco) Erosione Fondo ==> Avviso + 2 controlli
-- (TODO .....) Bloccare se CF destinatario non è presente in iscrizioni
-- (TODO .....) Facility di autocompilazione tutor mettendo solo CF, facendo query su pratiche già protocollate
-- (TODO Fabiola) controllo obbligatorieta' selezione corso
-- (TODO.....) 			aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
-- (TODO.....) 		cambiare il nome dei file
-- (TODO.....) 		Fix Dati Firmatario (tranne nome e cognome) non presenti quando coincidono con rappresentante legale
+
+LOW - (TODO .....) Bloccare se CF destinatario non è presente in iscrizioni
+
+LOW - (TODO .....) Facility di autocompilazione tutor mettendo solo CF, facendo query su pratiche già protocollate
+OK - (TODO Fabiola) controllo obbligatorieta' selezione corso
+LOW - (TODO.....) 			aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
+- (TODO Fabiola) 		cambiare il nome dei file
+- (TODO Fabiola) 		Fix Dati Firmatario (tranne nome e cognome) non presenti quando coincidono con rappresentante legale
 
 - (wait LISPA) 	controllo tutor anni esperienza (già aperto PA_021)
 - (TODO.....)  Fare screenshots per Lispa e richiedere il testo del messaggio che deve comparire quando l'atto unico è stato presentato.
