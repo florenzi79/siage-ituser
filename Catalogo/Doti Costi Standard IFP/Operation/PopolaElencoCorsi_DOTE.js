@@ -31,22 +31,78 @@ if (true) {
     // offerteFormative = [048];
     //
 
-		// recupero tabella qualifiche da anagrafica
-		var qualificheSql = "SELECT ANA_DS FROM AG_ANAGRAFICHE "+
-				"WHERE ANA_TIPO = 'Qualifiche_Doti_Costi_Standard_IFP' ";
-		var qualificheResult = dizionarioService.getList(null, qualificheSql);
-    logger.info("XXXXX qualificheResult: "+ qualificheResult);
+		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 01\n");
+		// definisco tabella qualifiche
+		/*
+  	var amQualifiche =
+		[
+			{"qualificaId":"800","indirizzoId":""},
+			{"qualificaId":"796","indirizzoId":""},
+			{"qualificaId":"910","indirizzoId":""},
+			{"qualificaId":"910","indirizzoId":"189"},
+			{"qualificaId":"809","indirizzoId":""}
+		]
+		;
+*/
+			mImporti={
+					"800|":"4000",
+					"796|":"4000",
+					"910|":"4000",
+					"910|189":"4000",
+					"809|":"4000",
+					"109|":"4000",
+					"108|":"4000",
+					"113|":"4000",
+					"793|":"4300",
+					"789|":"4300",
+					"792|":"4300",
+					"795|":"4300",
+					"794|":"4300",
+					"791|":"4300",
+					"799|":"4300",
+					"788|":"4300",
+					"13|":"4300",
+					"820|":"4300",
+					"916|":"4300",
+					"917|":"4300",
+					"808|":"4300",
+					"804|":"4300",
+					"806|":"4300",
+					"805|":"4300",
+					"52|":"4300",
+					"36|":"4300",
+					"12|":"4600",
+					"786|":"4600",
+					"14|":"4600",
+					"18|":"4600",
+					"1|":"4600",
+					"790|":"4600",
+					"16|":"4600",
+					"793|188":"4600",
+					"19|":"4600",
+					"910|186":"4600",
+					"910|119":"4600",
+					"803|":"4600",
+					"801|":"4600",
+					"103|":"4600",
+					"104|":"4600",
+					"915|":"4600",
+					"28|":"4600",
+					"39|":"4600",
+					"110|":"4600",
+					"819|":"4600",
+					"no|":"4600",
+					"no|":"4600"
+	};
 
-    if (qualificheResult.size() > 0) {
-      var i=0;
-      for (i = 0; i < qualificheResult.size(); i++) {
-        var qualificheResultStr = ''+qualificheResult.get(i);
-        var datiQualifiche = qualificheResultStr.split("|");
-        logger.info("XXXXX : "+ datiQualifiche);
-      }
-    }
+		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 02\n");
+		print("XXXXX mImporti: "+ mImporti+"\n");
 
-    print("XXXXX DOTI - Offerte Formative: "+offerteFormative+"\n");
+		print("XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 02a\n");
+		print("XXXXX Importo associato a '910|186': "+ mImporti['910|186']+"\n");
+//			print("XXXXX amQualifiche: "+ amQualifiche[k].get(indirizzoId)+"\n");
+		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 03\n");
+		print("XXXXX DOTI - Offerte Formative: "+offerteFormative+"\n");
     try {
       print("XXXXX DOTI - esecuzione di estraiDettagliCorsi(IdOperatore = "+idOperatore+" codiceFiscale="+codiceFiscale+" offerteFormative:"+offerteFormative+" idSede:"+idSede+")\n");
       var dati_estraiDettagliCorsi = estraiDettagliCorsi(idOperatore, codiceFiscale, offerteFormative, idSede);
