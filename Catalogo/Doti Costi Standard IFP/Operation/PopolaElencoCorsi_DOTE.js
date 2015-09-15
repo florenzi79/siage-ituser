@@ -32,19 +32,12 @@ if (true) {
     //
 
 		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 01\n");
-		// definisco tabella qualifiche
-		/*
-  	var amQualifiche =
-		[
-			{"qualificaId":"800","indirizzoId":""},
-			{"qualificaId":"796","indirizzoId":""},
-			{"qualificaId":"910","indirizzoId":""},
-			{"qualificaId":"910","indirizzoId":"189"},
-			{"qualificaId":"809","indirizzoId":""}
-		]
-		;
-*/
-			mImporti={
+		// mappa qualifiche
+			mappaQualificheImporti={
+
+// SOLO PER test ************** TODO  Togliere a regime
+					"796|98":"12345",
+// FINE TEST *******************TODO  Togliere a regime
 					"800|":"4000",
 					"796|":"4000",
 					"910|":"4000",
@@ -96,10 +89,10 @@ if (true) {
 	};
 
 		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 02\n");
-		print("XXXXX mImporti: "+ mImporti+"\n");
+		print("XXXXX mappaQualificheImporti: "+ mappaQualificheImporti+"\n");
 
 		print("XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 02a\n");
-		print("XXXXX Importo associato a '910|186': "+ mImporti['910|186']+"\n");
+		print("XXXXX Importo associato a '910|186': "+ mappaQualificheImporti['910|186']+"\n");
 //			print("XXXXX amQualifiche: "+ amQualifiche[k].get(indirizzoId)+"\n");
 		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 03\n");
 		print("XXXXX DOTI - Offerte Formative: "+offerteFormative+"\n");
@@ -122,13 +115,19 @@ if (true) {
                   var elem = a_IscrDC[i];
                   offerta = dati_estraiDettagliCorsi.result.get(elem.get('idcorso'));
                   //print("\nXXXXX DOTI i="+i+" estraiStatoIscrizioni.iscrizioni: "+ elem+"\n");
-                  print("XXXXX DOTI i="+i+" elem.get('idcorso')="+ elem.get('idcorso')+" \n");
+                  print("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+									print("\nXXXXX DOTI i="+i+" \nXXXX elem.get('idcorso')="+ elem.get('idcorso')+" \n");
                   print("XXXXX DOTI: dati_estraiDettagliCorsi result datafine i-esima: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('datafine')+"\n");
                   print("XXXXX DOTI: dati_estraiDettagliCorsi result titolo i-esimo: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('titolo')+"\n");
                   print("XXXXX DOTI: offerta get titolo i-esimo: "+ offerta.get('titolo')+"\n");
+                  var competenze = offerta.get('competenze')[0];
 
+                  print('XXXXX mappa competenze: ' +competenze+'\n');
+									print('XXXXX idqualifica di competenze: ' + competenze.get('idqualifica')+'\n');
+									print('XXXXX idindirizzo di competenze: ' + competenze.get('idindirizzo')+'\n');
+									print('XXXXX qualifica|indirizzo:==>' + competenze.get('idqualifica')+"|"+competenze.get('idindirizzo')+'<==\n');
+                  print('XXXXX annocorso: ' +offerta.get('annocorso')+'\n');
                   if(annualita == offerta.get('annocorso')+'') {  // TODO Aggiungere le condizioni corrette che devono essere soddisfatte per popolare l'elenco corsi
-                    var competenze = offerta.get('competenze')[0];
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].NomeServizio',offerta.get('titolo'));
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].NomeServizioDn',offerta.get('titolo'));
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].IdCorso',offerta.get('idcorso'));
@@ -144,13 +143,21 @@ if (true) {
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].IdAnnualita',offerta.get('annocorso'));
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].Area',competenze.get('descrizionearea'));
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].IdQualifica',competenze.get('idqualifica'));
-                    print('XXXXX idqualifica di competenze: ' + competenze.get('idqualifica')+'\n');
+
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].QualificaDiploma',competenze.get('descrizionequalifica'));
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].Indirizzo',competenze.get('descrizioneindirizzo'));
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].Ore',''+((offerta.get('durata') == 'null') ? 0 : parseFloat(offerta.get('durata'))));
 
                     //TODO Valorizzare ImportoAmmissibile Da tabella "tabella qualifica valori Dote" in base al valore di c43
-                    values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',''+parseFloat('1234567890'));
+										var chiaveRicercaImporto= competenze.get('idqualifica')+"|"+competenze.get('idindirizzo');
+										var importo = mappaQualificheImporti[chiaveRicercaImporto];
+										print('XXXXX importo calcolato per '+chiaveRicercaImporto+': '+importo+'\n');
+//                    values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',''+parseFloat('1234567890'));
+										if (importo!==null) {
+												values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',importo);
+										}
+
+
                     if (offerta.get('datainizio')!== null) {
                       var dataAvvioMS = offerta.get('datainizio');
                       values.put('ServiziFormazione_ElencoCorsi['+j+'].DataAvvio',''+dataAvvioMS);
