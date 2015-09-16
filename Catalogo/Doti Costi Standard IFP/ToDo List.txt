@@ -6,9 +6,8 @@ TODO
 HI - (TODO Marco) Erosione Fondo ==> Avviso + 2 controlli
 HI - (TODO Marco) Fare screenshots per Lispa e richiedere il testo del messaggio che deve comparire quando l'atto unico è stato presentato.
 HI - (TODO Marco) Sollecitare dati di test usabili in gefo produzione CF Operatore, Indirizzo Sede, CF iscritti a corso nella sede IdSede
-HI - (TODO Fabiola / Patrizia) Importare nuovi template pdf
+HI - (TODO Fabiola / Patrizia) Importare nuovo template pdf dati riassuntivi
 HI - (TODO Fabiola) Aggiungere creazione CheckList (Istruttoria automatica) contemporaneamente alla protocollazione
-HI - (TODO Fabiola) Fix Dati Firmatario (tranne nome e cognome) non presenti quando coincidono con rappresentante legale
 HI - (TODO Fabiola) Protocollazione dote
 
 MEDIUM - (TODO .....) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
@@ -20,6 +19,8 @@ LOW - (TODO .....) Aggiungere facility del firmatario su onchange del cf: popola
 - (WAIT Aldo) Aggiungere controllo check digit dei CF con script in sviluppo da Aldo
 - (WAIT LISPA) Controllo tutor anni esperienza (già aperto PA_021)
 - (WAIT Sopra) Restringere filtro ( o parametro in interrogazione gefo)  al recupero anagrafiche al OnChange del CF Partecipante, in modo che vengano recuperati corsi solo se esiste iscrizioni ad un corso dell'off formativa del bando nella sede IdSede del gruppo richiedente nel recupero dei corsi
+- (WAIT LISPA) Assegnare le security corrette al processo per l'istruttore
+- (WAIT LISPA) Assegnare le security corrette ai file _tmp
 
 ==========================
 GIA' FATTI
@@ -36,3 +37,5 @@ GIA' FATTI
 - OK ( OK Fabiola) Cambiare il nome dei file
 - OK ( OK Fabiola) Protocollazione atto unico
 - OK ( OK Fabiola) Aggiungere campi (nascosti) idQUalifica e idIndirizzo ai due sottomoduli valorizzandoli correttamente con i valori provenienti da "competenze"
+- OK ( OK Fabiola) Fix Dati Firmatario (tranne nome e cognome) non presenti quando coincidono con rappresentante legale
+- OK ( OK Fabiola/Patrizia) Importare nuovi template pdf (tranne dati riassuntivi)
