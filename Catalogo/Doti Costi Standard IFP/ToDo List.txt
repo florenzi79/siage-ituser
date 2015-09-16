@@ -19,6 +19,7 @@ LOW - (TODO .....) Aggiungere facility del firmatario su onchange del cf: popola
 - (WAIT Sopra) Restringere filtro ( o parametro in interrogazione gefo)  al recupero anagrafiche al OnChange del CF Partecipante, in modo che vengano recuperati corsi solo se esiste iscrizioni ad un corso dell'off formativa del bando nella sede IdSede del gruppo richiedente nel recupero dei corsi
 - (WAIT LISPA) Assegnare le security corrette al processo per l'istruttore
 - (WAIT LISPA) Assegnare le security corrette ai file _tmp
+HI - TODO  Sistemare avvisi modulo 1 in caso di atto unico già presentato
 
 ==========================
 GIA' FATTI
