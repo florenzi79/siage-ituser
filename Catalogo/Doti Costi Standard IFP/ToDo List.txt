@@ -4,38 +4,35 @@ TODO
 ===================
 
 HI - (TODO Marco) Erosione Fondo ==> Avviso + 2 controlli
-HI - (TODO .....) Aggiungere campi (nascosti) idQUalifica e idIndirizzo ai due sottomoduli valorizzandoli correttamente con i valori provenienti da "competenze"
-MEDIUM - (TODO .....) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
+HI - (TODO Marco) Fare screenshots per Lispa e richiedere il testo del messaggio che deve comparire quando l'atto unico è stato presentato.
+HI - (TODO Marco) Sollecitare dati di test usabili in gefo produzione CF Operatore, Indirizzo Sede, CF iscritti a corso nella sede IdSede
 HI - (TODO Fabiola / Patrizia) Importare nuovi template pdf
 HI - (TODO Fabiola) Aggiungere creazione CheckList (Istruttoria automatica) contemporaneamente alla protocollazione
-LOW (TODO ....) Abilitare controllo coerenza e firmatario documenti ricaricati nei DUE moduli documenti
-                NOTA: limita i test di protocollazione solo a chi può firmare un doc
-
-LOW - (TODO .....) Bloccare se CF destinatario non è presente in iscrizioni utilizzando (nuova) integrazione con GeFo
-LOW - (TODO .....) Facility di autocompilazione tutor mettendo solo CF, facendo query su pratiche già protocollate
-LOW - (TODO.....) 			aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
-HI - (TODO Fabiola) 		Fix Dati Firmatario (tranne nome e cognome) non presenti quando coincidono con rappresentante legale
-
-- (wait LISPA) 	controllo tutor anni esperienza (già aperto PA_021)
-HI - (TODO Marco )  Fare screenshots per Lispa e richiedere il testo del messaggio che deve comparire quando l'atto unico è stato presentato.
-LOW -(WAIT Aldo) Aggiungere controllo check digit dei CF con script in sviluppo da Aldo
-
-HI (Marco) Sollecitare dati di test usabili in gefo produzione CF Operatore, Indirizzo Sede, CF iscritti a corso nella sede IdSede
-Wait sopra - Restringere filtro ( o parametro in interrogazione gefo)  al recupero anagrafiche al OnChange del CF Partecipante, in modo che vengano recuperati corsi solo se esiste iscrizioni ad un corso dell'off formativa del bando nella sede IdSede del gruppo richiedente nel recupero dei corsi
+HI - (TODO Fabiola) Fix Dati Firmatario (tranne nome e cognome) non presenti quando coincidono con rappresentante legale
 HI - (TODO Fabiola) Protocollazione dote
 
+MEDIUM - (TODO .....) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
+
+LOW - (TODO .....) Abilitare controllo coerenza e firmatario documenti ricaricati nei DUE moduli documenti (NOTA: limita i test di protocollazione solo a chi può firmare un doc)
+LOW - (TODO .....) Bloccare se CF destinatario non è presente in iscrizioni utilizzando (nuova) integrazione con GeFo
+LOW - (TODO .....) Facility di autocompilazione tutor mettendo solo CF, facendo query su pratiche già protocollate
+LOW - (TODO .....) Aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
+- (WAIT Aldo) Aggiungere controllo check digit dei CF con script in sviluppo da Aldo
+- (WAIT LISPA) Controllo tutor anni esperienza (già aperto PA_021)
+- (WAIT Sopra) Restringere filtro ( o parametro in interrogazione gefo)  al recupero anagrafiche al OnChange del CF Partecipante, in modo che vengano recuperati corsi solo se esiste iscrizioni ad un corso dell'off formativa del bando nella sede IdSede del gruppo richiedente nel recupero dei corsi
 
 ==========================
 GIA' FATTI
 
-- ( Ok solo da riportare in PO ? ) gestione messaggio servizi di formazione
-- ( Ok ) titolo servizi di formazione tutto maiuscolo
-- ( Ok ) domanda di selezione corso tutta maiuscola
-- ( Ok ) aggiunta di un fieldset e un item per ricordare all'utente di selezionare il corso
-- ( Ok ) aggiustare il totale ore dei servizi (non devono essere somme)
-- OK ( OK Fabiola) idqualifica dentro il vettore competenze (servizi)
-- OK (TODO Marco) Calcolo Importo parametrico da tabella dei requisiti
+- ( Ok solo da riportare in PO ? ) Gestione messaggio servizi di formazione
+- ( Ok ) Titolo servizi di formazione tutto maiuscolo
+- ( Ok ) Domanda di selezione corso tutta maiuscola
+- ( Ok ) Aggiunta di un fieldset e un item per ricordare all'utente di selezionare il corso
+- ( Ok ) Aggiustare il totale ore dei servizi (non devono essere somme)
+- OK ( OK Fabiola) Idqualifica dentro il vettore competenze (servizi)
+- OK ( OK Marco) Calcolo Importo parametrico da tabella dei requisiti
 - OK ( OK Fabiola) Fare in modo che il sottomodulo riepilogo corsi contenga tutti i campi che sono presenti nell'elenco corsi valorizzati.
-- OK ( OK Fabiola) controllo obbligatorieta' selezione corso
-- OK ( OK Fabiola) cambiare il nome dei file
-- OK ( OK Fabiola) protocollazione atto unico
+- OK ( OK Fabiola) Controllo obbligatorieta' selezione corso
+- OK ( OK Fabiola) Cambiare il nome dei file
+- OK ( OK Fabiola) Protocollazione atto unico
+- OK ( OK Fabiola) Aggiungere campi (nascosti) idQUalifica e idIndirizzo ai due sottomoduli valorizzandoli correttamente con i valori provenienti da "competenze"
