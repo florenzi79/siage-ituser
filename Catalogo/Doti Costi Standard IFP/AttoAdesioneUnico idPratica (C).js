@@ -11,11 +11,14 @@ logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1")
 		var idFildsetDettagliAttoUnicoPresentato = 'b19c24e93a98431bbb1c5720807fcf2f'; // viene nascosto o mostrato a secondo che è stato o non è stato presentato l'atto di adesione unico
 		var idFildsetFirmatario = 'e681dd72e6e647d68429e9e6dab34be3';
 		var idFildsetDichiarazioni = '2089fc04d0294984b2f85cdbe3eda960';
+		var nomeBando ="Doti IeFP DDF I anni - (Nome strumento attuativo) wait chiusura  punto aperto PA_020";
+
 		var descrizioneBando ="wait chiusura  punto aperto PA_020 - inserire la descrizione del bando";
 
 	//**** VALORIZZAZIONE CAMPI dei DATI GENERICI
 		values.put('NumeroPratica', values.get('idPratica'));
 		values.put('Bando_Descrizione', descrizioneBando); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
+		values.put('Bando_Nome', nomeBando);
 		values.put('Bando_Annualita', annualita); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
 
 
