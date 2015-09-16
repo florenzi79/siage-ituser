@@ -14,7 +14,6 @@ LOW (TODO ....) Abilitare controllo coerenza e firmatario documenti ricaricati n
 LOW - (TODO .....) Bloccare se CF destinatario non è presente in iscrizioni utilizzando (nuova) integrazione con GeFo
 LOW - (TODO .....) Facility di autocompilazione tutor mettendo solo CF, facendo query su pratiche già protocollate
 LOW - (TODO.....) 			aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
-LOW - (TODO Fabiola) 		cambiare il nome dei file
 HI - (TODO Fabiola) 		Fix Dati Firmatario (tranne nome e cognome) non presenti quando coincidono con rappresentante legale
 
 - (wait LISPA) 	controllo tutor anni esperienza (già aperto PA_021)
@@ -22,19 +21,21 @@ HI - (TODO Marco )  Fare screenshots per Lispa e richiedere il testo del messagg
 LOW -(WAIT Aldo) Aggiungere controllo check digit dei CF con script in sviluppo da Aldo
 
 HI (Marco) Sollecitare dati di test usabili in gefo produzione CF Operatore, Indirizzo Sede, CF iscritti a corso nella sede IdSede
-Wait sopra - Restringere filtro ( o parametro in interrogazione gefo)  al recupero anagrafiche al OnChange del CF Partecipante, in modo che vengano recuperati corsi solo se esiste iscrizioni ad un corso dell'off formativa del bando nella sede IdSede del gruppo richiedente  
-            nel recupero dei corsi
+Wait sopra - Restringere filtro ( o parametro in interrogazione gefo)  al recupero anagrafiche al OnChange del CF Partecipante, in modo che vengano recuperati corsi solo se esiste iscrizioni ad un corso dell'off formativa del bando nella sede IdSede del gruppo richiedente nel recupero dei corsi
+HI - (TODO Fabiola) Protocollazione dote
 
 
 ==========================
 GIA' FATTI
 
-- ( Ok solo da riportare in PO ? ) 	gestione messaggio servizi di formazione
-- ( Ok )				 titolo servizi di formazione tutto maiuscolo
-- ( Ok solo da riportare in PO ? ) domanda di selezione corso tutta maiuscola
-- ( Ok solo da riportare in PO ? ) aggiunta di un fieldset e un item per ricordare all'utente di selezionare il corso
-- ( Ok solo da riportare in PO e gitHub ) aggiustare il totale ore dei servizi (non devono essere somme)
-- OK  - (TODO Fabiola) 	idqualifica dentro il vettore competenze (servizi)
+- ( Ok solo da riportare in PO ? ) gestione messaggio servizi di formazione
+- ( Ok ) titolo servizi di formazione tutto maiuscolo
+- ( Ok ) domanda di selezione corso tutta maiuscola
+- ( Ok ) aggiunta di un fieldset e un item per ricordare all'utente di selezionare il corso
+- ( Ok ) aggiustare il totale ore dei servizi (non devono essere somme)
+- OK ( OK Fabiola) idqualifica dentro il vettore competenze (servizi)
 - OK (TODO Marco) Calcolo Importo parametrico da tabella dei requisiti
 - OK ( OK Fabiola) Fare in modo che il sottomodulo riepilogo corsi contenga tutti i campi che sono presenti nell'elenco corsi valorizzati.
-- OK - (TODO Fabiola) controllo obbligatorieta' selezione corso
+- OK ( OK Fabiola) controllo obbligatorieta' selezione corso
+- OK ( OK Fabiola) cambiare il nome dei file
+- OK ( OK Fabiola) protocollazione atto unico
