@@ -4,13 +4,11 @@ TODO
 ===================
 
 HI - (TODO Marco) Erosione Fondo ==> Avviso + 2 controlli
-HI - (TODO Marco) Fare screenshots per Lispa e richiedere il testo del messaggio che deve comparire quando l'atto unico è stato presentato.
-HI - (TODO Marco) Sollecitare dati di test usabili in gefo produzione CF Operatore, Indirizzo Sede, CF iscritti a corso nella sede IdSede
 HI - (TODO Fabiola / Patrizia) Importare nuovo template pdf dati riassuntivi
-HI - (TODO Fabiola) Aggiungere creazione CheckList (Istruttoria automatica) contemporaneamente alla protocollazione
-HI - (TODO Fabiola) Protocollazione dote
+HI - (TODO .....) Settare la security della checklist in modo da nasconderla al richiedente
 
 MEDIUM - (TODO .....) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
+MEDIUM - (TODO .....) Aggiungere operation per impostare la fase pratica a bozza eliminata
 
 LOW - (TODO .....) Abilitare controllo coerenza e firmatario documenti ricaricati nei DUE moduli documenti (NOTA: limita i test di protocollazione solo a chi può firmare un doc)
 LOW - (TODO .....) Bloccare se CF destinatario non è presente in iscrizioni utilizzando (nuova) integrazione con GeFo
@@ -25,7 +23,7 @@ LOW - (TODO .....) Aggiungere facility del firmatario su onchange del cf: popola
 ==========================
 GIA' FATTI
 
-- ( Ok solo da riportare in PO ? ) Gestione messaggio servizi di formazione
+- ( Ok ) Gestione messaggio servizi di formazione
 - ( Ok ) Titolo servizi di formazione tutto maiuscolo
 - ( Ok ) Domanda di selezione corso tutta maiuscola
 - ( Ok ) Aggiunta di un fieldset e un item per ricordare all'utente di selezionare il corso
@@ -36,6 +34,10 @@ GIA' FATTI
 - OK ( OK Fabiola) Controllo obbligatorieta' selezione corso
 - OK ( OK Fabiola) Cambiare il nome dei file
 - OK ( OK Fabiola) Protocollazione atto unico
+- OK ( OK Marco) Protocollazione dote
 - OK ( OK Fabiola) Aggiungere campi (nascosti) idQUalifica e idIndirizzo ai due sottomoduli valorizzandoli correttamente con i valori provenienti da "competenze"
 - OK ( OK Fabiola) Fix Dati Firmatario (tranne nome e cognome) non presenti quando coincidono con rappresentante legale
 - OK ( OK Fabiola/Patrizia) Importare nuovi template pdf (tranne dati riassuntivi)
+- OK ( OK Marco) Fare screenshots per Lispa e richiedere il testo del messaggio che deve comparire quando l'atto unico è stato presentato.
+- OK ( OK Marco) Sollecitare dati di test usabili in gefo produzione CF Operatore, Indirizzo Sede, CF iscritti a corso nella sede IdSede
+- OK ( OK Fabiola) Aggiungere creazione CheckList (Istruttoria automatica) contemporaneamente alla protocollazione
