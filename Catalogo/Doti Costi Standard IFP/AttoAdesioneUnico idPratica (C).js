@@ -580,6 +580,17 @@ mappaBudgetDDFIIIAnno={
 			 values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIIIAnno[idOperatore]);
 		 }
 
+		 var corsiDF = values.get('Bando_DotazioneFinCorsi_Iniziale')-values.get('Bando_DotazioneFinCorsi_Erosa');
+		 logger.info('FFFF corsiDF ' + corsiDF);
+		 var disabilitaDF = values.get('Bando_DotazioneFinDisabilita_Iniziale')-values.get('Bando_DotazioneFinDisabilita_Erosa');
+		 logger.info('FFFF disabilitaDF ' + disabilitaDF);
+		 var operatoreDF = values.get('Bando_DotazioneFinOperatore_Iniziale')-values.get('Bando_DotazioneFinOperatore_Erosa');
+		 logger.info('FFFF operatoreDF ' + operatoreDF);
+
+		 values.put('Bando_DotazioneFinCorsi_Rimanente',corsiDF);
+		 values.put('Bando_DotazioneFinDisabilita_Rimanente',disabilitaDF);
+		 values.put('Bando_DotazioneFinOperatore_Rimanente',operatoreDF);
+
 
 
 		 //TODO: Calcolare Dotazione finanziaria erosa per il singolo operatore
