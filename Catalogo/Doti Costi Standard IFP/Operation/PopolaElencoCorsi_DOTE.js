@@ -1,4 +1,4 @@
-print("\n************************************\n XXXXX INIZIO SCRIPT OPERATION PopolaElencoCorsi_DOTE\n************************************\n")
+print("\n************************************\n XXXXX INIZIO SCRIPT OPERATION PopolaElencoCorsi_DOTE\n************************************\n");
 //PopolaElencoCorsi_DOTE
 //if (!isEmpty('Partecipante_CodiceFiscale')) {
 //Svuota il sottomodulo ServiziFormazione_ElencoCorsi
@@ -83,9 +83,7 @@ if (true) {
 					"28|":"4600",
 					"39|":"4600",
 					"110|":"4600",
-					"819|":"4600",
-					"no|":"4600",
-					"no|":"4600"
+					"819|":"4600"
 	};
 
 		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 02\n");
@@ -177,6 +175,7 @@ if (true) {
 
             } else {
               print("XXXXX DOTI dati_estraiDettagliCorsi.result.get('iscrizioni')=null\n");
+//			  values.get('Avviso_ricercaEmpty').setHidden(false);
             }
             var a_idcorsoDC = dati_estraiDettagliCorsi.result.get('idcorso');
             if (a_idcorsoDC!==null) {
@@ -195,18 +194,20 @@ if (true) {
           }
           else {
           print("dati_estraiDettagliCorsi.result = null\n");
+//		  values.get('Avviso_ricercaEmpty').setHidden(false);
           }
       }
       else  {
         // l'integrazione con gefo ha problemi
         // TODO: Valorizzare una variabile per permettere un avviso nel modulo successivo e relativo blocco
-        print("\n XXXXX estraiDettagliCorsi non andato a buon fine -  \n")
+        print("\n XXXXX estraiDettagliCorsi non andato a buon fine -  \n");
+//		values.get('Avviso_ricercaEmpty').setHidden(false);
 
       }
     }
     catch(err) {
-      print("\n XXXXX CATCH  estraiDettagliCorsi non andato a buon fine -  \n")
-
+		print("\n XXXXX CATCH  estraiDettagliCorsi non andato a buon fine -  \n");
+//		values.get('Avviso_ricercaEmpty').setHidden(false);
     }
 
 
@@ -249,7 +250,7 @@ if (true) {
 */
     }
 }
-print("\n************************************\n XXXXX FINE SCRIPT OPERATION PopolaElencoCorsi_DOTE\n************************************\n")
+print("\n************************************\n XXXXX FINE SCRIPT OPERATION PopolaElencoCorsi_DOTE\n************************************\n");
 
 /*
  {datiAnagrafici={capdomicilio=23861, capresidenza=23861, codicefiscale=VLSSNO98S60E507L, cognome=VALSECCHI, datanascita=20/11/1998, genere=F, indirizzodomicilio=SEGANTINI, 95, indirizzoresidenza=SEGANTINI, 95, comunedomicilio=097021, istatcomunenascita=097042, istatcomuneresidenza=097021, nome=SONIA},

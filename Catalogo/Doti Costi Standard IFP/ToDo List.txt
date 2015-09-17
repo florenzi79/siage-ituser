@@ -3,7 +3,20 @@ Attività Doti IFP
 TODO
 ===================
 
-HI - (TODO Marco) Erosione Fondo ==> Avviso + 2 controlli
+TODO Chiedere chiarimenti: la soglia dell'età non definita per bandi II e III anni. Non c'è o è sempre 21 anni ?
+HI - (TODO Marco) Aggiungere avvisi e 2 controlli per Erosione Fondo Globale (già calcolato)
+TODO:(Marco) Calcolare Dotazione finanziaria erosa per il singolo operatore ( riga 563 script AttoAdesioneUnico idPratica (C).js )
+HI - (TODO Marco) Aggiungere avvisi e 2 controlli per erosione budget per singolo operatore
+HI -  TODO DDF I Anno -query e Controllo Numero massimo di doti per ID corso:  25
+HI -  TODO Se dote: Verificare accreditamento SEDE (oltre a operatore) all'inizio e prima della protocollazione
+HI    TODO CONTROLLO Verifica su residenza in lombardia
+      Se lo studente non è residente in Lombardia, per poter richiedere la dote, il domicilio dovrà coincidere con la sede dell’operatore che presenta la dote e che ha il convitto (regione fornisce un elenco, lista statica).
+TODO CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo
+TODO AVVISO e Blocco  in caso di problemi nella leggi istcrizioni (per l'anagrafica) e leggi elenco corsi
+CONTROLLO Parametrico sul bando vedi PA_016 Età destinatario
+
+HI - (TODO ... ) Parametizzazione o cancellazione titolo di studio sheet tabtit_istruzione
+
 HI - (TODO Fabiola / Patrizia) Importare nuovo template pdf dati riassuntivi
 HI - (TODO .....) Settare la security della checklist in modo da nasconderla al richiedente
 
@@ -15,11 +28,20 @@ LOW - (TODO .....) Bloccare se CF destinatario non è presente in iscrizioni uti
 LOW - (TODO .....) Facility di autocompilazione tutor mettendo solo CF, facendo query su pratiche già protocollate
 LOW - (TODO .....) Aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
 - (WAIT Aldo) Aggiungere controllo check digit dei CF con script in sviluppo da Aldo
-- (WAIT LISPA) Controllo tutor anni esperienza (già aperto PA_021)
+- (WAIT LISPA) Controllo tutor anni esperienza (già aperto PA_021) (verificare se la ver 4.00 chiiude questo punto)
 - (WAIT Sopra) Restringere filtro ( o parametro in interrogazione gefo)  al recupero anagrafiche al OnChange del CF Partecipante, in modo che vengano recuperati corsi solo se esiste iscrizioni ad un corso dell'off formativa del bando nella sede IdSede del gruppo richiedente nel recupero dei corsi
 - (WAIT LISPA) Assegnare le security corrette al processo per l'istruttore
 - (WAIT LISPA) Assegnare le security corrette ai file _tmp
 HI - TODO  Sistemare avvisi modulo 1 in caso di atto unico già presentato
+TODO - Verificare baco: non è visibile "Comune/stato estero di nascita" del partecipante
+TODO - ServiziFormazione_DataConclusioneMax  Aggiungere script che popola tale campo con la data massima
+TODO - Capire perchè non viene visualizzato il fascicolo per pratiche protocollate.
+TODO - MEV Esperienza Tutor (Vedi Requisiti ver 4.00)
+  a. Modifica etichetta e tipo campo c42
+  b.      Definizione controlli campi c41 e c42
+
+TODO: Report come da requisiti ver 4.00
+
 
 ==========================
 GIA' FATTI

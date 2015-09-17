@@ -74,12 +74,13 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
       items.get('avviso_CfErrato').setHidden(true);
 			// chiamata a GeFo per compilare i restanti campi
       var offerteFormative = [];
+      logger.info("XXXXX Offerte Formative(prima): "+offerteFormative);
       var i=0;
       while (values.get('Bando_OfferteFormative['+i+']')!==null) {
         offerteFormative[i]=values.get('Bando_OfferteFormative['+i+']');
         i++;
       }
-      logger.info("XXXXX Offerte Formative: "+offerteFormative);
+      logger.info("XXXXX Offerte Formative(dopo): "+offerteFormative);
 			var dati_estraiStatoIscrizioni = estraiStatoIscrizioni(codiceFiscale,offerteFormative);
 
 			if (dati_estraiStatoIscrizioni.success) {
@@ -239,3 +240,4 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
       nascondiCampiDestinatario(true);
     }
 }
+clearModule('ServiziFormazione_RiepilogoServizi');

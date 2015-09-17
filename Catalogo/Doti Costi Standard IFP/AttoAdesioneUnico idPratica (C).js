@@ -6,23 +6,381 @@
 
 // PARAMETRI da valorizzare correttamente usando il CATALOGO
 		var nomeTemplate ="Doti IeFP DDF I anni"; // usato nella query per il check dell'atto unico
+		var catalogoNome ='Doti Costi Standard IFP' ;
+		var catalogoBando ='DDFIanni';
+//		var catalogoBando ='DDFIIanni';
+//		var catalogoBando ='DDFIIIanni';
+//		var catalogoBando ='DDFIVanni';
+//		var catalogoBando ='PPDIanni';
+//		var catalogoBando ='PPDIIIanni';
+
 		var annualita ="1";
+//		var annualita ="2";
+//		var annualita ="3";
+//		var annualita ="4";
 		//		var nomeTemplate ="TEST CATALOGO Dote IFP "; // temporaneo... per prova ********
 		var offerteFormative = ['048','120'];
 		// TODO: Inserire le offerte formative corrette
+
 		var idStatiAttoUnicoPresentato = "'859506c362764ba1a70277d1345e7cee','8c8999ca9712409f81b1f5c39ef2f052'";
+		var idStatiDotePresentata = "'4a8eb456b84549a895bd0e87a59e0b67','1629519c9d5f43d1bc8b6b036f4a4a8e'";
+
 		var idFildsetDettagliAttoUnicoPresentato = 'b19c24e93a98431bbb1c5720807fcf2f'; // viene nascosto o mostrato a secondo che è stato o non è stato presentato l'atto di adesione unico
+
 		var idFildsetFirmatario = 'e681dd72e6e647d68429e9e6dab34be3';
 		var idFildsetDichiarazioni = '2089fc04d0294984b2f85cdbe3eda960';
-		var nomeBando ="Doti IeFP DDF I anni - (Nome strumento attuativo) wait chiusura  punto aperto PA_020";
+		var nomeBando ="Dote DDIF I Anni 2015-2016";
+//		var nomeBando ="Dote DDIF II Anni 2015-2016";
+//		var nomeBando ="Dote DDIF III Anni 2015-2016";
+//		var nomeBando ="Dote IV anni 2015-2016";
 
 		var descrizioneBando ="wait chiusura  punto aperto PA_020 - inserire la descrizione del bando";
 
+		mappaDotazioneFinCorsi={
+			"DDFIanni":"59600000",
+			"DDFIIanni":"59300000",
+			"DDFIIIanni":"54100000",
+			"DDFIVanni":"19099998",
+			"PPDIanni":"2602500",
+			"PPDIIanni":"2617500",
+			"PPDIIIanni":"2775000"};
+
+		mappaDotazioneFinDisabilita={
+				"DDFIanni":"4648500",
+				"DDFIIanni":"4411700",
+				"DDFIIIanni":"3995955",
+				"DDFIVanni":"900000",
+				"PPDIanni":"0",
+				"PPDIIanni":"0",
+				"PPDIIIanni":"0"};
+
+				mappaBudgetDDFIAnno={
+				"158735":"1989000",
+				"127859":"236200",
+				"1710241":"144000",
+				"154877":"580800",
+				"136109":"490300",
+				"6372":"548200",
+				"122076":"1647400",
+				"1651219":"707000",
+				"6050":"822800",
+				"336317":"950800",
+				"5372":"665400",
+				"173938":"556500",
+				"577313":"317400",
+				"133537":"547400",
+				"151013":"164000",
+				"5671":"550800",
+				"277239":"136000",
+				"270955":"208000",
+				"6073":"1791800",
+				"221076":"1150200",
+				"270439":"517200",
+				"179057":"224000",
+				"211149":"358000",
+				"131315":"236000",
+				"182735":"86000",
+				"216010":"652200",
+				"5426":"2784800",
+				"271625":"195100",
+				"6124":"173700",
+				"967191":"211600",
+				"149134":"80000",
+				"261846":"253900",
+				"125110":"200000",
+				"267178":"64500",
+				"125089":"972600",
+				"221620":"64500",
+				"126372":"603900",
+				"15571":"154800",
+				"153060":"263800",
+				"171919":"2717500",
+				"1078883":"84700",
+				"15480":"1435000",
+				"3558":"141800",
+				"173624":"277200",
+				"168690":"296000",
+				"120655":"400200",
+				"163950":"233900",
+				"134547":"115000",
+				"167336":"146700",
+				"213042":"155600",
+				"127050":"342300",
+				"171134":"690200",
+				"15392":"1545100",
+				"133457":"103200",
+				"1113467":"298200",
+				"189562":"1333400",
+				"201384":"325100",
+				"244070":"477400",
+				"1103775":"170900",
+				"205692":"78200",
+				"149460":"174800",
+				"121645":"96600",
+				"240357":"0",
+				"928055":"316000",
+				"224810":"185200",
+				"1456914":"500600",
+				"120965":"568200",
+				"223271":"412700",
+				"5384":"4331100",
+				"157130":"151800",
+				"1598015":"91000",
+				"5498":"2928800",
+				"275740":"96600",
+				"6185":"211600",
+				"900283":"60000",
+				"1098085":"213000",
+				"1112381":"192100",
+				"134900":"716600",
+				"5324":"1611700",
+				"275827":"96600",
+				"174448":"160000",
+				"5438":"1267500",
+				"1604039":"1473000",
+				"365195":"172000",
+				"266008":"101200",
+				"125412":"220800",
+				"128613":"506000",
+				"1512303":"164000",
+				"226125":"477900",
+				"235979":"392000",
+				"122636":"69000",
+				"201870":"348000",
+				"267000":"929000",
+				"199965":"547400",
+				"122042":"151800",
+				"178087":"381000",
+				"152823":"92000",
+				"231256":"220800",
+				"269925":"110400",
+				"903097":"207000",
+				"238553":"337500"
+	};
+
+	mappaBudgetDDFIIAnno={
+		"158735":"1988400",
+		"127859":"236200",
+		"1710241":"140000",
+		"154877":"580800",
+		"136109":"486000",
+		"6372":"547900",
+		"122076":"1643100",
+		"1651219":"707000",
+		"6050":"822800",
+		"336317":"945900",
+		"5372":"665400",
+		"173938":"545500",
+		"577313":"317400",
+		"133537":"547400",
+		"151013":"164000",
+		"5671":"550800",
+		"277239":"136000",
+		"270955":"208000",
+		"6073":"1791800",
+		"221076":"1151400",
+		"270439":"517500",
+		"179057":"224000",
+		"211149":"358000",
+		"131315":"236000",
+		"182735":"86000",
+		"216010":"652200",
+		"5426":"2784800",
+		"271625":"195100",
+		"6124":"173700",
+		"967191":"211600",
+		"149134":"80000",
+		"261846":"253900",
+		"125110":"200000",
+		"267178":"64500",
+		"125089":"972600",
+		"221620":"64500",
+		"126372":"603000",
+		"15571":"154800",
+		"153060":"263800",
+		"171919":"2717800",
+		"1078883":"84700",
+		"15480":"1435000",
+		"3558":"141800",
+		"173624":"277200",
+		"168690":"296000",
+		"120655":"400200",
+		"163950":"234200",
+		"134547":"115000",
+		"167336":"146700",
+		"213042":"155600",
+		"127050":"342300",
+		"171134":"690200",
+		"15392":"1545100",
+		"133457":"103200",
+		"1113467":"298200",
+		"189562":"1333400",
+		"201384":"325100",
+		"244070":"477700",
+		"1103775":"170900",
+		"205692":"78200",
+		"149460":"174800",
+		"121645":"96600",
+		"240357":"0",
+		"928055":"316000",
+		"224810":"185200",
+		"1456914":"475100",
+		"120965":"568200",
+		"223271":"412100",
+		"5384":"4332000",
+		"157130":"151800",
+		"1598015":"91000",
+		"5498":"2927000",
+		"275740":"96600",
+		"6185":"211600",
+		"900283":"60000",
+		"1098085":"213600",
+		"1112381":"192100",
+		"134900":"716600",
+		"5324":"1611700",
+		"275827":"96600",
+		"174448":"160000",
+		"5438":"1268100",
+		"1604039":"1473000",
+		"365195":"172000",
+		"266008":"101200",
+		"125412":"220800",
+		"128613":"501400",
+		"1512303":"164000",
+		"226125":"477300",
+		"235979":"392000",
+		"122636":"69000",
+		"201870":"348000",
+		"267000":"929000",
+		"199965":"547400",
+		"122042":"151800",
+		"178087":"381300",
+		"152823":"87400",
+		"231256":"220800",
+		"269925":"110400",
+		"903097":"207000",
+		"238553":"337500"
+};
+mappaBudgetDDFIIIAnno={
+	"158735":"1951965",
+	"127859":"213180",
+	"1710241":"125400",
+	"154877":"526205",
+	"136109":"394820",
+	"6372":"411730",
+	"122076":"1517625",
+	"1651219":"614175",
+	"6050":"743755",
+	"336317":"855475",
+	"5372":"621870",
+	"173938":"507585",
+	"577313":"257830",
+	"133537":"511290",
+	"151013":"159600",
+	"5671":"442510",
+	"277239":"102600",
+	"270955":"201400",
+	"6073":"1717505",
+	"221076":"1009755",
+	"270439":"517275",
+	"179057":"182400",
+	"211149":"357010",
+	"131315":"197600",
+	"182735":"65360",
+	"216010":"615030",
+	"5426":"2648695",
+	"271625":"148390",
+	"6124":"152475",
+	"967191":"192280",
+	"149134":"45600",
+	"261846":"183730",
+	"125110":"167200",
+	"267178":"36765",
+	"125089":"967670",
+	"221620":"44935",
+	"126372":"498940",
+	"15571":"151145",
+	"153060":"245955",
+	"171919":"2467530",
+	"1078883":"76095",
+	"15480":"1326580",
+	"3558":"93480",
+	"173624":"271510",
+	"168690":"243200",
+	"120655":"358340",
+	"163950":"174895",
+	"134547":"83030",
+	"167336":"69920",
+	"213042":"138510",
+	"127050":"319865",
+	"171134":"631275",
+	"15392":"1493590",
+	"133457":"98040",
+	"1113467":"211470",
+	"189562":"1318030",
+	"201384":"259160",
+	"244070":"447450",
+	"1103775":"162355",
+	"205692":"48070",
+	"149460":"214130",
+	"121645":"83030",
+	"240357":"61180",
+	"928055":"269800",
+	"224810":"121220",
+	"1456914":"473955",
+	"120965":"563350",
+	"223271":"378670",
+	"5384":"4002825",
+	"157130":"131100",
+	"1598015":"71250",
+	"5498":"2728115",
+	"275740":"96140",
+	"6185":"209760",
+	"900283":"0",
+	"1098085":"188100",
+	"1112381":"186390",
+	"134900":"620255",
+	"5324":"1560850",
+	"275827":"91770",
+	"174448":"148200",
+	"5438":"1152730",
+	"1604039":"1287440",
+	"365195":"144400",
+	"266008":"96140",
+	"125412":"218500",
+	"128613":"450110",
+	"1512303":"155800",
+	"226125":"404130",
+	"235979":"353400",
+	"122636":"38000",
+	"201870":"247000",
+	"267000":"774250",
+	"199965":"541880",
+	"122042":"131100",
+	"178087":"366700",
+	"152823":"109250",
+	"231256":"218500",
+	"269925":"100510",
+	"903097":"205390",
+	"238553":"311600"
+
+};
+// mappaBudgetDDFIAnno
+// mappaBudgetDDFIIAnno
+// mappaBudgetDDFIIIAnno
+
+
+
 	//**** VALORIZZAZIONE CAMPI dei DATI GENERICI
 		values.put('NumeroPratica', values.get('idPratica'));
-		values.put('Bando_Descrizione', descrizioneBando); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
+		values.put('Bando_Descrizione', descrizioneBando);
 		values.put('Bando_Nome', nomeBando);
-		values.put('Bando_Annualita', annualita); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
+		values.put('Bando_Annualita', annualita);
+		values.put('CatalogoNome', catalogoNome);
+		values.put('CatalogoBando', catalogoBando);
+
+		values.put('Bando_DotazioneFinCorsi_Iniziale',''+mappaDotazioneFinCorsi[catalogoBando]);
+		values.put('Bando_DotazioneFinDisabilita_Iniziale',''+mappaDotazioneFinDisabilita[catalogoBando]);
 
 
 		var i=0;
@@ -90,7 +448,7 @@
 						values.put('Richiedente_OperatoreAccreditato','true');
 						items.get('Avviso_NoRequisitiAttoUnico').setHidden(true);
 				} else {
-						logger.info('XXXXXXXX  Ente NON Accreditato - Visualizzo avviso 01');
+						logger.info('XXXXXXXX  Operatore NON Accreditato - Visualizzo avviso 01');
 						values.put('Richiedente_OperatoreAccreditato','false');
 						items.get('Avviso_NoRequisitiAttoUnico').setHidden(false);
 				}
@@ -152,6 +510,60 @@
 			} else {
 					logger.info("\n\n\n\n\nErrore su recuperaSedePratica: " + result_SedePratica.message + "\n\n\n\n\n");
 			}
+	   // verifiche dotazioni finanziarie
+		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 1");
+		 var sql_dotazioneFinCorsi_Erosa =   " select nvl(sum(to_number(DAT_VL, '999999999999999999999.9999999999999999999999999')),0) as IMPORTO_EROGATO_CORSI   " +
+		 																		 " from ag_sm_data_entries data_entries "+
+																				 " where "+
+																				 " dat_pth = 'ServiziFormazione_ImportoTotaleCorsi'     "+
+																				 " and fk_id in"+
+																				 " ( select sm_id  FROM ag_sm_instances inst "+
+																				 " WHERE "+
+																				 " inst.sm_tmpl_dn = '"+nomeTemplate+"' "+
+																				 " and inst.current_state in ("+idStatiDotePresentata+")) ";
+		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 2");
+
+		 var sql_dotazioneFinDisabilita_Erosa = "select nvl(sum(to_number(DAT_VL, '999999999999999999999.9999999999999999999999999')),0) as IMPORTO_EROGATO_Disabilita   " +
+		 																		 " from ag_sm_data_entries data_entries "+
+																				 " where "+
+																				 " dat_pth = 'ServiziFormazione_ImportoTotaleDisabilita'"+
+																				 " and fk_id in"+
+																				 " ( select sm_id  FROM ag_sm_instances inst"+
+																				 " WHERE "+
+																				 " inst.sm_tmpl_dn = '"+nomeTemplate+"' "+
+																				 " and inst.current_state in ("+idStatiDotePresentata+"))";
+
+     logger.info("XXXXX DOTI - sql_dotazioneFinCorsi_Erosa:"+sql_dotazioneFinCorsi_Erosa);
+		 logger.info("XXXXX DOTI - sql_dotazioneFinDisabilita_Erosa:"+sql_dotazioneFinDisabilita_Erosa);
+		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 3");
+
+		 var dotazioneFinCorsi_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinCorsi_Erosa);
+		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria Corsi:"+dotazioneFinCorsi_Erosa);
+		 values.put('Bando_DotazioneFinCorsi_Erosa',''+dotazioneFinCorsi_Erosa);
+
+		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 4");
+
+		 var dotazioneFinDisabilita_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinDisabilita_Erosa);
+		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria Disabilita:"+dotazioneFinDisabilita_Erosa);
+		 values.put('Bando_DotazioneFinDisabilita_Erosa',''+dotazioneFinDisabilita_Erosa);
+
+		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 5 FINE");
+
+		 var idOperatore = values.get('Richiedente_IdOperatore');
+		 if (catalogoBando ='DDFIanni') {
+			 	values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIAnno[idOperatore]);
+		 } else if (catalogoBando ='DDFIIanni') {
+			 values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIIAnno[idOperatore]);
+		 }else if (catalogoBando ='DDFIIIanni') {
+			 values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIIIAnno[idOperatore]);
+		 }
+
+
+
+		 //TODO: Calcolare Dotazione finanziaria erosa per il singolo operatore
+
+
+
 		} // fine if I am in stato 1
 		else { // se non sono in stato 1
 			items.get('Avviso_NoRequisitiAttoUnico').setHidden(true);
@@ -291,57 +703,6 @@
 	idItemDichiarazioni = items.get('Dichiaraz_0013'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 
 
-
-
-// TODO MARCO SCOTTI -  verificare da qui in avanti......
-/*
-  // Mostro avviso solo se ente La dotazione finanziaria per la linea di intervento relativa A o B  è terminata
-		{
-			  var sqlLineaA=""+
-			"   select nvl(sum(to_number(DAT_VL, '999999999999999999999.9999999999999999999999999')),0) as IMPORTO_EROGATO" +
-			"     from ag_sm_data_entries data_entries                                                                                                                                                              " +
-			"     where                                                                                                                                                                                                                       " +
-			"      dat_pth = 'SintesiServizi_TotaleImporti_LineaA'                                                                                                                                               " +
-			"      and fk_id in                                                                                                                                                                                                             " +
-			"      (                                                                                                                                                                                                                                " +
-			"      select sm_id  FROM ag_sm_instances inst                                                                                                                                                       " +
-			"     WHERE                                                                                                                                                                                                                    " +
-			"       inst.sm_tmpl_dn = 'Dote Apprendistato art 3'                                                                                                                                                    " +
-    		"       and  inst.current_state in ('1629519c9d5f43d1bc8b6b036f4a4a8e','4a8eb456b84549a895bd0e87a59e0b67')                                   " +
-			"      )                                                                                                                                                                                                                                 " +
-			"";
-
-			var sqlLineaB=""+
-			"   select nvl(sum(to_number(DAT_VL, '999999999999999999999.9999999999999999999999999')),0) as IMPORTO_EROGATO " +
-			"     from ag_sm_data_entries data_entries                                                                                                                                                              " +
-			"     where                                                                                                                                                                                                                       " +
-			"      dat_pth = 'SintesiServizi_TotaleImporti_LineaB'                                                                                                                                               " +
-			"      and fk_id in                                                                                                                                                                                                             " +
-			"      (                                                                                                                                                                                                                                " +
-			"      select sm_id  FROM ag_sm_instances inst                                                                                                                                                       " +
-			"     WHERE                                                                                                                                                                                                                    " +
-			"       inst.sm_tmpl_dn = 'Dote Apprendistato art 3'                                                                                                                                                    " +
-    		"       and  inst.current_state in ('1629519c9d5f43d1bc8b6b036f4a4a8e','4a8eb456b84549a895bd0e87a59e0b67')                                   " +
-			"      )                                                                                                                                                                                                                                 " +
-			"";
-
-				var ImportoErogatoLineaA = dizionarioService.getSingle(null, sqlLineaA);
-				var ImportoErogatoLineaB = dizionarioService.getSingle(null, sqlLineaB);
-
-				if (ImportoErogatoLineaA >= 3800000 ) {
-						items.get('Avviso_03').setHidden(false);
-				} else {
-						items.get('Avviso_03').setHidden(true);
-				}
-				if (ImportoErogatoLineaB >= 4800000 ) {
-						items.get('Avviso_04').setHidden(false);
-				} else {
-						items.get('Avviso_04').setHidden(true);
-				}
-
-		}
-
-*/
 logger.info("XXXXXMMMMM DOTE IFP: FINE Script ONLOAD su IdPratica - Modulo 1");
 
 	}  // fine if iamInRoot() e sono nel modulo 1
