@@ -3,9 +3,9 @@ Attività Doti IFP
 TODO
 ===================
 
-
+HI - (TOOO Marco) Sistema re Aualifiche aggiornate da Bettiga con relativa nuova logica di ricerca (vedi appunti su quadernone)
 HI - (TODO Marco) Aggiungere avvisi e 2 controlli per Erosione Fondo Globale (già calcolato)
-HI - (TODO Marco) Calcolare Dotazione finanziaria erosa per il singolo operatore ( riga 563 script AttoAdesioneUnico idPratica (C).js )
+
 HI - (TODO Marco) Aggiungere avvisi e 2 controlli per erosione budget per singolo operatore
 HI - (TODO Marco CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo
 HI - (TODO Marco) DDF I Anno -query e Controllo Numero massimo di doti per ID corso:  25 e numero massimo di disabili per ID Corso
@@ -82,3 +82,4 @@ GIA' FATTI
 - ( OK Marco) Sollecitare dati di test usabili in gefo produzione CF Operatore, Indirizzo Sede, CF iscritti a corso nella sede IdSede
 - ( OK Fabiola) Aggiungere creazione CheckList (Istruttoria automatica) contemporaneamente alla protocollazione
 - ( OK Marco) Chiedere chiarimenti: la soglia dell'età non definita per bandi II e III anni. Non c'è o è sempre 21 anni ?
+- ( OK Marco) Calcolare Dotazione finanziaria erosa per il singolo operatore ( riga 563 script AttoAdesioneUnico idPratica (C).js )

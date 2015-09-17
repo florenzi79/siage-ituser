@@ -555,6 +555,39 @@ mappaBudgetDDFIIIAnno={
 																				 " inst.sm_tmpl_dn = '"+nomeTemplate+"' "+
 																				 " and inst.current_state in ("+idStatiDotePresentata+"))";
 
+     var sql_dotazioneFinCorsiOperatore_Erosa =
+																				 " Select sum(IMPORTO) from 																																		"+
+																					" (																																												"+
+																					"   SELECT TO_NUMBER (IMPORTO.DAT_VL) as IMPORTO                                                                                          "+
+																					"   FROM                                                                                                                                                                     "+
+																					"     (SELECT sm_id                                                                                                                                                     "+
+																					"     FROM ag_sm_instances inst                                                                                                                                   "+
+																					"     WHERE inst.sm_tmpl_dn   = '"+nomeTemplate+"'                                                                                                  "+
+																					"     AND inst.current_state IN ("+idStatiDotePresentata+")                         "+
+																					"     ) I                                                                                                                                                                          "+
+																					"   LEFT OUTER JOIN                                                                                                                                                   "+
+																					"     (SELECT FK_ID,                                                                                                                                                    "+
+																					"       DAT_VL                                                                                                                                                               "+
+																					"     FROM ag_sm_data_entries data_entries                                                                                                                   "+
+																					"     WHERE dat_pth = 'ServiziFormazione_ImportoTotaleCorsi'                                                                                        "+
+																					"     ) IMPORTO                                                                                                                                                             "+
+																					"   ON I.sm_id= IMPORTO.fk_id                                                                                                                                      "+
+																					"   LEFT OUTER JOIN                                                                                                                                                    "+
+																					"     (SELECT FK_ID,                                                                                                                                                     "+
+																					"       DAT_VL                                                                                                                                                                "+
+																					"     FROM ag_sm_data_entries data_entries                                                                                                                    "+
+																					"     WHERE dat_pth = 'Richiedente_IdOperatore'                                                                                                             "+
+																					"     ) ID_OPERATORE                                                                                                                                                   "+
+																					"   ON I.sm_id            = ID_OPERATORE.fk_id                                                                                                                "+
+																					"   WHERE IMPORTO.dat_VL IS NOT NULL                                                                                                                     "+
+																					"   AND ID_OPERATORE.DAT_VL ='"+idOperatore+"'                                                                                                                     "+
+																					"   UNION ALL                                                                                                                                                                "+
+																					"   Select 0 as IMPORTO from dual                                                                                                                                  "+
+																					"  )                                                                                                                                                                                 "+
+																					"                                                                                                                                                                                    "
+																					;
+
+
      logger.info("XXXXX DOTI - sql_dotazioneFinCorsi_Erosa:"+sql_dotazioneFinCorsi_Erosa);
 		 logger.info("XXXXX DOTI - sql_dotazioneFinDisabilita_Erosa:"+sql_dotazioneFinDisabilita_Erosa);
 		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 3");
@@ -569,6 +602,11 @@ mappaBudgetDDFIIIAnno={
 		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria Disabilita:"+dotazioneFinDisabilita_Erosa);
 		 values.put('Bando_DotazioneFinDisabilita_Erosa',''+dotazioneFinDisabilita_Erosa);
 
+ 		 var dotazioneFinCorsiOperatore_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinCorsiOperatore_Erosa);
+ 		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria Disabilita:"+dotazioneFinCorsiOperatore_Erosa);
+ 		 values.put('Bando_DotazioneFinOperatore_Erosa',''+dotazioneFinCorsiOperatore_Erosa);
+
+
 		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 5 FINE");
 
 		 var idOperatore = values.get('Richiedente_IdOperatore');
@@ -580,17 +618,16 @@ mappaBudgetDDFIIIAnno={
 			 values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIIIAnno[idOperatore]);
 		 }
 
-		 var corsiDF = values.get('Bando_DotazioneFinCorsi_Iniziale')-values.get('Bando_DotazioneFinCorsi_Erosa');
+		 var corsiDF = parseFloat(values.get('Bando_DotazioneFinCorsi_Iniziale'))-parseFloat(values.get('Bando_DotazioneFinCorsi_Erosa'));
 		 logger.info('FFFF corsiDF ' + corsiDF);
-		 var disabilitaDF = values.get('Bando_DotazioneFinDisabilita_Iniziale')-values.get('Bando_DotazioneFinDisabilita_Erosa');
+		 var disabilitaDF = parseFloat(values.get('Bando_DotazioneFinDisabilita_Iniziale'))-parseFloat(values.get('Bando_DotazioneFinDisabilita_Erosa'));
 		 logger.info('FFFF disabilitaDF ' + disabilitaDF);
-		 var operatoreDF = values.get('Bando_DotazioneFinOperatore_Iniziale')-values.get('Bando_DotazioneFinOperatore_Erosa');
+		 var operatoreDF = parseFloat(values.get('Bando_DotazioneFinOperatore_Iniziale'))-parseFloat(values.get('Bando_DotazioneFinOperatore_Erosa'));
 		 logger.info('FFFF operatoreDF ' + operatoreDF);
 
-		 values.put('Bando_DotazioneFinCorsi_Rimanente',corsiDF);
-		 values.put('Bando_DotazioneFinDisabilita_Rimanente',disabilitaDF);
-		 values.put('Bando_DotazioneFinOperatore_Rimanente',operatoreDF);
-
+		 values.put('Bando_DotazioneFinCorsi_Rimanente',''+corsiDF);
+		 values.put('Bando_DotazioneFinDisabilita_Rimanente',''+disabilitaDF);
+		 values.put('Bando_DotazioneFinOperatore_Rimanente',''+operatoreDF);
 
 
 		 //TODO: Calcolare Dotazione finanziaria erosa per il singolo operatore
