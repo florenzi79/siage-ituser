@@ -507,9 +507,31 @@ mappaBudgetDDFIIIAnno={
 					values.put('Richiedente_SedeOperativa_Provincia',istatComuneP.substr(0, 3));
 					values.put('Richiedente_SedeOperativa_ProvinciaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_SedeOperativa_Provincia')));
 
+					// verifica accreditamento sede
+					var idSedePratica = values.get('Richiedente_IdSede');
+					var result_AccrSedeSezA = verificaAccreditamentoSedeFormazioneSezioneA(idSedePratica);
+					if (result_AccrSedeSezA.success) {
+						var is_AccrSedeSezA=result_AccrSedeSezA.result;
+						logger.info("XXXXX Test-Integrazione-GEFO: m_AccrSedeSezA: "+ is_AccrSedeSezA);
+						if (is_AccrSedeSezA) {
+							values.put('Richiedente_SedeOperativaAccrSezA','true')
+						} else {
+							values.put('Richiedente_SedeOperativaAccrSezA','false')
+						}
+
+					}
+					else { // interrogazione gefo accreditamento Sede non andata a buon fine
+						logger.info("XXXXX interrogazione gefo accreditamento Sede non andata a buon fine");
+					}
+					// fine verifica accreditamento sede
+
+
 			} else {
 					logger.info("\n\n\n\n\nErrore su recuperaSedePratica: " + result_SedePratica.message + "\n\n\n\n\n");
 			}
+
+
+
 	   // verifiche dotazioni finanziarie
 		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 1");
 		 var sql_dotazioneFinCorsi_Erosa =   " select nvl(sum(to_number(DAT_VL, '999999999999999999999.9999999999999999999999999')),0) as IMPORTO_EROGATO_CORSI   " +
