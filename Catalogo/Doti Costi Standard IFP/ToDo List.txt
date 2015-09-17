@@ -3,16 +3,18 @@ Attività Doti IFP
 TODO
 ===================
 
-HI - (TODO .....) Chiedere chiarimenti: la soglia dell'età non definita per bandi II e III anni. Non c'è o è sempre 21 anni ?
+
 HI - (TODO Marco) Aggiungere avvisi e 2 controlli per Erosione Fondo Globale (già calcolato)
 HI - (TODO Marco) Calcolare Dotazione finanziaria erosa per il singolo operatore ( riga 563 script AttoAdesioneUnico idPratica (C).js )
 HI - (TODO Marco) Aggiungere avvisi e 2 controlli per erosione budget per singolo operatore
-HI - (TODO .....) DDF I Anno -query e Controllo Numero massimo di doti per ID corso:  25
-HI - (TODO .....) Se dote: Verificare accreditamento SEDE (oltre a operatore) all'inizio e prima della protocollazione
+HI - (TODO Marco CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo
+HI - (TODO Marco) DDF I Anno -query e Controllo Numero massimo di doti per ID corso:  25 e numero massimo di disabili per ID Corso
+HI - (TODO .....) Se dote: Visualizzare avviso e creare controllo per accreditamento SEDE (oltre a operatore) al modulo 1e e prima della protocollazione.
 HI - (TODO .....) CONTROLLO Verifica su residenza in lombardia
                   Se lo studente non è residente in Lombardia, per poter richiedere la dote, il domicilio dovrà coincidere con la sede dell’operatore che presenta la dote e che ha il convitto (regione fornisce un elenco, lista statica).
-HI - (TODO .....) CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo
-HI - (TODO .....) AVVISO e Blocco  in caso di problemi nella leggi istcrizioni (per l'anagrafica) e leggi elenco corsi
+
+
+HI - (TODO .....) AVVISO e Blocco  in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
 HI - (TODO .....) CONTROLLO Parametrico sul bando vedi PA_016 Età destinatario
 HI - (TODO .....) Parametizzazione o cancellazione titolo di studio sheet tabtit_istruzione
 HI - (TODO Fabiola / Patrizia) Importare nuovo template pdf dati riassuntivi
@@ -29,6 +31,7 @@ HI - (TODO .....) Modificare il messaggio di avviso nella prima schermata: "E' p
 				  messaggio di errore)
 HI - (TODO .....) Verificare che i controlli specificati nell'info bandi siano stati tutti inseriti
 HI - (TODO .....) Aggiungere il controllo, all'onchange del codice fiscale del destinatario, che abbia iscrizioni sulla sede selezionata
+
 
 MEDIUM - (TODO .....) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
 MEDIUM - (TODO .....) Aggiungere operation per impostare la fase pratica a bozza eliminata
@@ -78,3 +81,4 @@ GIA' FATTI
 - ( OK Marco) Fare screenshots per Lispa e richiedere il testo del messaggio che deve comparire quando l'atto unico è stato presentato.
 - ( OK Marco) Sollecitare dati di test usabili in gefo produzione CF Operatore, Indirizzo Sede, CF iscritti a corso nella sede IdSede
 - ( OK Fabiola) Aggiungere creazione CheckList (Istruttoria automatica) contemporaneamente alla protocollazione
+- ( OK Marco) Chiedere chiarimenti: la soglia dell'età non definita per bandi II e III anni. Non c'è o è sempre 21 anni ?
