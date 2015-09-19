@@ -1,57 +1,105 @@
+function nascondiFieldsetPrincipali(valore) {
+	// NASCONDI fieldsets e ITEMS per la raccolta dati atto unico
+	fieldsets.get(idFildsetFirmatario).setHidden(valore);
+	fieldsets.get(idFildsetDichiarazioni).setHidden(valore);
+	fieldsets.get(idFildsetDettagliAttoUnicoPresentato).setHidden(valore);
+
+}
 {
+	var catalogoBando ='DDFIanni';
+//		var catalogoBando ='DDFIIanni' ;
+//		var catalogoBando ='DDFIIIanni';
+//		var catalogoBando ='DDFIVanni' ;
+//		var catalogoBando ='PPDIanni'  ;
+//		var catalogoBando ='PPDIIanni'  ;
+//		var catalogoBando ='PPDIIIanni';
+
+
+	var idStatiAttoUnicoPresentato = "'859506c362764ba1a70277d1345e7cee','8c8999ca9712409f81b1f5c39ef2f052'";
+	var idStatiDotePresentata = "'4a8eb456b84549a895bd0e87a59e0b67','1629519c9d5f43d1bc8b6b036f4a4a8e'";
+	var idFildsetDettagliAttoUnicoPresentato = 'b19c24e93a98431bbb1c5720807fcf2f'; // viene nascosto o mostrato a secondo che è stato o non è stato presentato l'atto di adesione unico
+	var idFildsetFirmatario = 'e681dd72e6e647d68429e9e6dab34be3';
+	var idFildsetDichiarazioni = '2089fc04d0294984b2f85cdbe3eda960';
+
 	var idStato1 = '19358b018f8746de8b6e325b1cadd945';
 	var iamInStato1 = (instance.getCurrentState() == idStato1);
 	if (iamInRoot())  {
 		logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1");
 
 // PARAMETRI da valorizzare correttamente usando il CATALOGO
-		var nomeTemplate ="Doti IeFP DDF I anni"; // usato nella query per il check dell'atto unico
 		var catalogoNome ='Doti Costi Standard IFP' ;
-		var catalogoBando ='DDFIanni';
-//		var catalogoBando ='DDFIIanni';
-//		var catalogoBando ='DDFIIIanni';
-//		var catalogoBando ='DDFIVanni';
-//		var catalogoBando ='PPDIanni';
-//		var catalogoBando ='PPDIIIanni';
 
-		var annualita ="1";
-//		var annualita ="2";
-//		var annualita ="3";
-//		var annualita ="4";
-		//		var nomeTemplate ="TEST CATALOGO Dote IFP "; // temporaneo... per prova ********
-		var offerteFormative = ['048','120'];
-		// TODO: Inserire le offerte formative corrette
 
-		var idStatiAttoUnicoPresentato = "'859506c362764ba1a70277d1345e7cee','8c8999ca9712409f81b1f5c39ef2f052'";
-		var idStatiDotePresentata = "'4a8eb456b84549a895bd0e87a59e0b67','1629519c9d5f43d1bc8b6b036f4a4a8e'";
+		mappaNomeTemplate={  // usato nelle where condition delle query
+			"DDFIanni"  :"DDF I anni",
+			"DDFIIanni" :"DDF II anni",
+			"DDFIIIanni":"DDF III anni",
+			"DDFIVanni" :"DDF IV anni",
+			"PPDIanni"  :"Percorsi Personalizzati Disabili I anni",
+			"PPDIIanni" :"Percorsi Personalizzati Disabili II anni",
+			"PPDIIIanni":"Percorsi Personalizzati Disabili III anni"};
+	var nomeTemplate = mappaNomeTemplate[catalogoBando];
+	//	 nomeTemplate ="TEST CATALOGO Dote IFP "; // usato solo su ***.81***
+	// 	 nomeTemplate ="Doti IeFP DDF I anni";    // usato solo su ***.81***
 
-		var idFildsetDettagliAttoUnicoPresentato = 'b19c24e93a98431bbb1c5720807fcf2f'; // viene nascosto o mostrato a secondo che è stato o non è stato presentato l'atto di adesione unico
+			mappaAnnualita={
+				"DDFIanni"  :"1",
+				"DDFIIanni" :"2",
+				"DDFIIIanni":"3",
+				"DDFIVanni" :"4",
+				"PPDIanni"  :"1",
+				"PPDIIanni" :"2",
+				"PPDIIIanni":"3"};
+		var annualita = mappaAnnualita[catalogoBando];
 
-		var idFildsetFirmatario = 'e681dd72e6e647d68429e9e6dab34be3';
-		var idFildsetDichiarazioni = '2089fc04d0294984b2f85cdbe3eda960';
-		var nomeBando ="Dote DDIF I Anni 2015-2016";
-//		var nomeBando ="Dote DDIF II Anni 2015-2016";
-//		var nomeBando ="Dote DDIF III Anni 2015-2016";
-//		var nomeBando ="Dote IV anni 2015-2016";
+		//var offerteFormative = ['161'];
+		//var offerteFormative = ['048','120'];  // usato solo su ***.81***
 
-		var descrizioneBando ="wait chiusura  punto aperto PA_020 - inserire la descrizione del bando";
+		var offerteFormative = [];
+		if (catalogoBando=='DDFIanni'  ) {offerteFormative = ['161']; }
+		if (catalogoBando=='DDFIIanni' ) {offerteFormative = ['121']; }
+		if (catalogoBando=='DDFIIIanni') {offerteFormative = ['087']; }
+		if (catalogoBando=='DDFIVanni' ) {offerteFormative = ['163']; }
+		if (catalogoBando=='PPDIanni'  ) {offerteFormative = ['162']; }
+		if (catalogoBando=='PPDIIanni' ) {offerteFormative = ['122']; }
+		if (catalogoBando=='PPDIIIanni') {offerteFormative = ['188']; }
+
+		mappaNomeBando={
+			"DDFIanni"  :"DOTE DDIF I ANNI 2015-2016",
+			"DDFIIanni" :"DOTE DDIF II ANNI 2015-2016",
+			"DDFIIIanni":"DOTE DDIF III ANNI 2015-2016",
+			"DDFIVanni" :"DOTE IV ANNI 2015-2016",
+			"PPDIanni"  :"I ANNI - PERCORSI PERSONALIZZATI PER ALLIEVI DISABILI ANNO FORMATIVO 2015-2016",
+			"PPDIIanni" :"II ANNI - PERCORSI PERSONALIZZATI PER ALLIEVI DISABILI ANNO FORMATIVO 2015-2016",
+			"PPDIIIanni":"III ANNI - PERCORSI PERSONALIZZATI PER ALLIEVI DISABILI ANNO FORMATIVO 2015-2016"};
+		var nomeBando =mappaNomeBando[catalogoBando];
+
+		mappaDescrizioneBando={
+			"DDFIanni"  :"wait chiusura  punto aperto PA_020 - inserire la descrizione del bando",
+			"DDFIIanni" :"wait chiusura  punto aperto PA_020 - inserire la descrizione del bando",
+			"DDFIIIanni":"wait chiusura  punto aperto PA_020 - inserire la descrizione del bando",
+			"DDFIVanni" :"wait chiusura  punto aperto PA_020 - inserire la descrizione del bando",
+			"PPDIanni"  :"wait chiusura  punto aperto PA_020 - inserire la descrizione del bando",
+			"PPDIIanni" :"wait chiusura  punto aperto PA_020 - inserire la descrizione del bando",
+			"PPDIIIanni":"wait chiusura  punto aperto PA_020 - inserire la descrizione del bando"};
+		var descrizioneBando =mappaDescrizioneBando[catalogoBando];
 
 		mappaDotazioneFinCorsi={
-			"DDFIanni":"59600000",
-			"DDFIIanni":"59300000",
+			"DDFIanni"  :"59600000",
+			"DDFIIanni" :"59300000",
 			"DDFIIIanni":"54100000",
-			"DDFIVanni":"19099998",
-			"PPDIanni":"2602500",
-			"PPDIIanni":"2617500",
+			"DDFIVanni" :"19099998",
+			"PPDIanni"  :"2602500",
+			"PPDIIanni" :"2617500",
 			"PPDIIIanni":"2775000"};
 
 		mappaDotazioneFinDisabilita={
-				"DDFIanni":"4648500",
-				"DDFIIanni":"4411700",
+				"DDFIanni"  :"4648500",
+				"DDFIIanni" :"4411700",
 				"DDFIIIanni":"3995955",
-				"DDFIVanni":"900000",
-				"PPDIanni":"0",
-				"PPDIIanni":"0",
+				"DDFIVanni" :"900000",
+				"PPDIanni"  :"0",
+				"PPDIIanni" :"0",
 				"PPDIIIanni":"0"};
 
 				mappaBudgetDDFIAnno={
@@ -395,39 +443,45 @@ mappaBudgetDDFIIIAnno={
 			//**** LETTURA user
 			if (user.getProfiloQualificaCorrente().getCodiceNaturaGiuridicaSgProf() !== null) {
 			values.put( 'Richiedente_NaturaGiuridica', user.getProfiloQualificaCorrente().getCodiceNaturaGiuridicaSgProf());
+			logger.info("XXXXX Natura Giuridica ricavata : "+values.get( 'Richiedente_NaturaGiuridica'));
 			}
 
 			//**** LETTURA da SGPROF
 			var mappaValoriSgProf = ricercaProfiloSgProf(user);
-			if (mappaValoriSgProf != null) {
-				if((mappaValoriSgProf.get('AA037') != null )&&(isEmpty('Richiedente_Denominazione')))
+			if ((mappaValoriSgProf !== null) ) {
+				logger.info("XXXXX Lettura da SgProf - mappaValoriSgProf: "+mappaValoriSgProf);
+				if((mappaValoriSgProf.get('AA037') !== null )&&(isEmpty('Richiedente_Denominazione')))
 					values.put( 'Richiedente_Denominazione', mappaValoriSgProf.get('AA037').toString() );
-				if( mappaValoriSgProf.get('AA038') != null )
+				if( mappaValoriSgProf.get('AA038') !== null )
 					values.put( 'Richiedente_PartitaIva', mappaValoriSgProf.get('AA038').toString() );
-				if((mappaValoriSgProf.get('AA206') != null) && (isEmpty('Richiedente_CodiceFiscale')))
+				if((mappaValoriSgProf.get('AA206') !== null) && (isEmpty('Richiedente_CodiceFiscale')))
 					values.put( 'Richiedente_CodiceFiscale', mappaValoriSgProf.get('AA206').toString());
-				if((mappaValoriSgProf.get('AA062') != null)&& (isEmpty('Richiedente_SedeLegaleProvincia'))){
+				if((mappaValoriSgProf.get('AA062') !== null)&& (isEmpty('Richiedente_SedeLegaleProvincia'))){
 					values.put( 'Richiedente_SedeLegaleProvincia', mappaValoriSgProf.get('AA062').toString() );
 					values.put( 'Richiedente_SedeLegaleProvinciaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_SedeLegaleProvincia')) );
 				}
-				if((mappaValoriSgProf.get('AA061')!= null)&&(isEmpty('Richiedente_SedeLegaleComune'))) {
+				if((mappaValoriSgProf.get('AA061')!== null)&&(isEmpty('Richiedente_SedeLegaleComune'))) {
 					values.put( 'Richiedente_SedeLegaleComune', mappaValoriSgProf.get('AA061').toString());
 					values.put( 'Richiedente_SedeLegaleComuneDn', getAnaDenominazione('comune_istat', values.get('Richiedente_SedeLegaleComune')) );
 				}
 
-				if((mappaValoriSgProf.get('AA063')!= null)&&(isEmpty('Richiedente_SedeLegaleCap'))) {
+				if((mappaValoriSgProf.get('AA063')!== null)&&(isEmpty('Richiedente_SedeLegaleCap'))) {
 					values.put( 'Richiedente_SedeLegaleCap', mappaValoriSgProf.get('AA063').toString());
 				}
 
-				if((mappaValoriSgProf.get('AA060') != null)&&(isEmpty('Richiedente_SedeLegaleIndirizzo')))
+				if((mappaValoriSgProf.get('AA060') !== null)&&(isEmpty('Richiedente_SedeLegaleIndirizzo')))
 					values.put( 'Richiedente_SedeLegaleIndirizzo', mappaValoriSgProf.get('AA060').toString() );
-				if( mappaValoriSgProf.get('AA030') != null && isEmpty('Richiedente_RappresentanteLegaleNome'))
+				if( mappaValoriSgProf.get('AA030') !== null && isEmpty('Richiedente_RappresentanteLegaleNome'))
 					values.put( 'Richiedente_RappresentanteLegaleNome', mappaValoriSgProf.get('AA030').toString() );
-				if( mappaValoriSgProf.get('AA029') != null && isEmpty('Richiedente_RappresentanteLegaleCognome'))
+				if( mappaValoriSgProf.get('AA029') !== null && isEmpty('Richiedente_RappresentanteLegaleCognome'))
 					values.put( 'Richiedente_RappresentanteLegaleCognome', mappaValoriSgProf.get('AA029').toString() );
-				if( mappaValoriSgProf.get('AA142') != null && isEmpty('Richiedente_RappresentanteLegaleCodiceFiscale') )
+				if( mappaValoriSgProf.get('AA142') !== null && isEmpty('Richiedente_RappresentanteLegaleCodiceFiscale') )
 					values.put( 'Richiedente_RappresentanteLegaleCodiceFiscale', mappaValoriSgProf.get('AA142').toString() );
 			} // **** FINE LETTURA da SGPROF
+			else {  // fallimento sgprof
+					logger.info("XXXXX Lettura da SgProf Fallita");
+					// TODO: Impostare campo che indica un errore di connessione che non fa proseguire il modulo
+			}
 
 			// Campi derivati
 			var descrizioneSedeLegaleOperatore = values.get('Richiedente_SedeLegaleComuneDn')+" ("+
@@ -437,6 +491,7 @@ mappaBudgetDDFIIIAnno={
 
 			// Verifica Accreditamento Operatore
 			var CF_Oper = values.get('Richiedente_CodiceFiscale');
+			logger.info("XXXXX Richiedente_CodiceFiscale ( Operatore): "+CF_Oper);
 			var m_accreditamentoOperatore = verificaAccreditamentoOperatore(CF_Oper);
 			logger.info("XXXXX DOTE IFP: verificaAccreditamentoOperatore per il CF "+CF_Oper+": m_accreditamentoOperatore.success:"+m_accreditamentoOperatore.success);
 			if (m_accreditamentoOperatore.success) {
@@ -457,6 +512,7 @@ mappaBudgetDDFIIIAnno={
 				values.put('InterrogazioneAlboAccreditati','m_accreditamentoOperatore.message');
 				items.get('Avviso_NoRequisitiAttoUnico').setHidden(true);
 				items.get('Avviso_AccreditamentoOperatoreNonVerificabile').setHidden(false);
+				nascondiFieldsetPrincipali(true);
 			}
 			logger.info("XXXXX DOTE IFP: FINE verificaAccreditamentoOperatore");
 
@@ -481,21 +537,21 @@ mappaBudgetDDFIIIAnno={
 			*/
 			if (result_SedePratica.success) {
 				var m_InfoSedePratica=result_SedePratica.result;
-					logger.info("XXXXX Test-Integrazione-GEFO: m_InfoSedePratica: "+ m_InfoSedePratica);
+					logger.info("XXXXX DOTE IFP: m_InfoSedePratica: "+ m_InfoSedePratica);
 
-					logger.info("XXXXX Test-Integrazione-GEFO: denominazionesede: "+ m_InfoSedePratica.get("denominazionesede"));
-					logger.info("XXXXX Test-Integrazione-GEFO: idsede: "+ m_InfoSedePratica.get("idsede"));
-					logger.info("XXXXX Test-Integrazione-GEFO: idoperatore: "+ m_InfoSedePratica.get("idoperatore"));
-					logger.info("XXXXX Test-Integrazione-GEFO: cap: "+ m_InfoSedePratica.get("cap"));
-					logger.info("XXXXX Test-Integrazione-GEFO: cf: "+ m_InfoSedePratica.get("cf"));
-					logger.info("XXXXX Test-Integrazione-GEFO: email: "+ m_InfoSedePratica.get("email"));
-					logger.info("XXXXX Test-Integrazione-GEFO: fax: "+ m_InfoSedePratica.get("fax"));
-					logger.info("XXXXX Test-Integrazione-GEFO: indirizzo: "+ m_InfoSedePratica.get("indirizzo"));
-					logger.info("XXXXX Test-Integrazione-GEFO: istatcomune: "+ m_InfoSedePratica.get("istatcomune"));
-					logger.info("XXXXX Test-Integrazione-GEFO: reanum: "+ m_InfoSedePratica.get("reanum"));
-					logger.info("XXXXX Test-Integrazione-GEFO: telefono: "+ m_InfoSedePratica.get("telefono"));
-					logger.info("XXXXX Test-Integrazione-GEFO: tipologia: "+ m_InfoSedePratica.get("tipologia"));
-					logger.info("XXXXX Test-Integrazione-GEFO: www: "+ m_InfoSedePratica.get("www"));
+					logger.info("XXXXX DOTE IFP: denominazionesede: "+ m_InfoSedePratica.get("denominazionesede"));
+					logger.info("XXXXX DOTE IFP: idsede: "+ m_InfoSedePratica.get("idsede"));
+					logger.info("XXXXX DOTE IFP: idoperatore: "+ m_InfoSedePratica.get("idoperatore"));
+					logger.info("XXXXX DOTE IFP: cap: "+ m_InfoSedePratica.get("cap"));
+					logger.info("XXXXX DOTE IFP: cf: "+ m_InfoSedePratica.get("cf"));
+					logger.info("XXXXX DOTE IFP: email: "+ m_InfoSedePratica.get("email"));
+					logger.info("XXXXX DOTE IFP: fax: "+ m_InfoSedePratica.get("fax"));
+					logger.info("XXXXX DOTE IFP: indirizzo: "+ m_InfoSedePratica.get("indirizzo"));
+					logger.info("XXXXX DOTE IFP: istatcomune: "+ m_InfoSedePratica.get("istatcomune"));
+					logger.info("XXXXX DOTE IFP: reanum: "+ m_InfoSedePratica.get("reanum"));
+					logger.info("XXXXX DOTE IFP: telefono: "+ m_InfoSedePratica.get("telefono"));
+					logger.info("XXXXX DOTE IFP: tipologia: "+ m_InfoSedePratica.get("tipologia"));
+					logger.info("XXXXX DOTE IFP: www: "+ m_InfoSedePratica.get("www"));
 
 					values.put('Richiedente_IdOperatore',m_InfoSedePratica.get("idoperatore"));
 					values.put('Richiedente_IdSede',m_InfoSedePratica.get("idsede"));
@@ -514,9 +570,9 @@ mappaBudgetDDFIIIAnno={
 						var is_AccrSedeSezA=result_AccrSedeSezA.result;
 						logger.info("XXXXX Test-Integrazione-GEFO: m_AccrSedeSezA: "+ is_AccrSedeSezA);
 						if (is_AccrSedeSezA) {
-							values.put('Richiedente_SedeOperativaAccrSezA','true')
+							values.put('Richiedente_SedeOperativaAccrSezA','true');
 						} else {
-							values.put('Richiedente_SedeOperativaAccrSezA','false')
+							values.put('Richiedente_SedeOperativaAccrSezA','false');
 						}
 
 					}
@@ -528,11 +584,14 @@ mappaBudgetDDFIIIAnno={
 
 			} else {
 					logger.info("\n\n\n\n\nErrore su recuperaSedePratica: " + result_SedePratica.message + "\n\n\n\n\n");
+					nascondiFieldsetPrincipali(true);
+
 			}
 
 
 
 	   // verifiche dotazioni finanziarie
+		 var idOperatore = values.get('Richiedente_IdOperatore');
 		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 1");
 		 var sql_dotazioneFinCorsi_Erosa =   " select nvl(sum(to_number(DAT_VL, '999999999999999999999.9999999999999999999999999')),0) as IMPORTO_EROGATO_CORSI   " +
 		 																		 " from ag_sm_data_entries data_entries "+
@@ -593,28 +652,32 @@ mappaBudgetDDFIIIAnno={
 		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 3");
 
 		 var dotazioneFinCorsi_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinCorsi_Erosa);
-		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria Corsi:"+dotazioneFinCorsi_Erosa);
+		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria Corsi BANDO:"+dotazioneFinCorsi_Erosa);
 		 values.put('Bando_DotazioneFinCorsi_Erosa',''+dotazioneFinCorsi_Erosa);
 
 		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 4");
 
 		 var dotazioneFinDisabilita_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinDisabilita_Erosa);
-		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria Disabilita:"+dotazioneFinDisabilita_Erosa);
+		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria DISABILITA:"+dotazioneFinDisabilita_Erosa);
 		 values.put('Bando_DotazioneFinDisabilita_Erosa',''+dotazioneFinDisabilita_Erosa);
-
- 		 var dotazioneFinCorsiOperatore_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinCorsiOperatore_Erosa);
- 		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria Disabilita:"+dotazioneFinCorsiOperatore_Erosa);
- 		 values.put('Bando_DotazioneFinOperatore_Erosa',''+dotazioneFinCorsiOperatore_Erosa);
+		 if((idOperatore !== null)|| (idOperatore ==='')) {  // se ha funzionato l'integrazione con gefo
+			 var dotazioneFinCorsiOperatore_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinCorsiOperatore_Erosa);
+	 		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria OPERATORE:"+dotazioneFinCorsiOperatore_Erosa);
+	 		 values.put('Bando_DotazioneFinOperatore_Erosa',''+dotazioneFinCorsiOperatore_Erosa);
+		 }
+		 else {
+			 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria OPERATORE non ricavata per mancanza di IdOperatore");
+			 values.put('Bando_DotazioneFinOperatore_Erosa','');
+		 }
 
 
 		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 5 FINE");
 
-		 var idOperatore = values.get('Richiedente_IdOperatore');
-		 if (catalogoBando ='DDFIanni') {
+		 if (catalogoBando =='DDFIanni') {
 			 	values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIAnno[idOperatore]);
-		 } else if (catalogoBando ='DDFIIanni') {
+		 } else if (catalogoBando =='DDFIIanni') {
 			 values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIIAnno[idOperatore]);
-		 }else if (catalogoBando ='DDFIIIanni') {
+		 }else if (catalogoBando =='DDFIIIanni') {
 			 values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIIIAnno[idOperatore]);
 		 }
 
@@ -627,7 +690,12 @@ mappaBudgetDDFIIIAnno={
 
 		 values.put('Bando_DotazioneFinCorsi_Rimanente',''+corsiDF);
 		 values.put('Bando_DotazioneFinDisabilita_Rimanente',''+disabilitaDF);
-		 values.put('Bando_DotazioneFinOperatore_Rimanente',''+operatoreDF);
+		 if((idOperatore !== null)|| (idOperatore ==='')) {  // se ha funzionato l'integrazione con gefo
+		 	values.put('Bando_DotazioneFinOperatore_Rimanente',''+operatoreDF);
+		 }
+		 else {
+			values.put('Bando_DotazioneFinOperatore_Rimanente','');
+		 }
 
 
 		 //TODO: Calcolare Dotazione finanziaria erosa per il singolo operatore
@@ -764,10 +832,46 @@ mappaBudgetDDFIIIAnno={
 	idItemDichiarazioni = items.get('Dichiaraz_0005'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 	idItemDichiarazioni = items.get('Dichiaraz_0007'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 	idItemDichiarazioni = items.get('Dichiaraz_0008'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0009'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0009_1'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0010'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0010_1'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0009');
+	if (idItemDichiarazioni !== null) {
+		if ((catalogoBando=='DDFIanni'  )||(catalogoBando=='DDFIIanni' )) {
+			idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);
+		} else {
+			idItemDichiarazioni.setHidden(true);
+			idItemDichiarazioni.setRequired(false);
+		}
+	}
+
+	idItemDichiarazioni = items.get('Dichiaraz_0009_1');
+	if (idItemDichiarazioni !== null) {
+		if ((catalogoBando=='DDFIIIanni'  )||(catalogoBando=='DDFIVanni' )||(catalogoBando=='PPDIanni' )||(catalogoBando=='PPDIIanni' )||(catalogoBando=='PPDIIIanni' )) {
+			idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);
+		} else {
+			idItemDichiarazioni.setHidden(true);
+			idItemDichiarazioni.setRequired(false);
+		}
+	}
+
+	idItemDichiarazioni = items.get('Dichiaraz_0010');
+	if (idItemDichiarazioni !== null) {
+		if ((catalogoBando=='DDFIanni'  )||(catalogoBando=='DDFIIanni' )) {
+			idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);
+		} else {
+			idItemDichiarazioni.setHidden(true);
+			idItemDichiarazioni.setRequired(false);
+		}
+	}
+
+	idItemDichiarazioni = items.get('Dichiaraz_0010_1');
+	if (idItemDichiarazioni !== null) {
+		if ((catalogoBando=='DDFIIIanni'  )||(catalogoBando=='DDFIVanni' )||(catalogoBando=='PPDIanni' )||(catalogoBando=='PPDIIanni' )||(catalogoBando=='PPDIIIanni' )) {
+			idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);
+		} else {
+			idItemDichiarazioni.setHidden(true);
+			idItemDichiarazioni.setRequired(false);
+		}
+	}
+
 	idItemDichiarazioni = items.get('Dichiaraz_0011'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 	idItemDichiarazioni = items.get('Dichiaraz_0012'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 	idItemDichiarazioni = items.get('Dichiaraz_0013'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}

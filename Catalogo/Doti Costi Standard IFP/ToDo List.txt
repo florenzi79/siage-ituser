@@ -3,7 +3,7 @@ Attività Doti IFP
 TODO
 ===================
 
-HI - (TOOO Marco) Sistema re Aualifiche aggiornate da Bettiga con relativa nuova logica di ricerca (vedi appunti su quadernone)
+HI - (TOOO Marco)Testare funzionamento nuova logica di ricerca importo con qualifiche (vedi appunti su quadernone)
 HI - (TODO Marco) Aggiungere avvisi e 2 controlli per Erosione Fondo Globale (già calcolato)
 
 HI - (TODO Marco) Aggiungere avvisi e 2 controlli per erosione budget per singolo operatore
@@ -15,17 +15,18 @@ HI - (TODO .....) CONTROLLO Verifica su residenza in lombardia
 
 
 HI - (TODO .....) AVVISO e Blocco  in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
+HI - (TODO .....) CONTROLLO con non ci sono stati problemi tecnici nel primo modulo (impostare nuovi campi negli "else {}")
 HI - (TODO .....) CONTROLLO Parametrico sul bando vedi PA_016 Età destinatario
-HI - (TODO .....) Parametizzazione o cancellazione titolo di studio sheet tabtit_istruzione
+HI - (TODO .....) Parametizzazione o cancellazione/inserimento titolo di studio sheet tabtit_istruzione nei vari bandi
 HI - (TODO Fabiola / Patrizia) Importare nuovo template pdf dati riassuntivi
-HI - (TODO .....) Settare la security della checklist in modo da nasconderla al richiedente
+HI - (TODO .....) Settare la security della checklist al gruppo degli istruttori in modo da non visualizzarla nel fascicolo per i richiedenti
 HI - (TODO .....) Sistemare avvisi modulo 1 in caso di atto unico già presentato
 HI - (TODO .....) Verificare baco: non è visibile "Comune/stato estero di nascita" del partecipante
 HI - (TODO .....) ServiziFormazione_DataConclusioneMax  Aggiungere script che popola tale campo con la data massima
 HI - (TODO .....) Capire perchè non viene visualizzato il fascicolo per pratiche protocollate.
 HI - (TODO .....) Controllo tutor anni esperienza (già aperto PA_021) (verificare se la ver 4.00 chiude questo punto)
 
-HI - (TODO .....) Impaginare i dati di dotazione finanziaria
+
 HI - (TODO .....) Aggiungere un messaggio che spieghi che i dati della dotazione finanziaria possono essere cambiati rispetto quelli visualizzati
 HI - (TODO .....) Modificare il messaggio di avviso nella prima schermata: "E' possibile procedere con la compilazione della dote" (renderlo uguale al
 				  messaggio di errore)
@@ -48,17 +49,14 @@ LOW - (TODO .....) Aggiungere facility del firmatario su onchange del cf: popola
 - (WAIT LISPA) Assegnare le security corrette al processo per l'istruttore
 - (WAIT LISPA) Assegnare le security corrette ai file _tmp
 - (WAIT LISPA) Messaggio esplicativo sul come caricare i documenti firmati nell'atto unico
-- (WAIT LISPA) Invio email alla protocollazione dell'atto unico
+- (WAIT LISPA) Invio email alla protocollazione dell'atto unico ? (forse NO)
+- (wait LISPA) Aggiungere spedizione mail ANCHE a regione  quando protocollato Dote (wait indicazioni e corpo mail)
 
 - (TODO .....) MEV Esperienza Tutor (Vedi Requisiti ver 4.00)
 			   a. Modifica etichetta e tipo campo c42
 			   b. Definizione controlli campi c41 e c42
 
 - (TODO .....) Report come da requisiti ver 4.00
-
-
-- (TODO .....) Parametrizzare l'offerta formativa tramite csv
-
 
 ==========================
 GIA' FATTI
@@ -83,3 +81,4 @@ GIA' FATTI
 - ( OK Fabiola) Aggiungere creazione CheckList (Istruttoria automatica) contemporaneamente alla protocollazione
 - ( OK Marco) Chiedere chiarimenti: la soglia dell'età non definita per bandi II e III anni. Non c'è o è sempre 21 anni ?
 - ( OK Marco) Calcolare Dotazione finanziaria erosa per il singolo operatore ( riga 563 script AttoAdesioneUnico idPratica (C).js )
+- ( OK Marco) Impaginare i dati di dotazione finanziaria

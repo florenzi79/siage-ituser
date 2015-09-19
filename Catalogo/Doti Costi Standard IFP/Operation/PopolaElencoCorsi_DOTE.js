@@ -35,55 +35,58 @@ if (true) {
 		// mappa qualifiche
 			mappaQualificheImporti={
 
-// SOLO PER test ************** TODO  Togliere a regime
-					"796|98":"12345",
-// FINE TEST *******************TODO  Togliere a regime
-					"800|":"4000",
-					"796|":"4000",
-					"910|":"4000",
-					"910|189":"4000",
-					"809|":"4000",
-					"109|":"4000",
-					"108|":"4000",
-					"113|":"4000",
-					"793|":"4300",
-					"789|":"4300",
-					"792|":"4300",
-					"795|":"4300",
-					"794|":"4300",
-					"791|":"4300",
-					"799|":"4300",
-					"788|":"4300",
-					"13|":"4300",
-					"820|":"4300",
-					"916|":"4300",
-					"917|":"4300",
-					"808|":"4300",
-					"804|":"4300",
-					"806|":"4300",
-					"805|":"4300",
-					"52|":"4300",
-					"36|":"4300",
-					"12|":"4600",
-					"786|":"4600",
-					"14|":"4600",
-					"18|":"4600",
-					"1|":"4600",
-					"790|":"4600",
-					"16|":"4600",
-					"793|188":"4600",
-					"19|":"4600",
-					"910|186":"4600",
-					"910|119":"4600",
-					"803|":"4600",
-					"801|":"4600",
-					"103|":"4600",
-					"104|":"4600",
-					"915|":"4600",
-					"28|":"4600",
-					"39|":"4600",
-					"110|":"4600",
-					"819|":"4600"
+				// SOLO PER test ************** TODO  Togliere a regime
+				//"796|98":"12345",
+				// FINE TEST *******************TODO  Togliere a regime
+				"800|":"4000",
+				"796|":"4000",
+				"910|":"4000",
+				"910|189":"4000",
+				"809|":"4000",
+				"109|":"4000",
+				"108|":"4000",
+				"918|":"4000",
+				"977|":"4000",
+				"793|":"4300",
+				"789|":"4300",
+				"792|":"4300",
+				"795|":"4300",
+				"794|":"4300",
+				"791|":"4300",
+				"799|":"4300",
+				"788|":"4300",
+				"13|":"4300",
+				"820|":"4300",
+				"916|":"4300",
+				"917|":"4300",
+				"808|":"4300",
+				"804|":"4300",
+				"806|":"4300",
+				"805|":"4300",
+				"52|":"4300",
+				"36|":"4300",
+				"12|":"4600",
+				"786|":"4600",
+				"14|":"4600",
+				"18|":"4600",
+				"1|":"4600",
+				"790|":"4600",
+				"16|":"4600",
+				"793|188":"4600",
+				"19|":"4600",
+				"910|186":"4600",
+				"910|119":"4600",
+				"803|":"4600",
+				"801|":"4600",
+				"103|":"4600",
+				"104|":"4600",
+				"915|":"4600",
+				"28|":"4600",
+				"39|":"4600",
+				"110|":"4600",
+				"819|":"4600",
+				"975|":"4600",
+				"976|":"4600"
 	};
 
 		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 02\n");
@@ -149,10 +152,17 @@ if (true) {
                     //TODO Valorizzare ImportoAmmissibile Da tabella "tabella qualifica valori Dote" in base al valore di c43
 										var chiaveRicercaImporto= competenze.get('idqualifica')+"|"+competenze.get('idindirizzo');
 										var importo = mappaQualificheImporti[chiaveRicercaImporto];
+										if ((importo === null)||(importo === '')) {
+											chiaveRicercaImporto= competenze.get('idqualifica')+"|";
+											print('XXXXX importo non trovato usando sia qualifica che indirizzo. Ricerca quindi per '+chiaveRicercaImporto+'\n');
+										}
+										var importo = mappaQualificheImporti[chiaveRicercaImporto];
 										print('XXXXX importo calcolato per '+chiaveRicercaImporto+': '+importo+'\n');
 //                    values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',''+parseFloat('1234567890'));
 										if (importo!==null) {
 												values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',importo);
+										} else {
+											print('XXXXX ricerca in mappaQualificheImporti per '+chiaveRicercaImporto+' non andata a buon fine\n');
 										}
 
 
