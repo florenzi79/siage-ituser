@@ -413,11 +413,6 @@ mappaBudgetDDFIIIAnno={
 	"238553":"311600"
 
 };
-// mappaBudgetDDFIAnno
-// mappaBudgetDDFIIAnno
-// mappaBudgetDDFIIIAnno
-
-
 
 	//**** VALORIZZAZIONE CAMPI dei DATI GENERICI
 		values.put('NumeroPratica', values.get('idPratica'));
