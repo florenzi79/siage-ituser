@@ -3,6 +3,8 @@ print("\n************************************\n XXXXX INIZIO SCRIPT OPERATION Po
 //if (!isEmpty('Partecipante_CodiceFiscale')) {
 //Svuota il sottomodulo ServiziFormazione_ElencoCorsi
 var annualita = values.get('Bando_Annualita');
+var isIdentificazioneImportoOk =true;
+var isInterrogazioneGefoOk = true;
 var  it = values.keySet().iterator();
 while (it.hasNext()) {
 	var property = it.next();
@@ -34,10 +36,6 @@ if (true) {
 		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 01\n");
 		// mappa qualifiche
 			mappaQualificheImporti={
-
-				// SOLO PER test ************** TODO  Togliere a regime
-				//"796|98":"12345",
-				// FINE TEST *******************TODO  Togliere a regime
 				"800|":"4000",
 				"796|":"4000",
 				"910|":"4000",
@@ -101,23 +99,20 @@ if (true) {
       print("XXXXX DOTI - esecuzione di estraiDettagliCorsi(IdOperatore = "+idOperatore+" codiceFiscale="+codiceFiscale+" offerteFormative:"+offerteFormative+" idSede:"+idSede+")\n");
       var dati_estraiDettagliCorsi = estraiDettagliCorsi(idOperatore, codiceFiscale, offerteFormative, idSede);
       if (dati_estraiDettagliCorsi.success) {
-          print("XXXXX DOTI: dati_estraiDettagliCorsi result: "+ dati_estraiDettagliCorsi.result+"\n");
-          print("XXXXX DOTI: dati_estraiDettagliCorsi result 66678: "+ dati_estraiDettagliCorsi.result.get('66678')+"\n");
-          print("XXXXX DOTI: dati_estraiDettagliCorsi competenze 66678: "+ dati_estraiDettagliCorsi.result.get('66678').get('competenze')[0]+"\n");
-          print("XXXXX DOTI: dati_estraiDettagliCorsi result 66678 datafine: "+ dati_estraiDettagliCorsi.result.get('66678').get('datafine')+"\n");
-
-
           if (dati_estraiDettagliCorsi.result!== null) {
+						print("XXXXX DOTI: dati_estraiDettagliCorsi.result:"+ dati_estraiDettagliCorsi.result+"\n");
             var a_IscrDC = dati_estraiDettagliCorsi.result.get('iscrizioni');
+						print("XXXXX DOTI: array di iscrizioni: a_IscrDC:"+ a_IscrDC+"\n");
             if (a_IscrDC!==null) {
               var j=0;
               var offerta;
               for (i = 0; i < a_IscrDC.length; i++) {
+  								print("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
                   var elem = a_IscrDC[i];
+									print("XXXXX DOTI: elemento elem=a_IscrDC["+i+"] = elem:"+ a_IscrDC+"\n");
                   offerta = dati_estraiDettagliCorsi.result.get(elem.get('idcorso'));
                   //print("\nXXXXX DOTI i="+i+" estraiStatoIscrizioni.iscrizioni: "+ elem+"\n");
-                  print("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
-									print("\nXXXXX DOTI i="+i+" \nXXXX elem.get('idcorso')="+ elem.get('idcorso')+" \n");
+									print("\nXXXXX DOTI i="+i+" \nXXXX offerta = elem.get('idcorso')="+ elem.get('idcorso')+" \n");
                   print("XXXXX DOTI: dati_estraiDettagliCorsi result datafine i-esima: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('datafine')+"\n");
                   print("XXXXX DOTI: dati_estraiDettagliCorsi result titolo i-esimo: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('titolo')+"\n");
                   print("XXXXX DOTI: offerta get titolo i-esimo: "+ offerta.get('titolo')+"\n");
@@ -151,18 +146,24 @@ if (true) {
 
                     //TODO Valorizzare ImportoAmmissibile Da tabella "tabella qualifica valori Dote" in base al valore di c43
 										var chiaveRicercaImporto= competenze.get('idqualifica')+"|"+competenze.get('idindirizzo');
+										print('XXXXX PRIMO TENTATIVO: chiaveRicercaImporto '+chiaveRicercaImporto+'\n');
 										var importo = mappaQualificheImporti[chiaveRicercaImporto];
-										if ((importo === null)||(importo === '')) {
+										print('XXXXX PRIMO TENTATIVO: ==> importo '+importo+'\n');
+
+										if (importo === undefined)	{
 											chiaveRicercaImporto= competenze.get('idqualifica')+"|";
-											print('XXXXX importo non trovato usando sia qualifica che indirizzo. Ricerca quindi per '+chiaveRicercaImporto+'\n');
+											print('XXXXX importo non trovato usando sia qualifica che indirizzo.\n');
+											print('XXXXX SECONDO TENTATIVO: chiaveRicercaImporto '+chiaveRicercaImporto+'\n');
+											importo = mappaQualificheImporti[chiaveRicercaImporto];
+											print('XXXXX SECONDO TENTATIVO: ==> importo '+importo+'\n');
 										}
-										var importo = mappaQualificheImporti[chiaveRicercaImporto];
-										print('XXXXX importo calcolato per '+chiaveRicercaImporto+': '+importo+'\n');
 //                    values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',''+parseFloat('1234567890'));
-										if (importo!==null) {
-												values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',importo);
+										if (importo !== undefined) {
+											isIdentificazioneImportoOk = true;
+											values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',importo);
 										} else {
 											print('XXXXX ricerca in mappaQualificheImporti per '+chiaveRicercaImporto+' non andata a buon fine\n');
+											isIdentificazioneImportoOk = false;
 										}
 
 
@@ -178,14 +179,11 @@ if (true) {
                     j++;
 
                   }
-
-                  //print("\nXXXXX DOTI i="+i+" iddote="+ elem.get("iddote")+" \n");
-
               }
 
             } else {
               print("XXXXX DOTI dati_estraiDettagliCorsi.result.get('iscrizioni')=null\n");
-//			  values.get('Avviso_ricercaEmpty').setHidden(false);
+							//			  values.get('Avviso_ricercaEmpty').setHidden(false);
             }
             var a_idcorsoDC = dati_estraiDettagliCorsi.result.get('idcorso');
             if (a_idcorsoDC!==null) {
@@ -206,11 +204,13 @@ if (true) {
           print("dati_estraiDettagliCorsi.result = null\n");
 //		  values.get('Avviso_ricercaEmpty').setHidden(false);
           }
+			isInterrogazioneGefoOk = true;
       }
       else  {
         // l'integrazione con gefo ha problemi
         // TODO: Valorizzare una variabile per permettere un avviso nel modulo successivo e relativo blocco
         print("\n XXXXX estraiDettagliCorsi non andato a buon fine -  \n");
+				isInterrogazioneGefoOk = false;
 //		values.get('Avviso_ricercaEmpty').setHidden(false);
 
       }

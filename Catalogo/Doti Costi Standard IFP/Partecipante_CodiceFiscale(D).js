@@ -81,14 +81,20 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
         i++;
       }
       logger.info("XXXXX Offerte Formative(dopo): "+offerteFormative);
-			var dati_estraiStatoIscrizioni = estraiStatoIscrizioni(codiceFiscale,offerteFormative);
+//			var dati_estraiStatoIscrizioni = estraiStatoIscrizioni(codiceFiscale,offerteFormative);
+//			if (dati_estraiStatoIscrizioni.success) {
+		var idOperatore = values.get('Richiedente_IdOperatore');
+		var idSede = values.get('Richiedente_IdSede');
 
-			if (dati_estraiStatoIscrizioni.success) {
-        items.get('avviso_problemaTecnico').setHidden(true);
-				logger.info("XXXXX DOTI IFP Esecuzione di estraiStatoIscrizioni. result:"+ dati_estraiStatoIscrizioni.result);
-				if (dati_estraiStatoIscrizioni.result!== null) {
-          nascondiCampiDestinatario(false);
-					var m_Ana = dati_estraiStatoIscrizioni.result.get('datiAnagrafici');
+		  print("XXXXX DOTI - esecuzione di estraiDettagliCorsi(IdOperatore = "+idOperatore+" codiceFiscale="+codiceFiscale+" offerteFormative:"+offerteFormative+" idSede:"+idSede+")\n");
+		  var dati_estraiDettagliCorsi = estraiDettagliCorsi(idOperatore, codiceFiscale, offerteFormative, idSede);
+		  if (dati_estraiDettagliCorsi.success) {
+
+			items.get('avviso_problemaTecnico').setHidden(true);
+			logger.info("XXXXX DOTI IFP Esecuzione di estraiStatoIscrizioni. result:"+ dati_estraiDettagliCorsi.result);
+				if (dati_estraiDettagliCorsi.result!== null) {
+				nascondiCampiDestinatario(false);
+					var m_Ana = dati_estraiDettagliCorsi.result.get('datiAnagrafici');
 					logger.info("\n XXXXX Test-Integrazione-GEFO: cognome: "+ m_Ana.get("cognome")+"\n");
 					logger.info("\n XXXXX Test-Integrazione-GEFO: nome   : "+ m_Ana.get("nome")+"\n");
 /*
