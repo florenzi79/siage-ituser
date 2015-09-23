@@ -5,12 +5,10 @@ TODO
 
 HI - (TODO Marco) Aggiungere avvisi e 2 controlli per Erosione Fondo Globale (già calcolato)
 HI - (TODO Marco) Aggiungere avvisi e 2 controlli per erosione budget per singolo operatore  (già calcolato)
-HI - (TODO Marco CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo
+HI - (TODO Marco) CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo
 HI - (TODO Marco) CONTROLLO: Bloccare se CF destinatario non è presente in iscrizioni
 HI - (TODO Marco) DDF I Anno -query e Controllo Numero massimo di doti per ID corso:  25 e numero massimo di disabili per ID Corso
 HI - (TODO F ?..) Se dote: Visualizzare avviso e creare controllo per accreditamento SEDE (oltre a operatore) al modulo 1e e prima della protocollazione.
-HI - (TODO M ?..) CONTROLLO Verifica su residenza in lombardia
-                  Se lo studente non è residente in Lombardia, per poter richiedere la dote, il domicilio dovrà coincidere con la sede dell’operatore che presenta la dote e che ha il convitto (regione fornisce un elenco, lista statica).
 HI - (TODO M....) AVVISO e Blocco (Controllo) in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
 HI - (TODO .....) CONTROLLO con non ci sono stati problemi tecnici nel primo modulo (impostare nuovi campi negli "else {}")
 HI - (TODO Fabiola / wait Patrizia) Importare nuovo template pdf dati riassuntivi
@@ -20,8 +18,6 @@ HI - (TODO F....) ServiziFormazione_DataConclusioneMax  Aggiungere script che po
 HI - (TODO .....) (verificare se si verifica ancora) Capire perchè non viene visualizzato il fascicolo per pratiche protocollate.
 HI - (TODO F....) Impostare Report come da requisiti ver 4.00
 HI - (TODO .....) Verificare che i controlli specificati nell'info bandi siano stati tutti inseriti
-HI - (TODO .....) Aggiungere un filtro, all'onchange del codice fiscale del destinatario,
-                  che abbia iscrizioni relative alla ANNUALITA' giusta (1 per i I ani, 2 per i II anni)
 HI - (TODO .....) Impostare (verificare) i valori assunti nell'operation, relativi a fase pratica a bozza eliminata.
 
 MEDIUM - (TODO .....) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
@@ -36,6 +32,7 @@ LOW - (TODO .....) Aggiungere facility del firmatario su onchange del cf: popola
 LOW - (TODO .....) Parametrizzazione o cancellazione/inserimento titolo di studio sheet tabtit_istruzione nei vari bandi
                    in alternativa  non fare niente e utilizzare il PO Completo cancellando i titoli di studio che non servono nel singolo bando
 LOW - (WAIT Aldo) Aggiungere controllo check digit dei CF con script in sviluppo da Aldo
+LOW - (TODO Marco) Aggiungere un filtro, all'onchange del codice fiscale del destinatario, che abbia iscrizioni relative alla ANNUALITA' giusta
 
 - (WAIT LISPA) Assegnare le security corrette al processo per l'istruttore
 - (WAIT LISPA) Assegnare le security corrette ai file _tmp
@@ -76,3 +73,5 @@ GIA' FATTI
 			     b. Definizione controlli campi c41 e c42
 - ( OK Marco) CONTROLLO Parametrico sul bando vedi PA_016 Età destinatario
 - ( OK Fabiola) Modificare il messaggio di avviso nella prima schermata: "E' possibile procedere con la compilazione della dote" (renderlo uguale al messaggio di errore)
+- ( OK Fabiola) CONTROLLO Verifica su residenza in lombardia
+                Se lo studente non è residente in Lombardia, per poter richiedere la dote, il domicilio dovrà coincidere con la sede dell’operatore che presenta la dote e che ha il convitto (regione fornisce un elenco, lista statica).
