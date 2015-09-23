@@ -2,9 +2,7 @@ Attività Doti IFP
 ===================
 TODO
 ===================
-HI - (TODO Fabiola ) (Gia Fatto ? Verificare  ) MEV Esperienza Tutor (Vedi Requisiti ver 4.00)
-			   a. Modifica etichetta e tipo campo c42
-			   b. Definizione controlli campi c41 e c42
+
 HI - (TODO Marco) Aggiungere avvisi e 2 controlli per Erosione Fondo Globale (già calcolato)
 HI - (TODO Marco) Aggiungere avvisi e 2 controlli per erosione budget per singolo operatore  (già calcolato)
 HI - (TODO Marco CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo
@@ -13,38 +11,32 @@ HI - (TODO Marco) DDF I Anno -query e Controllo Numero massimo di doti per ID co
 HI - (TODO F ?..) Se dote: Visualizzare avviso e creare controllo per accreditamento SEDE (oltre a operatore) al modulo 1e e prima della protocollazione.
 HI - (TODO M ?..) CONTROLLO Verifica su residenza in lombardia
                   Se lo studente non è residente in Lombardia, per poter richiedere la dote, il domicilio dovrà coincidere con la sede dell’operatore che presenta la dote e che ha il convitto (regione fornisce un elenco, lista statica).
-HI - (TODO M....) AVVISO e Blocco 8Controllo) in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
+HI - (TODO M....) AVVISO e Blocco (Controllo) in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
 HI - (TODO .....) CONTROLLO con non ci sono stati problemi tecnici nel primo modulo (impostare nuovi campi negli "else {}")
-HI - (TODO F....) (già fatto ??? verificare) CONTROLLO Parametrico sul bando vedi PA_016 Età destinatario
 HI - (TODO Fabiola / wait Patrizia) Importare nuovo template pdf dati riassuntivi
 HI - (TODO M....) Settare la security della checklist al gruppo degli istruttori in modo da non visualizzarla nel fascicolo per i richiedenti
-HI - (TODO F....) (già fatto ?) Sistemare avvisi modulo 1 in caso di atto unico già presentato
 HI - (TODO M&F..) Verificare baco: non è visibile "Comune/stato estero di nascita" del partecipante
 HI - (TODO F....) ServiziFormazione_DataConclusioneMax  Aggiungere script che popola tale campo con la data massima
 HI - (TODO .....) (verificare se si verifica ancora) Capire perchè non viene visualizzato il fascicolo per pratiche protocollate.
 HI - (TODO F....) Impostare Report come da requisiti ver 4.00
-
-ME - (TODO .....) Aggiungere un messaggio / tooltip che renda chiaro che i dati della dotazione finanziaria rimanenti sono da considerarsi indicativi
-
-HI - (TODO .....) (Già fatto ? ) Modificare il messaggio di avviso nella prima schermata: "E' possibile procedere con la compilazione della dote" (renderlo uguale al
-				  messaggio di errore)
 HI - (TODO .....) Verificare che i controlli specificati nell'info bandi siano stati tutti inseriti
 HI - (TODO .....) Aggiungere un filtro, all'onchange del codice fiscale del destinatario,
                   che abbia iscrizioni relative alla ANNUALITA' giusta (1 per i I ani, 2 per i II anni)
 HI - (TODO .....) Impostare (verificare) i valori assunti nell'operation, relativi a fase pratica a bozza eliminata.
 
 MEDIUM - (TODO .....) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
+MEDIUM - (TODO .....) Aggiungere un messaggio / tooltip che renda chiaro che i dati della dotazione finanziaria rimanenti sono da considerarsi indicativi
 
 LOW - (TODO .....) Abilitare controllo coerenza e firmatario documenti ricaricati nei DUE moduli documenti (NOTA: limita i test di protocollazione solo a chi
 	               può firmare un doc)
 LOW - (TODO .....) Facility di autocompilazione tutor mettendo solo CF, facendo query su pratiche già protocollate
                    utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
 LOW - (TODO .....) Aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi
-                 nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
+                   nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
 LOW - (TODO .....) Parametrizzazione o cancellazione/inserimento titolo di studio sheet tabtit_istruzione nei vari bandi
-                                   in alternativa  non fare niente e utilizzare il PO Completo cancellando i titoli di studio che non servono nel singolo bando
-
+                   in alternativa  non fare niente e utilizzare il PO Completo cancellando i titoli di studio che non servono nel singolo bando
 LOW - (WAIT Aldo) Aggiungere controllo check digit dei CF con script in sviluppo da Aldo
+
 - (WAIT LISPA) Assegnare le security corrette al processo per l'istruttore
 - (WAIT LISPA) Assegnare le security corrette ai file _tmp
 - (WAIT LISPA) Messaggio esplicativo sul come caricare i documenti firmati nell'atto unico
@@ -78,4 +70,9 @@ GIA' FATTI
 - ( OK Marco) Testare funzionamento nuova logica di ricerca importo con qualifiche (vedi appunti su quadernone)
 - ( OK Fabiola) Controllo tutor anni esperienza (già aperto PA_021) (verificare se la ver 4.00 chiude questo punto)
 - ( Ok Marco) Restringere filtro ( o parametro in interrogazione gefo)  al recupero anagrafiche al OnChange del CF Partecipante, in modo che vengano
-			   recuperati corsi solo se esiste iscrizioni ad un corso dell'off formativa del bando nella sede IdSede del gruppo richiedente nel recupero dei corsi
+			  recuperati corsi solo se esiste iscrizioni ad un corso dell'off formativa del bando nella sede IdSede del gruppo richiedente nel recupero dei corsi
+- ( OK Fabiola ) MEV Esperienza Tutor (Vedi Requisiti ver 4.00)
+			     a. Modifica etichetta e tipo campo c42
+			     b. Definizione controlli campi c41 e c42
+- ( OK Marco) CONTROLLO Parametrico sul bando vedi PA_016 Età destinatario
+- ( OK Fabiola) Modificare il messaggio di avviso nella prima schermata: "E' possibile procedere con la compilazione della dote" (renderlo uguale al messaggio di errore)
