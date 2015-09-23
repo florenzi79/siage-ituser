@@ -1,3 +1,4 @@
+logger.info("XXXXXMMMMM DOTE IFP: INIZIO Script ONLOAD su IdPratica - Modulo 1");
 function nascondiFieldsetPrincipali(valore) {
 	// NASCONDI fieldsets e ITEMS per la raccolta dati atto unico
 	fieldsets.get(idFildsetFirmatario).setHidden(valore);
@@ -5,9 +6,10 @@ function nascondiFieldsetPrincipali(valore) {
 	fieldsets.get(idFildsetDettagliAttoUnicoPresentato).setHidden(valore);
 
 }
+
 {
-	var catalogoBando ='DDFIanni';
-//		var catalogoBando ='DDFIIanni' ;
+//	var catalogoBando ='DDFIanni';
+		var catalogoBando ='DDFIIanni' ;
 //		var catalogoBando ='DDFIIIanni';
 //		var catalogoBando ='DDFIVanni' ;
 //		var catalogoBando ='PPDIanni'  ;
@@ -92,7 +94,6 @@ function nascondiFieldsetPrincipali(valore) {
 			"PPDIanni"  :"2602500",
 			"PPDIIanni" :"2617500",
 			"PPDIIIanni":"2775000"};
-
 		mappaDotazioneFinDisabilita={
 				"DDFIanni"  :"4648500",
 				"DDFIIanni" :"4411700",
@@ -100,9 +101,40 @@ function nascondiFieldsetPrincipali(valore) {
 				"DDFIVanni" :"900000",
 				"PPDIanni"  :"0",
 				"PPDIIanni" :"0",
-				"PPDIIIanni":"0"};
+				"PPDIIIanni":"0"
+			};
+		mappa_DotazioneFinCorsi_SogliaPrimoModulo={ // se la dot fin rimanente va sotto questa soglia, viene bloccato il proseguimento
+			"DDFIanni"  :"4000",
+			"DDFIIanni" :"4000",
+			"DDFIIIanni":"4000",
+			"DDFIVanni" :"-999999999",
+			"PPDIanni"  :"-999999999",
+			"PPDIIanni" :"-999999999",
+			"PPDIIIanni":"-999999999"
+		};
+		mappa_DotazioneFinDisabilita_SogliaPrimoModulo={
+			"DDFIanni"  :"-999999999",
+			"DDFIIanni" :"-999999999",
+			"DDFIIIanni":"-999999999",
+			"DDFIVanni" :"3000",
+			"PPDIanni"  :"-999999999",
+			"PPDIIanni" :"-999999999",
+			"PPDIIIanni":"-999999999"
+		};
+		mappa_DotazioneFinOperatore_SogliaPrimoModulo={ // se la dot fin rimanente va sotto questa soglia, viene bloccato il proseguimento
+			"DDFIanni"  :"4000",
+			"DDFIIanni" :"4000",
+			"DDFIIIanni":"4000",
+			"DDFIVanni" :"0",
+			"PPDIanni"  :"0",
+			"PPDIIanni" :"0",
+			"PPDIIIanni":"0"
+		};
 
-				mappaBudgetDDFIAnno={
+
+
+
+		mappaBudgetDDFIAnno={
 				"158735":"1989000",
 				"127859":"236200",
 				"1710241":"144000",
@@ -425,6 +457,9 @@ mappaBudgetDDFIIIAnno={
 		values.put('Bando_DotazioneFinCorsi_Iniziale',''+mappaDotazioneFinCorsi[catalogoBando]);
 		values.put('Bando_DotazioneFinDisabilita_Iniziale',''+mappaDotazioneFinDisabilita[catalogoBando]);
 
+		values.put('Bando_DotazioneFinCorsi_SogliaPrimoModulo', ''+parseFloat(mappa_DotazioneFinCorsi_SogliaPrimoModulo[catalogoBando]));
+		values.put('Bando_DotazioneFinDisabilita_SogliaPrimoModulo', ''+parseFloat(mappa_DotazioneFinDisabilita_SogliaPrimoModulo[catalogoBando]));
+		values.put('Bando_DotazioneFinOperatore_SogliaPrimoModulo', ''+parseFloat(mappa_DotazioneFinOperatore_SogliaPrimoModulo[catalogoBando]));
 
 		var i=0;
 		while (offerteFormative[i]) {
@@ -644,6 +679,8 @@ mappaBudgetDDFIIIAnno={
 
      logger.info("XXXXX DOTI - sql_dotazioneFinCorsi_Erosa:"+sql_dotazioneFinCorsi_Erosa);
 		 logger.info("XXXXX DOTI - sql_dotazioneFinDisabilita_Erosa:"+sql_dotazioneFinDisabilita_Erosa);
+		 logger.info("XXXXX DOTI - sql_dotazioneFinCorsiOperatore_Erosa:"+sql_dotazioneFinCorsiOperatore_Erosa);
+
 		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 3");
 
 		 var dotazioneFinCorsi_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinCorsi_Erosa);
@@ -655,8 +692,20 @@ mappaBudgetDDFIIIAnno={
 		 var dotazioneFinDisabilita_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinDisabilita_Erosa);
 		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria DISABILITA:"+dotazioneFinDisabilita_Erosa);
 		 values.put('Bando_DotazioneFinDisabilita_Erosa',''+dotazioneFinDisabilita_Erosa);
-		 if((idOperatore !== null)|| (idOperatore ==='')) {  // se ha funzionato l'integrazione con gefo
-			 var dotazioneFinCorsiOperatore_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinCorsiOperatore_Erosa);
+		 if((idOperatore !== null)|| (idOperatore ==='')) {  // se ha funzionato l'integrazione con gefo e conosco quindi idOperatore
+			logger.info('XXXXX DOTI  idOperatore:' + idOperatore);
+			if (catalogoBando =='DDFIanni') {
+				 values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIAnno[idOperatore]);
+				 logger.info('XXXXX DOTI  mappaBudgetDDFIAnno[idOperatore] ' + mappaBudgetDDFIAnno[idOperatore]);
+			} else if (catalogoBando =='DDFIIanni') {
+				values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIIAnno[idOperatore]);
+				 logger.info('XXXXX DOTI  mappaBudgetDDFIIAnno[idOperatore] ' + mappaBudgetDDFIIAnno[idOperatore]);
+			}else if (catalogoBando =='DDFIIIanni') {
+				values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIIIAnno[idOperatore]);
+				 logger.info('XXXXX DOTI  mappaBudgetDDFIIIAnno[idOperatore] ' + mappaBudgetDDFIIIAnno[idOperatore]);
+			}
+
+		 var dotazioneFinCorsiOperatore_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinCorsiOperatore_Erosa);
 	 		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria OPERATORE:"+dotazioneFinCorsiOperatore_Erosa);
 	 		 values.put('Bando_DotazioneFinOperatore_Erosa',''+dotazioneFinCorsiOperatore_Erosa);
 		 }
@@ -668,20 +717,12 @@ mappaBudgetDDFIIIAnno={
 
 		 logger.info("XXXXX DOTI - Inizio calcolo dotazione finanziaria STEP 5 FINE");
 
-		 if (catalogoBando =='DDFIanni') {
-			 	values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIAnno[idOperatore]);
-		 } else if (catalogoBando =='DDFIIanni') {
-			 values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIIAnno[idOperatore]);
-		 }else if (catalogoBando =='DDFIIIanni') {
-			 values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIIIAnno[idOperatore]);
-		 }
-
 		 var corsiDF = parseFloat(values.get('Bando_DotazioneFinCorsi_Iniziale'))-parseFloat(values.get('Bando_DotazioneFinCorsi_Erosa'));
-		 logger.info('FFFF corsiDF ' + corsiDF);
+		 logger.info('XXXXX DOTI  corsiDF ' + corsiDF);
 		 var disabilitaDF = parseFloat(values.get('Bando_DotazioneFinDisabilita_Iniziale'))-parseFloat(values.get('Bando_DotazioneFinDisabilita_Erosa'));
-		 logger.info('FFFF disabilitaDF ' + disabilitaDF);
+		 logger.info('XXXXX DOTI  disabilitaDF ' + disabilitaDF);
 		 var operatoreDF = parseFloat(values.get('Bando_DotazioneFinOperatore_Iniziale'))-parseFloat(values.get('Bando_DotazioneFinOperatore_Erosa'));
-		 logger.info('FFFF operatoreDF ' + operatoreDF);
+		 logger.info('XXXXX DOTI  operatoreDF ' + operatoreDF);
 
 		 values.put('Bando_DotazioneFinCorsi_Rimanente',''+corsiDF);
 		 values.put('Bando_DotazioneFinDisabilita_Rimanente',''+disabilitaDF);
@@ -871,6 +912,8 @@ mappaBudgetDDFIIIAnno={
 	idItemDichiarazioni = items.get('Dichiaraz_0012'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 	idItemDichiarazioni = items.get('Dichiaraz_0013'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 
+	var isMostrareDotazionePerDisabilita =(catalogoBando=='DDFIVanni');
+	items.get('Bando_DotazioneFinDisabilita_Rimanente').setHidden(!isMostrareDotazionePerDisabilita);
 
 logger.info("XXXXXMMMMM DOTE IFP: FINE Script ONLOAD su IdPratica - Modulo 1");
 
