@@ -9,7 +9,7 @@ HI - (TODO Marco) Aggiungere avvisi e controllo stato finale per Erosione Fondo 
 HI - (TODO Marco) Aggiungere avvisi e controllo stato finale per erosione budget per singolo operatore  (Come fatto nel OnLoad di IdPratica nel "1 - Atto di Adesione Unico - Dati" )
 HI - (TODO Marco) CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo (controllo + eventualmente OnChange CF Destinatario)
 HI - (TODO Marco) CONTROLLO: Bloccare se CF destinatario non è presente in iscrizioni
-HI - (TODO FL...) DDF I Anno -query e Controllo Numero massimo di doti per ID corso:  25 e numero massimo di disabili per ID Corso
+HI - (TODO FL...) CONTROLLO VALIDAZIONE. DDF I Anno -query e Controllo Numero massimo di doti per ID corso:  25 e numero massimo di disabili per ID Corso
 HI - (TODO F ?..) creare controllo per verifica accreditamento SEDE prima della protocollazione (funzione già utilizzata nel nel OnLoad di IdPratica nel "1 - Atto di Adesione Unico - Dati" )
 HI - (TODO M....) AVVISO e Blocco (Controllo) in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
 HI - (TODO M....) Settare la security della checklist al gruppo degli istruttori in modo da non visualizzarla nel fascicolo per i richiedenti
@@ -23,6 +23,7 @@ HI - (TODO FL...) Facility di autocompilazione tutor mettendo solo CF, facendo q
                    utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
 HI - (TODO FL...) Aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi
                    nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
+HI - (TODO FL...) Valorizzazione Data - Ora Invio al Protocollo
 MEDIUM - (TODO .....) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
 MEDIUM - (TODO .....) Aggiungere un messaggio / tooltip che renda chiaro che i dati della dotazione finanziaria rimanenti sono da considerarsi indicativi
 

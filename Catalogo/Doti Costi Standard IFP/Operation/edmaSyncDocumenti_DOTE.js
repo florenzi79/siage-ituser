@@ -31,11 +31,13 @@ var nomeBando = values.get('Bando_Nome');
 	 +'.',
 	[mailContatto]);
 	print('XXXXXXXXXX sendMailProtDomandaBoDOTE  FINE');
-
+	
 	//set_Fase_e_Stato_Pratica_quando_protocollato
 	print('XXXXXXXXXX set_Fase_e_Stato_Pratica_quando_protocollato  INIZIO');
 	values.put('statoPratica', "Presentato");
-	values.put('fasePratica', "Ammesso e Finanziato");
+	values.put('fasePratica', "Rendicontazione e Liquidazione Front Office");
+
+	values.put('statoPratica', "Ammesso e Finanziato");
 	print('XXXXXXXXXX set_Fase_e_Stato_Pratica_quando_protocollato  FINE');
 
 	print('XXXXXXXXXX generaPdfDopoProtocollo  INIZIO');
