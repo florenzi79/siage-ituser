@@ -25,7 +25,7 @@ if (true) {
 // recupera offerte formative del bando definite nel primo modulo
     var offerteFormative = [];
     var i=0;
-    while (values.get('Bando_OfferteFormative['+i+']')!==null) {
+    while (values.get('Bando_OfferteFormative['+i+']')!=null) {
       offerteFormative[i]=values.get('Bando_OfferteFormative['+i+']');
       i++;
     }
@@ -99,11 +99,11 @@ if (true) {
       print("XXXXX DOTI - esecuzione di estraiDettagliCorsi(IdOperatore = "+idOperatore+" codiceFiscale="+codiceFiscale+" offerteFormative:"+offerteFormative+" idSede:"+idSede+")\n");
       var dati_estraiDettagliCorsi = estraiDettagliCorsi(idOperatore, codiceFiscale, offerteFormative, idSede);
       if (dati_estraiDettagliCorsi.success) {
-          if (dati_estraiDettagliCorsi.result!== null) {
+          if (dati_estraiDettagliCorsi.result!= null) {
 						print("XXXXX DOTI: dati_estraiDettagliCorsi.result:"+ dati_estraiDettagliCorsi.result+"\n");
             var a_IscrDC = dati_estraiDettagliCorsi.result.get('iscrizioni');
 						print("XXXXX DOTI: array di iscrizioni: a_IscrDC:"+ a_IscrDC+"\n");
-            if (a_IscrDC!==null) {
+            if (a_IscrDC!=null) {
               var j=0;
               var offerta;
               for (i = 0; i < a_IscrDC.length; i++) {
@@ -122,6 +122,8 @@ if (true) {
 									print('XXXXX idqualifica di competenze: ' + competenze.get('idqualifica')+'\n');
 									print('XXXXX idindirizzo di competenze: ' + competenze.get('idindirizzo')+'\n');
 									print('XXXXX qualifica|indirizzo:==>' + competenze.get('idqualifica')+"|"+competenze.get('idindirizzo')+'<==\n');
+                  print('XXXXX annocorso: ' +offerta.get('annocorso')+'\n');
+                  print('XXXXX idqualifica: ' +offerta.get('idqualifica')+'\n');
                   print('XXXXX annocorso: ' +offerta.get('annocorso')+'\n');
                   if(annualita == offerta.get('annocorso')+'') {  // TODO Aggiungere le condizioni corrette che devono essere soddisfatte per popolare l'elenco corsi
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].NomeServizio',offerta.get('titolo'));
@@ -150,7 +152,7 @@ if (true) {
 										var importo = mappaQualificheImporti[chiaveRicercaImporto];
 										print('XXXXX PRIMO TENTATIVO: ==> importo '+importo+'\n');
 
-										if (importo === undefined)	{
+										if (importo == undefined)	{
 											chiaveRicercaImporto= competenze.get('idqualifica')+"|";
 											print('XXXXX importo non trovato usando sia qualifica che indirizzo.\n');
 											print('XXXXX SECONDO TENTATIVO: chiaveRicercaImporto '+chiaveRicercaImporto+'\n');
@@ -158,7 +160,7 @@ if (true) {
 											print('XXXXX SECONDO TENTATIVO: ==> importo '+importo+'\n');
 										}
 //                    values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',''+parseFloat('1234567890'));
-										if (importo !== undefined) {
+										if (importo != undefined) {
 											isIdentificazioneImportoOk = true;
 											values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',importo);
 										} else {
@@ -167,11 +169,11 @@ if (true) {
 										}
 
 
-                    if (offerta.get('datainizio')!== null) {
+                    if (offerta.get('datainizio')!= null) {
                       var dataAvvioMS = offerta.get('datainizio');
                       values.put('ServiziFormazione_ElencoCorsi['+j+'].DataAvvio',''+dataAvvioMS);
                     }
-                    if (offerta.get('datafine')!== null) {
+                    if (offerta.get('datafine')!= null) {
                       var dataConclusioneMS = offerta.get('datafine');
                       values.put('ServiziFormazione_ElencoCorsi['+j+'].DataConclusione',''+dataConclusioneMS);
                     }
@@ -186,7 +188,7 @@ if (true) {
 							//			  values.get('Avviso_ricercaEmpty').setHidden(false);
             }
             var a_idcorsoDC = dati_estraiDettagliCorsi.result.get('idcorso');
-            if (a_idcorsoDC!==null) {
+            if (a_idcorsoDC!=null) {
               for (i = 0; i < a_idcorsoDC.length; i++) {
                   var elem3 = a_idcorsoDC[i];
                   print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" estraiStatoIscrizioni.iscrizioni: "+ elem3+"\n");
@@ -231,9 +233,9 @@ if (true) {
 
 
         print("\n\n\n\n\n XXXXXX (1) estraiStatoIscrizioni message: " + dati_estraiStatoIscrizioni.message + "\n\n\n\n\n");
-        if (dati_estraiStatoIscrizioni.result!== null) {
+        if (dati_estraiStatoIscrizioni.result!= null) {
           var a_Iscr = dati_estraiStatoIscrizioni.result.get('iscrizioni');
-          if (a_Iscr!==null) {
+          if (a_Iscr!=null) {
 
             for (i = 0; i < a_Iscr.length; i++) {
                 var elem = a_Iscr[i];

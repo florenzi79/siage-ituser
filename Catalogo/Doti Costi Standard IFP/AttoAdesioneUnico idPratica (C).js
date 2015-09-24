@@ -471,41 +471,41 @@ mappaBudgetDDFIIIAnno={
 		values.put('fasePratica', "Adesione"); // da definire cosa dovrà essere nel caso in cui si sta compilando l'atto unico
 		if (iamInStato1) {
 			//**** LETTURA user
-			if (user.getProfiloQualificaCorrente().getCodiceNaturaGiuridicaSgProf() !== null) {
+			if (user.getProfiloQualificaCorrente().getCodiceNaturaGiuridicaSgProf() != null) {
 			values.put( 'Richiedente_NaturaGiuridica', user.getProfiloQualificaCorrente().getCodiceNaturaGiuridicaSgProf());
 			logger.info("XXXXX Natura Giuridica ricavata : "+values.get( 'Richiedente_NaturaGiuridica'));
 			}
 
 			//**** LETTURA da SGPROF
 			var mappaValoriSgProf = ricercaProfiloSgProf(user);
-			if ((mappaValoriSgProf !== null) ) {
+			if ((mappaValoriSgProf != null) ) {
 				logger.info("XXXXX Lettura da SgProf - mappaValoriSgProf: "+mappaValoriSgProf);
-				if((mappaValoriSgProf.get('AA037') !== null )&&(isEmpty('Richiedente_Denominazione')))
+				if((mappaValoriSgProf.get('AA037') != null )&&(isEmpty('Richiedente_Denominazione')))
 					values.put( 'Richiedente_Denominazione', mappaValoriSgProf.get('AA037').toString() );
-				if( mappaValoriSgProf.get('AA038') !== null )
+				if( mappaValoriSgProf.get('AA038') != null )
 					values.put( 'Richiedente_PartitaIva', mappaValoriSgProf.get('AA038').toString() );
-				if((mappaValoriSgProf.get('AA206') !== null) && (isEmpty('Richiedente_CodiceFiscale')))
+				if((mappaValoriSgProf.get('AA206') != null) && (isEmpty('Richiedente_CodiceFiscale')))
 					values.put( 'Richiedente_CodiceFiscale', mappaValoriSgProf.get('AA206').toString());
-				if((mappaValoriSgProf.get('AA062') !== null)&& (isEmpty('Richiedente_SedeLegaleProvincia'))){
+				if((mappaValoriSgProf.get('AA062') != null)&& (isEmpty('Richiedente_SedeLegaleProvincia'))){
 					values.put( 'Richiedente_SedeLegaleProvincia', mappaValoriSgProf.get('AA062').toString() );
 					values.put( 'Richiedente_SedeLegaleProvinciaDn', getAnaDenominazione('provincia_istat', values.get('Richiedente_SedeLegaleProvincia')) );
 				}
-				if((mappaValoriSgProf.get('AA061')!== null)&&(isEmpty('Richiedente_SedeLegaleComune'))) {
+				if((mappaValoriSgProf.get('AA061')!= null)&&(isEmpty('Richiedente_SedeLegaleComune'))) {
 					values.put( 'Richiedente_SedeLegaleComune', mappaValoriSgProf.get('AA061').toString());
 					values.put( 'Richiedente_SedeLegaleComuneDn', getAnaDenominazione('comune_istat', values.get('Richiedente_SedeLegaleComune')) );
 				}
 
-				if((mappaValoriSgProf.get('AA063')!== null)&&(isEmpty('Richiedente_SedeLegaleCap'))) {
+				if((mappaValoriSgProf.get('AA063')!= null)&&(isEmpty('Richiedente_SedeLegaleCap'))) {
 					values.put( 'Richiedente_SedeLegaleCap', mappaValoriSgProf.get('AA063').toString());
 				}
 
-				if((mappaValoriSgProf.get('AA060') !== null)&&(isEmpty('Richiedente_SedeLegaleIndirizzo')))
+				if((mappaValoriSgProf.get('AA060') != null)&&(isEmpty('Richiedente_SedeLegaleIndirizzo')))
 					values.put( 'Richiedente_SedeLegaleIndirizzo', mappaValoriSgProf.get('AA060').toString() );
-				if( mappaValoriSgProf.get('AA030') !== null && isEmpty('Richiedente_RappresentanteLegaleNome'))
+				if( mappaValoriSgProf.get('AA030') != null && isEmpty('Richiedente_RappresentanteLegaleNome'))
 					values.put( 'Richiedente_RappresentanteLegaleNome', mappaValoriSgProf.get('AA030').toString() );
-				if( mappaValoriSgProf.get('AA029') !== null && isEmpty('Richiedente_RappresentanteLegaleCognome'))
+				if( mappaValoriSgProf.get('AA029') != null && isEmpty('Richiedente_RappresentanteLegaleCognome'))
 					values.put( 'Richiedente_RappresentanteLegaleCognome', mappaValoriSgProf.get('AA029').toString() );
-				if( mappaValoriSgProf.get('AA142') !== null && isEmpty('Richiedente_RappresentanteLegaleCodiceFiscale') )
+				if( mappaValoriSgProf.get('AA142') != null && isEmpty('Richiedente_RappresentanteLegaleCodiceFiscale') )
 					values.put( 'Richiedente_RappresentanteLegaleCodiceFiscale', mappaValoriSgProf.get('AA142').toString() );
 			} // **** FINE LETTURA da SGPROF
 			else {  // fallimento sgprof
@@ -522,7 +522,7 @@ mappaBudgetDDFIIIAnno={
 			// Verifica Accreditamento Operatore
 			var CF_Oper = values.get('Richiedente_CodiceFiscale');
 			logger.info("XXXXX Richiedente_CodiceFiscale ( Operatore): "+CF_Oper);
-			var m_accreditamentoOperatore = verificaAccreditamentoOperatore(CF_Oper);
+			var m_accreditamentoOperatore = verificaAccreditamentoOperatoreFormazioneSezioneA(CF_Oper);
 			logger.info("XXXXX DOTE IFP: verificaAccreditamentoOperatore per il CF "+CF_Oper+": m_accreditamentoOperatore.success:"+m_accreditamentoOperatore.success);
 			if (m_accreditamentoOperatore.success) {
 				logger.info("XXXXX DOTE IFP: verificaAccreditamentoOperatore per il CF "+CF_Oper+": m_accreditamentoOperatore.result:"+m_accreditamentoOperatore.result);
@@ -696,7 +696,7 @@ mappaBudgetDDFIIIAnno={
 		 var dotazioneFinDisabilita_Erosa = dizionarioService.getSingle(null, sql_dotazioneFinDisabilita_Erosa);
 		 logger.info("XXXXX DOTE IFP: Dotazione Finanziaria DISABILITA:"+dotazioneFinDisabilita_Erosa);
 		 values.put('Bando_DotazioneFinDisabilita_Erosa',''+dotazioneFinDisabilita_Erosa);
-		 if((idOperatore !== null)|| (idOperatore ==='')) {  // se ha funzionato l'integrazione con gefo e conosco quindi idOperatore
+		 if((idOperatore != null)&&(idOperatore !='')) {  // se ha funzionato l'integrazione con gefo e conosco quindi idOperatore
 			logger.info('XXXXX DOTI  idOperatore:' + idOperatore);
 			if (catalogoBando =='DDFIanni') {
 				 values.put('Bando_DotazioneFinOperatore_Iniziale',''+mappaBudgetDDFIAnno[idOperatore]);
@@ -730,7 +730,7 @@ mappaBudgetDDFIIIAnno={
 
 		 values.put('Bando_DotazioneFinCorsi_Rimanente',''+corsiDF);
 		 values.put('Bando_DotazioneFinDisabilita_Rimanente',''+disabilitaDF);
-		 if((idOperatore !== null)|| (idOperatore ==='')) {  // se ha funzionato l'integrazione con gefo
+		 if((idOperatore != null)&&(idOperatore !='')) {  // se ha funzionato l'integrazione con gefo
 		 	values.put('Bando_DotazioneFinOperatore_Rimanente',''+operatoreDF);
 		 }
 		 else {
@@ -762,7 +762,7 @@ mappaBudgetDDFIIIAnno={
 		values.put('Richiedente_AttoUnicoPresentato','true');
 		var dataAtto = values.get('AttoUnico_ProtocolloData');
 		var numeroAtto = values.get('AttoUnico_ProtocolloNumero');
-		if ((dataAtto!== null) && (numeroAtto!== null) &&(dataAtto!== '') && (numeroAtto!== '')) {
+		if ((dataAtto!= null) && (numeroAtto!= null) &&(dataAtto!= '') && (numeroAtto!= '')) {
 		    values.put('AttoUnico_ProtocolloData_1',dataAtto);
 		    values.put('AttoUnico_ProtocolloNumero_1',numeroAtto);
 				items.get('AttoUnico_ProtocolloData_1').setHidden(false);
@@ -867,15 +867,15 @@ mappaBudgetDDFIIIAnno={
 	}
 
   var idItemDichiarazioni;
-	idItemDichiarazioni = items.get('Dichiaraz_0001'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0002'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0003'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0004'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0005'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0007'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0008'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0001'); if (idItemDichiarazioni != null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0002'); if (idItemDichiarazioni != null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0003'); if (idItemDichiarazioni != null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0004'); if (idItemDichiarazioni != null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0005'); if (idItemDichiarazioni != null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0007'); if (idItemDichiarazioni != null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0008'); if (idItemDichiarazioni != null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 	idItemDichiarazioni = items.get('Dichiaraz_0009');
-	if (idItemDichiarazioni !== null) {
+	if (idItemDichiarazioni != null) {
 		if ((catalogoBando=='DDFIanni'  )||(catalogoBando=='DDFIIanni' )) {
 			idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);
 		} else {
@@ -885,7 +885,7 @@ mappaBudgetDDFIIIAnno={
 	}
 
 	idItemDichiarazioni = items.get('Dichiaraz_0009_1');
-	if (idItemDichiarazioni !== null) {
+	if (idItemDichiarazioni != null) {
 		if ((catalogoBando=='DDFIIIanni'  )||(catalogoBando=='DDFIVanni' )||(catalogoBando=='PPDIanni' )||(catalogoBando=='PPDIIanni' )||(catalogoBando=='PPDIIIanni' )) {
 			idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);
 		} else {
@@ -895,7 +895,7 @@ mappaBudgetDDFIIIAnno={
 	}
 
 	idItemDichiarazioni = items.get('Dichiaraz_0010');
-	if (idItemDichiarazioni !== null) {
+	if (idItemDichiarazioni != null) {
 		if ((catalogoBando=='DDFIanni'  )||(catalogoBando=='DDFIIanni' )) {
 			idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);
 		} else {
@@ -905,7 +905,7 @@ mappaBudgetDDFIIIAnno={
 	}
 
 	idItemDichiarazioni = items.get('Dichiaraz_0010_1');
-	if (idItemDichiarazioni !== null) {
+	if (idItemDichiarazioni != null) {
 		if ((catalogoBando=='DDFIIIanni'  )||(catalogoBando=='DDFIVanni' )||(catalogoBando=='PPDIanni' )||(catalogoBando=='PPDIIanni' )||(catalogoBando=='PPDIIIanni' )) {
 			idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);
 		} else {
@@ -914,9 +914,9 @@ mappaBudgetDDFIIIAnno={
 		}
 	}
 
-	idItemDichiarazioni = items.get('Dichiaraz_0011'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0012'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
-	idItemDichiarazioni = items.get('Dichiaraz_0013'); if (idItemDichiarazioni !== null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0011'); if (idItemDichiarazioni != null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0012'); if (idItemDichiarazioni != null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
+	idItemDichiarazioni = items.get('Dichiaraz_0013'); if (idItemDichiarazioni != null) {idItemDichiarazioni.setRequired(!isAttoUnicoPresentato);}
 
 	var isMostrareDotazionePerDisabilita =(catalogoBando=='DDFIVanni');
 	items.get('Bando_DotazioneFinDisabilita_Rimanente').setHidden(!isMostrareDotazionePerDisabilita);

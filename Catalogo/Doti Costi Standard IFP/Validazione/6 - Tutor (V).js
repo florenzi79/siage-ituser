@@ -1,26 +1,26 @@
 // nel caso il tutor sia anche dipendente
 // il TutorAziendale_LivelloSuperioreAdApprendista deve essere true
 {
-    var isTutorDiLivelloSuperiore = values.get('TutorAziendale_LivelloSuperioreAdApprendista'); 
-    var isTutorDipendente = values.get('TutorAziendale_LavoratoreDipendente'); 
+    var isTutorDiLivelloSuperiore = values.get('TutorAziendale_LivelloSuperioreAdApprendista');
+    var isTutorDipendente = values.get('TutorAziendale_LavoratoreDipendente');
 
-    
+
     if (( isTutorDiLivelloSuperiore == 'false') && (isTutorDipendente == true) ) {
-        errors.put('TutorAziendale_LivelloSuperioreAdApprendista', 'TutorAziendale_LivelloSuperioreAdApprendista_val'); 
+        errors.put('TutorAziendale_LivelloSuperioreAdApprendista', 'TutorAziendale_LivelloSuperioreAdApprendista_val');
         }
-    
+
 }
 
 var cf = getVal('TutorFormativo_CodiceFiscale');
-if (cf !== null && cf !== '') { 
-    if (!isValidCf(cf)) { 
+if (cf != null && cf != '') {
+    if (!isValidCf(cf)) {
       err('TutorFormativo_CodiceFiscale', 'TutorFormativo_CodiceFiscale_val');
-    } 
-} 
+    }
+}
 
 var titoloDiStudio = values.get('TutorFormativo_TitoloDiStudioNome');
-var esperienza = values.get('TutorFormativo_EsperienzaAnni');
-var esperienzaSettore = values.get('TutorFormativo_EsperienzaSettore');
+var esperienza = parseFloat(values.get('TutorFormativo_EsperienzaAnni'));
+var esperienzaSettore = parseFloat(values.get('TutorFormativo_EsperienzaSettore'));
 
 if (((titoloDiStudio == 'masterPostLaureaTriennale') | (titoloDiStudio == 'masterPostLaureaSpecialistica') | (titoloDiStudio == 'specializzazionePostLaurea') | (titoloDiStudio == 'dottoratoDiRicerca')) && (esperienza < 2)) {
 	err('TutorFormativo_EsperienzaAnni', 'TutorFormativo_EsperienzaAnni_MinoreDue_val');

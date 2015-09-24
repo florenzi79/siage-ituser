@@ -29,12 +29,29 @@ print('XXXXXXXXXX Operation edmaSyncDocumenti_DOTE - STEP 3\n');
   "Con la presente si comunica che la pratica relativa all'atto di adesione unico   - "+ instance.getIdPratica() +", e' stata protocollata in data odierna  con il numero %s.",
 "AttoUnico_FirmatarioEmail");
 
-
-
-
 print('XXXXXXXXXX Operation edmaSyncDocumenti_DOTE_ATTO - STEP 4\n');
 
   if (dm.isRegistrered()) {
+
+	print('XXXXXXXXXX set_Fase_e_Stato_Pratica_quando_protocollato_ATTO_UNICO  INIZIO');
+	values.put('statoPratica', "N/D");
+	values.put('fasePratica', "N/D");
+	print('XXXXXXXXXX set_Fase_e_Stato_Pratica_quando_protocollato_ATTO_UNICO  FINE');
+
+	print('XXXXXXXXXX AttoUnico_FilePdfAttoAdesioneDatiRiassuntivi  INIZIO');
+	var datiRiassuntivi = '';
+    if (values.get('CatalogoBando') == 'DDFIanni') {
+        print('FFFF ddfIanni');
+        attoUnicoRiassuntivo = '823e0676885944ff86971e65bd5b69c2';
+    } else if (values.get('CatalogoBando') == 'DDFIIanni') {
+        print('FFFF ddfIIanni');
+        attoUnicoRiassuntivo = '0f224a5934614419b303f68405f3f03c';
+    }
+    generatePdf('AttoUnico_FilePdfAttoAdesioneDatiRiassuntivi', attoUnicoRiassuntivo, 'AttoDiAdesioneDatiRiassuntivi.pdf');
+	print('XXXXXXXXXX AttoUnico_FilePdfAttoAdesioneDatiRiassuntivi  FINE');
+
+	save();
+
     notifyOrRepeat('859506c362764ba1a70277d1345e7cee', 'Protocolla', 'edmaSyncDocumenti_DOTE_ATTO');   // stato Adesione - In attesa di protocollazione
 	print('XXXXXXXXXX Operation edmaSyncDocumenti_DOTE_ATTO - STEP 5a protocollato\n');
   } else {

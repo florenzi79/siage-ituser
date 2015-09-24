@@ -13,7 +13,7 @@ if (eta >= etaSoglia) {
 }
 
 var cf = getVal('Partecipante_CodiceFiscale');
-if (cf !== null && cf !== '') {
+if (cf != null && cf != '') {
     if (!isValidCf(cf)) {
       err('Partecipante_CodiceFiscale', 'Partecipante_CodiceFiscale_val');
     }

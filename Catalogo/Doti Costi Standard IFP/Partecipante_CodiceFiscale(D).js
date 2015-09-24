@@ -1,5 +1,5 @@
 function calcolaEtaRichiedente(dobTime) {
-    if (parseInt(dobTime) === 0)
+    if (parseInt(dobTime) == 0)
         return '';
 
 	var age;
@@ -76,7 +76,7 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
       var offerteFormative = [];
       logger.info("XXXXX Offerte Formative(prima): "+offerteFormative);
       var i=0;
-      while (values.get('Bando_OfferteFormative['+i+']')!==null) {
+      while (values.get('Bando_OfferteFormative['+i+']')!=null) {
         offerteFormative[i]=values.get('Bando_OfferteFormative['+i+']');
         i++;
       }
@@ -91,8 +91,9 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 		  if (dati_estraiDettagliCorsi.success) {
 
 			items.get('avviso_problemaTecnico').setHidden(true);
-			logger.info("XXXXX DOTI IFP Esecuzione di estraiStatoIscrizioni. result:"+ dati_estraiDettagliCorsi.result);
-				if (dati_estraiDettagliCorsi.result!== null) {
+			logger.info("XXXXX DOTI IFP Esecuzione di estraiDettagliCorsi. result:"+ dati_estraiDettagliCorsi.result);
+				if (dati_estraiDettagliCorsi.result!= null) {
+          // veriricare che esiste almento una iscrizione per quel opera
 				nascondiCampiDestinatario(false);
 					var m_Ana = dati_estraiDettagliCorsi.result.get('datiAnagrafici');
 					logger.info("\n XXXXX Test-Integrazione-GEFO: cognome: "+ m_Ana.get("cognome")+"\n");
@@ -143,14 +144,19 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 						var istatComuneN = m_Ana.get("istatcomunenascita");
 						values.put('Partecipante_NascitaProvincia',istatComuneN.substr(0, 3));
 						values.put('Partecipante_NascitaComune',istatComuneN);
+						logger.info('FFFFF istatComuneN: '+istatComuneN);
 						setSelectDependedOptionsAndShowCached('Partecipante_NascitaComune', 'comune_istat', path+'Partecipante_NascitaProvincia');
 						// imposto la label provincia per i PDF
 						var codeProvinciaN = values.get(path+'Partecipante_NascitaProvincia');
-						var labelProvinciaN = getOptionLabel('Partecipante_NascitaProvincia', codeProvinciaN);
+						logger.info('FFFFF codeProvinciaN: '+codeProvinciaN);
+					    var labelProvinciaN = getOptionLabel('Partecipante_NascitaProvincia', codeProvinciaN);
+						logger.info('FFFFF labelProvinciaN: '+labelProvinciaN);
 						values.put('Partecipante_NascitaProvinciaDn', labelProvinciaN);
 						// imposto la label comune  per i PDF
 						var codeComuneN = values.get(path+'Partecipante_NascitaComune');
+						logger.info('FFFFF codeComuneN: '+codeComuneN);
 						var labelComuneN = getOptionLabel('Partecipante_NascitaComune', codeComuneN);
+						logger.info('FFFFF labelComuneN: '+labelComuneN);
 						values.put('Partecipante_NascitaComuneDn', labelComuneN);
 
             //valorizza da gefo Comune e Provincia di RESIDENZA

@@ -17,33 +17,38 @@ println('XXXX DOTE ENTRATA Script Validazione Primo Modulo');
 //Simulazione DIAMANTE
 var isPresentatoAttoUnico = getVal('Richiedente_AttoUnicoPresentato');
 
-if ((isPresentatoAttoUnico !== null) && (isPresentatoAttoUnico !== '')) {
+if ((isPresentatoAttoUnico != null) && (isPresentatoAttoUnico != '')) {
     if ((inputAction == 'Compila Dote')&& (isPresentatoAttoUnico == 'false')) {
         err('Richiedente_Denominazione', 'Richiedente_AttoUnicoPresentato_FALSE_val');
     }
 }
 
-if ((isPresentatoAttoUnico !== null) && (isPresentatoAttoUnico !== '')) {
+if ((isPresentatoAttoUnico != null) && (isPresentatoAttoUnico != '')) {
     if ((inputAction == 'Compila Atto di Adesione Unico')&& (isPresentatoAttoUnico == 'true')) {
         err('Avviso_AttoUnicoOk', 'Richiedente_AttoUnicoPresentato_TRUE_val');
     }
 }
 
 if (inputAction == 'Compila Atto di Adesione Unico') {
-
+println('XXXX DOTE - Premuto pulsante Compila Atto di Adesione Unico');
   var cf = getVal('AttoUnico_FirmatarioCodiceFiscale');
-  if ((cf !== null) && (cf !== '')) {
+  if ((cf != null) && (cf != '')) {
       if (!isValidCf(cf)) {
         err('AttoUnico_FirmatarioCodiceFiscale', 'AttoUnico_FirmatarioCodiceFiscale_val');
       }
   }
   var queryAlboAccreditatiOk = getVal('isQueryAlboAccreditatiOk');
-  if (queryAlboAccreditatiOk !== 'true') {
-      err('Avviso_AccreditamentoOperatoreNonVerificabile', 'Avviso_AccreditamentoOperatoreNonVerificabile_val');
+  println('XXXX DOTE queryAlboAccreditatiOk ==>'+queryAlboAccreditatiOk);
+
+  if (queryAlboAccreditatiOk == 'false') {
+    println('XXXX DOTE RAISE Avviso_AccreditamentoOperatoreNonVerificabile');
+// TODO Controllare prchè viene
+err('Avviso_AccreditamentoOperatoreNonVerificabile', 'Avviso_AccreditamentoOperatoreNonVerificabile_val');
   }
 
   var is_OperatoreAccreditato = getVal('Richiedente_OperatoreAccreditato');
   if (is_OperatoreAccreditato == 'false') {
+      println('XXXX DOTE RAISE is_OperatoreAccreditato = false');
       err('Richiedente_IdOperatore', 'Richiedente_IdOperatore_val');
   }
 
@@ -51,7 +56,7 @@ if (inputAction == 'Compila Atto di Adesione Unico') {
 
 
 if (inputAction == 'Compila Dote') {
-
+println('XXXX DOTE - Premuto pulsante Compila Dote');
   var queryVerificaSedeAccreditataOk = getVal('isQueryVerificaSedeAccreditataOk');
   if (queryVerificaSedeAccreditataOk == 'false') {
       err('Avviso_AccreditamentoSedeNonVerificabile', 'Avviso_AccreditamentoSedeNonVerificabile_val');
@@ -60,7 +65,7 @@ if (inputAction == 'Compila Dote') {
   var is_SedeOperativaAccreditata = getVal('Richiedente_SedeOperativaAccrSezA');
   println('XXXX Dote is_SedeOperativaAccreditata:'+is_SedeOperativaAccreditata);
   if (is_SedeOperativaAccreditata == 'false') {
-      println('XXXX Dote Controllo attivato Richiedente_IdSede_val');
+      println('XXXX DOTE RAISE sede non accreditata');
       err('Richiedente_IdSede', 'Richiedente_IdSede_val');
   }
   // caricamento Soglie definite negli OnLoad
