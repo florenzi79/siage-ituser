@@ -8,9 +8,9 @@ HI - (TODO Marco) Aggiungere avvisi e controllo stato finale per erosione budget
 HI - (TODO Marco) CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo
 HI - (TODO Marco) CONTROLLO: Bloccare se CF destinatario non è presente in iscrizioni
 HI - (TODO Marco) DDF I Anno -query e Controllo Numero massimo di doti per ID corso:  25 e numero massimo di disabili per ID Corso
-HI - (TODO F ?..) Se dote: Visualizzare avviso e creare controllo per accreditamento SEDE (oltre a operatore) al modulo 1e e prima della protocollazione.
+HI - (TODO F ?..) Se dote: Visualizzare avviso e creare controllo per accreditamento SEDE (oltre a operatore) al modulo 1e(fatto)  e prima della protocollazione (da fare).
 HI - (TODO M....) AVVISO e Blocco (Controllo) in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
-HI - (TODO .....) CONTROLLO con non ci sono stati problemi tecnici nel primo modulo (impostare nuovi campi negli "else {}")
+HI - (TODO .....) (fatto: fare una prova) CONTROLLO con non ci sono stati problemi tecnici nel primo modulo (impostare nuovi campi negli "else {}")
 HI - (TODO Fabiola) Importare nuovo template pdf dati riassuntivi parametrizzando per catalogoBando
 HI - (TODO M....) Settare la security della checklist al gruppo degli istruttori in modo da non visualizzarla nel fascicolo per i richiedenti
 HI - (TODO M&F..) Verificare baco: non è visibile "Comune/stato estero di nascita" del partecipante

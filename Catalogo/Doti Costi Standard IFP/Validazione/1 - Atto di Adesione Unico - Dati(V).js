@@ -43,7 +43,7 @@ if (inputAction == 'Compila Atto di Adesione Unico') {
   }
 
   var is_OperatoreAccreditato = getVal('Richiedente_OperatoreAccreditato');
-  if (is_OperatoreAccreditato !== 'true') {
+  if (is_OperatoreAccreditato == 'false') {
       err('Richiedente_IdOperatore', 'Richiedente_IdOperatore_val');
   }
 
@@ -52,9 +52,15 @@ if (inputAction == 'Compila Atto di Adesione Unico') {
 
 if (inputAction == 'Compila Dote') {
 
+  var queryVerificaSedeAccreditataOk = getVal('isQueryVerificaSedeAccreditataOk');
+  if (queryVerificaSedeAccreditataOk == 'false') {
+      err('Avviso_AccreditamentoSedeNonVerificabile', 'Avviso_AccreditamentoSedeNonVerificabile_val');
+  }
   //Richiedente_SedeOperativaAccrSezA
   var is_SedeOperativaAccreditata = getVal('Richiedente_SedeOperativaAccrSezA');
-  if (is_SedeOperativaAccreditata !== 'true') {
+  println('XXXX Dote is_SedeOperativaAccreditata:'+is_SedeOperativaAccreditata);
+  if (is_SedeOperativaAccreditata == 'false') {
+      println('XXXX Dote Controllo attivato Richiedente_IdSede_val');
       err('Richiedente_IdSede', 'Richiedente_IdSede_val');
   }
   // caricamento Soglie definite negli OnLoad

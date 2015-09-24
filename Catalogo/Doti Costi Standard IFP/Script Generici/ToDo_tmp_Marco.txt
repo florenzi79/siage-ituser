@@ -32,3 +32,7 @@ Attenzione per procedere è necessario essere in possesso dei requisiti di accre
 
 Richiedente_IdSede_val
 Attenzione per procedere è necessario essere in possesso dei requisiti di accreditamento alla sezione "A" ai sensi della DGR del 26-10-2011 n. 2412 e relativi decreti attuativi.
+
+aggiungere nel PO
+isQueryVerificaSedeAccreditataOk
+Avviso_AccreditamentoSedeNonVerificabile

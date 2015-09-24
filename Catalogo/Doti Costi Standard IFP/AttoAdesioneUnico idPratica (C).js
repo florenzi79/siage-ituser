@@ -539,7 +539,7 @@ mappaBudgetDDFIIIAnno={
 				}
 			} else {  // se non è stato possibile verificare l'accreditamento dell'operatore
 				logger.info("\n\n\n\n\n XXXXXXXX Errore su verificaAccreditamentoOperatore: " + m_accreditamentoOperatore.message + "\n\n\n\n\n");
-				values.put('QueryAlboAccreditatiOk','m_accreditamentoOperatore.message');
+				values.put('QueryAlboAccreditatiOk','false');
 				items.get('Avviso_NoRequisitiAttoUnico').setHidden(true);
 				items.get('Avviso_AccreditamentoOperatoreNonVerificabile').setHidden(false);
 				nascondiFieldsetPrincipali(true);
@@ -604,10 +604,14 @@ mappaBudgetDDFIIIAnno={
 						} else {
 							values.put('Richiedente_SedeOperativaAccrSezA','false');
 						}
+						values.put('isQueryVerificaSedeAccreditataOk','true');
+						items.get('Avviso_AccreditamentoSedeNonVerificabile').setHidden(true);
 
 					}
 					else { // interrogazione gefo accreditamento Sede non andata a buon fine
-						logger.info("XXXXX interrogazione gefo accreditamento Sede non andata a buon fine");
+						logger.info("XXXXX interrogazione gefo accreditamento sede non andata a buon fine");
+						values.put('isQueryVerificaSedeAccreditataOk','false');
+						items.get('Avviso_AccreditamentoSedeNonVerificabile').setHidden(false);
 					}
 					// fine verifica accreditamento sede
 
