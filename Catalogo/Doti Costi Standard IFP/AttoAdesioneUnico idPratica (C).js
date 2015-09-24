@@ -8,8 +8,8 @@ function nascondiFieldsetPrincipali(valore) {
 }
 
 {
-//	var catalogoBando ='DDFIanni';
-		var catalogoBando ='DDFIIanni' ;
+	var catalogoBando ='DDFIanni';
+//		var catalogoBando ='DDFIIanni' ;
 //		var catalogoBando ='DDFIIIanni';
 //		var catalogoBando ='DDFIVanni' ;
 //		var catalogoBando ='PPDIanni'  ;
@@ -527,7 +527,7 @@ mappaBudgetDDFIIIAnno={
 			if (m_accreditamentoOperatore.success) {
 				logger.info("XXXXX DOTE IFP: verificaAccreditamentoOperatore per il CF "+CF_Oper+": m_accreditamentoOperatore.result:"+m_accreditamentoOperatore.result);
 				items.get('Avviso_AccreditamentoOperatoreNonVerificabile').setHidden(true);
-				values.put('InterrogazioneAlboAccreditati','ok');
+				values.put('isQueryAlboAccreditatiOk','true');
 				if(m_accreditamentoOperatore.result) {
 						logger.info('XXXXXXXX  Ente Accreditato');
 						values.put('Richiedente_OperatoreAccreditato','true');
@@ -539,7 +539,7 @@ mappaBudgetDDFIIIAnno={
 				}
 			} else {  // se non è stato possibile verificare l'accreditamento dell'operatore
 				logger.info("\n\n\n\n\n XXXXXXXX Errore su verificaAccreditamentoOperatore: " + m_accreditamentoOperatore.message + "\n\n\n\n\n");
-				values.put('InterrogazioneAlboAccreditati','m_accreditamentoOperatore.message');
+				values.put('QueryAlboAccreditatiOk','m_accreditamentoOperatore.message');
 				items.get('Avviso_NoRequisitiAttoUnico').setHidden(true);
 				items.get('Avviso_AccreditamentoOperatoreNonVerificabile').setHidden(false);
 				nascondiFieldsetPrincipali(true);
@@ -732,11 +732,13 @@ mappaBudgetDDFIIIAnno={
 		 else {
 			values.put('Bando_DotazioneFinOperatore_Rimanente','');
 		 }
+     var is_DotazioneFinCorsi_Esaurita = (corsiDF < parseFloat(values.get('Bando_DotazioneFinCorsi_SogliaPrimoModulo')));
+     var is_DotazioneFinDisabilita_Esaurita = (disabilitaDF < parseFloat(values.get('Bando_DotazioneFinDisabilita_SogliaPrimoModulo')));
+     var is_DotazioneFinOperatore = (operatoreDF < parseFloat(values.get('Bando_DotazioneFinOperatore_SogliaPrimoModulo')));
 
-
-		 //TODO: Calcolare Dotazione finanziaria erosa per il singolo operatore
-
-
+		 items.get('Avviso_DotazioneFinCorsi_Rimanente_Esaurita').setHidden(!is_DotazioneFinCorsi_Esaurita);
+		 items.get('Avviso_DotazioneFinDisabilita_Rimanente_Esaurita').setHidden(!is_DotazioneFinDisabilita_Esaurita);
+		 items.get('Avviso_DotazioneFinOperatore_Rimanente_Esaurita').setHidden(!is_DotazioneFinOperatore);
 
 		} // fine if I am in stato 1
 		else { // se non sono in stato 1

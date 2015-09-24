@@ -1,0 +1,34 @@
+Aggiungere nel catalogo (PO) i Campi di modello:
+
+  NUMERICI
+  Bando_DotazioneFinCorsi_SogliaPrimoModulo
+  Bando_DotazioneFinDisabilita_SogliaPrimoModulo
+  Bando_DotazioneFinOperatore_SogliaPrimoModulo
+
+
+Avviso_DotazioneFinCorsi_Rimanente_Esaurita
+values.put('Avviso_DotazioneFinCorsi_Rimanente_Esaurita',"La dotazione finanziaria relativa al bando è esaurita. Non sarà possiblie proseguire con la compilazione delle doti.");
+
+Avviso_DotazioneFinOperatore_Rimanente_Esaurita
+values.put('Avviso_DotazioneFinOperatore_Rimanente_Esaurita',"Il budget assegnato all'operatore è esaurito. Non sarà possiblie proseguire con la compilazione delle doti.");
+
+Avviso_DotazioneFinDisabilita_Rimanente_Esaurita
+values.put('Avviso_DotazioneFinDisabilita_Rimanente_Esaurita',"La dotazione finanziaria per la componente disabilità è esaurita. Non sarà possibile effettuare la richiesta di doti in cui il destinatario è dichiarato disabile.");
+
+
+
+
+
+values.put('Bando_DotazioneFinCorsi_SogliaPrimoModulo', ''+parseFloat(mappa_DotazioneFinCorsi_SogliaPrimoModulo[catalogoBando]));
+values.put('Bando_DotazioneFinDisabilita_SogliaPrimoModulo', ''+parseFloat(mappa_DotazioneFinDisabilita_SogliaPrimoModulo[catalogoBando]));
+values.put('Bando_DotazioneFinOperatore_SogliaPrimoModulo', ''+parseFloat(mappa_DotazioneFinOperatore_SogliaPrimoModulo[catalogoBando]));
+
+
+Avviso_AccreditamentoOperatoreNonVerificabile_val
+Si è verificato un momentaneo problema di connessione. Si prega di riprovare più tardi.
+
+Richiedente_IdOperatore_val
+Attenzione per procedere è necessario essere in possesso dei requisiti di accreditamento alla sezione "A" ai sensi della DGR del 26-10-2011 n. 2412 e relativi decreti attuativi.
+
+Richiedente_IdSede_val
+Attenzione per procedere è necessario essere in possesso dei requisiti di accreditamento alla sezione "A" ai sensi della DGR del 26-10-2011 n. 2412 e relativi decreti attuativi.

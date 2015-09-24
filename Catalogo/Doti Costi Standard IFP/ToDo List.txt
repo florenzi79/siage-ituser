@@ -3,15 +3,15 @@ Attività Doti IFP
 TODO
 ===================
 
-HI - (TODO Marco) Aggiungere avvisi e 2 controlli per Erosione Fondo Globale (già calcolato)
-HI - (TODO Marco) Aggiungere avvisi e 2 controlli per erosione budget per singolo operatore  (già calcolato)
+HI - (TODO Marco) Aggiungere avvisi e controllo stato finale per Erosione Fondo Globale (già calcolato)
+HI - (TODO Marco) Aggiungere avvisi e controllo stato finale per erosione budget per singolo operatore  (già calcolato)
 HI - (TODO Marco) CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo
 HI - (TODO Marco) CONTROLLO: Bloccare se CF destinatario non è presente in iscrizioni
 HI - (TODO Marco) DDF I Anno -query e Controllo Numero massimo di doti per ID corso:  25 e numero massimo di disabili per ID Corso
 HI - (TODO F ?..) Se dote: Visualizzare avviso e creare controllo per accreditamento SEDE (oltre a operatore) al modulo 1e e prima della protocollazione.
 HI - (TODO M....) AVVISO e Blocco (Controllo) in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
 HI - (TODO .....) CONTROLLO con non ci sono stati problemi tecnici nel primo modulo (impostare nuovi campi negli "else {}")
-HI - (TODO Fabiola / wait Patrizia) Importare nuovo template pdf dati riassuntivi
+HI - (TODO Fabiola) Importare nuovo template pdf dati riassuntivi parametrizzando per catalogoBando
 HI - (TODO M....) Settare la security della checklist al gruppo degli istruttori in modo da non visualizzarla nel fascicolo per i richiedenti
 HI - (TODO M&F..) Verificare baco: non è visibile "Comune/stato estero di nascita" del partecipante
 HI - (TODO F....) ServiziFormazione_DataConclusioneMax  Aggiungere script che popola tale campo con la data massima
