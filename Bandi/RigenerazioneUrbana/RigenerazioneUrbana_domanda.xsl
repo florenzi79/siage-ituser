@@ -29,7 +29,12 @@
 								</fo:table-cell>
 								<fo:table-cell text-align="left" font-weight="bold">
 									<fo:block>
-										<fo:inline><xsl:value-of select="/_/Richiedente_Tipologia" /></fo:inline>
+										<fo:inline>
+											<xsl:choose>
+												<xsl:when test="/_/Richiedente_Tipologia[text()='Comune (anche in forma associata)']">Comune</xsl:when>
+												<xsl:otherwise><xsl:value-of select="/_/Richiedente_Tipologia" /></xsl:otherwise>
+											</xsl:choose>
+										</fo:inline>
 										<fo:inline padding-left="1mm">di</fo:inline>
 										<fo:inline padding-left="1mm"><xsl:value-of select="/_/Richiedente_Denominazione" /></fo:inline>
 									</fo:block>

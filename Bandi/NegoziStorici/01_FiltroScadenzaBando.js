@@ -1,0 +1,2 @@
+checkLoanActive(['a543641e71534e9cab50b349a487874d','e6ce0d223ca64bc592b5ba7c39cae364','204f30e1c4a442829df1ec8c2f34e8c9','d64d8f8dd0c6429792935d9998f80204','f386aca4561140238a45eb9e07763da3','d470f143f14744d8b130937bfd7dcf31','b65b9ad84ad5451982bb1a081310704c']);
+                 //1 di 7 - Requisiti di accesso     2 di 7 - Dati della domanda        3 di 7 - Dati del progetto         4 di 7 - Spese                     5 di 7 - Documenti                 6 di 7 - Domanda di contributo     7 di 7 - Pagamento bollo
