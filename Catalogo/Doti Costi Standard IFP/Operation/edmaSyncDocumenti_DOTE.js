@@ -31,7 +31,7 @@ var nomeBando = values.get('Bando_Nome');
 	 +'.',
 	[mailContatto]);
 	print('XXXXXXXXXX sendMailProtDomandaBoDOTE  FINE');
-	
+
 	//set_Fase_e_Stato_Pratica_quando_protocollato
 	print('XXXXXXXXXX set_Fase_e_Stato_Pratica_quando_protocollato  INIZIO');
 	values.put('statoPratica', "Presentato");

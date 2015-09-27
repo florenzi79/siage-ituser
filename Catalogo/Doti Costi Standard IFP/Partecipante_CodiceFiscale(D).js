@@ -1,5 +1,5 @@
 function calcolaEtaRichiedente(dobTime) {
-    if (parseInt(dobTime) == 0)
+    if (parseInt(dobTime,10) == 0)
         return '';
 
 	var age;
@@ -11,7 +11,7 @@ function calcolaEtaRichiedente(dobTime) {
     // todaysDay=28; todaysMonth=2; todaysYear=2000; // simulate today is another day
 
 	var dob = new Date();
-	dob.setTime(parseInt(dobTime));
+	dob.setTime(parseInt(dobTime,10));
 	var myDay = dob.getDate();
 	var myMonth = dob.getMonth()+1;
 	var myYear = dob.getFullYear();
@@ -85,6 +85,7 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 //			if (dati_estraiStatoIscrizioni.success) {
 		var idOperatore = values.get('Richiedente_IdOperatore');
 		var idSede = values.get('Richiedente_IdSede');
+		var annualita = values.get('Bando_Annualita');
 
 		  print("XXXXX DOTI - esecuzione di estraiDettagliCorsi(IdOperatore = "+idOperatore+" codiceFiscale="+codiceFiscale+" offerteFormative:"+offerteFormative+" idSede:"+idSede+")\n");
 		  var dati_estraiDettagliCorsi = estraiDettagliCorsi(idOperatore, codiceFiscale, offerteFormative, idSede);
@@ -92,7 +93,51 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 
 			items.get('avviso_problemaTecnico').setHidden(true);
 			logger.info("XXXXX DOTI IFP Esecuzione di estraiDettagliCorsi. result:"+ dati_estraiDettagliCorsi.result);
-				if (dati_estraiDettagliCorsi.result!= null) {
+			var esisteIscrizione = false;
+			if (dati_estraiDettagliCorsi.result!= null) {
+			//*****************************************************************
+				// veriricare che esiste almento una iscrizione per quel operatore
+				var a_IscrDC = dati_estraiDettagliCorsi.result.get('iscrizioni');
+				logger.info("MMMMM DOTI: array di iscrizioni: a_IscrDC:"+ a_IscrDC+"\n");
+				if (a_IscrDC!=null) {
+				  var j=0;
+				  var offerta;
+				  for (i = 0; i < a_IscrDC.length; i++) {
+						logger.info("\nMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXXXX\n");
+						var elem = a_IscrDC[i];
+						logger.info("MMMMM DOTI: idcorso="+ elem.get('idcorso')+"\n");
+						logger.info("MMMMM DOTI: elemento elem=a_IscrDC["+i+"] = elem:"+ a_IscrDC+"\n");
+						offerta = dati_estraiDettagliCorsi.result.get(elem.get('idcorso'));
+						if ((offerta.get('idoperatore') != null) && (annualita == offerta.get('annocorso')+'')) {
+							  esisteIscrizione = true;
+							  logger.info("MMMMM DOTI i="+i+" XXXX offerta = elem.get('idcorso')="+ elem.get('idcorso')+": "+offerta+"\n");
+							  logger.info("MMMMM DOTI: dati_estraiDettagliCorsi result datafine i-esima: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('datafine')+"\n");
+							  logger.info("MMMMM DOTI: dati_estraiDettagliCorsi result titolo i-esimo: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('titolo')+"\n");
+							  logger.info("MMMMM DOTI: offerta get titolo i-esimo: "+ offerta.get('titolo')+"\n");
+							  logger.info("MMMMM DOTI: offerta get titolo i-esimo: idoperatore"+ offerta.get('idoperatore')+"\n");
+							  logger.info("MMMMM DOTI: offerta get titolo i-esimo: idsede: "+ offerta.get('idsede')+"\n");
+							  var competenze = offerta.get('competenze')[0];
+
+							  logger.info('MMMMM mappa competenze: ' +competenze+'\n');
+							  logger.info('MMMMM idqualifica di competenze: ' + competenze.get('idqualifica')+'\n');
+							  logger.info('MMMMM idindirizzo di competenze: ' + competenze.get('idindirizzo')+'\n');
+							  logger.info('MMMMM qualifica|indirizzo:==>' + competenze.get('idqualifica')+"|"+competenze.get('idindirizzo')+'<==\n');
+							  logger.info('MMMMM annocorso: ' +offerta.get('annocorso')+'\n');
+							  logger.info('MMMMM idqualifica: ' +offerta.get('idqualifica')+'\n');
+							  logger.info('MMMMM annocorso: ' +offerta.get('annocorso')+'\n');
+							}  // fine IF (offerta.get('idoperatore') != null) && (annualita == offerta.get('annocorso')+
+						} // fine cidlo for sulle iscrizioni
+				  } else {
+					logger.info("MMMMM DOTI dati_estraiDettagliCorsi.result.get('iscrizioni')=null\n");
+								//			  values.get('Avviso_ricercaEmpty').setHidden(false);
+				  }
+
+			//*****************************************************************
+			}
+
+
+			if (esisteIscrizione ) {
+				    values.put('CFvalido','true');
           // veriricare che esiste almento una iscrizione per quel opera
 				nascondiCampiDestinatario(false);
 					var m_Ana = dati_estraiDettagliCorsi.result.get('datiAnagrafici');
@@ -142,10 +187,19 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 
             //valorizza da gefo Comune e Provincia di NASCITA
 						var istatComuneN = m_Ana.get("istatcomunenascita");
+						logger.info('FFFFF istatComuneN estero?: '+istatComuneN.indexOf('E'));
+						if (istatComuneN.indexOf('E')>=0) {
+						    var codiceComune = istatComuneN.substr(3, 3);
+						    istatComuneN = 'EEE'+codiceComune;
+						}
+						var isEstero = (istatComuneN.indexOf('E')>=0);
+						logger.info('FFFFF isEstero: '+isEstero);
+						items.get('Partecipante_NascitaComune').setHidden(isEstero);
 						values.put('Partecipante_NascitaProvincia',istatComuneN.substr(0, 3));
 						values.put('Partecipante_NascitaComune',istatComuneN);
 						logger.info('FFFFF istatComuneN: '+istatComuneN);
-						setSelectDependedOptionsAndShowCached('Partecipante_NascitaComune', 'comune_istat', path+'Partecipante_NascitaProvincia');
+						setSelectOptionsCached('Partecipante_NascitaProvincia', 'provincia_istat');
+						setSelectDependedOptionsCached('Partecipante_NascitaComune', 'comune_istat', path+'Partecipante_NascitaProvincia');
 						// imposto la label provincia per i PDF
 						var codeProvinciaN = values.get(path+'Partecipante_NascitaProvincia');
 						logger.info('FFFFF codeProvinciaN: '+codeProvinciaN);
@@ -203,10 +257,6 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
                 values.put('Partecipante_DomicilioComeResidenza','false');
             }
 
-            (values.get('Partecipante_ResidenzaComune')==values.get('Partecipante_DomicilioComune')) &&
-            (values.get('Partecipante_ResidenzaIndirizzo')==values.get('Partecipante_DomicilioIndirizzo')) &&
-            (values.get('Partecipante_ResidenzaCap')==values.get('Partecipante_DomicilioCap'))
-
             logger.info('XXXXX Partecipante_ResidenzaComune:>>>'+values.get('Partecipante_ResidenzaComune')+'<<<');
             logger.info('XXXXX Partecipante_DomicilioComune:>>>'+values.get('Partecipante_DomicilioComune')+'<<<');
             logger.info('XXXXX Partecipante_ResidenzaIndirizzo:>>>'+values.get('Partecipante_ResidenzaIndirizzo')+'<<<');
@@ -227,11 +277,12 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
             // TODO: Richiamare Gefo per controllare che il destinatario non abbia già partecipato ad una dote tra quelle nel sheets "Verifica Bandi"
             // visualizzando eventualmente l'avviso  avviso_DoteGiaErogataIncompatibile e bloccando con un controllo.
 
-				}
+				}  //if (dati_estraiDettagliCorsi.result!= null)
         else {
           // result = null ==> Non ci sono destinatari iscritti con quel CF
           logger.info("XXXXXX  DOTE: Il destinatario non risulta iscritto a nessun corso. Pertanto non è possibile procedere con la richiesta della dote");
           items.get('avviso_iscrizioneCorso').setHidden(false);
+          values.put('CFvalido','false');
           svuotaCampiDestinatario();
           nascondiCampiDestinatario(true);
         }

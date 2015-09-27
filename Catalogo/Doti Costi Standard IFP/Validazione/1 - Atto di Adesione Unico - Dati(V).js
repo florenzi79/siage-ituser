@@ -29,6 +29,23 @@ if ((isPresentatoAttoUnico != null) && (isPresentatoAttoUnico != '')) {
     }
 }
 
+/*if ((values.get('Dichiaraz_0001') != 'true') ||
+    (values.get('Dichiaraz_0002') != 'true') ||
+    (values.get('Dichiaraz_0003') != 'true') ||
+    (values.get('Dichiaraz_0004') != 'true') ||
+    (values.get('Dichiaraz_0005') != 'true') ||
+    (values.get('Dichiaraz_0007') != 'true') ||
+    (values.get('Dichiaraz_0008') != 'true') ||
+    (values.get('Dichiaraz_0009') != 'true') ||
+    //(values.get('Dichiaraz_0009_1') != 'true') ||
+    (values.get('Dichiaraz_0010') != 'true') ||
+    //(values.get('Dichiaraz_0010_1') != 'true') ||
+    (values.get('Dichiaraz_0011') != 'true') ||
+    (values.get('Dichiaraz_0012') != 'true') ||
+    (values.get('Dichiaraz_0013') != 'true')) {
+	    err('SelezionaTutteDichiarazioni','SelezionaTutteDichiarazioni_val');
+}*/
+
 if (inputAction == 'Compila Atto di Adesione Unico') {
 println('XXXX DOTE - Premuto pulsante Compila Atto di Adesione Unico');
   var cf = getVal('AttoUnico_FirmatarioCodiceFiscale');

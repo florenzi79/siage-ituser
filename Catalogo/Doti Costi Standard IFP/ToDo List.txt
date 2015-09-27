@@ -4,42 +4,28 @@ TODO
 ===================
 NOTA: Ultima Versione Bando:  DDF I anni in Formazione
 
-HI - (TODO Marco) Verifica (Con personale GeFo) corretto match e filtri Corsi acquisiti da integrazione gefo
+HI - (TODO Marco) Aggiungere filtro "Offerta Formativa" in Partecipante_CodiceFiscale(D) e in PopolaElencoCorsi_DOTE.js
 HI - (TODO Marco) Aggiungere avvisi e controllo stato finale per Erosione Fondo Globale (Come fatto nel OnLoad di IdPratica nel "1 - Atto di Adesione Unico - Dati" )
 HI - (TODO Marco) Aggiungere avvisi e controllo stato finale per erosione budget per singolo operatore  (Come fatto nel OnLoad di IdPratica nel "1 - Atto di Adesione Unico - Dati" )
-HI - (TODO Marco) CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo (controllo + eventualmente OnChange CF Destinatario)
-HI - (TODO Marco) CONTROLLO: Bloccare se CF destinatario non è presente in iscrizioni
-HI - (TODO FL...) CONTROLLO VALIDAZIONE. DDF I Anno -query e Controllo Numero massimo di doti per ID corso:  25 e numero massimo di disabili per ID Corso
-HI - (TODO F ?..) creare controllo per verifica accreditamento SEDE prima della protocollazione (funzione già utilizzata nel nel OnLoad di IdPratica nel "1 - Atto di Adesione Unico - Dati" )
+HI - (TODO Marco) CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo (controllo + eventualmente OnChange CF  Destinatario)
 HI - (TODO M....) AVVISO e Blocco (Controllo) in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
 HI - (TODO M....) Settare la security della checklist al gruppo degli istruttori in modo da non visualizzarla nel fascicolo per i richiedenti
-HI - (TODO M&F..) Verificare baco: non è visibile "Comune/stato estero di nascita" del partecipante
-HI - (TODO FL...) Campo ServiziFormazione_DataConclusioneMax  Aggiungere script OnLoad che popola tale campo con la data massima tra le "DataConclusione" del riepilogo servizi
-
-HI - (TODO FL...) Impostare Report come da requisiti ver 4.00
 HI - (TODO M....) Verificare che i controlli specificati nell'info bandi siano stati tutti inseriti
 HI - (TODO FL...) Impostare (verificare) i valori assunti nell'operation, relativi a fase pratica a bozza eliminata.
-HI - (TODO FL...) Facility di autocompilazione tutor mettendo solo CF, facendo query su pratiche già protocollate
-                   utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
-HI - (TODO FL...) Aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi
-                   nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
-HI - (TODO FL...) Valorizzazione Data - Ora Invio al Protocollo
 MEDIUM - (TODO .....) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
 MEDIUM - (TODO .....) Aggiungere un messaggio / tooltip che renda chiaro che i dati della dotazione finanziaria rimanenti sono da considerarsi indicativi
-
-LOW - (TODO .....) Abilitare controllo coerenza e firmatario documenti ricaricati nei DUE moduli documenti (NOTA: limita i test di protocollazione solo a chi
-	               può firmare un doc)
-
-LOW - (TODO .....) Parametrizzazione o cancellazione/inserimento titolo di studio sheet tabtit_istruzione nei vari bandi
-                   in alternativa  non fare niente e utilizzare il PO Completo cancellando i titoli di studio che non servono nel singolo bando
+LOW - (TODO .....) Abilitare controllo coerenza e firmatario documenti ricaricati nei DUE moduli documenti, (Atto unico e dote) (NOTA: limita i test di protocollazione solo a chi può firmare un doc)
 LOW - (WAIT Aldo) Aggiungere controllo check digit dei CF con script in sviluppo da Aldo
 LOW - (TODO Marco) Aggiungere un filtro, all'onchange del codice fiscale del destinatario, che abbia iscrizioni relative alla ANNUALITA' giusta
 LOW - (TODO .....) Aggiungere un item che, nonostante il richiedente sia dichiarato disabile, permetta di scegliere di richiedere o meno l'incentivo disabilita'
 
-- (WAIT LISPA) Assegnare le security corrette al processo per l'istruttore
-- (WAIT LISPA) Assegnare le security corrette ai file _tmp
+LOW - (TODO .....) Assegnare le security corrette al processo per l'istruttore e per monitraggio. Nome: Istruttore procedura +  titolo bando ovvero "Istruttore procedura I Anni IeFP a.f. 2015-2016"
+"Istruttore procedura II Anni IeFP a.f. 2015-2016"
+"Monitoraggio I e II Anni IeFP a.f. 2015-2016" (definito da Scotti, da chiedere conferma a Lispa)
+
+LOW - (TODO .....) Assegnare le security corrette ai file _tmp o rimuovere la necessità del file TMP (vedi Lorenzi)
 - (WAIT LISPA) Messaggio esplicativo sul come caricare i documenti firmati nell'atto unico
-- (WAIT LISPA) Invio email alla protocollazione dell'atto unico ? (forse NO)
+- (WAIT LISPA) Invio email alla protocollazione dell'atto unico ? (forse NO) altrimenti mettere indirizzo fake corretto (vedi mail Silvia)
 - (wait LISPA) Aggiungere spedizione mail ANCHE a regione  quando protocollato Dote (wait indicazioni e corpo mail)
 
 ==========================
@@ -74,9 +60,24 @@ GIA' FATTI
 			     a. Modifica etichetta e tipo campo c42
 			     b. Definizione controlli campi c41 e c42
 - ( OK Marco) CONTROLLO Parametrico sul bando vedi PA_016 Età destinatario
-- ( OK Fabiola) Modificare il messaggio di avviso nella prima schermata: "E' possibile procedere con la compilazione della dote" (renderlo uguale al messaggio di errore)
+- ( OK Fabiola) Modificare il messaggio di avviso nella prima schermata: "E' possibile procedere con la compilazione della dote" (renderlo uguale al messaggio
+				di errore)
 - ( OK Fabiola) CONTROLLO Verifica su residenza in lombardia
                 Se lo studente non è residente in Lombardia, per poter richiedere la dote, il domicilio dovrà coincidere con la sede dell’operatore che presenta la dote e che ha il convitto (regione fornisce un elenco, lista statica).
 - ( OK Fabiola) Importare nuovo template pdf dati riassuntivi parametrizzando per catalogoBando
-- ( OK Marco) (fatto: fare una prova) CONTROLLO con non ci sono stati problemi tecnici nel primo modulo (impostare nuovi campi negli "else {}")
-- (OK Fabiola .....) (verificare se si verifica ancora) Capire perchè non viene visualizzato il fascicolo per pratiche protocollate.
+- ( OK Marco) CONTROLLO con non ci sono stati problemi tecnici nel primo modulo (impostare nuovi campi negli "else {}")
+- ( OK Fabiola) Capire perchè non viene visualizzato il fascicolo per pratiche protocollate.
+- ( OK Fabiola) Creare controllo per verifica accreditamento SEDE prima della protocollazione (funzione già utilizzata nel OnLoad di IdPratica nel "1 -
+				Atto di Adesione Unico - Dati" )
+- ( OK Marco) CONTROLLO: Bloccare se CF destinatario non è presente in iscrizioni
+- ( OK Francesco) Verificare baco: non è visibile "Comune/stato estero di nascita" del partecipante
+- ( OK FL...) CONTROLLO VALIDAZIONE. DDF I Anno -query e Controllo Numero massimo di doti per ID corso:  25 e numero massimo di disabili per ID Corso
+- ( OK FL...) Impostare Report come da requisiti ver 4.00
+- ( OK FL...) Facility di autocompilazione tutor mettendo solo CF, facendo query su pratiche già protocollate
+                  utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
+- ( OK FL...) Aggiungere facility del firmatario su onchange del cf: popolare con firmatari gia' immessi
+                  nelle pratiche esistenti utilizzando i dati corrispondenti alla pratica protocollata con id piu' alto
+- ( OK FL...) Valorizzazione Data - Ora Invio al Protocollo
+- ( Ok M....) Parametrizzazione o cancellazione/inserimento titolo di studio sheet tabtit_istruzione nei vari bandi
+                   in alternativa  non fare niente e utilizzare il PO Completo cancellando i titoli di studio che non servono nel singolo bando
+- ( OK FL...) Campo ServiziFormazione_DataConclusioneMax  Aggiungere script OnLoad che popola tale campo con la data massima tra le "DataConclusione" del riepilogo servizi

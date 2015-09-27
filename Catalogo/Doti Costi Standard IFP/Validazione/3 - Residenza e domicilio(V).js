@@ -29,6 +29,6 @@ if (!(isProvinciaInRegioneIstat(values.get('Partecipante_ResidenzaProvincia'), '
 		    residenza = true;
 	}
 	if (residenza == false) {
-	    err('Partecipante_DomicilioComune','Partecipante_DomicilioComune_val');
+	    err('Partecipante_DomicilioProvincia','Partecipante_DomicilioComune_val');
 	}
 }

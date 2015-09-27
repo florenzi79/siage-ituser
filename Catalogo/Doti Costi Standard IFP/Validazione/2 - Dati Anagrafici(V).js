@@ -18,6 +18,9 @@ if (cf != null && cf != '') {
       err('Partecipante_CodiceFiscale', 'Partecipante_CodiceFiscale_val');
     }
 }
+if (values.get('CFvalido') == 'false') {
+    err('Partecipante_CodiceFiscale', 'Partecipante_CodiceFiscale_val1');
+}
 
 var isRichiestaDichiarazFreq = (
             (values.get('CatalogoBando')=='DDFIIanni' )||
