@@ -12,16 +12,6 @@ if (is_SedeOperativaAccreditata == 'false') {
   println('XXXX DOTE RAISE sede non accreditata');
   err('Richiedente_IdSede_12', 'Richiedente_IdSede_12_val');
 }
-// fine verifica accreditamento sede
-
-// **** Inizio Controllo Numero massimo di doti per ID corso:  25
-// TODO
-// **** Fine Controllo Numero massimo di doti per ID corso:  25
-
-
-// **** Inizio Controllo numero massimo componenti disabilità per classe: 4 per I anni  5 II anni
-// TODO
-// **** Fine  Controllo numero massimo componenti disabilità per classe: 4 per I anni  5 II anni
 
 var templateName = values.get('Bando_NomeTemplate');
 var maxIscritti = parseFloat(values.get('Bando_SogliaIscrittiCorso'));
@@ -66,6 +56,49 @@ if (!isEmpty('ServiziFormazione_RiepilogoServizi[1].TitoloCorso')) {
     errors.put('File_PdfDruFirmato','MaxNumDisabiliCorso_val');
   }
 }
+// controllo dotazioni finanziarie
+// caricamento Soglie definite negli OnLoad
+// var sogliaBandoCorsi    = parseFloat(values.get('Bando_DotazioneFinCorsi_SogliaPrimoModulo'));
+// var sogliaOperatore     = parseFloat(values.get('Bando_DotazioneFinOperatore_SogliaPrimoModulo'));
+// var sogliaBandoDisabili = parseFloat(values.get('Bando_DotazioneFinDisabilita_SogliaPrimoModulo'));
+
+ // caricamento Soglie in base alla dote richiesta
+  var sogliaBandoCorsi    = parseFloat(values.get('ServiziFormazione_ImportoTotaleCorsi'));
+  var sogliaOperatore     = parseFloat(values.get('ServiziFormazione_ImportoTotaleCorsi'));
+  var sogliaBandoDisabili = parseFloat(values.get('ServiziFormazione_ImportoTotaleDisabilita'));
+
+
+ var rimanenzaBandoCorsi = parseFloat(values.get('Bando_DotazioneFinCorsi_Rimanente'));
+ var rimanenzaOperatore = parseFloat(values.get('Bando_DotazioneFinOperatore_Rimanente'));
+ var rimanenzaBandoDisabili = parseFloat(values.get('Bando_DotazioneFinDisabilita_Rimanente'));
+
+ print('XXXX DOTE sogliaBandoCorsi:'+sogliaBandoCorsi + ' rimanenzaBandoCorsi:'+rimanenzaBandoCorsi+'\n');
+ print('XXXX DOTE sogliaOperatore:'+sogliaOperatore + ' rimanenzaOperatore:'+rimanenzaOperatore+'\n');
+ print('XXXX DOTE sogliaBandoDisabili:'+sogliaBandoDisabili + ' rimanenzaBandoDisabili:'+rimanenzaBandoDisabili+'\n');
+
+ //Bando_DotazioneFinCorsi_Rimanente_Protoc   ==> Avviso_DotazioneFinCorsi_Rimanente_Esaurita_Protoc_val
+ // ==> La dotazione finanziaria relativa al bando è esaurita. Non sarà possiblie proseguire con la presentazione della domanda.
+ //Bando_DotazioneFinDisabilita_Rimanente_Protoc ==> Avviso_DotazioneFinDisabilita__Esaurita_Protoc_val
+ // ==> La dotazione finanziaria relativa al bando per componente disabilità è esaurita. Non sarà possiblie proseguire con la presentazione della domanda.
+ //Bando_DotazioneFinOperatore_Rimanente_Protoc  ==> Avviso_DotazioneFinOperatore_Rimanente_Esaurita_Protoc_val
+ // ==> Il budget assegnato all'operatore è esaurito. Non sarà possibile proseguire con la presentazione della domanda.
+
+ if (rimanenzaBandoCorsi < sogliaBandoCorsi) {
+     err('Bando_DotazioneFinCorsi_Rimanente_Protoc', 'Avviso_DotazioneFinCorsi_Rimanente_Esaurita_Protoc_val');
+     print('XXXX DOTE Controllo Avviso_DotazioneFinCorsi_Rimanente_Esaurita_val Violato \n');
+
+ }
+ if ((rimanenzaOperatore < sogliaOperatore)) {
+       err('Bando_DotazioneFinOperatore_Rimanente_Protoc', 'Avviso_DotazioneFinOperatore_Rimanente_Esaurita_Protoc_val');
+       print('XXXX DOTE Controllo Avviso_DotazioneFinOperatore_Rimanente_Esaurita_val Violato \n');
+ }
+ /* commentato perchè non è da bloccare nel primo modulo visto che non è possibile sapere se il destinatario sarà dichiarato disabile
+ if ((rimanenzaBandoDisabili < sogliaBandoDisabili)) {
+         err('Bando_DotazioneFinDisabilita_Rimanente_Protoc', 'Avviso_DotazioneFinDisabilita__Esaurita_Protoc_val');
+ }
+ */
+
+
 
 
 println("XXXX DOTE USCITA Script Validazione 9 - Documenti(V)");

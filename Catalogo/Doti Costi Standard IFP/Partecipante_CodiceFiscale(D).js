@@ -83,11 +83,11 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
       logger.info("XXXXX Offerte Formative(dopo): "+offerteFormative);
 //			var dati_estraiStatoIscrizioni = estraiStatoIscrizioni(codiceFiscale,offerteFormative);
 //			if (dati_estraiStatoIscrizioni.success) {
-		var idOperatore = values.get('Richiedente_IdOperatore');
-		var idSede = values.get('Richiedente_IdSede');
-		var annualita = values.get('Bando_Annualita');
+  		var idOperatore = values.get('Richiedente_IdOperatore');
+  		var idSede = values.get('Richiedente_IdSede');
+  		var annualita = values.get('Bando_Annualita');
 
-		  print("XXXXX DOTI - esecuzione di estraiDettagliCorsi(IdOperatore = "+idOperatore+" codiceFiscale="+codiceFiscale+" offerteFormative:"+offerteFormative+" idSede:"+idSede+")\n");
+		  logger.info("XXXXX DOTI - esecuzione di estraiDettagliCorsi(IdOperatore = "+idOperatore+" codiceFiscale="+codiceFiscale+" offerteFormative:"+offerteFormative+" idSede:"+idSede+")\n");
 		  var dati_estraiDettagliCorsi = estraiDettagliCorsi(idOperatore, codiceFiscale, offerteFormative, idSede);
 		  if (dati_estraiDettagliCorsi.success) {
 
@@ -98,37 +98,66 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 			//*****************************************************************
 				// veriricare che esiste almento una iscrizione per quel operatore
 				var a_IscrDC = dati_estraiDettagliCorsi.result.get('iscrizioni');
-				logger.info("MMMMM DOTI: array di iscrizioni: a_IscrDC:"+ a_IscrDC+"\n");
 				if (a_IscrDC!=null) {
 				  var j=0;
 				  var offerta;
+          var isAnnualitaOk = false;
+          var isOffertaFormativaOk = false;
+          var isStatoIscrizioneOk = false;
 				  for (i = 0; i < a_IscrDC.length; i++) {
-						logger.info("\nMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXXXX\n");
+						logger.info("\n==> "+i+" <== MSMSMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXXXX\n");
 						var elem = a_IscrDC[i];
-						logger.info("MMMMM DOTI: idcorso="+ elem.get('idcorso')+"\n");
-						logger.info("MMMMM DOTI: elemento elem=a_IscrDC["+i+"] = elem:"+ a_IscrDC+"\n");
+						logger.info("MSMS DOTI: idcorso="+ elem.get('idcorso')+"\n");
 						offerta = dati_estraiDettagliCorsi.result.get(elem.get('idcorso'));
-						if ((offerta.get('idoperatore') != null) && (annualita == offerta.get('annocorso')+'')) {
+            // verifica se l'annualità dell'iscrizione corrisponde con quella del bando
+            isAnnualitaOk = (annualita == offerta.get('annocorso')+'');
+            logger.info("MSMS DOTI: annualita bando= "+ annualita+" Annualita iscrizione = "+offerta.get('annocorso')+" isAnnualitaOk = "+isAnnualitaOk+"\n");
+            // verifica se l'offerta formativa dell'iscrizione corrisponde con quella del bando
+            var l=0;
+            for (l = 0; l < offerteFormative.length; l++) {
+              logger.info("MSMS DOTI: offerteFormative[l] bando= "+ offerteFormative[l] +
+                          " offerta Formativa iscrizione = " + offerta.get('numoffertaformativa')+"\n");
+              if (offerteFormative[l]== offerta.get('numoffertaformativa')+'') {
+                isOffertaFormativaOk = true;
+              }
+            }
+            logger.info("MSMS DOTI: isOffertaFormativaOk="+ isOffertaFormativaOk+"\n");
+            logger.info('MSMS stato: ' +offerta.get('stato')+'\n');
+            logger.info('MSMS idstato : ' +offerta.get('idstato')+'\n');
+            if (offerta.get('stato')+''=='I') {
+              isOffertaFormativaOk = true;
+            }
+            // togliere la seguente riga nel caso si voglia abilitare il controllo dello stato iscrizione
+            isStatoIscrizioneOk = true;
+
+						if ((offerta.get('idoperatore') != null) && (isAnnualitaOk) && (isOffertaFormativaOk)){
 							  esisteIscrizione = true;
-							  logger.info("MMMMM DOTI i="+i+" XXXX offerta = elem.get('idcorso')="+ elem.get('idcorso')+": "+offerta+"\n");
-							  logger.info("MMMMM DOTI: dati_estraiDettagliCorsi result datafine i-esima: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('datafine')+"\n");
-							  logger.info("MMMMM DOTI: dati_estraiDettagliCorsi result titolo i-esimo: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('titolo')+"\n");
-							  logger.info("MMMMM DOTI: offerta get titolo i-esimo: "+ offerta.get('titolo')+"\n");
-							  logger.info("MMMMM DOTI: offerta get titolo i-esimo: idoperatore"+ offerta.get('idoperatore')+"\n");
-							  logger.info("MMMMM DOTI: offerta get titolo i-esimo: idsede: "+ offerta.get('idsede')+"\n");
+							  logger.info("MSMS DOTI i="+i+" XXXX offerta = elem.get('idcorso')="+ elem.get('idcorso')+": "+offerta+"\n");
+							  logger.info("MSMS DOTI: dati_estraiDettagliCorsi result datafine i-esima: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('datafine')+"\n");
+							  logger.info("MSMS DOTI: dati_estraiDettagliCorsi result titolo i-esimo: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('titolo')+"\n");
+							  logger.info("MSMS DOTI: offerta get titolo i-esimo: "+ offerta.get('titolo')+"\n");
+							  logger.info("MSMS DOTI: offerta get titolo i-esimo: idoperatore"+ offerta.get('idoperatore')+"\n");
+							  logger.info("MSMS DOTI: offerta get titolo i-esimo: idsede: "+ offerta.get('idsede')+"\n");
+                logger.info("MSMS DOTI: offerta get titolo i-esimo: numoffertaformativa: "+ offerta.get('numoffertaformativa')+"\n");
 							  var competenze = offerta.get('competenze')[0];
 
-							  logger.info('MMMMM mappa competenze: ' +competenze+'\n');
-							  logger.info('MMMMM idqualifica di competenze: ' + competenze.get('idqualifica')+'\n');
-							  logger.info('MMMMM idindirizzo di competenze: ' + competenze.get('idindirizzo')+'\n');
-							  logger.info('MMMMM qualifica|indirizzo:==>' + competenze.get('idqualifica')+"|"+competenze.get('idindirizzo')+'<==\n');
-							  logger.info('MMMMM annocorso: ' +offerta.get('annocorso')+'\n');
-							  logger.info('MMMMM idqualifica: ' +offerta.get('idqualifica')+'\n');
-							  logger.info('MMMMM annocorso: ' +offerta.get('annocorso')+'\n');
+							  logger.info('MSMS mappa competenze: ' +competenze+'\n');
+							  logger.info('MSMS idqualifica di competenze: ' + competenze.get('idqualifica')+'\n');
+							  logger.info('MSMS idindirizzo di competenze: ' + competenze.get('idindirizzo')+'\n');
+							  logger.info('MSMS qualifica|indirizzo:==>' + competenze.get('idqualifica')+"|"+competenze.get('idindirizzo')+'<==\n');
+							  logger.info('MSMS annocorso: ' +offerta.get('annocorso')+'\n');
+							  logger.info('MSMS idqualifica: ' +offerta.get('idqualifica')+'\n');
+							  logger.info('MSMS annocorso: ' +offerta.get('annocorso')+'\n');
+							  logger.info('MSMS stato: ' +offerta.get('stato')+'\n');
+                logger.info('MSMS idstato : ' +offerta.get('idstato')+'\n');
+
 							}  // fine IF (offerta.get('idoperatore') != null) && (annualita == offerta.get('annocorso')+
+              else {
+                logger.info('MSMS Iscrizione scartata (idoperatore = null o annualità sbagliata o offerta formativa sbagliata)\n');
+              }
 						} // fine cidlo for sulle iscrizioni
 				  } else {
-					logger.info("MMMMM DOTI dati_estraiDettagliCorsi.result.get('iscrizioni')=null\n");
+					logger.info("MSMS DOTI dati_estraiDettagliCorsi.result.get('iscrizioni')=null\n");
 								//			  values.get('Avviso_ricercaEmpty').setHidden(false);
 				  }
 
@@ -291,12 +320,14 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 			  logger.info("\n\n\n\n\n XXXXXX  Errore su estraiStatoIscrizioni message: " + dati_estraiStatoIscrizioni.message + "\n\n\n\n\n");
         // visualizzare avviso: Si è verificato un momentaneo problema di connessione. Si prega di riprovare più tardi
         items.get('avviso_problemaTecnico').setHidden(false);
-        //svuotaCampiDestinatario();
-        //nascondiCampiDestinatario(true);
+        values.put('CFvalido','false');
+        svuotaCampiDestinatario();
+        nascondiCampiDestinatario(true);
 			}
 		} else {
       // CF Non Valido
       logger.info("XXXXXX  DOTE: CF Non Valido");
+      values.put('CFvalido','false');
       items.get('avviso_CfErrato').setHidden(false);
       items.get('avviso_iscrizioneCorso').setHidden(true);
       svuotaCampiDestinatario();

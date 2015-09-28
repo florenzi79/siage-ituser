@@ -21,6 +21,7 @@ if (true) {
   if (true) {
     var idOperatore = values.get('Richiedente_IdOperatore');
     var idSede = values.get('Richiedente_IdSede');
+		var annualita = values.get('Bando_Annualita');
 
 // recupera offerte formative del bando definite nel primo modulo
     var offerteFormative = [];
@@ -90,8 +91,6 @@ if (true) {
 		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 02\n");
 		print("XXXXX mappaQualificheImporti: "+ mappaQualificheImporti+"\n");
 
-		print("XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 02a\n");
-		print("XXXXX Importo associato a '910|186': "+ mappaQualificheImporti['910|186']+"\n");
 //			print("XXXXX amQualifiche: "+ amQualifiche[k].get(indirizzoId)+"\n");
 		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 03\n");
 		print("XXXXX DOTI - Offerte Formative: "+offerteFormative+"\n");
@@ -106,6 +105,9 @@ if (true) {
             if (a_IscrDC!=null) {
               var j=0;
               var offerta;
+							var isAnnualitaOk = false;
+		          var isOffertaFormativaOk = false;
+		          var isStatoIscrizioneOk = false;
               for (i = 0; i < a_IscrDC.length; i++) {
   								print("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
                   var elem = a_IscrDC[i];
@@ -125,7 +127,29 @@ if (true) {
                   print('XXXXX annocorso: ' +offerta.get('annocorso')+'\n');
                   print('XXXXX idqualifica: ' +offerta.get('idqualifica')+'\n');
                   print('XXXXX annocorso: ' +offerta.get('annocorso')+'\n');
-                  if(annualita == offerta.get('annocorso')+'') {  // TODO Aggiungere le condizioni corrette che devono essere soddisfatte per popolare l'elenco corsi
+
+									// verifica se l'annualità dell'iscrizione corrisponde con quella del bando
+			            isAnnualitaOk = (annualita == offerta.get('annocorso')+'');
+			            print("MSMS DOTI: annualita bando= "+ annualita+" Annualita iscrizione = "+offerta.get('annocorso')+" isAnnualitaOk = "+isAnnualitaOk+"\n");
+			            // verifica se l'offerta formativa dell'iscrizione corrisponde con quella del bando
+			            var l=0;
+			            for (l = 0; l < offerteFormative.length; l++) {
+			              print("MSMS DOTI: offerteFormative[l] bando= "+ offerteFormative[l] +
+			                          " offerta Formativa iscrizione = " + offerta.get('numoffertaformativa')+"\n");
+			              if (offerteFormative[l]== offerta.get('numoffertaformativa')+'') {
+			                isOffertaFormativaOk = true;
+			              }
+			            }
+			            print("MSMS DOTI: isOffertaFormativaOk="+ isOffertaFormativaOk+"\n");
+			            print('MSMS stato: ' +offerta.get('stato')+'\n');
+			            print('MSMS idstato : ' +offerta.get('idstato')+'\n');
+			            if (offerta.get('stato')+''=='I') {
+			              isOffertaFormativaOk = true;
+			            }
+			            // togliere la seguente riga nel caso si voglia abilitare il controllo dello stato iscrizione
+			            isStatoIscrizioneOk = true;
+
+									if ((offerta.get('idoperatore') != null) && (isAnnualitaOk) && (isOffertaFormativaOk)){
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].NomeServizio',offerta.get('titolo'));
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].NomeServizioDn',offerta.get('titolo'));
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].IdCorso',offerta.get('idcorso'));
