@@ -4,34 +4,29 @@ TODO
 ===================
 
 NOTA: Ultima Versione Bando:  DDF I anni in .81 (mattino del 28/09/2015)
-==>  HI - (TODO ???? ) Portare Template DDF I ANNI da .81 a Formazione
-
-HI - (TODO FL...) Non permettere la presentazione per Destinatari per cui è stata già richiesta una dote per lo stesso bando
-LOW- (TODO FL...) Abilitare checksum e firmatario documenti ricaricati nei DUE moduli documenti, (Atto unico e dote) (NOTA: limita i test di protocollazione solo a chi può firmare un doc)
-HI - (TODO FL...) Impostare (verificare) i valori assunti nell'operation, relativi a fase pratica a bozza eliminata.
-LOW- (TODO FL...) Assegnare le security corrette ai file _tmp o rimuovere la necessità del file TMP (vedi Lorenzi)
-MED- (TODO ??...) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
-HI - (TODO M....) Wait Feedback mail a Pancaldi su Accreditamento Sede anomala (richiesta Bebo) ==> verifica
-HI - (TODO M....) Chiedere a lispa (Bebo / Bettiga) se necessario filtrare stato / idStato dei corsi ==> eventualmente configurare
-HI - (TODO M....) CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo (controllo + eventualmente OnChange CF  Destinatario)
-HI - (TODO M....) AVVISO e Blocco (Controllo) in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
+HI - (TODO M....) verifica accurata AVVISO e Blocco (Controllo) in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
 HI - (TODO M....) Verificare che i controlli specificati nell'info bandi siano stati tutti inseriti
-MED- (TODO Pat + F) Chiedere frase a LISPA ==> Aggiungere un messaggio / tooltip che renda chiaro che i dati della dotazione finanziaria rimanenti sono da considerarsi indicativi
+
+MED- (TODO wait Bettiga ==> F) Chiedere frase a LISPA ==> Aggiungere un messaggio / tooltip che
+                renda chiaro che i dati della dotazione finanziaria rimanenti sono da considerarsi indicativi
 HI - (TODO F.help FL ?) Verificare perchè non è visibile il fascicolo progetto
 HI - (TODO F....) Settare la security della checklist al gruppo degli istruttori in modo da non visualizzarla nel fascicolo per i richiedenti
-LOW- (TODO F....) Aggiungere un item che, nonostante il richiedente sia dichiarato disabile, permetta di scegliere di richiedere o meno l'incentivo disabilita'
-LOW- (TODO F....) Assegnare le security corrette al processo per l'istruttore e per monitraggio. Nome: Istruttore procedura +  titolo bando
+HI - (TODO F....) Assegnare le security corrette al processo per l'istruttore e per monitraggio. Nome: Istruttore procedura +  titolo bando
                      ovvero
  									 	"Istruttore procedura I Anni IeFP a.f. 2015-2016"
 										"Istruttore procedura II Anni IeFP a.f. 2015-2016"
-										"Monitoraggio I e II Anni IeFP a.f. 2015-2016" (definito da Scotti, da chiedere conferma a Lispa)
-HI - (TODO Pat... ask LISPA) Daniela? Aggiungere spedizione mail ANCHE a regione  quando protocollato Dote (wait indicazioni e corpo mail)
+										"Monitoraggio I Anni IeFP a.f. 2015-2016"
+                    "Monitoraggio II Anni IeFP a.f. 2015-2016"
+OK HI - (TODO Pat... ask LISPA) Daniela?
+   Aggiungere spedizione mail ANCHE a regione  quando protocollato Dote (wait indicazioni e corpo mail) NO
+MED- (TODO ??...) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
+MED - (TODO M....) CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo (controllo + eventualmente OnChange CF  Destinatario)
 
 LOW -(WAIT Aldo) Aggiungere controllo check digit dei CF con script in sviluppo da Aldo
 
 - (WAIT LISPA (Daniela? ) Messaggio esplicativo sul come caricare i documenti firmati nell'atto unico
 - (WAIT LISPA) Daniela? Invio email alla protocollazione dell'atto unico ? (forse NO) altrimenti mettere indirizzo fake corretto (vedi mail Silvia)
-
+LOW- (TODO F....) Aggiungere un item che, nonostante il richiedente sia dichiarato disabile, permetta di scegliere di richiedere o meno l'incentivo disabilita'
 ==========================
 GIA' FATTI
 
@@ -89,3 +84,10 @@ GIA' FATTI
           - ( OK M....) Aggiungere (avvisi e) controllo stato finale per erosione budget per singolo operatore  (Come fatto nel OnLoad di IdPratica nel "1 - Atto di Adesione Unico - Dati" )
           - ( OK M....) Aggiungere un filtro, all'onchange del codice fiscale del destinatario, che abbia iscrizioni relative alla ANNUALITA' giusta
           - (OK M.....) Aggiungere filtro "Offerta Formativa" in Partecipante_CodiceFiscale(D) e in PopolaElencoCorsi_DOTE.js
+          - ( OK M....)  Chiedere a lispa (Bebo / Bettiga) se necessario filtrare stato / idStato dei corsi ==> eventualmente configurare
+          - ( OK M....)  Wait Feedback mail a Pancaldi su Accreditamento Sede anomala (richiesta Bebo) ==> verifica
+          28/9/2015
+          OK * HI - (TODO FL...) Non permettere la presentazione per Destinatari per cui è stata già richiesta una dote per lo stesso bando
+          OK * LOW- (TODO FL...) Abilitare checksum e firmatario documenti ricaricati nei DUE moduli documenti, (Atto unico e dote) (NOTA: limita i test di protocollazione solo a chi può firmare un doc)
+          OK * HI - (TODO FL...) Impostare (verificare) i valori assunti nell'operation, relativi a fase pratica a bozza eliminata.
+          OK * LOW- (TODO FL...) Assegnare le security corrette ai file _tmp o rimuovere la necessità del file TMP (vedi Lorenzi)
