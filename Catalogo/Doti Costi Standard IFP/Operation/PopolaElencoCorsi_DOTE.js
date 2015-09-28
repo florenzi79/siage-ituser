@@ -13,88 +13,84 @@ while (it.hasNext()) {
 	}
 }
 
-if (true) {
-    var codiceFiscale= values.get('Partecipante_CodiceFiscale');
-    codiceFiscale = codiceFiscale.toUpperCase();
-    values.put('Partecipante_CodiceFiscale',codiceFiscale);
-//		if (isValidCf(codiceFiscale)) {
-  if (true) {
-    var idOperatore = values.get('Richiedente_IdOperatore');
-    var idSede = values.get('Richiedente_IdSede');
-		var annualita = values.get('Bando_Annualita');
+var codiceFiscale= values.get('Partecipante_CodiceFiscale');
+codiceFiscale = codiceFiscale.toUpperCase();
+values.put('Partecipante_CodiceFiscale',codiceFiscale);
+var idOperatore = values.get('Richiedente_IdOperatore');
+var idSede = values.get('Richiedente_IdSede');
+	var annualita = values.get('Bando_Annualita');
 
 // recupera offerte formative del bando definite nel primo modulo
-    var offerteFormative = [];
-    var i=0;
-    while (values.get('Bando_OfferteFormative['+i+']')!=null) {
-      offerteFormative[i]=values.get('Bando_OfferteFormative['+i+']');
-      i++;
-    }
-    // per forzare le offerte formative per test, togliere il commento all'istruzione seguente:
-    // offerteFormative = [048];
-    //
+var offerteFormative = [];
+var i=0;
+while (values.get('Bando_OfferteFormative['+i+']')!=null) {
+  offerteFormative[i]=values.get('Bando_OfferteFormative['+i+']');
+  i++;
+}
+// per forzare le offerte formative per test, togliere il commento all'istruzione seguente:
+// offerteFormative = [048];
+//
 
-		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 01\n");
+print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 01\n");
 		// mappa qualifiche
-			mappaQualificheImporti={
-				"800|":"4000",
-				"796|":"4000",
-				"910|":"4000",
-				"910|189":"4000",
-				"809|":"4000",
-				"109|":"4000",
-				"108|":"4000",
-				"918|":"4000",
-				"977|":"4000",
-				"793|":"4300",
-				"789|":"4300",
-				"792|":"4300",
-				"795|":"4300",
-				"794|":"4300",
-				"791|":"4300",
-				"799|":"4300",
-				"788|":"4300",
-				"13|":"4300",
-				"820|":"4300",
-				"916|":"4300",
-				"917|":"4300",
-				"808|":"4300",
-				"804|":"4300",
-				"806|":"4300",
-				"805|":"4300",
-				"52|":"4300",
-				"36|":"4300",
-				"12|":"4600",
-				"786|":"4600",
-				"14|":"4600",
-				"18|":"4600",
-				"1|":"4600",
-				"790|":"4600",
-				"16|":"4600",
-				"793|188":"4600",
-				"19|":"4600",
-				"910|186":"4600",
-				"910|119":"4600",
-				"803|":"4600",
-				"801|":"4600",
-				"103|":"4600",
-				"104|":"4600",
-				"915|":"4600",
-				"28|":"4600",
-				"39|":"4600",
-				"110|":"4600",
-				"819|":"4600",
-				"975|":"4600",
-				"976|":"4600"
-	};
+		var mappaQualificheImporti= new java.util.LinkedHashMap();
+				mappaQualificheImporti.put("800|","4000");
+				mappaQualificheImporti.put("796|","4000");
+				mappaQualificheImporti.put("910|","4000");
+				mappaQualificheImporti.put("910|189","4000");
+				mappaQualificheImporti.put("809|","4000");
+				mappaQualificheImporti.put("109|","4000");
+				mappaQualificheImporti.put("108|","4000");
+				mappaQualificheImporti.put("918|","4000");
+				mappaQualificheImporti.put("977|","4000");
+				mappaQualificheImporti.put("793|","4300");
+				mappaQualificheImporti.put("789|","4300");
+				mappaQualificheImporti.put("792|","4300");
+				mappaQualificheImporti.put("795|","4300");
+				mappaQualificheImporti.put("794|","4300");
+				mappaQualificheImporti.put("791|","4300");
+				mappaQualificheImporti.put("799|","4300");
+				mappaQualificheImporti.put("788|","4300");
+				mappaQualificheImporti.put("13|","4300");
+				mappaQualificheImporti.put("820|","4300");
+				mappaQualificheImporti.put("916|","4300");
+				mappaQualificheImporti.put("917|","4300");
+				mappaQualificheImporti.put("808|","4300");
+				mappaQualificheImporti.put("804|","4300");
+				mappaQualificheImporti.put("806|","4300");
+				mappaQualificheImporti.put("805|","4300");
+				mappaQualificheImporti.put("52|","4300");
+				mappaQualificheImporti.put("36|","4300");
+				mappaQualificheImporti.put("12|","4600");
+				mappaQualificheImporti.put("786|","4600");
+				mappaQualificheImporti.put("14|","4600");
+				mappaQualificheImporti.put("18|","4600");
+				mappaQualificheImporti.put("1|","4600");
+				mappaQualificheImporti.put("790|","4600");
+				mappaQualificheImporti.put("16|","4600");
+				mappaQualificheImporti.put("793|188","4600");
+				mappaQualificheImporti.put("19|","4600");
+				mappaQualificheImporti.put("910|186","4600");
+				mappaQualificheImporti.put("910|119","4600");
+				mappaQualificheImporti.put("803|","4600");
+				mappaQualificheImporti.put("801|","4600");
+				mappaQualificheImporti.put("103|","4600");
+				mappaQualificheImporti.put("104|","4600");
+				mappaQualificheImporti.put("915|","4600");
+				mappaQualificheImporti.put("28|","4600");
+				mappaQualificheImporti.put("39|","4600");
+				mappaQualificheImporti.put("110|","4600");
+				mappaQualificheImporti.put("819|","4600");
+				mappaQualificheImporti.put("975|","4600");
+				mappaQualificheImporti.put("976|","4600");
 
-		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 02\n");
-		print("XXXXX mappaQualificheImporti: "+ mappaQualificheImporti+"\n");
+print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 02\n");
+//print("XXXXX mappaQualificheImporti: "+ mappaQualificheImporti+"\n");
 
 //			print("XXXXX amQualifiche: "+ amQualifiche[k].get(indirizzoId)+"\n");
-		print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 03\n");
-		print("XXXXX DOTI - Offerte Formative: "+offerteFormative+"\n");
-    try {
+print("\n XXXXX SCRIPT OPERATION PopolaElencoCorsi_DOTE 03\n");
+print("XXXXX DOTI - Offerte Formative: "+offerteFormative+"\n");
+try {
       print("XXXXX DOTI - esecuzione di estraiDettagliCorsi(IdOperatore = "+idOperatore+" codiceFiscale="+codiceFiscale+" offerteFormative:"+offerteFormative+" idSede:"+idSede+")\n");
       var dati_estraiDettagliCorsi = estraiDettagliCorsi(idOperatore, codiceFiscale, offerteFormative, idSede);
       if (dati_estraiDettagliCorsi.success) {
@@ -173,14 +169,14 @@ if (true) {
                     //TODO Valorizzare ImportoAmmissibile Da tabella "tabella qualifica valori Dote" in base al valore di c43
 										var chiaveRicercaImporto= competenze.get('idqualifica')+"|"+competenze.get('idindirizzo');
 										print('XXXXX PRIMO TENTATIVO: chiaveRicercaImporto '+chiaveRicercaImporto+'\n');
-										var importo = mappaQualificheImporti[chiaveRicercaImporto];
+										var importo = mappaQualificheImporti.get(chiaveRicercaImporto);
 										print('XXXXX PRIMO TENTATIVO: ==> importo '+importo+'\n');
 
 										if (importo == undefined)	{
 											chiaveRicercaImporto= competenze.get('idqualifica')+"|";
 											print('XXXXX importo non trovato usando sia qualifica che indirizzo.\n');
 											print('XXXXX SECONDO TENTATIVO: chiaveRicercaImporto '+chiaveRicercaImporto+'\n');
-											importo = mappaQualificheImporti[chiaveRicercaImporto];
+											importo = mappaQualificheImporti.get(chiaveRicercaImporto);
 											print('XXXXX SECONDO TENTATIVO: ==> importo '+importo+'\n');
 										}
 //                    values.put('ServiziFormazione_ElencoCorsi['+j+'].ImportoAmmissibile',''+parseFloat('1234567890'));
@@ -220,7 +216,6 @@ if (true) {
                   print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" iddote="+ elem3.get("annocorso ")+" \n");
                   print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" area="+ elem3.get("area")+" \n");
 
-
               }
 
             }
@@ -240,65 +235,20 @@ if (true) {
 //		values.get('Avviso_ricercaEmpty').setHidden(false);
 
       }
+        if (isInterrogazioneGefoOk) {
+        values.put('avvisare_problema_tecnico','false');
+        }   else{
+       values.put('avvisare_problema_tecnico','false');
+        }
     }
+
     catch(err) {
 		print("\n XXXXX CATCH  estraiDettagliCorsi non andato a buon fine -  \n");
+		isInterrogazioneGefoOk = false;
 //		values.get('Avviso_ricercaEmpty').setHidden(false);
+        values.put('avvisare_problema_tecnico','false');
+
+
     }
 
-
-
-/*
-      // TODO: Specificare correttamente l'offerta formativa come sarà indicato dai BU per ogni Bando
-      var dati_estraiStatoIscrizioni = estraiStatoIscrizioni(codiceFiscale,null);
-      if (dati_estraiStatoIscrizioni.success) {
-        print("XXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni result: "+ dati_estraiStatoIscrizioni.result+"\n");
-
-
-
-        print("\n\n\n\n\n XXXXXX (1) estraiStatoIscrizioni message: " + dati_estraiStatoIscrizioni.message + "\n\n\n\n\n");
-        if (dati_estraiStatoIscrizioni.result!= null) {
-          var a_Iscr = dati_estraiStatoIscrizioni.result.get('iscrizioni');
-          if (a_Iscr!=null) {
-
-            for (i = 0; i < a_Iscr.length; i++) {
-                var elem = a_Iscr[i];
-                print("\nXXXXX Test-Integrazione-GEFO: estraiStatoIscrizioni.iscrizioni: "+ elem+"\n");
-                print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" idcorso="+ elem.get("idcorso")+" \n");
-                print("\nXXXXX Test-Integrazione-GEFO: iteratore: "+ i +" iddote="+ elem.get("iddote")+" \n");
-
-            }
-
-
-
-          }
-
-          }
-      }
-      else {
-        {
-          // l'integrazione con gefo ha problemi
-          // TODO: Valorizzare una variabile per permettere un avviso nel modulo successivo e relativo blocco
-          print("\n XXXXX estraiStatoIscrizioni non andato a buon fine -  \n")
-
-        }
-      }
-*/
-    }
-}
 print("\n************************************\n XXXXX FINE SCRIPT OPERATION PopolaElencoCorsi_DOTE\n************************************\n");
-
-/*
- {datiAnagrafici={capdomicilio=23861, capresidenza=23861, codicefiscale=VLSSNO98S60E507L, cognome=VALSECCHI, datanascita=20/11/1998, genere=F, indirizzodomicilio=SEGANTINI, 95, indirizzoresidenza=SEGANTINI, 95, comunedomicilio=097021, istatcomunenascita=097042, istatcomuneresidenza=097021, nome=SONIA},
-
- 66678={alternanza=0, annocorso=1, area=11, autofinanziato=N, datafine=05/06/2013, datainizio=null, descrizionepercorsoabilitante=Nessuna, descrizionepercorsoregolamentato=, durata=990, idcorso=66678, idoperatore=5498, idpadre=66678, idpercorsoabilitante=1, idpercorsoregolamentato=null, idsede=125962, idstato=C, ndotimax=18, numoffertaformativa=048, percorsoabilitante=NO, percorsoregolamentato=SI, stato=Concluso, tipologia=DDIF Triennali (2011-2013), titolo=OPERATORE DEL BENESSERE - TRATTAMENTI ESTETICI, totaleannualita=3, descrizionearea=COMPETENZA STORICO,SOCIO-ECONOMICA, descrizioneindirizzo=null, descrizionequalifica=null, idarea=137, idindirizzo=null, idqualifica=null, competenze=[Ljava.util.LinkedHashMap;@26ffc29a},
-
- 91010={alternanza=232, annocorso=2, area=11, autofinanziato=N, datafine=03/06/2014, datainizio=null, descrizionepercorsoabilitante=Nessuna, descrizionepercorsoregolamentato=, durata=990, idcorso=91010, idoperatore=5498, idpadre=66678, idpercorsoabilitante=1, idpercorsoregolamentato=null, idsede=180785, idstato=C, ndotimax=24, numoffertaformativa=048, percorsoabilitante=NO, percorsoregolamentato=SI, stato=Concluso, tipologia=DDIF Triennali (2011-2013), titolo=OPERATORE DEL BENESSERE - TRATTAMENTI ESTETICI, totaleannualita=3, descrizionearea=COMPETENZA STORICO,SOCIO-ECONOMICA, descrizioneindirizzo=null, descrizionequalifica=null, idarea=137, idindirizzo=null, idqualifica=null, competenze=[Ljava.util.LinkedHashMap;@61412076},
-
- 110036={alternanza=362, annocorso=3, area=11, autofinanziato=N, datafine=05/06/2015, datainizio=15/09/2014, descrizionepercorsoabilitante=Nessuna, descrizionepercorsoregolamentato=, durata=990, idcorso=110036, idoperatore=5498, idpadre=66678, idpercorsoabilitante=1, idpercorsoregolamentato=null, idsede=221739, idstato=A, ndotimax=22, numoffertaformativa=048, percorsoabilitante=NO, percorsoregolamentato=SI, stato=Avviato, tipologia=DDIF Triennali (2011-2013), titolo=OPERATORE DEL BENESSERE - TRATTAMENTI ESTETICI, totaleannualita=3, descrizionearea=COMPETENZA STORICO,SOCIO-ECONOMICA, descrizioneindirizzo=null, descrizionequalifica=null, idarea=137, idindirizzo=null, idqualifica=null, competenze=[Ljava.util.LinkedHashMap;@7aba54db},
-
- 105061={idcorso=105061, iddote=51346779, idiscrizione=793791, numeroofferta=120, statoiscrizione=I},
-
- iscrizioni=[Ljava.util.LinkedHashMap;@5f1934cf}
-
- */
