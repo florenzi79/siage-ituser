@@ -102,41 +102,51 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 				  var isAnnualitaOk = false;
 				  var isOffertaFormativaOk = false;
 				  var isStatoIscrizioneOk = false;
+          var isNoAutofinanziatoOk = false;
 						  for (i = 0; i < a_IscrDC.length; i++) {
 								logger.info("\n==> "+i+" <== MSMSMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXXXX\n");
 								var elem = a_IscrDC[i];
 								logger.info("MSMS DOTI: idcorso="+ elem.get('idcorso')+"\n");
-								offerta = dati_estraiDettagliCorsi.result.get(elem.get('idcorso'));
-					// verifica se l'annualità dell'iscrizione corrisponde con quella del bando
-					isAnnualitaOk = (annualita == offerta.get('annocorso')+'');
-					logger.info("MSMS DOTI: annualita bando= "+ annualita+" Annualita iscrizione = "+offerta.get('annocorso')+" isAnnualitaOk = "+isAnnualitaOk+"\n");
-					// verifica se l'offerta formativa dell'iscrizione corrisponde con quella del bando
-					var l=0;
-					for (l = 0; l < offerteFormative.length; l++) {
-					  logger.info("MSMS DOTI: offerteFormative[l] bando= "+ offerteFormative[l] +
-								  " offerta Formativa iscrizione = " + offerta.get('numoffertaformativa')+"\n");
-					  if (offerteFormative[l]== offerta.get('numoffertaformativa')+'') {
-						isOffertaFormativaOk = true;
-					  }
-					}
-					logger.info("MSMS DOTI: isOffertaFormativaOk="+ isOffertaFormativaOk+"\n");
-					logger.info('MSMS stato: ' +offerta.get('stato')+'\n');
-					logger.info('MSMS idstato : ' +offerta.get('idstato')+'\n');
-					if (offerta.get('stato')+''=='I') {
-					  isOffertaFormativaOk = true;
-					}
-					// togliere la seguente riga nel caso si voglia abilitare il controllo dello stato iscrizione
-					isStatoIscrizioneOk = true;
+                logger.info("MSMS DOTI: iddote="+ elem.get('iddote ')+"\n");
+                logger.info("MSMS DOTI: idiscrizione="+ elem.get('idiscrizione')+"\n");
+                logger.info("MSMS DOTI: numeroofferta="+ elem.get('numeroofferta')+"\n");
+                logger.info("MSMS DOTI: statoiscrizione="+ elem.get('statoiscrizione')+"\n");
 
-								if ((offerta.get('idoperatore') != null) && (isAnnualitaOk) && (isOffertaFormativaOk)){
+								offerta = dati_estraiDettagliCorsi.result.get(elem.get('idcorso'));
+      					// verifica se l'annualità dell'iscrizione corrisponde con quella del bando
+      					isAnnualitaOk = (annualita == offerta.get('annocorso')+'');
+      					logger.info("MSMS DOTI: annualita bando= "+ annualita+" Annualita iscrizione = "+offerta.get('annocorso')+" isAnnualitaOk = "+isAnnualitaOk+"\n");
+      					// verifica se l'offerta formativa dell'iscrizione corrisponde con quella del bando
+      					var l=0;
+      					for (l = 0; l < offerteFormative.length; l++) {
+      					  logger.info("MSMS DOTI: offerteFormative[l] bando= "+ offerteFormative[l] +
+      								  " offerta Formativa iscrizione = " + offerta.get('numoffertaformativa')+"\n");
+      					  if (offerteFormative[l]== offerta.get('numoffertaformativa')+'') {
+      						isOffertaFormativaOk = true;
+      					  }
+      					}
+                logger.info('MSMS stato   :' +offerta.get('stato')+'\n');
+                logger.info('MSMS idstato :' +offerta.get('idstato')+'\n');
+                // verifica lo stato dell'iscrizione (tra Iscritto, Bozza, Ritirato deve essere I)
+                isStatoIscrizioneOk=(elem.get('statoiscrizione')+''=='I');
+                logger.info("MSMS DOTI: statoiscrizione="+ elem.get('statoiscrizione')+"\n");
+                logger.info("MSMS DOTI: isStatoIscrizioneOk="+ isStatoIscrizioneOk+"\n");
+                // verifico se il corso è NON AUTOFINANZIATO (Deve essere N)
+                logger.info('MSMS autofinanziato : ' +offerta.get('autofinanziato')+'\n');
+                isNoAutofinanziatoOk = (offerta.get('autofinanziato')+''=='N');
+                logger.info("MSMS DOTI: isNoAutofinanziatoOk="+ isNoAutofinanziatoOk+"\n");
+      					logger.info("MSMS DOTI: isOffertaFormativaOk="+ isOffertaFormativaOk+"\n");
+
+								if ((offerta.get('idoperatore') != null) && (isAnnualitaOk) && (isOffertaFormativaOk) && (isNoAutofinanziatoOk)&&(isStatoIscrizioneOk)){
 									  esisteIscrizione = true;
+                    logger.info('MSMS Iscrizione CONSIDERATA :-)))))))))) ');
 									  logger.info("MSMS DOTI i="+i+" XXXX offerta = elem.get('idcorso')="+ elem.get('idcorso')+": "+offerta+"\n");
 									  logger.info("MSMS DOTI: dati_estraiDettagliCorsi result datafine i-esima: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('datafine')+"\n");
 									  logger.info("MSMS DOTI: dati_estraiDettagliCorsi result titolo i-esimo: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('titolo')+"\n");
 									  logger.info("MSMS DOTI: offerta get titolo i-esimo: "+ offerta.get('titolo')+"\n");
 									  logger.info("MSMS DOTI: offerta get titolo i-esimo: idoperatore"+ offerta.get('idoperatore')+"\n");
 									  logger.info("MSMS DOTI: offerta get titolo i-esimo: idsede: "+ offerta.get('idsede')+"\n");
-						logger.info("MSMS DOTI: offerta get titolo i-esimo: numoffertaformativa: "+ offerta.get('numoffertaformativa')+"\n");
+						        logger.info("MSMS DOTI: offerta get titolo i-esimo: numoffertaformativa: "+ offerta.get('numoffertaformativa')+"\n");
 									  var competenze = offerta.get('competenze')[0];
 
 									  logger.info('MSMS mappa competenze: ' +competenze+'\n');
@@ -147,19 +157,19 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 									  logger.info('MSMS idqualifica: ' +offerta.get('idqualifica')+'\n');
 									  logger.info('MSMS annocorso: ' +offerta.get('annocorso')+'\n');
 									  logger.info('MSMS stato: ' +offerta.get('stato')+'\n');
-						logger.info('MSMS idstato : ' +offerta.get('idstato')+'\n');
+      						  logger.info('MSMS idstato : ' +offerta.get('idstato')+'\n');
 
-									}  // fine IF (offerta.get('idoperatore') != null) && (annualita == offerta.get('annocorso')+
-					  else {
-						logger.info('MSMS Iscrizione scartata (idoperatore = null o annualità sbagliata o offerta formativa sbagliata)\n');
-					  }
+      						}  // fine IF (offerta.get('idoperatore') != null) && (annualita == offerta.get('annocorso')+
+      					  else {
+      						logger.info('MSMS Iscrizione SCARTATA !!!!!!!!!!! (idoperatore = null o annualità sbagliata o offerta formativa sbagliata)\n');
+      					  }
 								} // fine ciclo for sulle iscrizioni
 					}   // fine a_IscrDC!=null)
 					else {  // a_IscrDC==null
 							logger.info("MSMS DOTI dati_estraiDettagliCorsi.result.get('iscrizioni')=null\n");
 										//			  values.get('Avviso_ricercaEmpty').setHidden(false);
-								// TODO  		
-					}    
+								// TODO
+					}
 			} // fine if (dati_estraiDettagliCorsi.result!= null)
 
 			if (esisteIscrizione ) {
@@ -314,7 +324,7 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 			}
 	      }	else {  // dati_estraiDettagliCorsi.success == false ==> probelma gefo
 				// c'è un errore nell'integrazione con GeFo
-					  logger.info("\n\n\n\n\n XXXXXX  Errore su estraiStatoIscrizioni message: " + dati_estraiStatoIscrizioni.message + "\n\n\n\n\n");
+					  logger.info("\n\n\n\n\n XXXXXX  Errore su dati_estraiDettagliCorsi message: " + dati_estraiDettagliCorsi.message + "\n\n\n\n\n");
 				// visualizzare avviso: Si è verificato un momentaneo problema di connessione. Si prega di riprovare più tardi
 				items.get('avviso_problemaTecnico').setHidden(false);
 				values.put('CFvalido','false');
@@ -322,7 +332,7 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 				nascondiCampiDestinatario(true);
 		  } // fine        dati_estraiDettagliCorsi.success == false
 		}   // fine isValidCf(codiceFiscale)
-		else {       
+		else {
 		  // CF Non Valido
 		  logger.info("XXXXXX  DOTE: CF Non Valido");
 		  values.put('CFvalido','false');
@@ -330,6 +340,6 @@ if (!isEmpty('Partecipante_CodiceFiscale')) {
 		  items.get('avviso_iscrizioneCorso').setHidden(true);
 		  svuotaCampiDestinatario();
 		  nascondiCampiDestinatario(true);
-		}     
+		}
 }
 clearModule('ServiziFormazione_RiepilogoServizi');

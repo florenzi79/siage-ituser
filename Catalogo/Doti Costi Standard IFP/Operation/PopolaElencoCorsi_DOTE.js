@@ -101,28 +101,33 @@ try {
             if (a_IscrDC!=null) {
               var j=0;
               var offerta;
-							var isAnnualitaOk = false;
-		          var isOffertaFormativaOk = false;
-		          var isStatoIscrizioneOk = false;
+			  var isAnnualitaOk = false;
+		      var isOffertaFormativaOk = false;
+		      var isStatoIscrizioneOk = false;
+          	  var isNoAutofinanziatoOk = false;
               for (i = 0; i < a_IscrDC.length; i++) {
-  								print("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+  								print("MSMSXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
                   var elem = a_IscrDC[i];
 									print("XXXXX DOTI: elemento elem=a_IscrDC["+i+"] = elem:"+ a_IscrDC+"\n");
                   offerta = dati_estraiDettagliCorsi.result.get(elem.get('idcorso'));
                   //print("\nXXXXX DOTI i="+i+" estraiStatoIscrizioni.iscrizioni: "+ elem+"\n");
-									print("\nXXXXX DOTI i="+i+" \nXXXX offerta = elem.get('idcorso')="+ elem.get('idcorso')+" \n");
-                  print("XXXXX DOTI: dati_estraiDettagliCorsi result datafine i-esima: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('datafine')+"\n");
-                  print("XXXXX DOTI: dati_estraiDettagliCorsi result titolo i-esimo: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('titolo')+"\n");
-                  print("XXXXX DOTI: offerta get titolo i-esimo: "+ offerta.get('titolo')+"\n");
+									print("MSMS DOTI i= "+i+" XXXX offerta = elem.get('idcorso')="+ elem.get('idcorso')+" \n");
+									print("MSMS DOTI: iddote="+ elem.get('iddote ')+"\n");
+									print("MSMS DOTI: idiscrizione="+ elem.get('idiscrizione')+"\n");
+									print("MSMS DOTI: numeroofferta="+ elem.get('numeroofferta')+"\n");
+									print("MSMS DOTI: statoiscrizione="+ elem.get('statoiscrizione')+"\n");
+                  print("MSMS DOTI: dati_estraiDettagliCorsi result datafine i-esima: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('datafine')+"\n");
+                  print("MSMS DOTI: dati_estraiDettagliCorsi result titolo i-esimo: "+ dati_estraiDettagliCorsi.result.get(elem.get('idcorso')).get('titolo')+"\n");
+                  print("MSMS DOTI: offerta get titolo i-esimo: "+ offerta.get('titolo')+"\n");
                   var competenze = offerta.get('competenze')[0];
 
-                  print('XXXXX mappa competenze: ' +competenze+'\n');
-									print('XXXXX idqualifica di competenze: ' + competenze.get('idqualifica')+'\n');
-									print('XXXXX idindirizzo di competenze: ' + competenze.get('idindirizzo')+'\n');
-									print('XXXXX qualifica|indirizzo:==>' + competenze.get('idqualifica')+"|"+competenze.get('idindirizzo')+'<==\n');
-                  print('XXXXX annocorso: ' +offerta.get('annocorso')+'\n');
-                  print('XXXXX idqualifica: ' +offerta.get('idqualifica')+'\n');
-                  print('XXXXX annocorso: ' +offerta.get('annocorso')+'\n');
+                  print('MSMS mappa competenze: ' +competenze+'\n');
+									print('MSMS idqualifica di competenze: ' + competenze.get('idqualifica')+'\n');
+									print('MSMS idindirizzo di competenze: ' + competenze.get('idindirizzo')+'\n');
+									print('MSMS qualifica|indirizzo:==>' + competenze.get('idqualifica')+"|"+competenze.get('idindirizzo')+'<==\n');
+                  print('MSMS annocorso: ' +offerta.get('annocorso')+'\n');
+                  print('MSMS idqualifica: ' +offerta.get('idqualifica')+'\n');
+                  print('MSMS annocorso: ' +offerta.get('annocorso')+'\n');
 
 									// verifica se l'annualità dell'iscrizione corrisponde con quella del bando
 			            isAnnualitaOk = (annualita == offerta.get('annocorso')+'');
@@ -136,16 +141,21 @@ try {
 			                isOffertaFormativaOk = true;
 			              }
 			            }
-			            print("MSMS DOTI: isOffertaFormativaOk="+ isOffertaFormativaOk+"\n");
+			            print('MSMS DOTI: isOffertaFormativaOk='+ isOffertaFormativaOk+'\n');
 			            print('MSMS stato: ' +offerta.get('stato')+'\n');
 			            print('MSMS idstato : ' +offerta.get('idstato')+'\n');
-			            if (offerta.get('stato')+''=='I') {
-			              isOffertaFormativaOk = true;
-			            }
-			            // togliere la seguente riga nel caso si voglia abilitare il controllo dello stato iscrizione
-			            isStatoIscrizioneOk = true;
 
-									if ((offerta.get('idoperatore') != null) && (isAnnualitaOk) && (isOffertaFormativaOk)){
+									// verifica lo stato dell'iscrizione (tra Iscritto, Bozza, Ritirato deve essere I)
+									isStatoIscrizioneOk=(elem.get('statoiscrizione')+''=='I');
+									print("MSMS DOTI: statoiscrizione="+ elem.get('statoiscrizione')+"\n");
+									print("MSMS DOTI: isStatoIscrizioneOk="+ isStatoIscrizioneOk+"\n");
+									// verifico se il corso è NON AUTOFINANZIATO (Deve essere N)
+									print('MSMS autofinanziato : ' +offerta.get('autofinanziato')+'\n');
+									isNoAutofinanziatoOk = (offerta.get('autofinanziato')+''=='N');
+									print("MSMS DOTI: isNoAutofinanziatoOk="+ isNoAutofinanziatoOk+"\n");
+
+									if ((offerta.get('idoperatore') != null) && (isAnnualitaOk) && (isOffertaFormativaOk) && (isNoAutofinanziatoOk) && (isStatoIscrizioneOk)) {
+										print('MSMS Iscrizione CONSIDERATA :-)))))))))) ');
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].NomeServizio',offerta.get('titolo'));
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].NomeServizioDn',offerta.get('titolo'));
                     values.put('ServiziFormazione_ElencoCorsi['+j+'].IdCorso',offerta.get('idcorso'));
@@ -201,6 +211,9 @@ try {
                     j++;
 
                   }
+									else {
+										print('MSMS Iscrizione SCARTATA !!!!!!!!!!!');
+									}
               }
 
             } else {

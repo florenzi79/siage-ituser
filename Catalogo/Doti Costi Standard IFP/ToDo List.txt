@@ -3,29 +3,24 @@ Attività Doti IFP
 TODO
 ===================
 
-NOTA: Ultima Versione Bando:  DDF I anni in .81 (mattino del 28/09/2015)
-HI - (TODO M....) verifica accurata AVVISO e Blocco (Controllo) in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
-HI - (TODO M....) Verificare che i controlli specificati nell'info bandi siano stati tutti inseriti
+NOTA: Ultima Versione Bando:  DDF I anni in FORMAZIONE (mattino del 29/09/2015)
 
-MED- (TODO wait Bettiga ==> F) Chiedere frase a LISPA ==> Aggiungere un messaggio / tooltip che
-                renda chiaro che i dati della dotazione finanziaria rimanenti sono da considerarsi indicativi
+ASK Lispa:   REQUISITI Ver 5 è cambiata la dotazione finanziaria. (Tab Info bando in Viola) Non se ne è fatto cenno nella mail. Quali sono quelle corrette ?
+
+HI - (TODO M....) Verificare che i controlli specificati nell'info bandi siano stati tutti inseriti
 HI - (TODO F.help FL ?) Verificare perchè non è visibile il fascicolo progetto
 HI - (TODO F....) Settare la security della checklist al gruppo degli istruttori in modo da non visualizzarla nel fascicolo per i richiedenti
-HI - (TODO F....) Assegnare le security corrette al processo per l'istruttore e per monitraggio. Nome: Istruttore procedura +  titolo bando
-                     ovvero
- 									 	"Istruttore procedura I Anni IeFP a.f. 2015-2016"
-										"Istruttore procedura II Anni IeFP a.f. 2015-2016"
-										"Monitoraggio I Anni IeFP a.f. 2015-2016"
-                    "Monitoraggio II Anni IeFP a.f. 2015-2016"
-OK HI - (TODO Pat... ask LISPA) Daniela?
-   Aggiungere spedizione mail ANCHE a regione  quando protocollato Dote (wait indicazioni e corpo mail) NO
+HI/ ?? - (TODO Pat ) PDF come da mail
+HI/?? ( Sostituire PDF da Patrizia)
+
+OK HI - (TODO F....) Verificare che indirizo mail ricavato da user.  sia utilizzabile in un operation
+HI (TODO  dopo fix) - Duplicare DDF I Anni in DDF II Anni impostando correttamente le security (Copy and paste ? Chiedere a Sirio ?)
+
 MED- (TODO ??...) Aggiungere e valorizzare campi monitoraggio usando il PO di Laura sulla .81
 MED - (TODO M....) CONTROLLO: verifica se destinatario ha già usufruito di doti relative ad un certo bando in GeFo (controllo + eventualmente OnChange CF  Destinatario)
-
 LOW -(WAIT Aldo) Aggiungere controllo check digit dei CF con script in sviluppo da Aldo
 
 - (WAIT LISPA (Daniela? ) Messaggio esplicativo sul come caricare i documenti firmati nell'atto unico
-- (WAIT LISPA) Daniela? Invio email alla protocollazione dell'atto unico ? (forse NO) altrimenti mettere indirizzo fake corretto (vedi mail Silvia)
 LOW- (TODO F....) Aggiungere un item che, nonostante il richiedente sia dichiarato disabile, permetta di scegliere di richiedere o meno l'incentivo disabilita'
 ==========================
 GIA' FATTI
@@ -91,3 +86,12 @@ GIA' FATTI
           OK * LOW- (TODO FL...) Abilitare checksum e firmatario documenti ricaricati nei DUE moduli documenti, (Atto unico e dote) (NOTA: limita i test di protocollazione solo a chi può firmare un doc)
           OK * HI - (TODO FL...) Impostare (verificare) i valori assunti nell'operation, relativi a fase pratica a bozza eliminata.
           OK * LOW- (TODO FL...) Assegnare le security corrette ai file _tmp o rimuovere la necessità del file TMP (vedi Lorenzi)
+          OK  (TODO M....) verifica accurata AVVISO e Blocco (Controllo) in caso di problemi tecnici nella leggi iscrizioni e leggi elenco corsi
+          OK - MED- (TODO wait Bettiga ==> F) Chiedere frase a LISPA ==> Aggiungere un messaggio / tooltip che
+                          renda chiaro che i dati della dotazione finanziaria rimanenti sono da considerarsi indicativi
+          OK HI - (TODO F....) Assegnare le security corrette al processo per l'istruttore e per monitraggio. Nome: Istruttore procedura +  titolo bando
+                                               ovvero
+                           									 	"Istruttore procedura I Anni IeFP a.f. 2015-2016"
+                          										"Istruttore procedura II Anni IeFP a.f. 2015-2016"
+                          										"Monitoraggio I Anni IeFP a.f. 2015-2016"
+                                              "Monitoraggio II Anni IeFP a.f. 2015-2016"
