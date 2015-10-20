@@ -47,4 +47,24 @@
     if (values.get('Sedi[0].AttuazioneProgetto') === null) {
         errors.put('MessaggioMultiSedi', 'Sedi_val');
     }
+
+	var sede_i;
+	var sede_j;
+	var sediDuplicate = false;
+	sede_i = 0;
+	while (values.get('Sedi['+sede_i+'].CodiceIdentificativoSede') !== null) {
+	    sede_j = 0;
+		while (values.get('Sedi['+sede_j+'].CodiceIdentificativoSede') !== null) {
+			if (sede_i !== sede_j) {
+				if (values.get('Sedi['+sede_i+'].CodiceIdentificativoSede') == values.get('Sedi['+sede_j+'].CodiceIdentificativoSede')) {
+					sediDuplicate = true;
+				}
+			}
+			sede_j++;
+		}
+		sede_i++;
+	}
+	if (sediDuplicate === true) {
+	    errors.put('MessaggioMultiSedi', 'SediDuplicate_val');
+	}
 }
