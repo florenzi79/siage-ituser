@@ -1,3 +1,4 @@
+modules.get('Azione').setDynamic(true);
 if (iamIn('Azione')) {
     items.get('Azione.Richiedente_CodiceFiscale').setReadonly(false);
     if (path == 'Azione[0].') {
@@ -6,5 +7,6 @@ if (iamIn('Azione')) {
         values.put('Azione[0].Capofila','true');
         values.put('Azione[0].TipologiaSoggetto',values.get('Richiedente_TipologiaSoggetto'));
         items.get('Azione.Richiedente_CodiceFiscale').setReadonly(true);
+        modules.get('Azione').setDynamic(false);
     }
 }
